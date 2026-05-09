@@ -1,5 +1,6 @@
 "use client"
 
+import React from "react"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { Cloud, ArrowRight, Home, ChevronRight, Key, HardDrive } from "lucide-react"
@@ -24,7 +25,7 @@ const cloudItems = [
   },
 ]
 
-const iconMap: Record<string, JSX.Element> = {
+const iconMap: Record<string, React.ReactNode> = {
   key: <Key className="h-6 w-6" />,
   storage: <HardDrive className="h-6 w-6" />,
 }
