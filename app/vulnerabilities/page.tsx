@@ -7,13 +7,6 @@ import { cn } from "@/lib/utils"
 
 const vulnItems = [
   {
-    title: "IDOR & 403 Bypass",
-    description: "Insecure Direct Object Reference and 403 bypass techniques",
-    href: "/vulnerabilities/idor",
-    available: true,
-    commandCount: "20+",
-  },
-  {
     title: "SQL Injection",
     description: "SQL injection payloads, detection, and exploitation techniques",
     href: "/vulnerabilities/sql-injection",
@@ -120,9 +113,7 @@ export default function VulnerabilitiesPage() {
                           : "bg-muted text-muted-foreground"
                       )}
                     >
-                      {item.title === "IDOR & 403 Bypass" ? (
-                        <Shield className="h-6 w-6" />
-                      ) : item.title === "SQL Injection" ? (
+                      {item.title === "SQL Injection" ? (
                         <Database className="h-6 w-6" />
                       ) : item.title === "WordPress" ? (
                         <Globe className="h-6 w-6" />
