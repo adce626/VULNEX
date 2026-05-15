@@ -163,7 +163,7 @@ export const burpsuiteCategories: BurpSuiteCategory[] = [
         description: "Define scope to filter traffic to specific targets",
       },
       {
-        command: "Proxy -> Intercept -> "And check "Use scope"",
+        command: 'Proxy -> Intercept -> Enable scope restriction',
         description: "Only intercept requests within defined scope",
       },
       {
