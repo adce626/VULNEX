@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo } from "react"
+import { Suspense, useMemo } from "react"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
@@ -13,7 +13,7 @@ import {
   ArrowRight,
 } from "lucide-react"
 
-export default function SearchPage() {
+function SearchContent() {
   const searchParams = useSearchParams()
   const query = searchParams.get("q") || ""
 
@@ -140,5 +140,13 @@ export default function SearchPage() {
         </div>
       </main>
     </div>
+  )
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense>
+      <SearchContent />
+    </Suspense>
   )
 }
