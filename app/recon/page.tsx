@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
-import { Search, ArrowRight, Home, ChevronRight, Globe, Database, Variable } from "lucide-react"
+import { Search, ArrowRight, Home, ChevronRight, Globe, Database, Variable, Github } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { RecommendedTools } from "@/components/recommended-tools"
 
@@ -27,6 +27,13 @@ const reconItems = [
     href: "/recon/param-discovery",
     available: true,
     commandCount: "30+",
+  },
+  {
+    title: "GitHub Recon",
+    description: "GitHub dorks, TruffleHog, GitGraber, and .git directory hunting",
+    href: "/recon/github-recon",
+    available: true,
+    commandCount: "50+",
   },
 ]
 
@@ -93,6 +100,8 @@ export default function ReconPage() {
                         <Globe className="h-6 w-6" />
                       ) : item.title === "Shodan Dorks" ? (
                         <Database className="h-6 w-6" />
+                      ) : item.title === "GitHub Recon" ? (
+                        <Github className="h-6 w-6" />
                       ) : (
                         <Variable className="h-6 w-6" />
                       )}

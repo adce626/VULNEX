@@ -18,6 +18,7 @@ import {
   Menu,
   X,
   ArrowRight,
+  Puzzle,
 } from "lucide-react"
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -28,12 +29,14 @@ const iconMap: Record<string, React.ReactNode> = {
   wrench: <Wrench className="h-4 w-4" />,
   brain: <Brain className="h-4 w-4" />,
   shield: <Shield className="h-4 w-4" />,
+  puzzle: <Puzzle className="h-4 w-4" />,
 }
 
 const allPages = [
   { title: "Google Dorks", href: "/recon/google-dorks", keywords: "google,search,dork,recon" },
   { title: "Shodan Dorks", href: "/recon/shodan-dorks", keywords: "shodan,iot,recon,server" },
   { title: "Param Discovery", href: "/recon/param-discovery", keywords: "param,parameter,discovery,fuzz" },
+  { title: "GitHub Recon", href: "/recon/github-recon", keywords: "github,dork,secret,token,git,credential" },
   { title: "IDOR & 403 Bypass", href: "/vulnerabilities/idor", keywords: "idor,403,bypass,privilege" },
   { title: "SQL Injection", href: "/vulnerabilities/sql-injection", keywords: "sql,sqli,database,injection" },
   { title: "WordPress", href: "/vulnerabilities/wordpress", keywords: "wordpress,cms,wp" },
@@ -50,8 +53,21 @@ const allPages = [
   { title: "FFUF Techniques", href: "/tools/ffuf", keywords: "ffuf,fuzz,web fuzz" },
   { title: "Gospider Methods", href: "/tools/gospider", keywords: "gospider,crawl,spider" },
   { title: "CeWL Wordlists", href: "/tools/cewl", keywords: "cewl,wordlist,password" },
+  { title: "Nuclei Templates", href: "/tools/nuclei-templates", keywords: "nuclei,template,yaml,scan,automation,custom" },
+  { title: "Fast XSS", href: "/tools/fast-xss", keywords: "xss,fast,gau,gf,gxss,kxss,dalfox,loxs,pipeline" },
+  { title: "WhatWeb", href: "/tools/whatweb", keywords: "whatweb,fingerprinting,technology,recon,cms,framework" },
+  { title: "WPScan", href: "/tools/wpscan", keywords: "wpscan,wordpress,cms,scanner,plugin,theme,vulnerability" },
+  { title: "Dirsearch", href: "/tools/dirsearch", keywords: "dirsearch,directory,bruteforce,discovery,path,file" },
+  { title: "John the Ripper", href: "/tools/john", keywords: "john,ripper,password,crack,hash,bruteforce" },
+  { title: "Searchsploit", href: "/tools/searchsploit", keywords: "searchsploit,exploit,database,vulnerability,0day" },
+  { title: "Browser Extensions", href: "/browser-extensions", keywords: "browser,extension,recon,debug" },
   { title: "LLM Injection", href: "/advanced/llm-injection", keywords: "llm,ai,prompt,gpt" },
   { title: "Blind XSS Advanced", href: "/advanced/blind-xss", keywords: "blind xss,bxss,xss" },
+  { title: "Auth & Session Vulns", href: "/auth-session", keywords: "auth,session,jwt,cookie,token,fixation,logout" },
+  { title: "Email Input Testing", href: "/vulnerabilities/email-input-testing", keywords: "email,xss,ssrf,header,injection,sqli,rfc822,validation" },
+  { title: "Registration Vulns", href: "/advanced/registration-vulns", keywords: "registration,signup,bypass,otp,xss,rate limit,duplicate" },
+  { title: "Blind XSS via PasteJacking", href: "/advanced/blind-xss-pastejacking", keywords: "pastejacking,clipboard,xss,blind,paste,html" },
+  { title: "Rate Limit Bypass", href: "/advanced/rate-limit-bypass", keywords: "rate,limit,bypass,ip,spoof,proxy,header,rotate" },
   { title: "WAF Bypass & PoCs", href: "/waf-bypass", keywords: "waf,bypass,poc,firewall,idor" },
 ]
 

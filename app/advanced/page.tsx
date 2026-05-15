@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
-import { Brain, ArrowRight, Home, ChevronRight, Bot, Eye } from "lucide-react"
+import { Brain, ArrowRight, Home, ChevronRight, Bot, Eye, UserPlus, ClipboardPaste, Gauge } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { RecommendedTools } from "@/components/recommended-tools"
 
@@ -18,6 +18,27 @@ const advancedItems = [
     title: "Blind XSS Advanced",
     description: "Advanced blind XSS techniques and callbacks",
     href: "/advanced/blind-xss",
+    available: true,
+    commandCount: "40+",
+  },
+  {
+    title: "Registration Vulns",
+    description: "Duplicate accounts, OTP bypass, mass assignment, hidden endpoints, and 23+ signup vulnerabilities",
+    href: "/advanced/registration-vulns",
+    available: true,
+    commandCount: "60+",
+  },
+  {
+    title: "Blind XSS via PasteJacking",
+    description: "Clipboard Paste XSS — exploit paste events for Blind XSS via innerHTML in rich-text editors",
+    href: "/advanced/blind-xss-pastejacking",
+    available: true,
+    commandCount: "15+",
+  },
+  {
+    title: "Rate Limit Bypass",
+    description: "IP spoofing, header manipulation, proxy rotation, parameter variation, encoding tricks",
+    href: "/advanced/rate-limit-bypass",
     available: true,
     commandCount: "40+",
   },
@@ -84,8 +105,14 @@ export default function AdvancedPage() {
                     >
                       {item.title === "LLM Injection" ? (
                         <Bot className="h-6 w-6" />
-                      ) : (
+                      ) : item.title === "Blind XSS Advanced" ? (
                         <Eye className="h-6 w-6" />
+                      ) : item.title === "Blind XSS via PasteJacking" ? (
+                        <ClipboardPaste className="h-6 w-6" />
+                      ) : item.title === "Rate Limit Bypass" ? (
+                        <Gauge className="h-6 w-6" />
+                      ) : (
+                        <UserPlus className="h-6 w-6" />
                       )}
                     </div>
                     <div>

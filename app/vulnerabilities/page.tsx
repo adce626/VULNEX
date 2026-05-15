@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
-import { Bug, ArrowRight, Home, ChevronRight, Database, Globe, Link2, FileText, Shield, AlertTriangle } from "lucide-react"
+import { Bug, ArrowRight, Home, ChevronRight, Database, Globe, Link2, FileText, Shield, AlertTriangle, Mail } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { RecommendedTools } from "@/components/recommended-tools"
 
@@ -55,6 +55,13 @@ const vulnItems = [
     href: "/vulnerabilities/403-bypass",
     available: true,
     commandCount: "50+",
+  },
+  {
+    title: "Email Input Testing",
+    description: "RFC822 validation, XSS, SSRF, header injection, SQLi, command injection, and more",
+    href: "/vulnerabilities/email-input-testing",
+    available: true,
+    commandCount: "55+",
   },
 ]
 
@@ -127,6 +134,8 @@ export default function VulnerabilitiesPage() {
                         <AlertTriangle className="h-6 w-6" />
                       ) : item.title === "403 Bypass" ? (
                         <Shield className="h-6 w-6" />
+                      ) : item.title === "Email Input Testing" ? (
+                        <Mail className="h-6 w-6" />
                       ) : (
                         <FileText className="h-6 w-6" />
                       )}

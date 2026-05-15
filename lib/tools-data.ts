@@ -1450,6 +1450,325 @@ hydra -L users.txt -P passwords.txt ftp://target.com`
       { error: "Invalid module", solution: "Use hydra -h to list available modules" }
     ],
     tags: ["bruteforce", "password", "authentication", "networking"]
+  },
+  {
+    id: "whatweb",
+    name: "WhatWeb",
+    icon: "globe",
+    category: "Recon & OSINT",
+    description: "Web technology identification and fingerprinting tool",
+    installation: {
+      title: "Installation",
+      steps: [
+        "Install via package manager",
+        "Or install via gem",
+        "Verify installation"
+      ],
+      code: `# Debian/Ubuntu
+apt install whatweb
+
+# Using gem
+gem install whatweb
+
+# Verify
+whatweb --version`
+    },
+    usage: {
+      title: "Basic Usage",
+      description: "Identify web technologies, CMS, frameworks, and server software",
+      code: `# Basic scan
+whatweb example.com
+
+# Verbose output
+whatweb -v example.com
+
+# Aggressive mode
+whatweb --aggression 3 example.com`
+    },
+    commands: [
+      { command: "-v", description: "Verbose output" },
+      { command: "--aggression", description: "Set aggression level (1-3)" },
+      { command: "--color", description: "Colorize output" },
+      { command: "-a", description: "Set user agent" },
+      { command: "-H", description: "Add custom header" },
+      { command: "-t", description: "Set request timeout" },
+      { command: "-q", description: "Quiet mode" },
+      { command: "--log-json", description: "Log output in JSON format" },
+      { command: "--log-xml", description: "Log output in XML format" },
+      { command: "--proxy", description: "Use proxy" }
+    ],
+    whenToUse: [
+      "Technology profiling of web applications",
+      "Reconnaissance and asset inventory",
+      "Before exploitation to identify vulnerable components",
+      "Finding version-specific vulnerabilities",
+      "Competitor technology analysis"
+    ],
+    notes: [
+      "Can be noisy; use in controlled environments for best results",
+      "Combine with nmap for comprehensive fingerprinting",
+      "Supports 1800+ plugins for wide coverage"
+    ],
+    commonErrors: [
+      { error: "No results", solution: "Ensure the URL is correct and reachable" },
+      { error: "Connection refused", solution: "Check if the target allows inbound connections" },
+      { error: "Timeout", solution: "Increase timeout with -t flag or reduce aggression level" }
+    ],
+    tags: ["recon", "fingerprinting", "technology", "web"]
+  },
+  {
+    id: "wpscan",
+    name: "WPScan",
+    icon: "globe",
+    category: "Web Vulnerabilities",
+    description: "WordPress security scanner for vulnerability detection and enumeration",
+    installation: {
+      title: "Installation",
+      steps: [
+        "Install via gem",
+        "Install dependencies",
+        "Verify installation"
+      ],
+      code: `# Using gem
+gem install wpscan
+
+# Verify
+wpscan --version`
+    },
+    usage: {
+      title: "Basic Usage",
+      description: "Enumerate WordPress vulnerabilities, users, plugins, and themes",
+      code: `# Basic scan
+wpscan --url https://target.com
+
+# Enumerate users
+wpscan --url https://target.com --enumerate u
+
+# With API token for better results
+wpscan --url https://target.com --api-token TOKEN`
+    },
+    commands: [
+      { command: "--url", description: "Target WordPress URL" },
+      { command: "--enumerate", description: "Enumerate (u=users, p=plugins, t=themes)" },
+      { command: "--api-token", description: "WPVulnDB API token for live data" },
+      { command: "--password-attack", description: "Password brute forcing (xmlrpc, wp-login)" },
+      { command: "--plugins-version-detection", description: "Plugin version detection mode" },
+      { command: "-o", description: "Output to file" },
+      { command: "--format", description: "Output format (cli, json, etc.)" },
+      { command: "--proxy", description: "Proxy for requests" },
+      { command: "--cookie", description: "Cookie string for authentication" },
+      { command: "--random-user-agent", description: "Randomize user agent" }
+    ],
+    whenToUse: [
+      "WordPress reconnaissance and security auditing",
+      "Vulnerability scanning for known CVEs",
+      "User enumeration for brute force targets",
+      "Plugin and theme version checking",
+      "Password brute forcing on WordPress sites"
+    ],
+    notes: [
+      "API token from WPVulnDB required for real-time vulnerability data",
+      "Rate limiting may apply; use --throttle flag if needed",
+      "Works best with full access to the target site"
+    ],
+    commonErrors: [
+      { error: "Connection refused", solution: "Ensure the target URL is correct and reachable" },
+      { error: "API token required", solution: "Register at wpvulndb.com and use --api-token" },
+      { error: "Too many redirects", solution: "Use --follow-redirection or check URL format" }
+    ],
+    tags: ["wordpress", "cms", "scanner", "vulnerability"]
+  },
+  {
+    id: "dirsearch",
+    name: "Dirsearch",
+    icon: "folder-search",
+    category: "Tools & Methods",
+    description: "Advanced web path brute-forcing tool with recursive scanning",
+    installation: {
+      title: "Installation",
+      steps: [
+        "Clone the repository",
+        "Install Python dependencies",
+        "Verify installation"
+      ],
+      code: `# Clone repository
+git clone https://github.com/maurosoria/dirsearch.git
+
+# Install dependencies
+cd dirsearch && pip install -r requirements.txt
+
+# Run
+python3 dirsearch.py -u https://target.com`
+    },
+    usage: {
+      title: "Basic Usage",
+      description: "Brute-force directories and files on web servers",
+      code: `# Basic scan
+python3 dirsearch.py -u https://target.com
+
+# Specific extensions
+python3 dirsearch.py -u https://target.com -e php,html
+
+# Multiple targets from file
+python3 dirsearch.py -l targets.txt`
+    },
+    commands: [
+      { command: "-u", description: "Target URL" },
+      { command: "-l", description: "File with list of URLs" },
+      { command: "-e", description: "Extensions to check" },
+      { command: "-x", description: "Exclude status codes" },
+      { command: "-w", description: "Custom wordlist" },
+      { command: "-r", description: "Recursive scan" },
+      { command: "-R", description: "Recursion depth" },
+      { command: "-t", description: "Number of threads" },
+      { command: "--proxy", description: "Proxy for requests" },
+      { command: "--cookies", description: "Cookies for authentication" }
+    ],
+    whenToUse: [
+      "Directory discovery on web applications",
+      "Finding hidden files and backup files",
+      "Exposed API endpoints discovery",
+      "Recursive scanning of found directories",
+      "Web application asset mapping"
+    ],
+    notes: [
+      "Use -r for recursive scanning through discovered directories",
+      "Supports many file extensions with -e flag",
+      "Pair with SecLists for comprehensive wordlists"
+    ],
+    commonErrors: [
+      { error: "No results", solution: "Try a larger wordlist or more extensions" },
+      { error: "False positives", solution: "Filter by status codes with -x flag" },
+      { error: "Blocked by WAF", solution: "Reduce threads with -t flag or add delays" }
+    ],
+    tags: ["bruteforce", "directory", "discovery", "web"]
+  },
+  {
+    id: "john",
+    name: "John the Ripper",
+    icon: "key",
+    category: "Tools & Methods",
+    description: "Fast password cracking tool supporting many hash formats",
+    installation: {
+      title: "Installation",
+      steps: [
+        "Install via package manager",
+        "Or build from source",
+        "Verify installation"
+      ],
+      code: `# Debian/Ubuntu
+apt install john
+
+# Verify
+john --version`
+    },
+    usage: {
+      title: "Basic Usage",
+      description: "Crack password hashes using wordlists, rules, and brute force",
+      code: `# Basic cracking
+john hash.txt
+
+# Wordlist attack
+john --wordlist=rockyou.txt hash.txt
+
+# Show cracked passwords
+john --show hash.txt`
+    },
+    commands: [
+      { command: "--wordlist", description: "Use wordlist for dictionary attack" },
+      { command: "--rules", description: "Apply word mangling rules" },
+      { command: "--incremental", description: "Brute force incremental mode" },
+      { command: "--format", description: "Specify hash format" },
+      { command: "--show", description: "Show cracked passwords" },
+      { command: "--session", description: "Session name for resuming" },
+      { command: "--restore", description: "Restore interrupted session" },
+      { command: "--pot", description: "Pot file to use" },
+      { command: "--fork", description: "Number of parallel processes" },
+      { command: "--stdout", description: "Print words to stdout" }
+    ],
+    whenToUse: [
+      "Password cracking from captured hashes",
+      "Hash type analysis and identification",
+      "CTF challenges requiring hash cracking",
+      "Auditing password policy strength",
+      "Penetration testing post-exploitation"
+    ],
+    notes: [
+      "Use --wordlist for dictionary attacks with common passwords",
+      "Use --incremental for brute force on short passwords",
+      "GPU support available with john --devices for faster cracking"
+    ],
+    commonErrors: [
+      { error: "No hashes loaded", solution: "Verify hash format and use --format flag" },
+      { error: "Wrong format", solution: "Check if hashes are in valid format for John" },
+      { error: "Too slow", solution: "Use --fork for multiprocessing or enable GPU" }
+    ],
+    tags: ["password", "cracking", "hash", "bruteforce"]
+  },
+  {
+    id: "searchsploit",
+    name: "Searchsploit",
+    icon: "search",
+    category: "Tools & Methods",
+    description: "Exploit Database search tool for finding public exploits",
+    installation: {
+      title: "Installation",
+      steps: [
+        "Install exploitdb package",
+        "Update the database",
+        "Verify installation"
+      ],
+      code: `# Debian/Ubuntu
+apt install exploitdb
+
+# Update database
+searchsploit -u
+
+# Search
+searchsploit apache`
+    },
+    usage: {
+      title: "Basic Usage",
+      description: "Search offline copies of Exploit-DB for public exploits",
+      code: `# Search term
+searchsploit apache
+
+# Title search
+searchsploit -t wordpress
+
+# Show exploit details
+searchsploit -p 12345`
+    },
+    commands: [
+      { command: "-t", description: "Search by title only" },
+      { command: "-p", description: "Show full path to exploit" },
+      { command: "-c", description: "Case-sensitive search" },
+      { command: "-j", description: "JSON output" },
+      { command: "--nmap", description: "Search by Nmap service version" },
+      { command: "--exclude", description: "Exclude results by category" },
+      { command: "-s", description: "Strict search" },
+      { command: "-w", description: "Show full URL to Exploit-DB" },
+      { command: "-v", description: "Verbose output" },
+      { command: "--id", description: "Display EDB-ID (default)" }
+    ],
+    whenToUse: [
+      "Finding public exploits for known vulnerabilities",
+      "Vulnerability research and PoC collection",
+      "Locating exploit source code and details",
+      "CTF challenges requiring known exploits",
+      "Penetration testing exploit verification"
+    ],
+    notes: [
+      "Update regularly with -u for latest exploits",
+      "Use -w to get full URL to the Exploit-DB entry",
+      "Mirrors the Exploit-DB database offline"
+    ],
+    commonErrors: [
+      { error: "Outdated database", solution: "Run searchsploit -u to update" },
+      { error: "No results", solution: "Try broader search terms or use -t for title search" },
+      { error: "Wrong search term", solution: "Use -t for title-specific matching" }
+    ],
+    tags: ["exploit", "search", "database", "vulnerability"]
   }
 ]
 
