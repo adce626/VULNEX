@@ -27,7 +27,7 @@ export const navigation: NavSection[] = [
       { title: "CRLF Injection", href: "/vulnerabilities/crlf-injection" },
       { title: "Dependency Confusion", href: "/vulnerabilities/dependency-confusion" },
       { title: "Host Header Injection", href: "/vulnerabilities/host-header-injection", tag: "New" },
-      { title: "403 Bypass", href: "/vulnerabilities/403-bypass" },
+      { title: "SSRF Testing & Exploitation", href: "/vulnerabilities/ssrf", tag: "New" },
     ],
   },
   {
@@ -68,6 +68,7 @@ export const navigation: NavSection[] = [
     items: [
       { title: "IDOR & 403 Bypass", href: "/waf-bypass/idor", tag: "New" },
       { title: "WAF Bypass with SQLMap", href: "/waf-bypass/sqlmap", tag: "New" },
+      { title: "403 Bypass", href: "/vulnerabilities/403-bypass", tag: "New" },
     ],
   },
   {

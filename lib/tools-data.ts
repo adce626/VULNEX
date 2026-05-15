@@ -1205,6 +1205,251 @@ cat all_urls.txt | gf sqli,idor > vulns.txt`
       }
     ],
     tags: ["filter", "urls", "triage", "patterns", "go", "recon"]
+  },
+  {
+    id: "gospider",
+    name: "Gospider",
+    icon: "globe",
+    category: "Tools & Methods",
+    description: "Fast web crawler and content discovery tool written in Go",
+    installation: {
+      title: "Installation",
+      steps: ["Install via Go", "Verify installation"],
+      code: `# Using Go
+go install github.com/jaeles-project/gospider@latest
+
+# Verify
+gospider --help`
+    },
+    usage: {
+      title: "Basic Usage",
+      description: "Crawl websites and discover hidden endpoints",
+      code: `# Basic crawl
+gospider -s "https://target.com"
+
+# With depth and output
+gospider -s "https://target.com" -d 2 -o output.txt
+
+# Crawl with subdomains
+gospider -s "https://target.com" --subs`
+    },
+    commands: [
+      { command: "-s", description: "Target site URL" },
+      { command: "-d", description: "Crawl depth" },
+      { command: "--subs", description: "Include subdomains" },
+      { command: "-o", description: "Output directory" },
+      { command: "-c", description: "Concurrency" },
+      { command: "-t", description: "Request delay (seconds)" },
+      { command: "--js", description: "Parse JavaScript files" },
+      { command: "--sitemap", description: "Parse sitemap.xml" },
+      { command: "--robots", description: "Parse robots.txt" },
+      { command: "--no-redirect", description: "Disable redirects" }
+    ],
+    whenToUse: [
+      "Initial reconnaissance for endpoint discovery",
+      "Finding hidden files and directories",
+      "Collecting JavaScript files for analysis",
+      "Mapping site structure before manual testing",
+      "Automated content discovery in bug bounty"
+    ],
+    notes: [
+      "Combines crawling, JS parsing, and form extraction",
+      "Use --subs to discover subdomain endpoints",
+      "Output is saved as separate files per source",
+      "Works well with gf for filtering results"
+    ],
+    commonErrors: [
+      { error: "Too many requests", solution: "Use -t flag to add delay between requests" },
+      { error: "No results found", solution: "Increase depth with -d flag or check target accessibility" },
+      { error: "TLS errors", solution: "Use -k flag to skip certificate verification" }
+    ],
+    tags: ["crawler", "spider", "discovery", "go"]
+  },
+  {
+    id: "cewl",
+    name: "CeWL",
+    icon: "search",
+    category: "Tools & Methods",
+    description: "Custom wordlist generator that crawls websites for targeted brute-forcing",
+    installation: {
+      title: "Installation",
+      steps: ["Install Ruby", "Install CeWL via gem", "Verify installation"],
+      code: `# Using gem
+gem install cewl
+
+# Kali Linux
+apt install cewl
+
+# Verify
+cewl --help`
+    },
+    usage: {
+      title: "Basic Usage",
+      description: "Generate custom wordlists from target website content",
+      code: `# Basic wordlist generation
+cewl https://target.com -w wordlist.txt
+
+# With minimum word length
+cewl https://target.com -m 6 -w wordlist.txt
+
+# Verbose output
+cewl https://target.com -v`
+    },
+    commands: [
+      { command: "-w", description: "Output wordlist file" },
+      { command: "-m", description: "Minimum word length" },
+      { command: "-d", description: "Crawl depth" },
+      { command: "-c", description: "Count of words found" },
+      { command: "-v", description: "Verbose mode" },
+      { command: "--with-numbers", description: "Include words with numbers" },
+      { command: "--email", description: "Extract email addresses" },
+      { command: "--meta", description: "Extract meta data" },
+      { command: "--lowercase", description: "Convert to lowercase" },
+      { command: "--auth_type", description: "Authentication type" }
+    ],
+    whenToUse: [
+      "Creating targeted wordlists for brute-force attacks",
+      "Password spraying preparation",
+      "Custom dictionary generation",
+      "When default wordlists are too generic",
+      "Pre-engagement reconnaissance"
+    ],
+    notes: [
+      "Works best with deeper crawl depths",
+      "Combine with hydra for targeted attacks",
+      "Extracted emails can be used for username enumeration",
+      "Use --with-numbers for password-like patterns"
+    ],
+    commonErrors: [
+      { error: "Empty wordlist", solution: "Increase crawl depth with -d flag" },
+      { error: "Slow crawling", solution: "Reduce depth or use --agent for custom user-agent" },
+      { error: "Blocked by WAF", solution: "Add delays or use alternative user-agent" }
+    ],
+    tags: ["wordlist", "crawler", "password", "brute-force"]
+  },
+  {
+    id: "gobuster",
+    name: "Gobuster",
+    icon: "folder-search",
+    category: "Tools & Methods",
+    description: "Directory/file/DNS subdomain brute-forcing tool written in Go",
+    installation: {
+      title: "Installation",
+      steps: ["Install via package manager or Go", "Download wordlists", "Verify installation"],
+      code: `# Kali Linux
+apt install gobuster
+
+# Using Go
+go install github.com/OJ/gobuster/v3@latest
+
+# Verify
+gobuster --help`
+    },
+    usage: {
+      title: "Basic Usage",
+      description: "Brute-force directories, files, DNS subdomains, and vhosts",
+      code: `# Directory bruteforce
+gobuster dir -u https://target.com -w wordlist.txt
+
+# DNS subdomain enumeration
+gobuster dns -d target.com -w subdomains.txt
+
+# Virtual host discovery
+gobuster vhost -u https://target.com -w vhosts.txt`
+    },
+    commands: [
+      { command: "dir", description: "Directory/file bruteforce mode" },
+      { command: "dns", description: "DNS subdomain enumeration mode" },
+      { command: "vhost", description: "Virtual host discovery mode" },
+      { command: "-u", description: "Target URL" },
+      { command: "-w", description: "Wordlist path" },
+      { command: "-t", description: "Number of threads" },
+      { command: "-x", description: "File extensions to search" },
+      { command: "-s", description: "Status codes to include" },
+      { command: "-k", description: "Skip TLS verification" },
+      { command: "-o", description: "Output file" }
+    ],
+    whenToUse: [
+      "Finding hidden directories and files",
+      "DNS subdomain enumeration",
+      "Virtual host discovery bypassing DNS",
+      "When ffuf is not available",
+      "Quick content discovery"
+    ],
+    notes: [
+      "Faster than ffuf for directory bruteforcing",
+      "Use -x for extension bruteforcing (.php,.asp,.txt)",
+      "DNS mode uses wildcard detection",
+      "vhost mode doesn't depend on DNS resolution"
+    ],
+    commonErrors: [
+      { error: "No results", solution: "Try different wordlist or check target is accessible" },
+      { error: "Wildcard DNS detected", solution: "Gobuster handles this automatically with DNS mode" },
+      { error: "Too slow", solution: "Increase threads with -t flag" }
+    ],
+    tags: ["bruteforce", "discovery", "dns", "directory"]
+  },
+  {
+    id: "hydra",
+    name: "Hydra",
+    icon: "shield",
+    category: "Tools & Methods",
+    description: "Fast online password brute-forcing tool supporting many protocols",
+    installation: {
+      title: "Installation",
+      steps: ["Install via package manager", "Or compile from source", "Verify installation"],
+      code: `# Kali Linux
+apt install hydra
+
+# macOS
+brew install hydra
+
+# Verify
+hydra --help`
+    },
+    usage: {
+      title: "Basic Usage",
+      description: "Brute-force login credentials for various network services",
+      code: `# SSH bruteforce
+hydra -l admin -P passwords.txt ssh://target.com
+
+# Web form bruteforce
+hydra -l user -P pass.txt target.com http-post-form "/login:user=^USER^&pass=^PASS^:F=incorrect"
+
+# FTP bruteforce
+hydra -L users.txt -P passwords.txt ftp://target.com`
+    },
+    commands: [
+      { command: "-l", description: "Single username" },
+      { command: "-L", description: "Username wordlist" },
+      { command: "-p", description: "Single password" },
+      { command: "-P", description: "Password wordlist" },
+      { command: "-t", description: "Tasks per target (threads)" },
+      { command: "-v", description: "Verbose output" },
+      { command: "-f", description: "Stop after first success" },
+      { command: "-s", description: "Custom port" },
+      { command: "-o", description: "Output file" },
+      { command: "http-post-form", description: "Web form attack module" }
+    ],
+    whenToUse: [
+      "Password auditing and recovery",
+      "Testing weak credentials",
+      "CTF challenges",
+      "Post-exploitation lateral movement",
+      "Validating password policies"
+    ],
+    notes: [
+      "Supports 50+ protocols (SSH, FTP, HTTP, MySQL, etc.)",
+      "Use -f flag to stop on first valid password",
+      "Combine with CeWL for targeted wordlists",
+      "Rate limiting may cause false negatives"
+    ],
+    commonErrors: [
+      { error: "Connection refused", solution: "Check if service is running on the target" },
+      { error: "Too many connections", solution: "Reduce threads with -t flag" },
+      { error: "Invalid module", solution: "Use hydra -h to list available modules" }
+    ],
+    tags: ["bruteforce", "password", "authentication", "networking"]
   }
 ]
 

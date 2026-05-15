@@ -1,7 +1,8 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { MainSidebar } from "@/components/main-sidebar"
 import { sectionCards } from "@/lib/site-data"
 import { toolsData } from "@/lib/tools-data"
@@ -65,7 +66,28 @@ const featuredTools = toolsData.slice(0, 4)
 
 export default function HomePage() {
   const [mounted, setMounted] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
+  const searchRef = useRef<HTMLInputElement>(null)
+  const router = useRouter()
+
   useEffect(() => { setMounted(true) }, [])
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault()
+        searchRef.current?.focus()
+      }
+    }
+    document.addEventListener("keydown", handleKeyDown)
+    return () => document.removeEventListener("keydown", handleKeyDown)
+  }, [])
+
+  const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && searchQuery.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`)
+    }
+  }
   return (
     <div className="min-h-screen bg-background">
       <MainSidebar />
@@ -94,8 +116,12 @@ export default function HomePage() {
               <div className="flex items-center gap-3 rounded-2xl border border-border bg-card px-5 py-4 shadow-lg shadow-black/5">
                 <Search className="h-5 w-5 text-muted-foreground" />
                 <input
+                  ref={searchRef}
                   type="text"
                   placeholder="Search payloads, techniques, tools..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={handleSearch}
                   className="w-full bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none"
                 />
                 <kbd className="hidden rounded-lg bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground sm:block">
