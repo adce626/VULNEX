@@ -14,9 +14,12 @@ import {
   ChevronRight,
   Home,
   ExternalLink,
+  BookOpen,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
+import { UsageGuide } from "@/components/usage-guide"
+import { getToolById } from "@/lib/tools-data"
 
 export default function GospiderPage() {
   const [activeCategory, setActiveCategory] = useState("installation")
@@ -74,6 +77,7 @@ export default function GospiderPage() {
               <span className="rounded-full bg-secondary px-4 py-2 text-sm font-medium text-foreground">
                 Copy Ready
               </span>
+              <UsageGuide guide={getToolById('gospider')!} />
             </div>
           </div>
         </div>

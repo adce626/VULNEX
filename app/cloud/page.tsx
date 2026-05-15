@@ -3,8 +3,9 @@
 import React from "react"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
-import { Cloud, ArrowRight, Home, ChevronRight, Key, HardDrive } from "lucide-react"
+import { Cloud, ArrowRight, Home, ChevronRight, Key, HardDrive, Database, Shield } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { RecommendedTools } from "@/components/recommended-tools"
 
 const cloudItems = [
   {
@@ -78,7 +79,7 @@ export default function CloudPage() {
                 {item.available ? (
                   <Link href={item.href} className="absolute inset-0 z-10" />
                 ) : null}
-                
+
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div
@@ -103,7 +104,7 @@ export default function CloudPage() {
                       <p className="text-sm text-muted-foreground">{item.description}</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center gap-3">
                     {item.commandCount && (
                       <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
@@ -122,6 +123,12 @@ export default function CloudPage() {
               </div>
             ))}
           </div>
+
+          {/* Recommended Tools */}
+          <RecommendedTools
+            toolIds={["cloudfox", "amass", "subfinder", "nuclei"]}
+            title="الأدوات المقترحة لتقييم السحابة"
+          />
         </div>
       </main>
     </div>

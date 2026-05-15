@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState } from "react"
 import Link from "next/link"
@@ -59,7 +59,7 @@ export default function IDORPage() {
               </div>
               <div>
                 <h1 className="text-3xl font-bold text-foreground">
-                  IDOR & 403 Bypass
+                  IDOR &amp; 403 Bypass
                 </h1>
                 <p className="text-muted-foreground">
                   Insecure Direct Object Reference and 403 Forbidden bypass techniques
@@ -182,7 +182,7 @@ export default function IDORPage() {
                         <div className="mb-3 flex items-center gap-2">
                           <Zap className="h-4 w-4 text-accent" />
                           <h3 className="font-semibold text-foreground">
-                            Commands & Payloads
+                            Commands &amp; Payloads
                           </h3>
                         </div>
                         <div className="grid gap-3">

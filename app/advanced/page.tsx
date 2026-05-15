@@ -4,6 +4,7 @@ import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { Brain, ArrowRight, Home, ChevronRight, Bot, Eye } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { RecommendedTools } from "@/components/recommended-tools"
 
 const advancedItems = [
   {
@@ -70,7 +71,7 @@ export default function AdvancedPage() {
                 {item.available ? (
                   <Link href={item.href} className="absolute inset-0 z-10" />
                 ) : null}
-                
+
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div
@@ -99,7 +100,7 @@ export default function AdvancedPage() {
                       <p className="text-sm text-muted-foreground">{item.description}</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center gap-3">
                     {item.commandCount && (
                       <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
@@ -118,6 +119,12 @@ export default function AdvancedPage() {
               </div>
             ))}
           </div>
+
+          {/* Recommended Tools */}
+          <RecommendedTools
+            toolIds={["jwt_tool", "burpsuite", "xsstrike", "nuclei"]}
+            title="الأدوات المقترحة للمواضيع المتقدمة"
+          />
         </div>
       </main>
     </div>

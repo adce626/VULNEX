@@ -1,10 +1,12 @@
-﻿"use client"
+"use client"
 
 import { useState } from "react"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { CommandCard } from "@/components/command-card"
 import { wafSQLMapSteps } from "@/lib/waf-sqlmap-data"
+import { UsageGuide } from "@/components/usage-guide"
+import { getToolById } from "@/lib/tools-data"
 import {
   ExternalLink,
   Lightbulb,
@@ -80,6 +82,7 @@ export default function WAFSQLMapPage() {
                   {totalCommands} Commands
                 </span>
               </div>
+              <UsageGuide guide={getToolById('sqlmap')!} />
             </div>
           </div>
 

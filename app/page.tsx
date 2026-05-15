@@ -1,8 +1,10 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { sectionCards } from "@/lib/site-data"
+import { toolsData } from "@/lib/tools-data"
 import {
   Search,
   Bug,
@@ -12,12 +14,19 @@ import {
   Brain,
   Shield,
   ArrowRight,
+  Globe,
   Zap,
+  Target,
+  Database,
+  Code,
+  FolderSearch,
+  Network,
+  Key,
+  ChevronRight,
+  Sparkles,
   Copy,
-  Moon,
   Tag,
-  Rocket,
-  ExternalLink,
+  Moon,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -27,68 +36,61 @@ const iconMap: Record<string, React.ReactNode> = {
   server: <Server className="h-6 w-6" />,
   cloud: <Cloud className="h-6 w-6" />,
   wrench: <Wrench className="h-6 w-6" />,
+  shield: <Shield className="h-6 w-6" />,
   brain: <Brain className="h-6 w-6" />,
 }
 
-const features = [
-  {
-    icon: <Search className="h-5 w-5" />,
-    title: "Quick Search",
-    description: "Find any payload or technique instantly",
-  },
-  {
-    icon: <Copy className="h-5 w-5" />,
-    title: "Copy Button",
-    description: "One-click copy for all payloads",
-  },
-  {
-    icon: <Moon className="h-5 w-5" />,
-    title: "Dark Mode",
-    description: "Easy on the eyes for long sessions",
-  },
-  {
-    icon: <Tag className="h-5 w-5" />,
-    title: "Tags",
-    description: "Organized by technology and type",
-  },
-  {
-    icon: <Zap className="h-5 w-5" />,
-    title: "Fast Loading",
-    description: "Lightweight and blazing fast",
-  },
+const toolIconMap: Record<string, React.ReactNode> = {
+  search: <Search className="h-5 w-5" />,
+  globe: <Globe className="h-5 w-5" />,
+  zap: <Zap className="h-5 w-5" />,
+  target: <Target className="h-5 w-5" />,
+  database: <Database className="h-5 w-5" />,
+  code: <Code className="h-5 w-5" />,
+  shield: <Shield className="h-5 w-5" />,
+  "folder-search": <FolderSearch className="h-5 w-5" />,
+  network: <Network className="h-5 w-5" />,
+  cloud: <Cloud className="h-5 w-5" />,
+  key: <Key className="h-5 w-5" />,
+}
+
+const quickTags = [
+  { label: "Google Dorks", href: "/recon/google-dorks" },
+  { label: "SQLi Bypass", href: "/vulnerabilities/sql-injection" },
+  { label: "SSRF", href: "/vulnerabilities?tag=ssrf" },
+  { label: "Subdomain Enum", href: "/recon?tag=subdomain" },
 ]
 
+const featuredTools = toolsData.slice(0, 4)
+
 export default function HomePage() {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => { setMounted(true) }, [])
   return (
     <div className="min-h-screen bg-background">
       <MainSidebar />
 
       <main className="lg:pl-64">
-        {/* Hero Section */}
+        {/* Hero */}
         <div className="relative overflow-hidden border-b border-border">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSA2MCAwIEwgMCAwIDAgNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-50" />
-          
-          <div className="relative mx-auto max-w-4xl px-6 py-20 text-center lg:py-28">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary animate-pulse">
-              <Rocket className="h-4 w-4" />
-              <span>adce626</span>
+
+          <div className="relative mx-auto max-w-4xl px-6 py-16 text-center lg:py-24">
+            <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1 text-[11px] font-medium tracking-wider text-primary shadow-[0_0_12px_oklch(0.72_0.19_165/0.4)] backdrop-blur-sm animate-pulse-glow">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_6px_oklch(0.72_0.19_165/0.8)]" />
+              adce626
             </div>
-            
-            <div className="mx-auto mb-8 flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-br from-primary/20 to-accent/20 text-primary shadow-lg shadow-primary/10">
-              <Shield className="h-12 w-12" />
-            </div>
-            
-            <h1 className="text-4xl font-bold tracking-tight text-foreground lg:text-6xl text-balance">
+            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-7xl">
               VULNEX
             </h1>
-            
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground text-pretty">
-              Web Hacking Playbook — A comprehensive platform for security researchers and bug hunters. Ready-to-use payloads, exploitation techniques, practical tools, and quick checklists.
+
+            <p className="mx-auto mt-4 max-w-2xl text-sm text-muted-foreground sm:text-base">
+              The ultimate hacking playbook for security researchers and bug hunters. Payloads, techniques, and tools at your fingertips.
             </p>
 
-            {/* Search Bar */}
-            <div className="mx-auto mt-10 max-w-xl">
+            {/* Search */}
+            <div className="mx-auto mt-8 max-w-xl">
               <div className="flex items-center gap-3 rounded-2xl border border-border bg-card px-5 py-4 shadow-lg shadow-black/5">
                 <Search className="h-5 w-5 text-muted-foreground" />
                 <input
@@ -97,38 +99,58 @@ export default function HomePage() {
                   className="w-full bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none"
                 />
                 <kbd className="hidden rounded-lg bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground sm:block">
-                  /
+                  K
                 </kbd>
               </div>
             </div>
 
-            {/* Quick Stats */}
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-6">
-              <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold text-primary">7</span>
-                <span className="text-sm text-muted-foreground">Sections</span>
-              </div>
-              <div className="h-4 w-px bg-border" />
-              <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold text-primary">24</span>
-                <span className="text-sm text-muted-foreground">Topics</span>
-              </div>
-              <div className="h-4 w-px bg-border" />
-              <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold text-primary">1370</span>
-                <span className="text-sm text-muted-foreground">Commands</span>
-              </div>
+            {/* Quick Tags */}
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
+              {quickTags.map((tag) => (
+                <Link
+                  key={tag.label}
+                  href={tag.href}
+                  className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/20"
+                >
+                  <Zap className="h-3 w-3" />
+                  {tag.label}
+                </Link>
+              ))}
+            </div>
+
+            {/* Stats */}
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-5 sm:gap-8">
+{[
+                { value: "6", label: "Sections" },
+                { value: "24", label: "Topics" },
+                { value: "1900+", label: "Commands" },
+              ].map((stat, i) => (
+                <div key={stat.label} className="flex items-center gap-2">
+                  {i > 0 && <div className="h-4 w-px bg-border hidden sm:block" />}
+                  <span className="text-xl font-bold text-primary sm:text-2xl">{stat.value}</span>
+                  <span className="text-xs text-muted-foreground sm:text-sm">{stat.label}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Main Sections */}
+        {/* Explore Sections */}
         <div className="mx-auto max-w-6xl px-6 py-16">
-          <div className="mb-10 text-center">
-            <h2 className="text-2xl font-bold text-foreground">Explore Sections</h2>
-            <p className="mt-2 text-muted-foreground">
-              Choose a category to start exploring
-            </p>
+          <div className="mb-8 flex items-center justify-between">
+            <div>
+              <h2 className="text-2xl font-bold text-foreground">Explore Sections</h2>
+              <p className="mt-1 text-muted-foreground">
+                Choose a category to dive in
+              </p>
+            </div>
+            <Link
+              href="/all"
+              className="hidden sm:inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary/80"
+            >
+              View all
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -139,7 +161,7 @@ export default function HomePage() {
                 className="group relative overflow-hidden rounded-2xl border border-border bg-card p-6 transition-all hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5"
               >
                 <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-primary/5 transition-transform group-hover:scale-150" />
-                
+
                 <div
                   className={cn(
                     "mb-4 flex h-12 w-12 items-center justify-center rounded-xl",
@@ -150,10 +172,10 @@ export default function HomePage() {
                 >
                   {iconMap[card.icon]}
                 </div>
-                
+
                 <h3 className="text-lg font-semibold text-foreground">{card.title}</h3>
                 <p className="mt-1 text-sm text-muted-foreground">{card.description}</p>
-                
+
                 <div className="mt-4 flex items-center justify-between">
                   <span className="text-xs text-muted-foreground">
                     {card.itemCount} topics
@@ -165,27 +187,81 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Features */}
-        <div className="border-t border-border bg-card/50">
-          <div className="mx-auto max-w-6xl px-6 py-16">
-            <div className="mb-10 text-center">
-              <h2 className="text-2xl font-bold text-foreground">Built for Speed</h2>
-              <p className="mt-2 text-muted-foreground">
-                Designed for quick access during testing
-              </p>
+        {/* Featured Tools Section */}
+        <div className="mx-auto max-w-6xl px-6 py-16 border-t border-border">
+          <div className="mb-10 flex items-center justify-between">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <Wrench className="h-5 w-5 text-primary" />
+                <h2 className="text-2xl font-bold text-foreground">Featured Tools</h2>
+              </div>
+              <p className="text-muted-foreground">Essential tools with interactive usage guides</p>
             </div>
+            <Link
+              href="/tools"
+              className="flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-primary"
+            >
+              View all tools <ChevronRight className="h-4 w-4" />
+            </Link>
+          </div>
 
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-              {features.map((feature, idx) => (
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {featuredTools.map((tool, idx) => (
+              <Link
+                key={tool.id}
+                href={`/tools/${tool.id}`}
+                className={cn(
+                  "group relative overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5",
+                  mounted ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                )}
+                style={{ transitionDelay: `${idx * 100}ms` }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                
+                <div className="relative p-5">
+                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    {toolIconMap[tool.icon] || <Sparkles className="size-5" />}
+                  </div>
+                  
+                  <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                    {tool.name}
+                  </h3>
+                  <p className="mt-1 text-xs text-muted-foreground line-clamp-2">
+                    {tool.description}
+                  </p>
+                  
+                  <div className="mt-4 flex items-center justify-between pt-3 border-t border-border/50">
+                    <span className="text-xs text-muted-foreground">{tool.commands.length} commands</span>
+                    <ArrowRight className="size-4 text-muted-foreground transition-all group-hover:translate-x-1 group-hover:text-primary" />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Features Grid */}
+        <div className="border-t border-border bg-card/30">
+          <div className="mx-auto max-w-6xl px-6 py-16">
+            <div className="grid grid-cols-2 gap-6 md:grid-cols-5">
+              {[
+                { icon: <Search className="h-6 w-6" />, title: "Quick Search", desc: "Find instantly" },
+                { icon: <Copy className="h-6 w-6" />, title: "One-Click Copy", desc: "Copy payloads" },
+                { icon: <Zap className="h-6 w-6" />, title: "Blazing Fast", desc: "Instant load" },
+                { icon: <Tag className="h-6 w-6" />, title: "Tagged", desc: "Organized" },
+                { icon: <Moon className="h-6 w-6" />, title: "Dark Mode", desc: "Easy on eyes" },
+              ].map((feature) => (
                 <div
-                  key={idx}
-                  className="flex flex-col items-center rounded-xl border border-border bg-background p-6 text-center"
+                  key={feature.title}
+                  className="flex flex-col items-center text-center gap-3 rounded-xl border border-border/50 bg-background p-6 transition-all hover:border-primary/30 hover:shadow-md"
                 >
-                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
                     {feature.icon}
                   </div>
-                  <h3 className="text-sm font-semibold text-foreground">{feature.title}</h3>
-                  <p className="mt-1 text-xs text-muted-foreground">{feature.description}</p>
+                  <div>
+                    <h3 className="font-semibold text-foreground text-sm">{feature.title}</h3>
+                    <p className="text-xs text-muted-foreground mt-0.5">{feature.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -194,19 +270,22 @@ export default function HomePage() {
 
         {/* CTA Section */}
         <div className="border-t border-border">
-          <div className="mx-auto max-w-4xl px-6 py-16 text-center">
-            <h2 className="text-2xl font-bold text-foreground">Start Exploring</h2>
-            <p className="mt-2 text-muted-foreground">
-              Jump into the Tech-Specific section to see the Microsoft IIS guide
-            </p>
-            <Link
-              href="/tech-specific/iis"
-              className="mt-6 inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-            >
-              <Server className="h-4 w-4" />
-              View IIS Hacking Guide
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+          <div className="mx-auto max-w-6xl px-6 py-16">
+            <div className="relative overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 via-background to-accent/5 p-10 text-center lg:p-16">
+              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSA2MCAwIEwgMCAwIDAgNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-50" />
+              <div className="relative">
+                <h2 className="text-3xl font-bold text-foreground">Ready to Start?</h2>
+                <p className="mt-3 text-muted-foreground max-w-md mx-auto">
+                  Jump into the IIS Hacking Guide
+                </p>
+                <Link
+                  href="/tech-specific/iis"
+                  className="mt-6 inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20"
+                >
+                  View IIS Guide <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
 

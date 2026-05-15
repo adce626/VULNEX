@@ -4,6 +4,7 @@ import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { Search, ArrowRight, Home, ChevronRight, Globe, Database, Variable } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { RecommendedTools } from "@/components/recommended-tools"
 
 const reconItems = [
   {
@@ -77,7 +78,7 @@ export default function ReconPage() {
                 {item.available ? (
                   <Link href={item.href} className="absolute inset-0 z-10" />
                 ) : null}
-                
+
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div
@@ -108,7 +109,7 @@ export default function ReconPage() {
                       <p className="text-sm text-muted-foreground">{item.description}</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center gap-3">
                     {item.commandCount && (
                       <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
@@ -127,6 +128,12 @@ export default function ReconPage() {
               </div>
             ))}
           </div>
+
+          {/* Recommended Tools */}
+          <RecommendedTools
+            toolIds={["subfinder", "amass", "httpx", "nmap", "sqlmap"]}
+            title="الأدوات المقترحة للاستطلاع"
+          />
         </div>
       </main>
     </div>

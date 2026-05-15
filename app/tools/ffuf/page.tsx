@@ -13,9 +13,12 @@ import {
   ChevronRight,
   Home,
   ExternalLink,
+  BookOpen,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
+import { UsageGuide } from "@/components/usage-guide"
+import { getToolById } from "@/lib/tools-data"
 
 export default function FFUFPage() {
   const [activeCategory, setActiveCategory] = useState("installation")

@@ -4,6 +4,7 @@ import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { Bug, ArrowRight, Home, ChevronRight, Database, Globe, Link2, FileText, Shield, AlertTriangle } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { RecommendedTools } from "@/components/recommended-tools"
 
 const vulnItems = [
   {
@@ -63,6 +64,7 @@ export default function VulnerabilitiesPage() {
       <MainSidebar />
 
       <main className="lg:pl-64">
+        {/* Breadcrumb */}
         <div className="border-b border-border bg-card/50">
           <div className="mx-auto max-w-5xl px-6 py-3">
             <nav className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -75,6 +77,7 @@ export default function VulnerabilitiesPage() {
           </div>
         </div>
 
+        {/* Header */}
         <div className="border-b border-border bg-gradient-to-br from-destructive/5 via-background to-accent/5">
           <div className="mx-auto max-w-5xl px-6 py-12 text-center">
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-destructive/10 text-destructive">
@@ -87,6 +90,7 @@ export default function VulnerabilitiesPage() {
           </div>
         </div>
 
+        {/* Content */}
         <div className="mx-auto max-w-5xl px-6 py-12">
           <div className="grid gap-4">
             {vulnItems.map((item) => (
@@ -102,7 +106,7 @@ export default function VulnerabilitiesPage() {
                 {item.available ? (
                   <Link href={item.href} className="absolute inset-0 z-10" />
                 ) : null}
-                
+
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div
@@ -139,7 +143,7 @@ export default function VulnerabilitiesPage() {
                       <p className="text-sm text-muted-foreground">{item.description}</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center gap-3">
                     {item.commandCount && (
                       <span className="rounded-full bg-destructive/10 px-3 py-1 text-sm font-medium text-destructive">
@@ -158,6 +162,12 @@ export default function VulnerabilitiesPage() {
               </div>
             ))}
           </div>
+
+          {/* Recommended Tools */}
+          <RecommendedTools
+            toolIds={["sqlmap", "burpsuite", "xsstrike", "nuclei", "ffuf"]}
+            title="الأدوات المقترحة لاختبار الثغرات"
+          />
         </div>
       </main>
     </div>

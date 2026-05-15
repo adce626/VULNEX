@@ -4,6 +4,7 @@ import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { Server, ArrowRight, Home, ChevronRight, Bug, Search, Code, FileCode, Leaf } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { RecommendedTools } from "@/components/recommended-tools"
 
 const techItems = [
   {
@@ -91,7 +92,7 @@ export default function TechSpecificPage() {
                 {item.available ? (
                   <Link href={item.href} className="absolute inset-0 z-10" />
                 ) : null}
-                
+
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div
@@ -126,7 +127,7 @@ export default function TechSpecificPage() {
                       <p className="text-sm text-muted-foreground">{item.description}</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center gap-3">
                     {item.commandCount && (
                       <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
@@ -145,6 +146,12 @@ export default function TechSpecificPage() {
               </div>
             ))}
           </div>
+
+          {/* Recommended Tools */}
+          <RecommendedTools
+            toolIds={["ffuf", "nuclei", "burpsuite", "httpx", "xsstrike"]}
+            title="الأدوات المقترحة لاختبار التقنيات الخاصة"
+          />
         </div>
       </main>
     </div>
