@@ -1,4 +1,5 @@
 "use client"
+import { PageTitle } from "@/components/page-title"
 
 import { useState } from "react"
 import Link from "next/link"
@@ -34,6 +35,7 @@ export default function WPScanPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="WPScan — WordPress Scanner" />
       <MainSidebar />
 
       <main className="lg:pl-64">

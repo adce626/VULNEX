@@ -1,10 +1,12 @@
 import { ToolsSection } from "@/components/tools-section"
 import { MainSidebar } from "@/components/main-sidebar"
+import { PageTitle } from "@/components/page-title"
 import { Wrench, Sparkles } from "lucide-react"
 
 export default function ToolsPage() {
   return (
     <div className="flex min-h-screen bg-background">
+      <PageTitle title="Tools &amp; Methods" />
       <MainSidebar />
       
       <main className="flex-1 ml-64 p-8">

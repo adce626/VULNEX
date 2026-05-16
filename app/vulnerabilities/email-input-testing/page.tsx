@@ -13,6 +13,7 @@ import {
   ExternalLink,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { PageTitle } from "@/components/page-title"
 
 export default function EmailInputTestingPage() {
   const [activeCategory, setActiveCategory] = useState("introduction")
@@ -29,6 +30,7 @@ export default function EmailInputTestingPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="Email Input Testing" />
       <MainSidebar />
       <main className="lg:pl-64">
         <div className="border-b border-border bg-card/50">

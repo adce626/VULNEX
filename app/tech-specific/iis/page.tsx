@@ -27,6 +27,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
+import { PageTitle } from "@/components/page-title"
 
 const phases = [
   { id: "recon", title: "Reconnaissance", icon: Search },
@@ -50,6 +51,7 @@ export default function IISHackingGuide() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="IIS Hacking Guide" />
       <MainSidebar />
 
       <main className="lg:pl-64">

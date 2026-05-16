@@ -17,6 +17,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
+import { PageTitle } from "@/components/page-title"
 
 export default function OpenRedirectPage() {
   const [activeCategory, setActiveCategory] = useState("introduction")
@@ -31,6 +32,7 @@ export default function OpenRedirectPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="Open Redirect" />
       <MainSidebar />
 
       <main className="lg:pl-64">

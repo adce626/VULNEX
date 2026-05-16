@@ -16,6 +16,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
+import { PageTitle } from "@/components/page-title"
 
 export default function WordPressPage() {
   const [activeCategory, setActiveCategory] = useState("understanding-wordpress-architecture")
@@ -30,6 +31,7 @@ export default function WordPressPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="WordPress Security" />
       <MainSidebar />
 
       <main className="lg:pl-64">

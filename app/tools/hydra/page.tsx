@@ -1,4 +1,5 @@
 "use client"
+import { PageTitle } from "@/components/page-title"
 
 import { useState } from "react"
 import Link from "next/link"
@@ -33,6 +34,7 @@ export default function HydraPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="Hydra — Login Bruteforcer" />
       <MainSidebar />
       <main className="lg:pl-64">
         <div className="border-b border-border bg-card/50">

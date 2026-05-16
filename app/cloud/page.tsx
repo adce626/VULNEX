@@ -3,6 +3,7 @@
 import React from "react"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
+import { PageTitle } from "@/components/page-title"
 import { Cloud, ArrowRight, Home, ChevronRight, Key, HardDrive, Database, Shield } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { RecommendedTools } from "@/components/recommended-tools"
@@ -34,6 +35,7 @@ const iconMap: Record<string, React.ReactNode> = {
 export default function CloudPage() {
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="Cloud &amp; Assets" />
       <MainSidebar />
 
       <main className="lg:pl-64">

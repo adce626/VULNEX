@@ -34,6 +34,7 @@ import {
   CheckCircle,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { PageTitle } from "@/components/page-title"
 
 export default function ApiFuzzingPage() {
   const [expandedSteps, setExpandedSteps] = useState<string[]>(
@@ -57,6 +58,7 @@ export default function ApiFuzzingPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="API Fuzzing" />
       <MainSidebar />
 
       <main className="lg:pl-64">

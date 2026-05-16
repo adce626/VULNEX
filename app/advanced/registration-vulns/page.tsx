@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { CommandCard } from "@/components/command-card"
+import { PageTitle } from "@/components/page-title"
 import { registrationVulnCategories, registrationVulnTools } from "@/lib/registration-vulns-data"
 import {
   UserPlus,
@@ -29,6 +30,7 @@ export default function RegistrationVulnsPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="Registration Vulnerabilities" />
       <MainSidebar />
       <main className="lg:pl-64">
         <div className="border-b border-border bg-card/50">

@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
+import { PageTitle } from "@/components/page-title"
 import { navigation, sectionCards } from "@/lib/site-data"
 import {
   Home,
@@ -34,6 +35,7 @@ const colorMap: Record<string, string> = {
 export default function AllSectionsPage() {
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="All Sections" />
       <MainSidebar />
 
       <main className="lg:pl-64">

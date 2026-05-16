@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
+import { PageTitle } from "@/components/page-title"
 import { Shield, ArrowRight, Home, ChevronRight, Unlock, Database } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { RecommendedTools } from "@/components/recommended-tools"
@@ -26,6 +27,7 @@ const wafItems = [
 export default function WAFBypassPage() {
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="WAF Bypass &amp; PoCs" />
       <MainSidebar />
 
       <main className="lg:pl-64">

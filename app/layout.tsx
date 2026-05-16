@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { Toaster } from 'sonner'
 import { ThemeProvider } from "@/components/theme-provider"
 import './globals.css'
 
@@ -29,7 +30,22 @@ export const metadata: Metadata = {
   description:
     'A comprehensive platform for security researchers and bug hunters. Ready-to-use payloads, exploitation techniques, practical tools, and quick checklists.',
   generator: 'v0.app',
-  icons: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIzMiIgeTI9IjMyIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjN2MzYWVkIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjM2I4MmY2Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHBhdGggZD0iTTE2IDJMNCA4djdjMCA2LjEgNC4yIDExLjkgMTIgMTUgNy44LTMuMSAxMi04LjkgMTItMTVWOEwxNiAyeiIgZmlsbD0idXJsKCNnKSIvPjxwYXRoIGQ9Ik0xNC41IDE3bC0yLTIgMS0xIDEgMSAzLTMgMSAxLTQgNHoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=',
+  icons: '/favicon.svg',
+  manifest: '/manifest.json',
+  openGraph: {
+    title: 'VULNEX — Web Hacking Playbook',
+    description: 'Ready-to-use payloads, exploitation techniques, and security tools for researchers and bug hunters.',
+    url: 'https://vulnex.vercel.app',
+    siteName: 'VULNEX',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'VULNEX — Web Hacking Playbook',
+    description: 'Ready-to-use payloads, exploitation techniques, and security tools.',
+    creator: '@adce626',
+  },
 }
 
 export default function RootLayout({
@@ -51,6 +67,16 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <Toaster
+            position="bottom-right"
+            toastOptions={{
+              style: {
+                background: 'oklch(0.15 0.005 260)',
+                border: '1px solid oklch(0.25 0.01 260)',
+                color: 'oklch(0.9 0.005 260)',
+              },
+            }}
+          />
         </ThemeProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

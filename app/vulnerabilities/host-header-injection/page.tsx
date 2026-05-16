@@ -17,6 +17,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
+import { PageTitle } from "@/components/page-title"
 
 export default function HostHeaderInjectionPage() {
   const [activeCategory, setActiveCategory] = useState("introduction")
@@ -31,6 +32,7 @@ export default function HostHeaderInjectionPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="Host Header Injection" />
       <MainSidebar />
 
       <main className="lg:pl-64">

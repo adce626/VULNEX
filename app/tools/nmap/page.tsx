@@ -1,4 +1,5 @@
 "use client"
+import { PageTitle } from "@/components/page-title"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { CommandCard } from "@/components/command-card"
@@ -24,6 +25,7 @@ export default function ToolPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="Nmap — Network Scanner" />
       <MainSidebar />
 
       <main className="lg:pl-64">

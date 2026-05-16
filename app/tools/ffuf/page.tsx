@@ -1,4 +1,5 @@
 "use client"
+import { PageTitle } from "@/components/page-title"
 
 import { useState } from "react"
 import { MainSidebar } from "@/components/main-sidebar"
@@ -39,6 +40,7 @@ export default function FFUFPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="FFUF — Fuzzing Tool" />
       <MainSidebar />
 
       <main className="lg:pl-64">

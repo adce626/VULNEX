@@ -27,6 +27,7 @@ import {
   CheckCircle,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { PageTitle } from "@/components/page-title"
 
 export default function NextjsPage() {
   const [expandedSteps, setExpandedSteps] = useState<string[]>(
@@ -50,6 +51,7 @@ export default function NextjsPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="Next.js Security" />
       <MainSidebar />
 
       <main className="lg:pl-64">

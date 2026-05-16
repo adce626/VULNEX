@@ -1,4 +1,5 @@
 "use client"
+import { PageTitle } from "@/components/page-title"
 
 import { useState } from "react"
 import { MainSidebar } from "@/components/main-sidebar"
@@ -34,6 +35,7 @@ export default function GospiderPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="Gospider — Spidering" />
       <MainSidebar />
 
       <main className="lg:pl-64">

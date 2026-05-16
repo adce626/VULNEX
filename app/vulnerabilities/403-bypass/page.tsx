@@ -16,6 +16,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
+import { PageTitle } from "@/components/page-title"
 
 export default function Bypass403Page() {
   const [activeCategory, setActiveCategory] = useState("introduction-to-403-bypass")
@@ -30,6 +31,7 @@ export default function Bypass403Page() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="403 Bypass" />
       <MainSidebar />
 
       <main className="lg:pl-64">

@@ -1,4 +1,5 @@
 "use client"
+import { PageTitle } from "@/components/page-title"
 
 import { useState } from "react"
 import Link from "next/link"
@@ -35,6 +36,7 @@ export default function ParamSpiderPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="ParamSpider — Param Discovery" />
       <MainSidebar />
 
       <main className="lg:pl-64">

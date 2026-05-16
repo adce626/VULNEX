@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
+import { PageTitle } from "@/components/page-title"
 import { Brain, ArrowRight, Home, ChevronRight, Bot, Eye, UserPlus, ClipboardPaste, Gauge } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { RecommendedTools } from "@/components/recommended-tools"
@@ -47,6 +48,7 @@ const advancedItems = [
 export default function AdvancedPage() {
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="Advanced Topics" />
       <MainSidebar />
 
       <main className="lg:pl-64">

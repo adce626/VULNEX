@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { MainSidebar } from "@/components/main-sidebar"
 import { CommandCard } from "@/components/command-card"
+import { PageTitle } from "@/components/page-title"
 import {
   llmInjectionCategories,
   llmInjectionTools,
@@ -30,6 +31,7 @@ export default function LLMInjectionPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="LLM Injection" />
       <MainSidebar />
 
       <main className="lg:pl-64">

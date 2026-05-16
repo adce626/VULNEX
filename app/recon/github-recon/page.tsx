@@ -1,5 +1,6 @@
 "use client"
 
+import { PageTitle } from "@/components/page-title"
 import { useState } from "react"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
@@ -29,6 +30,7 @@ export default function GitHubReconPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="GitHub Recon" />
       <MainSidebar />
       <main className="lg:pl-64">
         <div className="border-b border-border bg-card/50">

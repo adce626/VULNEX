@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
+import { PageTitle } from "@/components/page-title"
 import { Bug, ArrowRight, Home, ChevronRight, Database, Globe, Link2, FileText, Shield, AlertTriangle, Mail } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { RecommendedTools } from "@/components/recommended-tools"
@@ -68,6 +69,7 @@ const vulnItems = [
 export default function VulnerabilitiesPage() {
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="Web Vulnerabilities" />
       <MainSidebar />
 
       <main className="lg:pl-64">

@@ -16,6 +16,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
+import { PageTitle } from "@/components/page-title"
 
 export default function S3BucketsPage() {
   const [activeCategory, setActiveCategory] = useState("understanding-aws-s3-buckets")
@@ -30,6 +31,7 @@ export default function S3BucketsPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="S3 Bucket Testing" />
       <MainSidebar />
 
       <main className="lg:pl-64">

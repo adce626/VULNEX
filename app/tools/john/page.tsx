@@ -1,4 +1,5 @@
 "use client"
+import { PageTitle } from "@/components/page-title"
 
 import { useState } from "react"
 import Link from "next/link"
@@ -34,6 +35,7 @@ export default function JohnPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="John the Ripper — Password Cracker" />
       <MainSidebar />
 
       <main className="lg:pl-64">

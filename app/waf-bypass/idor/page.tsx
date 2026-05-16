@@ -17,6 +17,7 @@ import {
   Shield,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { PageTitle } from "@/components/page-title"
 
 export default function IDORPage() {
   const [expandedSteps, setExpandedSteps] = useState<string[]>(
@@ -36,6 +37,7 @@ export default function IDORPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="IDOR Bypass" />
       <MainSidebar />
 
       <main className="lg:pl-64">

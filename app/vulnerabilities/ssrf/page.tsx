@@ -13,6 +13,7 @@ import {
   ExternalLink,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { PageTitle } from "@/components/page-title"
 
 export default function SSRFPage() {
   const [activeCategory, setActiveCategory] = useState("what-is-ssrf")
@@ -31,6 +32,7 @@ export default function SSRFPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="SSRF Testing & Exploitation" />
       <MainSidebar />
       <main className="lg:pl-64">
         <div className="border-b border-border bg-card/50">

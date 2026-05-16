@@ -3,6 +3,7 @@
 import React from "react"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
+import { PageTitle } from "@/components/page-title"
 import { browserExtensions } from "@/lib/browser-extensions-data"
 import {
   Puzzle,
@@ -57,6 +58,7 @@ const bgColors = [
 export default function BrowserExtensionsPage() {
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="Browser Extensions" />
       <MainSidebar />
       <main className="lg:pl-64">
         <div className="border-b border-border bg-card/50">

@@ -1,5 +1,6 @@
 "use client"
 
+import { PageTitle } from "@/components/page-title"
 import { useState } from "react"
 import { MainSidebar } from "@/components/main-sidebar"
 import { CommandCard } from "@/components/command-card"
@@ -30,6 +31,7 @@ export default function ShodanDorksPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="Shodan Dorks" />
       <MainSidebar />
 
       <main className="lg:pl-64">

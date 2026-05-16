@@ -1,5 +1,6 @@
 "use client";
 
+import { PageTitle } from "@/components/page-title";
 import { useState } from "react";
 import { MainSidebar } from "@/components/main-sidebar";
 import { googleDorksData } from "@/lib/google-dorks-data";
@@ -51,6 +52,7 @@ export default function GoogleDorksPage() {
 
   return (
     <div className="flex min-h-screen bg-background">
+      <PageTitle title="Google Dorks" />
       <MainSidebar />
 
       <main className="flex-1 lg:pl-64">

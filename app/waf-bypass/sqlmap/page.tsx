@@ -19,6 +19,7 @@ import {
   Shield,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { PageTitle } from "@/components/page-title"
 
 export default function WAFSQLMapPage() {
   const [expandedSteps, setExpandedSteps] = useState<string[]>(
@@ -38,6 +39,7 @@ export default function WAFSQLMapPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="SQLMap WAF Bypass" />
       <MainSidebar />
 
       <main className="lg:pl-64">

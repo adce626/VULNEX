@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { toast } from "sonner"
 import { Check, Copy, Terminal } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -16,6 +17,10 @@ export function CommandCard({ command, description, index }: CommandCardProps) {
   const copyToClipboard = async () => {
     await navigator.clipboard.writeText(command)
     setCopied(true)
+    toast.success('Copied!', {
+      duration: 1500,
+      style: { background: 'oklch(0.72 0.19 165 / 0.15)', border: '1px solid oklch(0.72 0.19 165 / 0.3)' },
+    })
     setTimeout(() => setCopied(false), 2000)
   }
 

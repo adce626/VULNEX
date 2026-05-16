@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
+import { PageTitle } from "@/components/page-title"
 import { Search, ArrowRight, Home, ChevronRight, Globe, Database, Variable, Github } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { RecommendedTools } from "@/components/recommended-tools"
@@ -40,6 +41,7 @@ const reconItems = [
 export default function ReconPage() {
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="Recon &amp; OSINT" />
       <MainSidebar />
 
       <main className="lg:pl-64">

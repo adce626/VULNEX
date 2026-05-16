@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { MainSidebar } from "@/components/main-sidebar"
+import { PageTitle } from "@/components/page-title"
 import { sectionCards } from "@/lib/site-data"
 import { toolsData } from "@/lib/tools-data"
 import {
@@ -90,6 +91,7 @@ export default function HomePage() {
   }
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="VULNEX — Web Hacking Playbook" />
       <MainSidebar />
 
       <main className="lg:pl-64">

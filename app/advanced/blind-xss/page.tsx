@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { CommandCard } from "@/components/command-card"
+import { PageTitle } from "@/components/page-title"
 import { blindXSSSteps } from "@/lib/blind-xss-commands"
 import {
   ChevronLeft,
@@ -41,6 +42,7 @@ export default function BlindXSSPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="Blind XSS Advanced" />
       <MainSidebar />
 
       <main className="lg:pl-64">

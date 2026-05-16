@@ -1,4 +1,5 @@
 "use client"
+import { PageTitle } from "@/components/page-title"
 
 import { useState } from "react"
 import { MainSidebar } from "@/components/main-sidebar"
@@ -34,6 +35,7 @@ export default function CewlPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="CeWL — Wordlist Generator" />
       <MainSidebar />
 
       <main className="lg:pl-64">

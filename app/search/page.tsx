@@ -4,6 +4,7 @@ import { Suspense, useMemo } from "react"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
+import { PageTitle } from "@/components/page-title"
 import { navigation } from "@/lib/site-data"
 import { toolsData } from "@/lib/tools-data"
 import {
@@ -63,6 +64,7 @@ function SearchContent() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageTitle title="Search" />
       <MainSidebar />
       <main className="lg:pl-64">
         <div className="border-b border-border bg-card/50">
