@@ -82,16 +82,17 @@ export function CommandCard({ command, description, index, pageTitle }: CommandC
             <Star className={cn("h-4 w-4", bookmarked && "fill-amber-400")} />
           </button>
           <button
-          onClick={copyToClipboard}
-          className={cn(
-            "flex h-8 w-8 items-center justify-center rounded-md transition-all",
-            copied
-              ? "bg-primary/20 text-primary"
-              : "bg-secondary text-muted-foreground hover:bg-primary/10 hover:text-primary"
-          )}
-        >
-          {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-        </button>
+            onClick={copyToClipboard}
+            className={cn(
+              "flex h-8 w-8 items-center justify-center rounded-md transition-all",
+              copied
+                ? "bg-primary/20 text-primary"
+                : "bg-secondary text-muted-foreground hover:bg-primary/10 hover:text-primary"
+            )}
+          >
+            {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+          </button>
+        </div>
       </div>
       <div className="flex items-start gap-2 rounded-md bg-background p-3">
         <Terminal className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
