@@ -75,7 +75,7 @@ export function CommandCard({ command, description, index, pageTitle }: CommandC
               "flex h-8 w-8 items-center justify-center rounded-md transition-all",
               bookmarked
                 ? "text-amber-400 hover:text-amber-500"
-                : "text-muted-foreground/30 hover:text-muted-foreground opacity-0 group-hover:opacity-100"
+                : "text-muted-foreground/40 hover:text-amber-400 opacity-60 hover:opacity-100"
             )}
             title={bookmarked ? "Remove bookmark" : "Add bookmark"}
           >
