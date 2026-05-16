@@ -30,7 +30,7 @@ import {
   Tag,
   Moon,
 } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { RecentlyViewed } from "@/components/recently-viewed"
 
 const iconMap: Record<string, React.ReactNode> = {
   search: <Search className="h-6 w-6" />,
@@ -267,6 +267,9 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+
+        {/* Recently Viewed */}
+        <RecentlyViewed />
 
         {/* Features Grid */}
         <div className="border-t border-border bg-card/30">

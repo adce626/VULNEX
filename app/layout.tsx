@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { Toaster } from 'sonner'
 import { ThemeProvider } from "@/components/theme-provider"
+import { PageTracker } from "@/components/page-tracker"
 import './globals.css'
 
 const interSans = Inter({
@@ -67,6 +68,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <PageTracker />
           <Toaster
             position="bottom-right"
             toastOptions={{

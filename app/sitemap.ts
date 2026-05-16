@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/advanced',
     '/auth-session',
     '/browser-extensions',
+    '/bookmarks',
   ]
 
   const navPages = navigation.flatMap(section =>

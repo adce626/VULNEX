@@ -19,6 +19,7 @@ import {
   X,
   ArrowRight,
   Puzzle,
+  Bookmark,
 } from "lucide-react"
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -69,6 +70,7 @@ const allPages = [
   { title: "Blind XSS via PasteJacking", href: "/advanced/blind-xss-pastejacking", keywords: "pastejacking,clipboard,xss,blind,paste,html" },
   { title: "Rate Limit Bypass", href: "/advanced/rate-limit-bypass", keywords: "rate,limit,bypass,ip,spoof,proxy,header,rotate" },
   { title: "WAF Bypass & PoCs", href: "/waf-bypass", keywords: "waf,bypass,poc,firewall,idor" },
+  { title: "Bookmarks", href: "/bookmarks", keywords: "bookmark,saved,favorite,star" },
 ]
 
 export function MainSidebar() {
@@ -255,9 +257,18 @@ export function MainSidebar() {
 
       {/* Footer */}
       <div className="border-t border-border p-4">
-        <p className="text-center text-xs text-muted-foreground">
-          For ethical use only
-        </p>
+        <div className="flex items-center justify-between">
+          <p className="text-center text-xs text-muted-foreground">
+            For ethical use only
+          </p>
+          <Link
+            href="/bookmarks"
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:text-primary hover:bg-muted transition-colors"
+            title="Bookmarks"
+          >
+            <Bookmark className="h-4 w-4" />
+          </Link>
+        </div>
       </div>
     </>
   )
