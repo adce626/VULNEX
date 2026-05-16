@@ -31,6 +31,7 @@ import {
   Moon,
 } from "lucide-react"
 import { RecentlyViewed } from "@/components/recently-viewed"
+import { cn } from "@/lib/utils"
 
 const iconMap: Record<string, React.ReactNode> = {
   search: <Search className="h-6 w-6" />,
