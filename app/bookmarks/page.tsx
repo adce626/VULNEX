@@ -5,11 +5,11 @@ import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
 import { CommandCard } from "@/components/command-card"
-import { getBookmarks, clearBookmarks, type Bookmark } from "@/lib/bookmarks"
+import { getBookmarks, clearBookmarks, type Bookmark as SavedBookmark } from "@/lib/bookmarks"
 import { Bookmark, Trash2, ArrowRight, ExternalLink } from "lucide-react"
 
 export default function BookmarksPage() {
-  const [bookmarks, setBookmarks] = useState<Bookmark[]>([])
+  const [bookmarks, setBookmarks] = useState<SavedBookmark[]>([])
 
   useEffect(() => {
     setBookmarks(getBookmarks())
@@ -20,7 +20,7 @@ export default function BookmarksPage() {
     setBookmarks([])
   }
 
-  const grouped = bookmarks.reduce<Record<string, Bookmark[]>>((acc, b) => {
+  const grouped = bookmarks.reduce<Record<string, SavedBookmark[]>>((acc, b) => {
     const key = b.pageUrl
     if (!acc[key]) acc[key] = []
     acc[key].push(b)
