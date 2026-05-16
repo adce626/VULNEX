@@ -1,103 +1,116 @@
-export interface Dork {
-  query: string;
-  description?: string;
+export interface GoogleDorkCategory {
+  id: string
+  title: string
+  description: string
+  dorks: { query: string; description: string }[]
 }
 
-export interface DorkCategory {
-  id: string;
-  title: string;
-  description: string;
-  dorks: Dork[];
-}
+export const lastUpdated = "2026-05-15"
+export const pageDescription = "Powerful Google search operators and dork queries for vulnerability discovery, exposed data, and reconnaissance."
 
-export const googleDorksData: DorkCategory[] = [
+export const googleDorksData: GoogleDorkCategory[] = [
   {
-    id: "basic-recon",
-    title: "Basic Domain Reconnaissance",
-    description: "Basic domain enumeration using Google dorks",
+    id: "login-admin",
+    title: "Login Pages & Admin Panels",
+    description: "Find administrative interfaces and login portals",
     dorks: [
-      { query: "site:{domain} -www -shop -share -ir -mfa", description: "Find subdomains excluding common ones" },
-      { query: "site:{domain} ext:php inurl:?", description: "Find PHP files with parameters" },
-      { query: "site:{domain} inurl:api | site:*/rest | site:*/v1 | site:*/v2 | site:*/v3", description: "Find API endpoints" },
+      { query: 'intitle:"login" inurl:/admin', description: "Find admin login pages" },
+      { query: 'inurl:/wp-admin', description: "WordPress admin panels" },
+      { query: 'intitle:"index of" "admin"', description: "Open directory listing of admin" },
+      { query: 'inurl:"/admin" intitle:"admin"', description: "Generic admin panels" },
+      { query: 'inurl:admin.php', description: "PHP admin login pages" },
     ],
   },
   {
-    id: "sensitive-files",
-    title: "Sensitive File Extensions",
-    description: "Search for potentially sensitive file extensions",
+    id: "files-config",
+    title: "Exposed Files & Configs",
+    description: "Configuration files and sensitive documents exposed online",
     dorks: [
-      { query: 'site:"{domain}" ext:log | ext:txt | ext:conf | ext:cnf | ext:ini | ext:env | ext:sh | ext:bak | ext:backup | ext:swp | ext:old | ext:~ | ext:git | ext:svn | ext:htpasswd | ext:htaccess | ext:json', description: "Find sensitive config and backup files" },
-      { query: "inurl:conf | inurl:env | inurl:cgi | inurl:bin | inurl:etc | inurl:root | inurl:sql | inurl:backup | inurl:admin | inurl:php site:{domain}", description: "Find sensitive directories" },
+      { query: 'intitle:"index of" ".env"', description: "Exposed .env files with secrets" },
+      { query: 'intitle:"index of" "config.php"', description: "Exposed PHP config files" },
+      { query: 'intitle:"index of" "backup"', description: "Open backup directories" },
+      { query: 'intitle:"index of" "database"', description: "Exposed database dumps" },
+      { query: 'intitle:"index of" "sql" ext:sql', description: "Exposed SQL dump files" },
+      { query: 'filetype:env "DB_PASSWORD"', description: "Exposed environment variables" },
+      { query: 'filetype:xml "CONF" inurl:web.xml', description: "Java web.xml config files" },
+      { query: 'inurl:"/phpinfo.php" intitle:"phpinfo"', description: "phpinfo() pages with server info" },
     ],
   },
   {
-    id: "error-pages",
-    title: "Error Pages and Exceptions",
-    description: "Find pages exposing error messages or exceptions",
+    id: "directory-listing",
+    title: "Directory Listing",
+    description: "Open directory listings exposing files and folders",
     dorks: [
-      { query: 'inurl:"error" | intitle:"exception" | intitle:"failure" | intitle:"server at" | inurl:exception | "database error" | "SQL syntax" | "undefined index" | "unhandled exception" | "stack trace" site:{domain}', description: "Find exposed error pages and stack traces" },
+      { query: 'intitle:"index of /" "parent directory"', description: "Generic open directory listing" },
+      { query: 'intitle:"index of" ".git"', description: "Exposed .git repositories" },
+      { query: 'intitle:"index of" "node_modules"', description: "Exposed node_modules" },
+      { query: 'intitle:"index of" "backup" "wp-content"', description: "WordPress backup exposure" },
+      { query: 'intitle:"index of" "log"', description: "Exposed log files" },
+      { query: 'intitle:"index of" "secrets"', description: "Exposed secrets directories" },
     ],
   },
   {
-    id: "vuln-params",
-    title: "Vulnerability-Prone Parameters",
-    description: "Search for potentially vulnerable parameters",
+    id: "sensitive-info",
+    title: "Sensitive Information",
+    description: "Passwords, keys, and confidential data leaks",
     dorks: [
-      { query: "inurl:q= | inurl:s= | inurl:search= | inurl:query= | inurl:keyword= | inurl:lang= inurl:& site:{domain}", description: "Search/query parameters (potential XSS)" },
-      { query: "inurl:url= | inurl:return= | inurl:next= | inurl:redirect= | inurl:redir= | inurl:ret= | inurl:r2= | inurl:page= inurl:& inurl:http site:{domain}", description: "Redirect parameters (Open Redirect)" },
-      { query: "inurl:id= | inurl:pid= | inurl:category= | inurl:cat= | inurl:action= | inurl:sid= | inurl:dir= inurl:& site:{domain}", description: "ID parameters (potential SQLi)" },
-      { query: "inurl:http | inurl:url= | inurl:path= | inurl:dest= | inurl:html= | inurl:data= | inurl:domain= | inurl:page= inurl:& site:{domain}", description: "URL parameters (potential SSRF)" },
-      { query: "inurl:include | inurl:dir | inurl:detail= | inurl:file= | inurl:folder= | inurl:inc= | inurl:locate= | inurl:doc= | inurl:conf= inurl:& site:{domain}", description: "File parameters (potential LFI)" },
-      { query: "inurl:cmd | inurl:exec= | inurl:query= | inurl:code= | inurl:do= | inurl:run= | inurl:read= | inurl:ping= inurl:& site:{domain}", description: "Command parameters (potential RCE)" },
+      { query: 'intext:"password" filetype:txt', description: "Password files in text format" },
+      { query: 'inurl:"/robots.txt" "Disallow"', description: "Find hidden paths via robots.txt" },
+      { query: 'inurl:"/sitemap.xml"', description: "Sitemap files for page discovery" },
+      { query: 'filetype:pdf "confidential"', description: "PDFs with confidential labels" },
+      { query: 'intext:"ssh-rsa" "-----BEGIN"', description: "Exposed SSH private keys" },
+      { query: 'intext:"API_KEY" filetype:env', description: "API keys in env files" },
+      { query: 'intext:"aws_access_key_id" filetype:txt', description: "AWS access keys exposed" },
+      { query: 'inurl:.gitignore "AWS"', description: "AWS secrets in gitignore files" },
     ],
   },
   {
-    id: "cloud-storage",
-    title: "Cloud Storage and Services",
-    description: "Find exposed cloud storage and services",
+    id: "vuln-discovery",
+    title: "Vulnerability Discovery",
+    description: "Find potentially vulnerable endpoints and services",
     dorks: [
-      { query: 'site:s3.amazonaws.com "{domain}"', description: "AWS S3 buckets" },
-      { query: 'site:blob.core.windows.net "{domain}"', description: "Azure Blob storage" },
-      { query: 'site:googleapis.com "{domain}"', description: "Google APIs" },
-      { query: 'site:drive.google.com "{domain}"', description: "Google Drive files" },
-      { query: 'site:dev.azure.com "{domain}"', description: "Azure DevOps" },
-      { query: 'site:onedrive.live.com "{domain}"', description: "OneDrive files" },
-      { query: 'site:digitaloceanspaces.com "{domain}"', description: "DigitalOcean Spaces" },
-      { query: 'site:sharepoint.com "{domain}"', description: "SharePoint files" },
-      { query: 'site:s3-external-1.amazonaws.com "{domain}"', description: "AWS S3 external" },
-      { query: 'site:s3.dualstack.us-east-1.amazonaws.com "{domain}"', description: "AWS S3 dualstack" },
-      { query: 'site:dropbox.com/s "{domain}"', description: "Dropbox shared files" },
-      { query: 'site:box.com/s "{domain}"', description: "Box shared files" },
-      { query: 'site:docs.google.com inurl:"/d/" "{domain}"', description: "Google Docs" },
-      { query: 'site:jfrog.io "{domain}"', description: "JFrog artifacts" },
-      { query: 'site:firebaseio.com "{domain}"', description: "Firebase databases" },
+      { query: 'inurl:"/wp-json/wp/v2/users"', description: "WordPress API user enumeration" },
+      { query: 'inurl:"/api/v1" intitle:"API"', description: "Exposed API endpoints" },
+      { query: 'inurl:"/graphql" intitle:"GraphQL"', description: "Exposed GraphQL interfaces" },
+      { query: 'inurl:"debug" intitle:"debug"', description: "Debug mode enabled" },
+      { query: 'inurl:"/actuator" intitle:"Actuator"', description: "Spring Boot actuator endpoints" },
+      { query: 'inurl:"/swagger-ui.html"', description: "Swagger UI documentation pages" },
+      { query: 'inurl:server-status "Apache"', description: "Apache server status pages" },
+      { query: 'inurl:server-info "Apache"', description: "Apache server info pages" },
     ],
   },
   {
-    id: "code-docs",
-    title: "Code and Documentation",
-    description: "Search for exposed code and documentation",
+    id: "camera-iot",
+    title: "Camera & IoT Dorks",
+    description: "Internet-connected cameras and IoT device interfaces",
     dorks: [
-      { query: 'site:pastebin.com "{domain}"', description: "Pastebin leaks" },
-      { query: 'site:jsfiddle.net "{domain}"', description: "JSFiddle code" },
-      { query: 'site:codebeautify.org "{domain}"', description: "CodeBeautify snippets" },
-      { query: 'site:codepen.io "{domain}"', description: "CodePen projects" },
-      { query: 'inurl:apidocs | inurl:api-docs | inurl:swagger | inurl:api-explorer site:"{domain}"', description: "API documentation" },
-      { query: 'site:openbugbounty.org inurl:reports intext:"{domain}"', description: "OpenBugBounty reports" },
-      { query: 'site:groups.google.com "{domain}"', description: "Google Groups discussions" },
+      { query: 'intitle:"webcam" "live" "camera"', description: "Live webcams" },
+      { query: 'inurl:"/viewer/live" "camera"', description: "Live viewer access" },
+      { query: 'intitle:"DVR" "login"', description: "DVR login pages" },
+      { query: 'intitle:"Network Camera" "login"', description: "Network camera logins" },
     ],
   },
   {
-    id: "sensitive-content",
-    title: "Sensitive Content",
-    description: "Find potentially sensitive content",
+    id: "upload-exploit",
+    title: "File Upload & Exploitation",
+    description: "File upload endpoints and exploitable services",
     dorks: [
-      { query: 'site:{domain} "choose file"', description: "File upload forms" },
-      { query: "inurl:login | inurl:signin | intitle:login | intitle:signin | inurl:secure site:{domain}", description: "Login pages" },
-      { query: "inurl:test | inurl:env | inurl:dev | inurl:staging | inurl:sandbox | inurl:debug | inurl:temp | inurl:internal | inurl:demo site:{domain}", description: "Development/staging environments" },
-      { query: "site:{domain} ext:txt | ext:pdf | ext:xml | ext:xls | ext:xlsx | ext:ppt | ext:pptx | ext:doc | ext:docx", description: "Document files" },
-      { query: 'intext:"confidential" | intext:"Not for Public Release" | intext:"internal use only" | intext:"do not distribute"', description: "Confidential documents" },
-      { query: "inurl:email= | inurl:phone= | inurl:password= | inurl:secret= inurl:& site:{domain}", description: "Sensitive parameters" },
+      { query: 'inurl:/file/upload intitle:"upload"', description: "File upload endpoints" },
+      { query: 'inurl:/cgi-bin/ "test.cgi"', description: "CGI scripts" },
+      { query: 'inurl:/wp-content/uploads/', description: "WordPress uploads directory" },
+      { query: 'inurl:"/uploads/" intitle:"index of"', description: "Open uploads directory" },
     ],
   },
-];
+  {
+    id: "errors-debug",
+    title: "Error Messages & Debug Info",
+    description: "Error pages and debug information leaks",
+    dorks: [
+      { query: 'intitle:"Warning" "mysql_connect"', description: "MySQL connection errors" },
+      { query: 'intitle:"PHP Error"', description: "PHP error messages" },
+      { query: 'inurl:"error_log" intitle:"error"', description: "Error log files" },
+      { query: 'inurl:"/var/log/" intitle:"index of"', description: "Exposed system logs" },
+      { query: 'intitle:"Stack Trace" filetype:html', description: "Stack trace information" },
+    ],
+  },
+]

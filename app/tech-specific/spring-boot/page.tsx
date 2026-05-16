@@ -3,9 +3,13 @@
 import { useState } from "react"
 import { MainSidebar } from "@/components/main-sidebar"
 import { CommandCard } from "@/components/command-card"
+import { CommandList } from "@/components/command-list"
+import { PageIntro } from "@/components/page-intro"
 import {
   springBootCategories,
   springBootTools,
+  lastUpdated,
+  pageDescription,
 } from "@/lib/spring-boot-data"
 import {
   Search,
@@ -79,6 +83,8 @@ export default function SpringBootPage() {
           </div>
         </div>
 
+        <PageIntro title="Spring Boot Security" description={pageDescription} lastUpdated={lastUpdated} />
+
         {/* Category Navigation */}
         <div className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur-sm">
           <div className="mx-auto max-w-5xl px-6">
@@ -127,16 +133,7 @@ export default function SpringBootPage() {
                     </h2>
                   </div>
                 </div>
-                <div className="space-y-3">
-                  {category.commands.map((cmd, cmdIdx) => (
-                    <CommandCard
-                      key={cmdIdx}
-                      command={cmd.command}
-                      description={cmd.description}
-                      index={cmdIdx + 1}
-                    />
-                  ))}
-                </div>
+                <CommandList commands={category.commands} pageTitle="Spring Boot" pageSize={15} />
               </section>
             )
           })}

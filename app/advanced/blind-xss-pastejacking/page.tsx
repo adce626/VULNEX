@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { CommandCard } from "@/components/command-card"
+import { CommandList } from "@/components/command-list"
 import { PageTitle } from "@/components/page-title"
 import { pasteJackingCategories, pasteJackingTools } from "@/lib/blind-xss-pastejacking-data"
 import {
@@ -91,11 +92,7 @@ export default function BlindXSSPasteJackingPage() {
                     <h2 className="text-2xl font-bold text-foreground">{category.category}</h2>
                   </div>
                 </div>
-                <div className="space-y-3">
-                  {category.commands.map((cmd, cmdIdx) => (
-                    <CommandCard key={cmdIdx} command={cmd.command} description={cmd.description} index={cmdIdx + 1} />
-                  ))}
-                </div>
+                <CommandList commands={category.commands} pageTitle="Blind XSS via PasteJacking" pageSize={15} />
               </section>
             )
           })}

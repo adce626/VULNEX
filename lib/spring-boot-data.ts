@@ -3,6 +3,9 @@ export interface SpringBootCategory {
   commands: { command: string; description: string }[]
 }
 
+export const lastUpdated = "2026-05-15"
+export const pageDescription = "Spring Boot actuator exploitation, heapdump analysis, and configuration vulnerability testing."
+
 export const springBootCategories: SpringBootCategory[] = [
   {
     category: "Phase 1: Discovery - Shodan Dorks",

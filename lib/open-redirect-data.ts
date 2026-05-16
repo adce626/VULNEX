@@ -3,6 +3,9 @@ export interface OpenRedirectCategory {
   commands: { command: string; description: string }[]
 }
 
+export const lastUpdated = "2026-05-15"
+export const pageDescription = "Open redirect vulnerability testing with various protocols, parameters, and bypass techniques."
+
 export const openRedirectCategories: OpenRedirectCategory[] = [
   // =================== INTRODUCTION ==================
   {

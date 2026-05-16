@@ -4,8 +4,10 @@ import { useState } from "react"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { CommandCard } from "@/components/command-card"
+import { CommandList } from "@/components/command-list"
+import { PageIntro } from "@/components/page-intro"
 import { PageTitle } from "@/components/page-title"
-import { rateLimitCategories, rateLimitTools } from "@/lib/rate-limit-bypass-data"
+import { rateLimitCategories, rateLimitTools, lastUpdated, pageDescription } from "@/lib/rate-limit-bypass-data"
 import {
   Gauge,
   Terminal,
@@ -62,6 +64,14 @@ export default function RateLimitBypassPage() {
           </div>
         </div>
 
+        <div className="mx-auto max-w-5xl px-6 pt-6">
+          <PageIntro
+            title="Rate Limit Bypass"
+            description={pageDescription}
+            lastUpdated={lastUpdated}
+          />
+        </div>
+
         <div className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur-sm">
           <div className="mx-auto max-w-5xl px-6">
             <div className="flex gap-1 overflow-x-auto py-3 scrollbar-hide">
@@ -91,11 +101,7 @@ export default function RateLimitBypassPage() {
                     <h2 className="text-2xl font-bold text-foreground">{category.category}</h2>
                   </div>
                 </div>
-                <div className="space-y-3">
-                  {category.commands.map((cmd, cmdIdx) => (
-                    <CommandCard key={cmdIdx} command={cmd.command} description={cmd.description} index={cmdIdx + 1} />
-                  ))}
-                </div>
+                <CommandList commands={category.commands} pageTitle="Rate Limit Bypass" pageSize={15} />
               </section>
             )
           })}

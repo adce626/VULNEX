@@ -278,7 +278,7 @@ export function MainSidebar() {
       {/* Mobile Toggle */}
       <button
         onClick={() => setMobileOpen(!mobileOpen)}
-        className="fixed right-4 top-4 z-50 flex h-10 w-10 items-center justify-center rounded-lg bg-card text-foreground shadow-lg lg:hidden"
+        className="fixed left-4 top-4 z-50 flex h-10 w-10 items-center justify-center rounded-lg bg-card text-foreground shadow-lg lg:hidden"
       >
         {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
       </button>
@@ -292,8 +292,8 @@ export function MainSidebar() {
       )}
       <aside
         className={cn(
-          "fixed right-0 top-0 z-40 flex h-full w-64 flex-col bg-card transition-transform lg:hidden",
-          mobileOpen ? "translate-x-0" : "translate-x-full"
+          "fixed left-0 top-0 z-40 flex h-full w-64 flex-col bg-card transition-transform lg:hidden",
+          mobileOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
         <SidebarContent />

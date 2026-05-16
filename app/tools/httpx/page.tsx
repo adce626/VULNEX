@@ -3,6 +3,7 @@ import { PageTitle } from "@/components/page-title"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { CommandCard } from "@/components/command-card"
+import { CommandList } from "@/components/command-list"
 import { getToolById } from "@/lib/tools-data"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -144,16 +145,7 @@ export default function ToolPage() {
                 </h2>
               </div>
             </div>
-            <div className="space-y-3">
-              {tool.commands.map((cmd, idx) => (
-                <CommandCard
-                  key={idx}
-                  command={cmd.command}
-                  description={cmd.description}
-                  index={idx + 1}
-                />
-              ))}
-            </div>
+            <CommandList commands={tool.commands} pageTitle="httpx" pageSize={15} />
           </section>
 
           <section id="when" className="scroll-mt-20">

@@ -5,6 +5,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { CommandCard } from "@/components/command-card"
+import { CommandList } from "@/components/command-list"
 import { nucleiTemplateCategories, nucleiTemplateTools } from "@/lib/nuclei-templates-data"
 import {
   FileJson,
@@ -91,11 +92,7 @@ export default function NucleiTemplatesPage() {
                     <h2 className="text-2xl font-bold text-foreground">{category.category}</h2>
                   </div>
                 </div>
-                <div className="space-y-3">
-                  {category.commands.map((cmd, cmdIdx) => (
-                    <CommandCard key={cmdIdx} command={cmd.command} description={cmd.description} index={cmdIdx + 1} />
-                  ))}
-                </div>
+                <CommandList commands={category.commands} pageTitle="Nuclei Templates" pageSize={15} />
               </section>
             )
           })}

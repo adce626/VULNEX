@@ -3,6 +3,9 @@ export interface EmailInputCategory {
   commands: { command: string; description: string }[]
 }
 
+export const lastUpdated = "2026-05-15"
+export const pageDescription = "Email field injection testing including XSS, SSRF, SQLi, and header injection payloads."
+
 export const emailInputCategories: EmailInputCategory[] = [
   {
     category: "Introduction",

@@ -3,9 +3,13 @@
 import { useState } from "react"
 import { MainSidebar } from "@/components/main-sidebar"
 import { CommandCard } from "@/components/command-card"
+import { CommandList } from "@/components/command-list"
+import { PageIntro } from "@/components/page-intro"
 import {
   hostHeaderInjectionCategories,
   hostHeaderInjectionTools,
+  lastUpdated,
+  pageDescription,
 } from "@/lib/host-header-injection-data"
 import {
   Search,
@@ -79,6 +83,14 @@ export default function HostHeaderInjectionPage() {
           </div>
         </div>
 
+        <div className="mx-auto max-w-5xl px-6 pt-6">
+          <PageIntro
+            title="Host Header Injection"
+            description={pageDescription}
+            lastUpdated={lastUpdated}
+          />
+        </div>
+
         {/* Category Navigation */}
         <div className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur-sm">
           <div className="mx-auto max-w-5xl px-6">
@@ -139,16 +151,7 @@ export default function HostHeaderInjectionPage() {
                     </h2>
                   </div>
                 </div>
-                <div className="space-y-3">
-                  {category.commands.map((cmd, cmdIdx) => (
-                    <CommandCard
-                      key={cmdIdx}
-                      command={cmd.command}
-                      description={cmd.description}
-                      index={cmdIdx + 1}
-                    />
-                  ))}
-                </div>
+                <CommandList commands={category.commands} pageTitle="Host Header Injection" pageSize={15} />
               </section>
             )
           })}

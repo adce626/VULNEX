@@ -2,10 +2,13 @@
 
 import { useState } from "react"
 import { MainSidebar } from "@/components/main-sidebar"
-import { CommandCard } from "@/components/command-card"
+import { CommandList } from "@/components/command-list"
+import { PageIntro } from "@/components/page-intro"
 import {
   sqlInjectionCategories,
   sqlInjectionTools,
+  lastUpdated,
+  pageDescription,
 } from "@/lib/sql-injection-data"
 import {
   Database,
@@ -76,6 +79,15 @@ export default function SQLInjectionPage() {
               </span>
             </div>
           </div>
+        </div>
+
+        {/* Page Intro */}
+        <div className="mx-auto max-w-5xl px-6 pt-6">
+          <PageIntro
+            title="SQL Injection Guide"
+            description={pageDescription}
+            lastUpdated={lastUpdated}
+          />
         </div>
 
         {/* Category Navigation */}
@@ -150,16 +162,11 @@ export default function SQLInjectionPage() {
                     </h2>
                   </div>
                 </div>
-                <div className="space-y-3">
-                  {category.commands.map((cmd, cmdIdx) => (
-                    <CommandCard
-                      key={cmdIdx}
-                      command={cmd.command}
-                      description={cmd.description}
-                      index={cmdIdx + 1}
-                    />
-                  ))}
-                </div>
+                <CommandList
+                  commands={category.commands}
+                  pageTitle="SQL Injection"
+                  pageSize={15}
+                />
               </section>
             )
           })}

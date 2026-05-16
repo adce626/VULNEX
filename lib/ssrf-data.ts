@@ -3,6 +3,9 @@ export interface SSRFCategory {
   commands: { command: string; description: string }[]
 }
 
+export const lastUpdated = "2026-05-15"
+export const pageDescription = "Server-Side Request Forgery testing with cloud metadata endpoints, URL schemes, and exploitation techniques."
+
 export const ssrfCategories: SSRFCategory[] = [
   {
     category: "What is SSRF?",

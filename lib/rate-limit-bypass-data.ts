@@ -3,6 +3,9 @@ export interface RateLimitCategory {
   commands: { command: string; description: string }[]
 }
 
+export const lastUpdated = "2026-05-15"
+export const pageDescription = "Rate limit bypass techniques using headers, IP rotation, race conditions, and caching."
+
 export const rateLimitCategories: RateLimitCategory[] = [
   {
     category: "Introduction",

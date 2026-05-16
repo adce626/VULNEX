@@ -3,6 +3,9 @@ export interface DependencyConfusionCategory {
   commands: { command: string; description: string }[]
 }
 
+export const lastUpdated = "2026-05-15"
+export const pageDescription = "Dependency confusion attacks against npm, pip, RubyGems, and other package managers."
+
 export const dependencyConfusionCategories: DependencyConfusionCategory[] = [
   // =================== INTRODUCTION ==================
   {

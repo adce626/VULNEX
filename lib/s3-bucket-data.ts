@@ -3,6 +3,9 @@ export interface S3BucketCategory {
   commands: { command: string; description: string }[]
 }
 
+export const lastUpdated = "2026-05-15"
+export const pageDescription = "AWS S3 bucket enumeration, permission testing, and misconfiguration exploitation."
+
 export const s3BucketCategories: S3BucketCategory[] = [
   // ==================== UNDERSTANDING ===================
   {

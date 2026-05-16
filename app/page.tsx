@@ -308,13 +308,13 @@ export default function HomePage() {
               <div className="relative">
                 <h2 className="text-3xl font-bold text-foreground">Ready to Start?</h2>
                 <p className="mt-3 text-muted-foreground max-w-md mx-auto">
-                  Jump into the IIS Hacking Guide
+                  Jump into the most popular payloads
                 </p>
                 <Link
                   href="/tech-specific/iis"
                   className="mt-6 inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20"
                 >
-                  View IIS Guide <ArrowRight className="h-4 w-4" />
+                  Browse Payloads <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
             </div>

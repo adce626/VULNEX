@@ -3,6 +3,9 @@ export interface CRLFCategory {
   commands: { command: string; description: string }[]
 }
 
+export const lastUpdated = "2026-05-15"
+export const pageDescription = "CRLF injection (HTTP response splitting) testing with various headers and encoding bypasses."
+
 export const crlfCategories: CRLFCategory[] = [
   // =================== INTRODUCTION ===================
   {

@@ -3,6 +3,9 @@ export interface HostHeaderInjectionCategory {
   commands: { command: string; description: string }[]
 }
 
+export const lastUpdated = "2026-05-15"
+export const pageDescription = "Host header injection testing for cache poisoning, password reset poisoning, and routing bypass."
+
 export const hostHeaderInjectionCategories: HostHeaderInjectionCategory[] = [
   // =================== VULNERABILITY DESCRIPTION ==================
   {

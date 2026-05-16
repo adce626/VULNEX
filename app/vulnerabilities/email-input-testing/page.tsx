@@ -4,7 +4,9 @@ import { useState } from "react"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { CommandCard } from "@/components/command-card"
-import { emailInputCategories, emailInputTools } from "@/lib/email-input-testing-data"
+import { CommandList } from "@/components/command-list"
+import { PageIntro } from "@/components/page-intro"
+import { emailInputCategories, emailInputTools, lastUpdated, pageDescription } from "@/lib/email-input-testing-data"
 import {
   Mail,
   Terminal,
@@ -62,6 +64,8 @@ export default function EmailInputTestingPage() {
           </div>
         </div>
 
+        <PageIntro title="Email Input Testing" description={pageDescription} lastUpdated={lastUpdated} />
+
         <div className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur-sm">
           <div className="mx-auto max-w-5xl px-6">
             <div className="flex gap-1 overflow-x-auto py-3 scrollbar-hide">
@@ -91,11 +95,7 @@ export default function EmailInputTestingPage() {
                     <h2 className="text-2xl font-bold text-foreground">{category.category}</h2>
                   </div>
                 </div>
-                <div className="space-y-3">
-                  {category.commands.map((cmd, cmdIdx) => (
-                    <CommandCard key={cmdIdx} command={cmd.command} description={cmd.description} index={cmdIdx + 1} />
-                  ))}
-                </div>
+                <CommandList commands={category.commands} pageTitle="Email Input Testing" pageSize={15} />
               </section>
             )
           })}

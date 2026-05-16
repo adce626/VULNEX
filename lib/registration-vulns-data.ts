@@ -3,6 +3,9 @@ export interface RegistrationVulnCategory {
   commands: { command: string; description: string }[]
 }
 
+export const lastUpdated = "2026-05-15"
+export const pageDescription = "Registration system vulnerability testing including mass assignment, duplicate accounts, and OTP bypass."
+
 export const registrationVulnCategories: RegistrationVulnCategory[] = [
   {
     category: "Introduction",

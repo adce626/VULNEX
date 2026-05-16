@@ -3,9 +3,13 @@
 import { useState } from "react"
 import { MainSidebar } from "@/components/main-sidebar"
 import { CommandCard } from "@/components/command-card"
+import { CommandList } from "@/components/command-list"
+import { PageIntro } from "@/components/page-intro"
 import {
   crlfCategories,
   crlfTools,
+  lastUpdated,
+  pageDescription,
 } from "@/lib/crlf-data"
 import {
   Bug,
@@ -79,6 +83,14 @@ export default function CRLFPage() {
           </div>
         </div>
 
+        <div className="mx-auto max-w-5xl px-6 pt-6">
+          <PageIntro
+            title="CRLF Injection"
+            description={pageDescription}
+            lastUpdated={lastUpdated}
+          />
+        </div>
+
         {/* Category Navigation */}
         <div className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur-sm">
           <div className="mx-auto max-w-5xl px-6">
@@ -127,16 +139,7 @@ export default function CRLFPage() {
                     </h2>
                   </div>
                 </div>
-                <div className="space-y-3">
-                  {category.commands.map((cmd, cmdIdx) => (
-                    <CommandCard
-                      key={cmdIdx}
-                      command={cmd.command}
-                      description={cmd.description}
-                      index={cmdIdx + 1}
-                    />
-                  ))}
-                </div>
+                <CommandList commands={category.commands} pageTitle="CRLF Injection" pageSize={15} />
               </section>
             )
           })}

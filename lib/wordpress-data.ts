@@ -3,6 +3,9 @@ export interface WordPressCategory {
   commands: { command: string; description: string }[]
 }
 
+export const lastUpdated = "2026-05-15"
+export const pageDescription = "WordPress security testing with plugin/theme vulnerability detection and user enumeration."
+
 export const wordpressCategories: WordPressCategory[] = [
   // =================== INTRODUCTION ==================
   {

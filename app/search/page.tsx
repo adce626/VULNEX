@@ -7,11 +7,13 @@ import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
 import { navigation } from "@/lib/site-data"
 import { toolsData } from "@/lib/tools-data"
+import { searchCommands } from "@/lib/search-index"
 import {
   Home,
   ChevronRight,
   Search,
   ArrowRight,
+  Terminal,
 } from "lucide-react"
 
 function SearchContent() {
@@ -22,7 +24,7 @@ function SearchContent() {
     if (!query.trim()) return []
 
     const q = query.toLowerCase()
-    const matches: { title: string; href: string; section: string; type: string }[] = []
+    const matches: { title: string; href: string; section: string; type: string; command?: string }[] = []
 
     // Search navigation items
     for (const section of navigation) {
@@ -59,7 +61,19 @@ function SearchContent() {
       }
     }
 
-    return matches
+    // Search command content
+    const cmdResults = searchCommands(query)
+    for (const cmd of cmdResults) {
+      matches.push({
+        title: cmd.title,
+        href: cmd.href,
+        section: cmd.section,
+        type: "command",
+        command: cmd.text,
+      })
+    }
+
+    return matches.slice(0, 50)
   }, [query])
 
   return (
@@ -123,18 +137,25 @@ function SearchContent() {
                   href={result.href}
                   className="group flex items-center justify-between rounded-xl border border-border bg-card p-4 transition-all hover:border-primary/50 hover:shadow-lg"
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary text-xs font-bold">
-                      {result.type === "tool" ? "T" : "P"}
+                  <div className="flex items-center gap-4 min-w-0">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary text-xs font-bold">
+                      {result.type === "tool" ? "T" : result.type === "command" ? <Terminal className="h-4 w-4" /> : "P"}
                     </div>
-                    <div>
-                      <h3 className="font-medium text-foreground group-hover:text-primary transition-colors">
+                    <div className="min-w-0">
+                      <h3 className="font-medium text-foreground group-hover:text-primary transition-colors truncate">
                         {result.title}
                       </h3>
-                      <p className="text-xs text-muted-foreground">{result.section}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {result.type === "command" ? result.section : result.section}
+                      </p>
+                      {result.command && (
+                        <p className="mt-1 text-xs text-muted-foreground/60 font-mono truncate">
+                          {result.command}
+                        </p>
+                      )}
                     </div>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
+                  <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
                 </Link>
               ))}
             </div>

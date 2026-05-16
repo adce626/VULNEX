@@ -3,6 +3,9 @@ export interface SQLInjectionCategory {
   commands: { command: string; description: string }[]
 }
 
+export const lastUpdated = "2026-05-15"
+export const pageDescription = "Comprehensive SQL injection payloads and techniques including time-based, error-based, UNION, blind, and WAF bypass methods."
+
 export const sqlInjectionCategories: SQLInjectionCategory[] = [
   // =================== INTRODUCTION ==================
   {

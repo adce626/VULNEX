@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { Toaster } from 'sonner'
 import { ThemeProvider } from "@/components/theme-provider"
 import { PageTracker } from "@/components/page-tracker"
+import { ScrollToTop } from "@/components/scroll-to-top"
 import './globals.css'
 
 const interSans = Inter({
@@ -69,6 +70,7 @@ export default function RootLayout({
         >
           {children}
           <PageTracker />
+          <ScrollToTop />
           <Toaster
             position="bottom-right"
             toastOptions={{

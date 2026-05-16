@@ -3,8 +3,9 @@
 import { useState } from "react"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
-import { CommandCard } from "@/components/command-card"
-import { ssrfCategories, ssrfTools } from "@/lib/ssrf-data"
+import { CommandList } from "@/components/command-list"
+import { PageIntro } from "@/components/page-intro"
+import { ssrfCategories, ssrfTools, lastUpdated, pageDescription } from "@/lib/ssrf-data"
 import {
   Globe,
   Terminal,
@@ -72,6 +73,15 @@ export default function SSRFPage() {
           </div>
         </div>
 
+        {/* Page Intro */}
+        <div className="mx-auto max-w-5xl px-6 pt-6">
+          <PageIntro
+            title="SSRF Testing & Exploitation"
+            description={pageDescription}
+            lastUpdated={lastUpdated}
+          />
+        </div>
+
         <div className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur-sm">
           <div className="mx-auto max-w-5xl px-6">
             <div className="flex gap-1 overflow-x-auto py-3 scrollbar-hide">
@@ -112,16 +122,11 @@ export default function SSRFPage() {
                     <h2 className="text-2xl font-bold text-foreground">{category.category}</h2>
                   </div>
                 </div>
-                <div className="space-y-3">
-                  {category.commands.map((cmd, cmdIdx) => (
-                    <CommandCard
-                      key={cmdIdx}
-                      command={cmd.command}
-                      description={cmd.description}
-                      index={cmdIdx + 1}
-                    />
-                  ))}
-                </div>
+                <CommandList
+                  commands={category.commands}
+                  pageTitle="SSRF Testing & Exploitation"
+                  pageSize={15}
+                />
               </section>
             )
           })}

@@ -4,6 +4,7 @@ import { PageTitle } from "@/components/page-title"
 import { useState } from "react"
 import { MainSidebar } from "@/components/main-sidebar"
 import { CommandCard } from "@/components/command-card"
+import { CommandList } from "@/components/command-list"
 import {
   ffufCategories,
   ffufTools,
@@ -163,16 +164,7 @@ export default function FFUFPage() {
                     </h2>
                   </div>
                 </div>
-                <div className="space-y-3">
-                  {category.commands.map((cmd, cmdIdx) => (
-                    <CommandCard
-                      key={cmdIdx}
-                      command={processCommand(cmd.command)}
-                      description={cmd.description}
-                      index={cmdIdx + 1}
-                    />
-                  ))}
-                </div>
+                <CommandList commands={category.commands} pageTitle="FFUF" pageSize={15} />
               </section>
             )
           })}

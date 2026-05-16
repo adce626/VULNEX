@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { CommandCard } from "@/components/command-card"
+import { CommandList } from "@/components/command-list"
 import { PageTitle } from "@/components/page-title"
 import { blindXSSSteps } from "@/lib/blind-xss-commands"
 import {
@@ -210,16 +211,7 @@ export default function BlindXSSPage() {
                             Commands
                           </h3>
                         </div>
-                        <div className="grid gap-3">
-                          {step.commands.map((cmd, cmdIndex) => (
-                            <CommandCard
-                              key={cmdIndex}
-                              command={cmd.command}
-                              description={cmd.description}
-                              index={cmdIndex + 1}
-                            />
-                          ))}
-                        </div>
+                        <CommandList commands={step.commands} pageTitle="Blind XSS Advanced" pageSize={15} />
                       </div>
                     )}
 

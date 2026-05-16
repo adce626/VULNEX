@@ -2,17 +2,18 @@
 
 import { useState } from "react"
 import { MainSidebar } from "@/components/main-sidebar"
-import { CommandCard } from "@/components/command-card"
+import { CommandList } from "@/components/command-list"
+import { PageIntro } from "@/components/page-intro"
 import {
   openRedirectCategories,
-  openRedirectTools,
+  lastUpdated,
+  pageDescription,
 } from "@/lib/open-redirect-data"
 import {
   RefreshCw,
   Terminal,
   ChevronRight,
   Home,
-  ExternalLink,
   Shield,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -77,6 +78,10 @@ export default function OpenRedirectPage() {
               </span>
             </div>
           </div>
+        </div>
+
+        <div className="mx-auto max-w-5xl px-6 pt-6">
+          <PageIntro title="Open Redirect" description={pageDescription} lastUpdated={lastUpdated} />
         </div>
 
         {/* Category Navigation */}
@@ -145,57 +150,10 @@ export default function OpenRedirectPage() {
                     </h2>
                   </div>
                 </div>
-                <div className="space-y-3">
-                  {category.commands.map((cmd, cmdIdx) => (
-                    <CommandCard
-                      key={cmdIdx}
-                      command={cmd.command}
-                      description={cmd.description}
-                      index={cmdIdx + 1}
-                    />
-                  ))}
-                </div>
+                <CommandList commands={category.commands} pageTitle="Open Redirect" pageSize={15} />
               </section>
             )
           })}
-
-          {/* Tools & Resources */}
-          <section className="scroll-mt-20">
-            <div className="mb-6 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-500/10 text-red-500">
-                <ExternalLink className="h-5 w-5" />
-              </div>
-              <div>
-                <span className="text-xs font-medium text-red-500">Tools</span>
-                <h2 className="text-2xl font-bold text-foreground">
-                  Tools & Resources
-                </h2>
-              </div>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {openRedirectTools.map((tool) => (
-                <a
-                  key={tool.name}
-                  href={tool.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-start gap-3 rounded-lg border border-border bg-card p-4 transition-all hover:border-red-500/50 hover:shadow-lg hover:shadow-red-500/5"
-                >
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-red-500/10 text-red-500">
-                    <ExternalLink className="h-4 w-4" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="font-medium text-foreground group-hover:text-red-500">
-                      {tool.name}
-                    </div>
-                    <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
-                      {tool.description}
-                    </p>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </section>
 
           {/* Footer */}
           <footer className="border-t border-border pt-8 text-center">
