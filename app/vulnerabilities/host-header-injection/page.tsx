@@ -22,11 +22,9 @@ import {
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { PageTitle } from "@/components/page-title"
-import { DomainInput } from "@/components/domain-input"
 
 export default function HostHeaderInjectionPage() {
   const [activeCategory, setActiveCategory] = useState("introduction")
-  const [domain, setDomain] = useState("")
 
   const scrollToSection = (id: string) => {
     setActiveCategory(id)
@@ -93,7 +91,6 @@ export default function HostHeaderInjectionPage() {
           />
         </div>
 
-        <DomainInput domain={domain} setDomain={setDomain} />
 
         {/* Category Navigation */}
         <div className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur-sm">
@@ -155,7 +152,7 @@ export default function HostHeaderInjectionPage() {
                     </h2>
                   </div>
                 </div>
-                <CommandList commands={category.commands} pageTitle="Host Header Injection" pageSize={15} domain={domain} />
+                <CommandList commands={category.commands} pageTitle="Host Header Injection" pageSize={15} />
               </section>
             )
           })}

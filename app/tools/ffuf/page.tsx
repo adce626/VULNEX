@@ -21,11 +21,9 @@ import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { UsageGuide } from "@/components/usage-guide"
 import { getToolById } from "@/lib/tools-data"
-import { DomainInput } from "@/components/domain-input"
 
 export default function FFUFPage() {
   const [activeCategory, setActiveCategory] = useState("installation")
-  const [domain, setDomain] = useState("")
 
   const scrollToSection = (id: string) => {
     setActiveCategory(id)
@@ -85,7 +83,6 @@ export default function FFUFPage() {
           </div>
         </div>
 
-        <DomainInput domain={domain} setDomain={setDomain} />
 
         {/* Category Navigation */}
         <div className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur-sm">
@@ -135,7 +132,7 @@ export default function FFUFPage() {
                     </h2>
                   </div>
                 </div>
-                <CommandList commands={category.commands} pageTitle="FFUF" pageSize={15} domain={domain} />
+                <CommandList commands={category.commands} pageTitle="FFUF" pageSize={15} />
               </section>
             )
           })}

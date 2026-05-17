@@ -2,41 +2,78 @@
 @import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
+@custom-variant light (&:is(.light *));
 
 :root {
-  --background: oklch(0.07 0.005 260);
-  --foreground: oklch(0.93 0 0);
-  --card: oklch(0.11 0.008 260);
-  --card-foreground: oklch(0.93 0 0);
-  --popover: oklch(0.11 0.008 260);
-  --popover-foreground: oklch(0.93 0 0);
-  --primary: oklch(0.72 0.19 165);
-  --primary-foreground: oklch(0.07 0 0);
-  --secondary: oklch(0.14 0.008 260);
-  --secondary-foreground: oklch(0.85 0 0);
-  --muted: oklch(0.16 0.008 260);
-  --muted-foreground: oklch(0.55 0 0);
-  --accent: oklch(0.72 0.19 165);
-  --accent-foreground: oklch(0.07 0 0);
+  --background: oklch(0.98 0.002 260);
+  --foreground: oklch(0.15 0.01 260);
+  --card: oklch(0.96 0.005 260);
+  --card-foreground: oklch(0.15 0.01 260);
+  --popover: oklch(0.96 0.005 260);
+  --popover-foreground: oklch(0.15 0.01 260);
+  --primary: oklch(0.55 0.22 165);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.92 0.01 260);
+  --secondary-foreground: oklch(0.2 0.01 260);
+  --muted: oklch(0.94 0.005 260);
+  --muted-foreground: oklch(0.5 0.01 260);
+  --accent: oklch(0.55 0.22 165);
+  --accent-foreground: oklch(0.98 0 0);
   --destructive: oklch(0.6 0.2 25);
-  --destructive-foreground: oklch(0.95 0 0);
-  --border: oklch(0.2 0.01 260);
-  --input: oklch(0.14 0.008 260);
-  --ring: oklch(0.72 0.19 165);
-  --chart-1: oklch(0.72 0.19 165);
-  --chart-2: oklch(0.65 0.15 200);
-  --chart-3: oklch(0.7 0.18 140);
-  --chart-4: oklch(0.6 0.12 280);
-  --chart-5: oklch(0.75 0.15 60);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.88 0.01 260);
+  --input: oklch(0.88 0.01 260);
+  --ring: oklch(0.55 0.22 165);
+  --chart-1: oklch(0.55 0.22 165);
+  --chart-2: oklch(0.5 0.18 200);
+  --chart-3: oklch(0.55 0.2 140);
+  --chart-4: oklch(0.45 0.15 280);
+  --chart-5: oklch(0.6 0.18 60);
   --radius: 0.625rem;
-  --sidebar: oklch(0.06 0.005 260);
-  --sidebar-foreground: oklch(0.85 0 0);
-  --sidebar-primary: oklch(0.72 0.19 165);
-  --sidebar-primary-foreground: oklch(0.07 0 0);
-  --sidebar-accent: oklch(0.12 0.008 260);
-  --sidebar-accent-foreground: oklch(0.93 0 0);
-  --sidebar-border: oklch(0.18 0.01 260);
-  --sidebar-ring: oklch(0.72 0.19 165);
+  --sidebar: oklch(0.96 0.005 260);
+  --sidebar-foreground: oklch(0.15 0.01 260);
+  --sidebar-primary: oklch(0.55 0.22 165);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.92 0.01 260);
+  --sidebar-accent-foreground: oklch(0.2 0.01 260);
+  --sidebar-border: oklch(0.88 0.01 260);
+  --sidebar-ring: oklch(0.55 0.22 165);
+}
+
+.light {
+  --background: oklch(0.98 0.002 260);
+  --foreground: oklch(0.15 0.01 260);
+  --card: oklch(0.96 0.005 260);
+  --card-foreground: oklch(0.15 0.01 260);
+  --popover: oklch(0.96 0.005 260);
+  --popover-foreground: oklch(0.15 0.01 260);
+  --primary: oklch(0.55 0.22 165);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.92 0.01 260);
+  --secondary-foreground: oklch(0.2 0.01 260);
+  --muted: oklch(0.94 0.005 260);
+  --muted-foreground: oklch(0.5 0.01 260);
+  --accent: oklch(0.55 0.22 165);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.6 0.2 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.88 0.01 260);
+  --input: oklch(0.88 0.01 260);
+  --ring: oklch(0.55 0.22 165);
+  --chart-1: oklch(0.55 0.22 165);
+  --chart-2: oklch(0.5 0.18 200);
+  --chart-3: oklch(0.55 0.2 140);
+  --chart-4: oklch(0.45 0.15 280);
+  --chart-5: oklch(0.6 0.18 60);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.96 0.005 260);
+  --sidebar-foreground: oklch(0.15 0.01 260);
+  --sidebar-primary: oklch(0.55 0.22 165);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.92 0.01 260);
+  --sidebar-accent-foreground: oklch(0.2 0.01 260);
+  --sidebar-border: oklch(0.88 0.01 260);
+  --sidebar-ring: oklch(0.55 0.22 165);
 }
 
 .dark {
@@ -353,6 +390,13 @@
 }
 main {
   animation: fade-in 0.3s ease-out;
+}
+
+/* Mobile: avoid hamburger overlap */
+@media (max-width: 1023px) {
+  main {
+    padding-top: 4rem !important;
+  }
 }
 
 /* Print styles */

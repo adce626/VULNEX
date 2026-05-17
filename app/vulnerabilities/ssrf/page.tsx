@@ -15,11 +15,9 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { PageTitle } from "@/components/page-title"
-import { DomainInput } from "@/components/domain-input"
 
 export default function SSRFPage() {
   const [activeCategory, setActiveCategory] = useState("what-is-ssrf")
-  const [domain, setDomain] = useState("")
 
   const scrollToSection = (id: string) => {
     setActiveCategory(id)
@@ -84,7 +82,6 @@ export default function SSRFPage() {
           />
         </div>
 
-        <DomainInput domain={domain} setDomain={setDomain} />
 
         <div className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur-sm">
           <div className="mx-auto max-w-5xl px-6">
@@ -130,7 +127,6 @@ export default function SSRFPage() {
                   commands={category.commands}
                   pageTitle="SSRF Testing & Exploitation"
                   pageSize={15}
-                  domain={domain}
                 />
               </section>
             )

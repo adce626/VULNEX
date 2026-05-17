@@ -15,11 +15,9 @@ import {
   ExternalLink,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { DomainInput } from "@/components/domain-input"
 
 export default function GitHubReconPage() {
   const [activeCategory, setActiveCategory] = useState("introduction")
-  const [domain, setDomain] = useState("")
 
   const scrollToSection = (id: string) => {
     setActiveCategory(id)
@@ -65,7 +63,6 @@ export default function GitHubReconPage() {
           </div>
         </div>
 
-        <DomainInput domain={domain} setDomain={setDomain} />
 
         <div className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur-sm">
           <div className="mx-auto max-w-5xl px-6">
@@ -96,7 +93,7 @@ export default function GitHubReconPage() {
                     <h2 className="text-2xl font-bold text-foreground">{category.category}</h2>
                   </div>
                 </div>
-                <CommandList commands={category.commands} pageTitle="GitHub Recon" pageSize={15} domain={domain} />
+                <CommandList commands={category.commands} pageTitle="GitHub Recon" pageSize={15} />
               </section>
             )
           })}

@@ -31,8 +31,12 @@ export default function GoogleDorksPage() {
   };
 
   const getProcessedQuery = (query: string) => {
-    const targetDomain = domain.trim() || "example.com";
-    return query.replace(/\{domain\}/g, targetDomain);
+    const targetDomain = domain.trim();
+    if (!targetDomain) return query;
+    if (query.includes("{domain}")) {
+      return query.replace(/\{domain\}/g, targetDomain);
+    }
+    return `site:${targetDomain} ${query}`;
   };
 
   const openInGoogle = (query: string) => {
@@ -120,7 +124,7 @@ export default function GoogleDorksPage() {
             <div className="mb-6 flex items-center gap-2 rounded-lg border border-accent/30 bg-accent/10 p-4">
               <Search className="h-5 w-5 text-accent" />
               <p className="text-sm text-accent">
-                Enter a domain above to customize all dork queries. Currently showing queries with <code className="rounded bg-accent/20 px-1.5 py-0.5 font-mono text-xs">example.com</code>
+                Enter a domain above to scope dork queries with <code className="rounded bg-accent/20 px-1.5 py-0.5 font-mono text-xs">site:target.com</code>
               </p>
             </div>
           )}
@@ -255,7 +259,7 @@ export default function GoogleDorksPage() {
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               <Button
                 variant="outline"
-                onClick={() => openInGoogle(`site:${domain || "example.com"}`)}
+                onClick={() => openInGoogle(`site:${domain || "{domain}"}`)}
                 className="h-auto flex-col gap-2 border-border py-4 text-foreground hover:bg-secondary/50"
               >
                 <Search className="h-5 w-5 text-primary" />
@@ -263,7 +267,7 @@ export default function GoogleDorksPage() {
               </Button>
               <Button
                 variant="outline"
-                onClick={() => openInGoogle(`site:${domain || "example.com"} filetype:pdf`)}
+                onClick={() => openInGoogle(`site:${domain || "{domain}"} filetype:pdf`)}
                 className="h-auto flex-col gap-2 border-border py-4 text-foreground hover:bg-secondary/50"
               >
                 <Search className="h-5 w-5 text-accent" />
@@ -271,7 +275,7 @@ export default function GoogleDorksPage() {
               </Button>
               <Button
                 variant="outline"
-                onClick={() => openInGoogle(`"${domain || "example.com"}" inurl:admin`)}
+                onClick={() => openInGoogle(`"${domain || "{domain}"}" inurl:admin`)}
                 className="h-auto flex-col gap-2 border-border py-4 text-foreground hover:bg-secondary/50"
               >
                 <Search className="h-5 w-5 text-yellow-500" />
@@ -279,7 +283,7 @@ export default function GoogleDorksPage() {
               </Button>
               <Button
                 variant="outline"
-                onClick={() => openInGoogle(`site:github.com "${domain || "example.com"}"`)}
+                onClick={() => openInGoogle(`site:github.com "${domain || "{domain}"}"`)}
                 className="h-auto flex-col gap-2 border-border py-4 text-foreground hover:bg-secondary/50"
               >
                 <Search className="h-5 w-5 text-orange-500" />

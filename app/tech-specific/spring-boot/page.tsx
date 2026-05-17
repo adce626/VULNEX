@@ -21,11 +21,9 @@ import {
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { PageTitle } from "@/components/page-title"
-import { DomainInput } from "@/components/domain-input"
 
 export default function SpringBootPage() {
   const [activeCategory, setActiveCategory] = useState("phase-1-discovery---shodan-dorks")
-  const [domain, setDomain] = useState("")
 
   const scrollToSection = (id: string) => {
     setActiveCategory(id)
@@ -87,7 +85,6 @@ export default function SpringBootPage() {
 
         <PageIntro title="Spring Boot Security" description={pageDescription} lastUpdated={lastUpdated} />
 
-        <DomainInput domain={domain} setDomain={setDomain} />
 
         {/* Category Navigation */}
         <div className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur-sm">
@@ -137,7 +134,7 @@ export default function SpringBootPage() {
                     </h2>
                   </div>
                 </div>
-                <CommandList commands={category.commands} pageTitle="Spring Boot" pageSize={15} domain={domain} />
+                <CommandList commands={category.commands} pageTitle="Spring Boot" pageSize={15} />
               </section>
             )
           })}

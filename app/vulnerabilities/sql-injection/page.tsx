@@ -20,11 +20,9 @@ import {
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { PageTitle } from "@/components/page-title"
-import { DomainInput } from "@/components/domain-input"
 
 export default function SQLInjectionPage() {
   const [activeCategory, setActiveCategory] = useState("introduction")
-  const [domain, setDomain] = useState("")
 
   const scrollToSection = (id: string) => {
     setActiveCategory(id)
@@ -92,8 +90,6 @@ export default function SQLInjectionPage() {
           />
         </div>
 
-        {/* Domain Input */}
-        <DomainInput domain={domain} setDomain={setDomain} />
 
         {/* Category Navigation */}
         <div className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur-sm">
@@ -171,7 +167,6 @@ export default function SQLInjectionPage() {
                   commands={category.commands}
                   pageTitle="SQL Injection"
                   pageSize={15}
-                  domain={domain}
                 />
               </section>
             )
