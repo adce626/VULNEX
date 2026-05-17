@@ -12,9 +12,11 @@ interface CommandCardProps {
   description?: string
   index: number
   pageTitle?: string
+  domain?: string
 }
 
-export function CommandCard({ command, description, index, pageTitle }: CommandCardProps) {
+export function CommandCard({ command, description, index, pageTitle, domain }: CommandCardProps) {
+  const displayCommand = domain ? command.replace(/example\.com/g, domain) : command
   const [copied, setCopied] = useState(false)
   const [bookmarked, setBookmarked] = useState(false)
   const pathname = usePathname()
@@ -24,7 +26,7 @@ export function CommandCard({ command, description, index, pageTitle }: CommandC
   }, [command])
 
   const copyToClipboard = async () => {
-    await navigator.clipboard.writeText(command)
+    await navigator.clipboard.writeText(displayCommand)
     setCopied(true)
     toast.success('Copied!', {
       duration: 1500,
@@ -97,7 +99,7 @@ export function CommandCard({ command, description, index, pageTitle }: CommandC
       <div className="flex items-start gap-2 rounded-md bg-background p-3">
         <Terminal className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
         <code className="text-sm text-foreground break-all font-mono">
-          {command}
+          {displayCommand}
         </code>
       </div>
     </div>

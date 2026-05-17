@@ -23,7 +23,7 @@ interface RecommendedToolsProps {
   title?: string
 }
 
-export function RecommendedTools({ toolIds, title = "الأدوات المقترحة" }: RecommendedToolsProps) {
+export function RecommendedTools({ toolIds, title = "Recommended Tools" }: RecommendedToolsProps) {
   const tools = toolIds
     .map((id) => getToolById(id))
     .filter((tool): tool is ToolGuide => !!tool)
@@ -55,7 +55,7 @@ export function RecommendedTools({ toolIds, title = "الأدوات المقتر
         </div>
         <div>
           <h2 className="text-2xl font-bold text-foreground">{title}</h2>
-          <p className="text-sm text-muted-foreground mt-1">أدوات مفيدة لهذا القسم مع أبرز الأوامر</p>
+          <p className="text-sm text-muted-foreground mt-1">Essential tools with top commands for this section</p>
         </div>
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -82,7 +82,7 @@ export function RecommendedTools({ toolIds, title = "الأدوات المقتر
                       </div>
                     </div>
                     <Badge variant="outline" className="text-[10px] shrink-0">
-                      {tool.commands.length} أوامر
+                      {tool.commands.length} commands
                     </Badge>
                   </div>
 

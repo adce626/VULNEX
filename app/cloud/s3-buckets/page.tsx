@@ -21,9 +21,11 @@ import {
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { PageTitle } from "@/components/page-title"
+import { DomainInput } from "@/components/domain-input"
 
 export default function S3BucketsPage() {
   const [activeCategory, setActiveCategory] = useState("understanding-aws-s3-buckets")
+  const [domain, setDomain] = useState("")
 
   const scrollToSection = (id: string) => {
     setActiveCategory(id)
@@ -85,6 +87,8 @@ export default function S3BucketsPage() {
 
         <PageIntro title="S3 Bucket Testing" description={pageDescription} lastUpdated={lastUpdated} />
 
+        <DomainInput domain={domain} setDomain={setDomain} />
+
         {/* Category Navigation */}
         <div className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur-sm">
           <div className="mx-auto max-w-5xl px-6">
@@ -133,7 +137,7 @@ export default function S3BucketsPage() {
                     </h2>
                   </div>
                 </div>
-                <CommandList commands={category.commands} pageTitle="S3 Buckets" pageSize={15} />
+                <CommandList commands={category.commands} pageTitle="S3 Buckets" pageSize={15} domain={domain} />
               </section>
             )
           })}

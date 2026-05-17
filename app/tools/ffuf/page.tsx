@@ -21,6 +21,7 @@ import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { UsageGuide } from "@/components/usage-guide"
 import { getToolById } from "@/lib/tools-data"
+import { DomainInput } from "@/components/domain-input"
 
 export default function FFUFPage() {
   const [activeCategory, setActiveCategory] = useState("installation")
@@ -32,11 +33,6 @@ export default function FFUFPage() {
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" })
     }
-  }
-
-  const processCommand = (command: string) => {
-    if (!domain) return command
-    return command.replace(/example\.com/g, domain)
   }
 
   return (
@@ -89,32 +85,7 @@ export default function FFUFPage() {
           </div>
         </div>
 
-        {/* Domain Input */}
-        <div className="mx-auto max-w-5xl px-6 mt-6">
-          <div className="bg-card border border-border rounded-xl p-6">
-            <label className="block text-sm font-medium text-foreground mb-2">
-              Target Domain
-            </label>
-            <div className="flex gap-3">
-              <input
-                type="text"
-                placeholder="Enter target domain (e.g., target.com)"
-                value={domain}
-                onChange={(e) => setDomain(e.target.value)}
-                className="flex-1 bg-secondary border-border rounded-lg px-3 py-2 text-foreground"
-              />
-              <button
-                onClick={() => setDomain("")}
-                className="px-4 py-2 border border-border rounded-lg hover:bg-secondary"
-              >
-                Clear
-              </button>
-            </div>
-            <p className="text-xs text-muted-foreground mt-2">
-              Commands will auto-replace example.com with your target
-            </p>
-          </div>
-        </div>
+        <DomainInput domain={domain} setDomain={setDomain} />
 
         {/* Category Navigation */}
         <div className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur-sm">
@@ -164,7 +135,7 @@ export default function FFUFPage() {
                     </h2>
                   </div>
                 </div>
-                <CommandList commands={category.commands} pageTitle="FFUF" pageSize={15} />
+                <CommandList commands={category.commands} pageTitle="FFUF" pageSize={15} domain={domain} />
               </section>
             )
           })}

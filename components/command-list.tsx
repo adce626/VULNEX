@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react"
 import { CommandCard } from "@/components/command-card"
-import { Copy, ChevronLeft, ChevronRight } from "lucide-react"
+import { Copy, ChevronLeft, ChevronRight, Search } from "lucide-react"
 import { toast } from "sonner"
 import { cn } from "@/lib/utils"
 
@@ -16,19 +16,33 @@ interface CommandListProps {
   startIndex?: number
   pageSize?: number
   pageTitle?: string
+  domain?: string
 }
 
-export function CommandList({ commands, startIndex = 0, pageSize = 20, pageTitle }: CommandListProps) {
+export function CommandList({ commands, startIndex = 0, pageSize = 20, pageTitle, domain }: CommandListProps) {
   const [page, setPage] = useState(1)
-  const totalPages = Math.ceil(commands.length / pageSize)
+  const [filter, setFilter] = useState("")
+
+  const filteredCommands = useMemo(() => {
+    if (!filter.trim()) return commands
+    const q = filter.toLowerCase()
+    return commands.filter(c => c.command.toLowerCase().includes(q) || c.description.toLowerCase().includes(q))
+  }, [commands, filter])
+
+  const totalPages = Math.ceil(filteredCommands.length / pageSize)
 
   const paginatedCommands = useMemo(() => {
     const start = (page - 1) * pageSize
-    return commands.slice(start, start + pageSize)
-  }, [commands, page, pageSize])
+    return filteredCommands.slice(start, start + pageSize)
+  }, [filteredCommands, page, pageSize])
+
+  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilter(e.target.value)
+    setPage(1)
+  }
 
   const copyAll = async () => {
-    const text = commands.map((c) => c.command).join("\n")
+    const text = commands.map((c) => domain ? c.command.replace(/example\.com/g, domain) : c.command).join("\n")
     await navigator.clipboard.writeText(text)
     toast.success(`Copied ${commands.length} commands!`, {
       duration: 2000,
@@ -36,18 +50,28 @@ export function CommandList({ commands, startIndex = 0, pageSize = 20, pageTitle
     })
   }
 
-  const needsPagination = commands.length > pageSize
+  const needsPagination = filteredCommands.length > pageSize
 
   return (
     <div>
-      <div className="mb-3 flex items-center justify-between">
-        <span className="text-xs text-muted-foreground">{commands.length} commands</span>
+      <div className="mb-3 flex items-center gap-2">
+        <div className="flex items-center gap-2 rounded-lg bg-muted px-3 py-1.5 flex-1">
+          <Search className="h-3.5 w-3.5 text-muted-foreground" />
+          <input
+            type="text"
+            placeholder="Filter commands..."
+            value={filter}
+            onChange={handleFilterChange}
+            className="w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
+          />
+        </div>
+        <span className="text-xs text-muted-foreground shrink-0">{filteredCommands.length} commands</span>
         <button
           onClick={copyAll}
-          className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary"
+          className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary shrink-0"
         >
           <Copy className="h-3.5 w-3.5" />
-          Copy All ({commands.length})
+          Copy All ({filteredCommands.length})
         </button>
       </div>
       <div className="space-y-3">
@@ -58,6 +82,7 @@ export function CommandList({ commands, startIndex = 0, pageSize = 20, pageTitle
             description={cmd.description}
             index={startIndex + (page - 1) * pageSize + i + 1}
             pageTitle={pageTitle}
+            domain={domain}
           />
         ))}
       </div>
@@ -91,6 +116,9 @@ export function CommandList({ commands, startIndex = 0, pageSize = 20, pageTitle
             Next <ChevronRight className="h-4 w-4" />
           </button>
         </div>
+      )}
+      {filter && filteredCommands.length === 0 && (
+        <p className="text-center text-sm text-muted-foreground py-8">No commands match "{filter}"</p>
       )}
     </div>
   )

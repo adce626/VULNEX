@@ -16,9 +16,11 @@ import {
   ExternalLink,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { DomainInput } from "@/components/domain-input"
 
 export default function RateLimitBypassPage() {
   const [activeCategory, setActiveCategory] = useState("introduction")
+  const [domain, setDomain] = useState("")
 
   const scrollToSection = (id: string) => {
     setActiveCategory(id)
@@ -72,6 +74,8 @@ export default function RateLimitBypassPage() {
           />
         </div>
 
+        <DomainInput domain={domain} setDomain={setDomain} />
+
         <div className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur-sm">
           <div className="mx-auto max-w-5xl px-6">
             <div className="flex gap-1 overflow-x-auto py-3 scrollbar-hide">
@@ -101,7 +105,7 @@ export default function RateLimitBypassPage() {
                     <h2 className="text-2xl font-bold text-foreground">{category.category}</h2>
                   </div>
                 </div>
-                <CommandList commands={category.commands} pageTitle="Rate Limit Bypass" pageSize={15} />
+                <CommandList commands={category.commands} pageTitle="Rate Limit Bypass" pageSize={15} domain={domain} />
               </section>
             )
           })}

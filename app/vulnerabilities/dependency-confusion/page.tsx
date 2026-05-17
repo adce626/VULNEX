@@ -21,9 +21,11 @@ import {
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { PageTitle } from "@/components/page-title"
+import { DomainInput } from "@/components/domain-input"
 
 export default function DependencyConfusionPage() {
   const [activeCategory, setActiveCategory] = useState("introduction")
+  const [domain, setDomain] = useState("")
 
   const scrollToSection = (id: string) => {
     setActiveCategory(id)
@@ -91,6 +93,8 @@ export default function DependencyConfusionPage() {
           />
         </div>
 
+        <DomainInput domain={domain} setDomain={setDomain} />
+
         {/* Category Navigation */}
         <div className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur-sm">
           <div className="mx-auto max-w-5xl px-6">
@@ -139,7 +143,7 @@ export default function DependencyConfusionPage() {
                     </h2>
                   </div>
                 </div>
-                <CommandList commands={category.commands} pageTitle="Dependency Confusion" pageSize={15} />
+                <CommandList commands={category.commands} pageTitle="Dependency Confusion" pageSize={15} domain={domain} />
               </section>
             )
           })}

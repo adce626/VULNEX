@@ -112,7 +112,7 @@ export const sectionCards = [
     description: "XSS, SQLi, SSRF, IDOR, and other common web security flaws",
     icon: "bug",
     href: "/vulnerabilities",
-    itemCount: 13,
+    itemCount: 9,
     color: "destructive",
   },
   {
@@ -120,7 +120,7 @@ export const sectionCards = [
     description: "IIS, Apache, Nginx, WordPress, and framework-specific attacks",
     icon: "server",
     href: "/tech-specific",
-    itemCount: 6,
+    itemCount: 5,
     color: "accent",
   },
   {
@@ -128,7 +128,7 @@ export const sectionCards = [
     description: "AWS, Azure, GCP misconfigurations and cloud security testing",
     icon: "cloud",
     href: "/cloud",
-    itemCount: 5,
+    itemCount: 2,
     color: "primary",
   },
   {
@@ -136,7 +136,7 @@ export const sectionCards = [
     description: "Burp Suite, Nuclei, ffuf, and essential hacking methodologies",
     icon: "wrench",
     href: "/tools",
-    itemCount: 9,
+    itemCount: 24,
     color: "accent",
   },
   {
@@ -146,5 +146,21 @@ export const sectionCards = [
     href: "/advanced",
     itemCount: 6,
     color: "primary",
+  },
+  {
+    title: "WAF Bypass & PoCs",
+    description: "Techniques to bypass WAF restrictions, IDOR exploits, and proof-of-concept demonstrations",
+    icon: "shield",
+    href: "/waf-bypass",
+    itemCount: 3,
+    color: "destructive",
+  },
+  {
+    title: "Browser Extensions",
+    description: "Curated browser extensions for security testing, reconnaissance, and debugging",
+    icon: "puzzle",
+    href: "/browser-extensions",
+    itemCount: 1,
+    color: "accent",
   },
 ]

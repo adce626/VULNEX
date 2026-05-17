@@ -2,9 +2,10 @@
 
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useRef, useEffect } from "react"
 import { navigation } from "@/lib/site-data"
 import { cn } from "@/lib/utils"
+import { useTheme } from "next-themes"
 import {
   Search,
   Bug,
@@ -20,6 +21,8 @@ import {
   ArrowRight,
   Puzzle,
   Bookmark,
+  Sun,
+  Moon,
 } from "lucide-react"
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -76,11 +79,30 @@ const allPages = [
 export function MainSidebar() {
   const pathname = usePathname()
   const router = useRouter()
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [showResults, setShowResults] = useState(false)
   const [expandedSections, setExpandedSections] = useState<string[]>([
   ])
   const [mobileOpen, setMobileOpen] = useState(false)
+  const searchRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => { setMounted(true) }, [])
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "/" && !["INPUT", "TEXTAREA"].includes((e.target as HTMLElement).tagName)) {
+        e.preventDefault()
+        searchRef.current?.focus()
+      }
+      if (e.key === "Escape") {
+        setMobileOpen(false)
+      }
+    }
+    document.addEventListener("keydown", handleKey)
+    return () => document.removeEventListener("keydown", handleKey)
+  }, [])
 
   const searchResults = useMemo(() => {
     if (!searchQuery.trim()) return []
@@ -149,6 +171,7 @@ export function MainSidebar() {
         <div className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2">
           <Search className="h-4 w-4 text-muted-foreground" />
           <input
+            ref={searchRef}
             type="text"
             placeholder="Search..."
             value={searchQuery}
@@ -261,13 +284,36 @@ export function MainSidebar() {
           <p className="text-center text-xs text-muted-foreground">
             For ethical use only
           </p>
-          <Link
-            href="/bookmarks"
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:text-primary hover:bg-muted transition-colors"
-            title="Bookmarks"
-          >
-            <Bookmark className="h-4 w-4" />
-          </Link>
+          <div className="flex items-center gap-1">
+            <button
+              onClick={() => {
+                const order = ["dark", "light", "neon"]
+                const idx = order.indexOf(theme || "dark")
+                setTheme(order[(idx + 1) % order.length])
+              }}
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:text-amber-400 hover:bg-muted transition-colors"
+              title="Toggle theme"
+            >
+              {mounted && theme === "neon" ? (
+                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2z" />
+                  <path d="M12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6 6 6 0 0 1-6-6 6 6 0 0 1 6-6z" />
+                  <path d="M12 10a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2z" />
+                </svg>
+              ) : mounted && theme === "dark" ? (
+                <Sun className="h-4 w-4" />
+              ) : (
+                <Moon className="h-4 w-4" />
+              )}
+            </button>
+            <Link
+              href="/bookmarks"
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:text-primary hover:bg-muted transition-colors"
+              title="Bookmarks"
+            >
+              <Bookmark className="h-4 w-4" />
+            </Link>
+          </div>
         </div>
       </div>
     </>

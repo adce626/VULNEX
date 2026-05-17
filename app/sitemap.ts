@@ -21,13 +21,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/bookmarks',
   ]
 
+  const extraPages = [
+    '/waf-bypass/idor',
+    '/waf-bypass/sqlmap',
+    '/recon/param-discovery/arjun',
+    '/recon/param-discovery/ffuf',
+    '/recon/param-discovery/gf',
+    '/recon/param-discovery/paramspider',
+    '/recon/param-discovery/x8',
+  ]
+
   const navPages = navigation.flatMap(section =>
     (section.items || []).map(item => item.href)
   )
 
   const toolPages = toolsData.map(tool => `/tools/${tool.id}`)
 
-  const allUrls = [...staticPages, ...navPages, ...toolPages].map(path => ({
+  const allUrls = [...staticPages, ...navPages, ...extraPages, ...toolPages].map(path => ({
     url: `${baseUrl}${path}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,

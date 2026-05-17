@@ -192,11 +192,11 @@ export const nextjsSteps: NextjsStep[] = [
       "Use these dorks to discover potentially vulnerable Next.js applications through search engines.",
     commands: [
       {
-        command: "shodan query: x-middleware-rewrite",
-        description: "Next.js server identification",
+        command: "shodan search: x-middleware-rewrite",
+        description: "Shodan search for Next.js middleware",
       },
       {
-        command: "shodan query: http.html:\"\/_next\/static\"",
+        command: "shodan search: http.html:\"\/_next\/static\"",
         description: "Static Next.js sites",
       },
       {

@@ -20,8 +20,10 @@ import {
   Zap,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { DomainInput } from "@/components/domain-input"
 
 export default function BlindXSSPage() {
+  const [domain, setDomain] = useState("")
   const [expandedSteps, setExpandedSteps] = useState<string[]>(
     blindXSSSteps.map((s) => s.id)
   )
@@ -124,6 +126,8 @@ export default function BlindXSSPage() {
             </div>
           </div>
 
+          <DomainInput domain={domain} setDomain={setDomain} />
+
           {/* Steps */}
           <div className="space-y-6">
             {blindXSSSteps.map((step, stepIndex) => (
@@ -211,7 +215,7 @@ export default function BlindXSSPage() {
                             Commands
                           </h3>
                         </div>
-                        <CommandList commands={step.commands} pageTitle="Blind XSS Advanced" pageSize={15} />
+                        <CommandList commands={step.commands} pageTitle="Blind XSS Advanced" pageSize={15} domain={domain} />
                       </div>
                     )}
 

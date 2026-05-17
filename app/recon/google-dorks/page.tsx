@@ -210,16 +210,16 @@ export default function GoogleDorksPage() {
                         )}
                         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                           <code className="flex-1 rounded-md bg-secondary/50 px-3 py-2 font-mono text-sm text-foreground break-all">
-                            {getProcessedQuery(dork.query)}
+                            {getProcessedQuery(dork.command)}
                           </code>
                           <div className="flex gap-2 shrink-0">
                             <Button
                               size="sm"
                               variant="outline"
-                              onClick={() => copyQuery(dork.query)}
+                              onClick={() => copyQuery(dork.command)}
                               className="border-border text-muted-foreground hover:text-foreground"
                             >
-                              {copiedQuery === dork.query ? (
+                              {copiedQuery === dork.command ? (
                                 <>
                                   <Check className="mr-1.5 h-3.5 w-3.5 text-primary" />
                                   Copied
@@ -233,7 +233,7 @@ export default function GoogleDorksPage() {
                             </Button>
                             <Button
                               size="sm"
-                              onClick={() => openInGoogle(dork.query)}
+                              onClick={() => openInGoogle(dork.command)}
                               className="bg-primary text-primary-foreground hover:bg-primary/90"
                             >
                               <ExternalLink className="mr-1.5 h-3.5 w-3.5" />
