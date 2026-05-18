@@ -15,6 +15,9 @@ export const navigation: NavSection[] = [
       { title: "Shodan Dorks", href: "/recon/shodan-dorks", tag: "New" },
       { title: "Param Discovery", href: "/recon/param-discovery" },
       { title: "GitHub Recon", href: "/recon/github-recon", tag: "New" },
+      { title: "Gau — URL Collection", href: "/tools/gau", tag: "New" },
+      { title: "Naabu — Port Scanner", href: "/tools/naabu", tag: "New" },
+      { title: "Katana — Web Crawler", href: "/tools/katana", tag: "New" },
     ],
   },
   {
@@ -51,6 +54,7 @@ export const navigation: NavSection[] = [
     items: [
       { title: "Google API Keys", href: "/cloud/google-api-keys", tag: "New" },
       { title: "S3 Buckets", href: "/cloud/s3-buckets", tag: "New" },
+      { title: "TruffleHog — Secret Scan", href: "/tools/trufflehog", tag: "New" },
     ],
   },
   {
@@ -63,6 +67,10 @@ export const navigation: NavSection[] = [
       { title: "CeWL Wordlists", href: "/tools/cewl", tag: "New" },
       { title: "Nuclei Templates", href: "/tools/nuclei-templates", tag: "New" },
       { title: "Fast XSS", href: "/tools/fast-xss", tag: "New" },
+      { title: "Dalfox", href: "/tools/dalfox", tag: "New" },
+      { title: "Katana", href: "/tools/katana", tag: "New" },
+      { title: "Hashcat", href: "/tools/hashcat", tag: "New" },
+      { title: "Masscan", href: "/tools/masscan", tag: "New" },
     ],
   },
   {
@@ -136,7 +144,7 @@ export const sectionCards = [
     description: "Burp Suite, Nuclei, ffuf, and essential hacking methodologies",
     icon: "wrench",
     href: "/tools",
-    itemCount: 24,
+    itemCount: 31,
     color: "accent",
   },
   {

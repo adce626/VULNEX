@@ -24,6 +24,13 @@ import { wpscanGuide } from "./guides/wpscan"
 import { dirsearchGuide } from "./guides/dirsearch"
 import { johnGuide } from "./guides/john"
 import { searchsploitGuide } from "./guides/searchsploit"
+import { dalfoxGuide } from "./guides/dalfox"
+import { gauGuide } from "./guides/gau"
+import { katanaGuide } from "./guides/katana"
+import { naabuGuide } from "./guides/naabu"
+import { masscanGuide } from "./guides/masscan"
+import { hashcatGuide } from "./guides/hashcat"
+import { trufflehogGuide } from "./guides/trufflehog"
 
 export const toolsData = [
   subfinderGuide,
@@ -50,6 +57,13 @@ export const toolsData = [
   dirsearchGuide,
   johnGuide,
   searchsploitGuide,
+  dalfoxGuide,
+  gauGuide,
+  katanaGuide,
+  naabuGuide,
+  masscanGuide,
+  hashcatGuide,
+  trufflehogGuide,
 ]
 
 export const getToolsByCategory = (category: string) =>

@@ -66,7 +66,8 @@ const quickTags = [
   { label: "Subdomain Enum", href: "/recon?tag=subdomain" },
 ]
 
-const featuredTools = toolsData.slice(0, 4)
+const featuredToolIds = ["nuclei", "dalfox", "katana", "hashcat"]
+const featuredTools = featuredToolIds.map(id => toolsData.find(t => t.id === id)).filter(Boolean) as typeof toolsData
 
 export default function HomePage() {
   const [mounted, setMounted] = useState(false)
@@ -153,7 +154,7 @@ export default function HomePage() {
             <div className="mt-8 flex flex-wrap items-center justify-center gap-5 sm:gap-8">
 {[
                 { value: "6", label: "Sections (featured)" },
-                { value: "34", label: "Topics" },
+                { value: "38", label: "Topics" },
                 { value: "2600+", label: "Commands" },
               ].map((stat, i) => (
                 <div key={stat.label} className="flex items-center gap-2">
