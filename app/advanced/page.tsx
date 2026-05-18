@@ -152,7 +152,7 @@ export default function AdvancedPage() {
           {/* Recommended Tools */}
           <RecommendedTools
             toolIds={["jwt_tool", "burpsuite", "xsstrike", "nuclei"]}
-            title="الأدوات المقترحة للمواضيع المتقدمة"
+            title="Recommended Tools for Advanced Topics"
           />
         </div>
       </main>

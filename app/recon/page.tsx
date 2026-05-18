@@ -143,7 +143,7 @@ export default function ReconPage() {
           {/* Recommended Tools */}
           <RecommendedTools
             toolIds={["subfinder", "amass", "httpx", "nmap", "sqlmap"]}
-            title="الأدوات المقترحة للاستطلاع"
+            title="Recommended Tools for Reconnaissance"
           />
         </div>
       </main>

@@ -177,7 +177,7 @@ export default function VulnerabilitiesPage() {
           {/* Recommended Tools */}
           <RecommendedTools
             toolIds={["sqlmap", "burpsuite", "xsstrike", "nuclei", "ffuf"]}
-            title="الأدوات المقترحة لاختبار الثغرات"
+            title="Recommended Tools for Vulnerability Testing"
           />
         </div>
       </main>

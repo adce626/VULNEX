@@ -152,7 +152,7 @@ export default function TechSpecificPage() {
           {/* Recommended Tools */}
           <RecommendedTools
             toolIds={["ffuf", "nuclei", "burpsuite", "httpx", "xsstrike"]}
-            title="الأدوات المقترحة لاختبار التقنيات الخاصة"
+            title="Recommended Tools for Tech-Specific Testing"
           />
         </div>
       </main>

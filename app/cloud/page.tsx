@@ -129,7 +129,7 @@ export default function CloudPage() {
           {/* Recommended Tools */}
           <RecommendedTools
             toolIds={["cloudfox", "amass", "subfinder", "nuclei"]}
-            title="الأدوات المقترحة لتقييم السحابة"
+            title="Recommended Tools for Cloud Security"
           />
         </div>
       </main>

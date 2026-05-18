@@ -125,7 +125,7 @@ export default function WAFBypassPage() {
           {/* Recommended Tools */}
           <RecommendedTools
             toolIds={["sqlmap", "burpsuite", "nuclei", "xsstrike"]}
-            title="الأدوات المقترحة لتجاوز الواي فاير والـ PoC"
+            title="Recommended Tools for WAF Bypass & PoCs"
           />
         </div>
       </main>
