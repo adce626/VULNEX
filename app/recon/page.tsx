@@ -5,7 +5,6 @@ import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
 import { Search, ArrowRight, Home, ChevronRight, Globe, Database, Variable, Github } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { RecommendedTools } from "@/components/recommended-tools"
 
 const reconItems = [
   {
@@ -102,10 +101,10 @@ export default function ReconPage() {
                         <Globe className="h-6 w-6" />
                       ) : item.title === "Shodan Dorks" ? (
                         <Database className="h-6 w-6" />
-                      ) : item.title === "GitHub Recon" ? (
-                        <Github className="h-6 w-6" />
-                      ) : (
+                      ) : item.title === "Param Discovery" ? (
                         <Variable className="h-6 w-6" />
+                      ) : (
+                        <Github className="h-6 w-6" />
                       )}
                     </div>
                     <div>
@@ -137,14 +136,37 @@ export default function ReconPage() {
                   </div>
                 </div>
               </div>
+                    <div>
+                      <h3
+                        className={cn(
+                          "text-lg font-semibold",
+                          item.available ? "text-foreground" : "text-muted-foreground"
+                        )}
+                      >
+                        {item.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">{item.description}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    {item.commandCount && (
+                      <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
+                        {item.commandCount} commands
+                      </span>
+                    )}
+                    {item.available ? (
+                      <ArrowRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
+                    ) : (
+                      <span className="rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">
+                        Coming Soon
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
-
-          {/* Recommended Tools */}
-          <RecommendedTools
-            toolIds={["subfinder", "amass", "httpx", "nmap", "sqlmap"]}
-            title="Recommended Tools for Reconnaissance"
-          />
         </div>
       </main>
     </div>

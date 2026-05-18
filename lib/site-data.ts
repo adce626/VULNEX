@@ -15,9 +15,6 @@ export const navigation: NavSection[] = [
       { title: "Shodan Dorks", href: "/recon/shodan-dorks", tag: "New" },
       { title: "Param Discovery", href: "/recon/param-discovery" },
       { title: "GitHub Recon", href: "/recon/github-recon", tag: "New" },
-      { title: "Gau — URL Collection", href: "/tools/gau", tag: "New" },
-      { title: "Naabu — Port Scanner", href: "/tools/naabu", tag: "New" },
-      { title: "Katana — Web Crawler", href: "/tools/katana", tag: "New" },
     ],
   },
   {
@@ -54,23 +51,17 @@ export const navigation: NavSection[] = [
     items: [
       { title: "Google API Keys", href: "/cloud/google-api-keys", tag: "New" },
       { title: "S3 Buckets", href: "/cloud/s3-buckets", tag: "New" },
-      { title: "TruffleHog — Secret Scan", href: "/tools/trufflehog", tag: "New" },
     ],
   },
   {
-    title: "Tools & Methods",
+    title: "Methods",
     icon: "wrench",
-    href: "/tools",
+    href: "/methods",
     items: [
-      { title: "FFUF Techniques", href: "/tools/ffuf", tag: "New" },
-      { title: "Gospider Methods", href: "/tools/gospider", tag: "New" },
-      { title: "CeWL Wordlists", href: "/tools/cewl", tag: "New" },
-      { title: "Nuclei Templates", href: "/tools/nuclei-templates", tag: "New" },
-      { title: "Fast XSS", href: "/tools/fast-xss", tag: "New" },
-      { title: "Dalfox", href: "/tools/dalfox", tag: "New" },
-      { title: "Katana", href: "/tools/katana", tag: "New" },
-      { title: "Hashcat", href: "/tools/hashcat", tag: "New" },
-      { title: "Masscan", href: "/tools/masscan", tag: "New" },
+      { title: "FFUF Techniques", href: "/methods/ffuf", tag: "New" },
+      { title: "Gospider Methods", href: "/methods/gospider", tag: "New" },
+      { title: "CeWL Wordlists", href: "/methods/cewl", tag: "New" },
+      { title: "Nuclei Templates", href: "/methods/nuclei-templates", tag: "New" },
     ],
   },
   {
@@ -104,6 +95,14 @@ export const navigation: NavSection[] = [
       { title: "Full Collection", href: "/browser-extensions", tag: "New" },
     ],
   },
+  {
+    title: "Tools",
+    icon: "terminal",
+    href: "/tools",
+    items: [
+      { title: "All Tools", href: "/tools", tag: "New" },
+    ],
+  },
 ]
 
 export const sectionCards = [
@@ -112,7 +111,7 @@ export const sectionCards = [
     description: "Information gathering, subdomain enumeration, and reconnaissance techniques",
     icon: "search",
     href: "/recon",
-    itemCount: 9,
+    itemCount: 4,
     color: "primary",
   },
   {
@@ -120,7 +119,7 @@ export const sectionCards = [
     description: "XSS, SQLi, SSRF, IDOR, and other common web security flaws",
     icon: "bug",
     href: "/vulnerabilities",
-    itemCount: 9,
+    itemCount: 8,
     color: "destructive",
   },
   {
@@ -140,11 +139,11 @@ export const sectionCards = [
     color: "primary",
   },
   {
-    title: "Tools & Methods",
-    description: "Burp Suite, Nuclei, ffuf, and essential hacking methodologies",
+    title: "Methods",
+    description: "Step-by-step technique guides for security testing tools and methodologies",
     icon: "wrench",
-    href: "/tools",
-    itemCount: 31,
+    href: "/methods",
+    itemCount: 4,
     color: "accent",
   },
   {
@@ -170,5 +169,13 @@ export const sectionCards = [
     href: "/browser-extensions",
     itemCount: 1,
     color: "accent",
+  },
+  {
+    title: "Tools",
+    description: "Complete security tool collection — from installation to advanced usage, with practical examples and expert tips",
+    icon: "terminal",
+    href: "/tools",
+    itemCount: 33,
+    color: "primary",
   },
 ]

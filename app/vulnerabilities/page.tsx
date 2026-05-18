@@ -5,7 +5,6 @@ import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
 import { Bug, ArrowRight, Home, ChevronRight, Database, Globe, Link2, FileText, Shield, AlertTriangle, Mail } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { RecommendedTools } from "@/components/recommended-tools"
 
 const vulnItems = [
   {
@@ -173,12 +172,6 @@ export default function VulnerabilitiesPage() {
               </div>
             ))}
           </div>
-
-          {/* Recommended Tools */}
-          <RecommendedTools
-            toolIds={["sqlmap", "burpsuite", "xsstrike", "nuclei", "ffuf"]}
-            title="Recommended Tools for Vulnerability Testing"
-          />
         </div>
       </main>
     </div>

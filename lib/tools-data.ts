@@ -7,7 +7,7 @@ import { nucleiGuide } from "./guides/nuclei"
 import { sqlmapGuide } from "./guides/sqlmap"
 import { xsstrikeGuide } from "./guides/xsstrike"
 import { burpsuiteGuide } from "./guides/burpsuite"
-import { ffufGuide } from "./guides/ffuf"
+// import { ffufGuide } from "./guides/ffuf"
 import { nmapGuide } from "./guides/nmap"
 import { cloudfoxGuide } from "./guides/cloudfox"
 import { jwtToolGuide } from "./guides/jwt_tool"
@@ -15,8 +15,8 @@ import { arjunGuide } from "./guides/arjun"
 import { paramSpiderGuide } from "./guides/paramspider"
 import { x8Guide } from "./guides/x8"
 import { gfGuide } from "./guides/gf"
-import { gospiderGuide } from "./guides/gospider"
-import { cewlGuide } from "./guides/cewl"
+// import { gospiderGuide } from "./guides/gospider"
+// import { cewlGuide } from "./guides/cewl"
 import { gobusterGuide } from "./guides/gobuster"
 import { hydraGuide } from "./guides/hydra"
 import { whatwebGuide } from "./guides/whatweb"
@@ -40,7 +40,6 @@ export const toolsData = [
   sqlmapGuide,
   xsstrikeGuide,
   burpsuiteGuide,
-  ffufGuide,
   nmapGuide,
   cloudfoxGuide,
   jwtToolGuide,
@@ -48,8 +47,6 @@ export const toolsData = [
   paramSpiderGuide,
   x8Guide,
   gfGuide,
-  gospiderGuide,
-  cewlGuide,
   gobusterGuide,
   hydraGuide,
   whatwebGuide,

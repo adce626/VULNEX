@@ -4,7 +4,7 @@ export const nmapGuide: ToolGuide = {
   id: "nmap",
   name: "Nmap",
   icon: "network",
-  category: "Tools & Methods",
+  category: "Methods",
   description: "Network scanner for host and service discovery",
   installation: {
     title: "Installation",

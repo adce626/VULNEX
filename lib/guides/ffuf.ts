@@ -4,7 +4,7 @@ export const ffufGuide: ToolGuide = {
   id: "ffuf",
   name: "ffuf",
   icon: "folder-search",
-  category: "Tools & Methods",
+  category: "Methods",
   description: "Fast web fuzzer for content discovery and parameter fuzzing",
   installation: {
     title: "Installation",

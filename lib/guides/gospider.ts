@@ -4,7 +4,7 @@ export const gospiderGuide: ToolGuide = {
   id: "gospider",
   name: "Gospider",
   icon: "globe",
-  category: "Tools & Methods",
+  category: "Methods",
   description: "Fast web crawler and content discovery tool written in Go",
   installation: {
     title: "Installation",

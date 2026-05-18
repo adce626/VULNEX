@@ -16,6 +16,7 @@ import {
   Shield,
   Brain,
   Puzzle,
+  Terminal,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -28,6 +29,7 @@ const iconMap: Record<string, React.ReactNode> = {
   shield: <Shield className="h-6 w-6" />,
   brain: <Brain className="h-6 w-6" />,
   puzzle: <Puzzle className="h-6 w-6" />,
+  terminal: <Terminal className="h-6 w-6" />,
 }
 
 const colorMap: Record<string, string> = {

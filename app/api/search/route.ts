@@ -48,7 +48,7 @@ const modules = [
   { mod: () => import("@/lib/github-recon-data"), prop: "githubReconCategories", url: "/recon/github-recon", title: "GitHub Recon" },
   { mod: () => import("@/lib/param-discovery-data"), prop: "paramDiscoveryCategories", url: "/recon/param-discovery", title: "Param Discovery" },
   // Tools
-  { mod: () => import("@/lib/ffuf-data"), prop: "ffufCategories", url: "/tools/ffuf", title: "FFUF" },
+  { mod: () => import("@/lib/ffuf-data"), prop: "ffufCategories", url: "/methods/ffuf", title: "FFUF" },
   { mod: () => import("@/lib/nuclei-data"), prop: "nucleiCategories", url: "/tools/nuclei", title: "Nuclei" },
   { mod: () => import("@/lib/burpsuite-data"), prop: "burpsuiteCategories", url: "/tools/burpsuite", title: "Burp Suite" },
   { mod: () => import("@/lib/nmap-data"), prop: "nmapCategories", url: "/tools/nmap", title: "Nmap" },
@@ -63,8 +63,8 @@ const modules = [
   { mod: () => import("@/lib/paramspider-data"), prop: "paramSpiderCategories", url: "/tools/paramspider", title: "ParamSpider" },
   { mod: () => import("@/lib/x8-data"), prop: "x8Categories", url: "/tools/x8", title: "X8" },
   { mod: () => import("@/lib/gf-data"), prop: "gfCategories", url: "/tools/gf", title: "GF" },
-  { mod: () => import("@/lib/gospider-data"), prop: "gospiderCategories", url: "/tools/gospider", title: "Gospider" },
-  { mod: () => import("@/lib/cewl-data"), prop: "cewlCategories", url: "/tools/cewl", title: "CeWL" },
+  { mod: () => import("@/lib/gospider-data"), prop: "gospiderCategories", url: "/methods/gospider", title: "Gospider" },
+  { mod: () => import("@/lib/cewl-data"), prop: "cewlCategories", url: "/methods/cewl", title: "CeWL" },
   { mod: () => import("@/lib/gobuster-data"), prop: "gobusterCategories", url: "/tools/gobuster", title: "Gobuster" },
   { mod: () => import("@/lib/hydra-data"), prop: "hydraCategories", url: "/tools/hydra", title: "Hydra" },
   { mod: () => import("@/lib/whatweb-data"), prop: "whatwebCategories", url: "/tools/whatweb", title: "WhatWeb" },
@@ -72,7 +72,7 @@ const modules = [
   { mod: () => import("@/lib/dirsearch-data"), prop: "dirsearchCategories", url: "/tools/dirsearch", title: "Dirsearch" },
   { mod: () => import("@/lib/john-data"), prop: "johnCategories", url: "/tools/john", title: "John" },
   { mod: () => import("@/lib/searchsploit-data"), prop: "searchsploitCategories", url: "/tools/searchsploit", title: "Searchsploit" },
-  { mod: () => import("@/lib/nuclei-templates-data"), prop: "nucleiTemplateCategories", url: "/tools/nuclei-templates", title: "Nuclei Templates" },
+  { mod: () => import("@/lib/nuclei-templates-data"), prop: "nucleiTemplateCategories", url: "/methods/nuclei-templates", title: "Nuclei Templates" },
   { mod: () => import("@/lib/fast-xss-data"), prop: "fastXSSCategories", url: "/tools/fast-xss", title: "Fast XSS" },
 ]
 

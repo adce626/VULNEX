@@ -4,7 +4,7 @@ export const dirsearchGuide: ToolGuide = {
   id: "dirsearch",
   name: "Dirsearch",
   icon: "folder-search",
-  category: "Tools & Methods",
+  category: "Methods",
   description: "Advanced web path brute-forcing tool with recursive scanning",
   installation: {
     title: "Installation",

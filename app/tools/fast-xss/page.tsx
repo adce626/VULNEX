@@ -39,7 +39,7 @@ export default function FastXSSPage() {
             <nav className="flex items-center gap-2 text-sm text-muted-foreground">
               <Link href="/" className="flex items-center gap-1 hover:text-foreground"><Home className="h-4 w-4" /></Link>
               <ChevronRight className="h-4 w-4" />
-              <Link href="/tools" className="hover:text-foreground">Tools & Methods</Link>
+              <Link href="/tools" className="hover:text-foreground">Tools</Link>
               <ChevronRight className="h-4 w-4" />
               <span className="text-foreground">Fast XSS</span>
             </nav>

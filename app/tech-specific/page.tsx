@@ -5,7 +5,6 @@ import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
 import { Server, ArrowRight, Home, ChevronRight, Bug, Search, Code, FileCode, Leaf } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { RecommendedTools } from "@/components/recommended-tools"
 
 const techItems = [
   {
@@ -148,12 +147,6 @@ export default function TechSpecificPage() {
               </div>
             ))}
           </div>
-
-          {/* Recommended Tools */}
-          <RecommendedTools
-            toolIds={["ffuf", "nuclei", "burpsuite", "httpx", "xsstrike"]}
-            title="Recommended Tools for Tech-Specific Testing"
-          />
         </div>
       </main>
     </div>

@@ -4,7 +4,7 @@ export const searchsploitGuide: ToolGuide = {
   id: "searchsploit",
   name: "Searchsploit",
   icon: "search",
-  category: "Tools & Methods",
+  category: "Methods",
   description: "Exploit Database search tool for finding public exploits",
   installation: {
     title: "Installation",

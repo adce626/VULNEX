@@ -5,7 +5,6 @@ import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
 import { Shield, ArrowRight, Home, ChevronRight, Unlock, Database } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { RecommendedTools } from "@/components/recommended-tools"
 
 const wafItems = [
   {
@@ -121,12 +120,6 @@ export default function WAFBypassPage() {
               </div>
             ))}
           </div>
-
-          {/* Recommended Tools */}
-          <RecommendedTools
-            toolIds={["sqlmap", "burpsuite", "nuclei", "xsstrike"]}
-            title="Recommended Tools for WAF Bypass & PoCs"
-          />
         </div>
       </main>
     </div>

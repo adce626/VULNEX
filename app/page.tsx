@@ -30,6 +30,7 @@ import {
   Copy,
   Tag,
   Moon,
+  Terminal,
 } from "lucide-react"
 import { RecentlyViewed } from "@/components/recently-viewed"
 import { cn } from "@/lib/utils"
@@ -43,6 +44,7 @@ const iconMap: Record<string, React.ReactNode> = {
   shield: <Shield className="h-6 w-6" />,
   brain: <Brain className="h-6 w-6" />,
   puzzle: <Puzzle className="h-6 w-6" />,
+  terminal: <Terminal className="h-6 w-6" />,
 }
 
 const toolIconMap: Record<string, React.ReactNode> = {
@@ -154,7 +156,7 @@ export default function HomePage() {
             <div className="mt-8 flex flex-wrap items-center justify-center gap-5 sm:gap-8">
 {[
                 { value: "6", label: "Sections (featured)" },
-                { value: "38", label: "Topics" },
+                { value: "34", label: "Topics" },
                 { value: "2600+", label: "Commands" },
               ].map((stat, i) => (
                 <div key={stat.label} className="flex items-center gap-2">

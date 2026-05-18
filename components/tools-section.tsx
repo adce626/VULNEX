@@ -40,17 +40,19 @@ const iconMap: Record<string, React.ReactNode> = {
 const categoryColors: Record<string, string> = {
   "Recon & OSINT": "from-cyan-500/20 to-cyan-500/5 border-cyan-500/30 text-cyan-400",
   "Web Vulnerabilities": "from-red-500/20 to-red-500/5 border-red-500/30 text-red-400",
-  "Tools & Methods": "from-violet-500/20 to-violet-500/5 border-violet-500/30 text-violet-400",
+  "Methods": "from-violet-500/20 to-violet-500/5 border-violet-500/30 text-violet-400",
   "Cloud & Assets": "from-blue-500/20 to-blue-500/5 border-blue-500/30 text-blue-400",
   "Advanced Topics": "from-amber-500/20 to-amber-500/5 border-amber-500/30 text-amber-400",
 }
 
-export function ToolsSection() {
+export function ToolsSection({ toolIds }: { toolIds?: string[] }) {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const categories = getAllCategories()
 
-  const filteredTools = toolsData.filter((tool) => {
+  const baseTools = toolIds ? toolIds.map((id) => toolsData.find((t) => t.id === id)).filter(Boolean) as ToolGuide[] : toolsData
+
+  const filteredTools = baseTools.filter((tool) => {
     const matchesSearch =
       tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       tool.description.toLowerCase().includes(searchQuery.toLowerCase()) ||

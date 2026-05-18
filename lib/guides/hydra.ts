@@ -4,7 +4,7 @@ export const hydraGuide: ToolGuide = {
   id: "hydra",
   name: "Hydra",
   icon: "shield",
-  category: "Tools & Methods",
+  category: "Methods",
   description: "Fast online password brute-forcing tool supporting many protocols",
   installation: {
     title: "Installation",

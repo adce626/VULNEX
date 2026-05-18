@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '',
     '/search',
     '/all',
-    '/tools',
+    '/methods',
     '/recon',
     '/vulnerabilities',
     '/tech-specific',
@@ -19,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/auth-session',
     '/browser-extensions',
     '/bookmarks',
+    '/tools',
   ]
 
   const extraPages = [

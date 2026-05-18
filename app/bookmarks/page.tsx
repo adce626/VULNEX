@@ -66,7 +66,7 @@ export default function BookmarksPage() {
                 Click the star icon on any command to save it here for quick access.
               </p>
               <Link
-                href="/tools"
+                href="/methods"
                 className="mt-6 inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
               >
                 Browse Tools <ArrowRight className="h-4 w-4" />

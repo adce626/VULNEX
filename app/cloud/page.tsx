@@ -6,7 +6,6 @@ import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
 import { Cloud, ArrowRight, Home, ChevronRight, Key, HardDrive, Database, Shield } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { RecommendedTools } from "@/components/recommended-tools"
 
 const cloudItems = [
   {
@@ -125,12 +124,6 @@ export default function CloudPage() {
               </div>
             ))}
           </div>
-
-          {/* Recommended Tools */}
-          <RecommendedTools
-            toolIds={["cloudfox", "amass", "subfinder", "nuclei"]}
-            title="Recommended Tools for Cloud Security"
-          />
         </div>
       </main>
     </div>

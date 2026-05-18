@@ -4,7 +4,7 @@ export const gobusterGuide: ToolGuide = {
   id: "gobuster",
   name: "Gobuster",
   icon: "folder-search",
-  category: "Tools & Methods",
+  category: "Methods",
   description: "Directory/file/DNS subdomain brute-forcing tool written in Go",
   installation: {
     title: "Installation",

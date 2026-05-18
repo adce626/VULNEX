@@ -4,7 +4,7 @@ export const burpsuiteGuide: ToolGuide = {
   id: "burpsuite",
   name: "Burp Suite",
   icon: "shield",
-  category: "Tools & Methods",
+  category: "Methods",
   description: "Industry-standard web security testing platform",
   installation: {
     title: "Installation",

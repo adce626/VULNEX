@@ -5,7 +5,6 @@ import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
 import { Brain, ArrowRight, Home, ChevronRight, Bot, Eye, UserPlus, ClipboardPaste, Gauge } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { RecommendedTools } from "@/components/recommended-tools"
 
 const advancedItems = [
   {
@@ -148,12 +147,6 @@ export default function AdvancedPage() {
               </div>
             ))}
           </div>
-
-          {/* Recommended Tools */}
-          <RecommendedTools
-            toolIds={["jwt_tool", "burpsuite", "xsstrike", "nuclei"]}
-            title="Recommended Tools for Advanced Topics"
-          />
         </div>
       </main>
     </div>

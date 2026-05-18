@@ -4,7 +4,7 @@ export const johnGuide: ToolGuide = {
   id: "john",
   name: "John the Ripper",
   icon: "key",
-  category: "Tools & Methods",
+  category: "Methods",
   description: "Fast password cracking tool supporting many hash formats",
   installation: {
     title: "Installation",

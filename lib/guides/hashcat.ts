@@ -4,7 +4,7 @@ export const hashcatGuide: ToolGuide = {
   id: "hashcat",
   name: "Hashcat",
   icon: "key",
-  category: "Tools & Methods",
+  category: "Methods",
   description: "World's fastest password recovery tool with GPU acceleration and multiple attack modes",
   installation: {
     title: "Installation",

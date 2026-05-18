@@ -62,5 +62,5 @@ export const hydraCategories: HydraCategory[] = [
 export const hydraTools = [
   { name: "Hydra GitHub", url: "https://github.com/vanhauser-thc/thc-hydra", description: "Official repository with documentation" },
   { name: "SecLists - Passwords", url: "https://github.com/danielmiessler/SecLists/tree/master/Passwords", description: "Common password wordlists" },
-  { name: "CeWL", url: "/tools/cewl", description: "Generate custom wordlists from target websites" },
+  { name: "CeWL", url: "/methods/cewl", description: "Generate custom wordlists from target websites" },
 ]

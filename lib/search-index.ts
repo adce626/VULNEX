@@ -140,7 +140,7 @@ const allEntries: { text: string; title: string; href: string; section: string }
   ...extractEntries(githubReconCategories as IndexItem[], "/recon/github-recon", "GitHub Recon", ""),
   ...extractEntries(paramDiscoveryCategories as IndexItem[], "/recon/param-discovery", "Param Discovery", ""),
   // Tools
-  ...extractEntries(ffufCategories as IndexItem[], "/tools/ffuf", "FFUF", ""),
+  ...extractEntries(ffufCategories as IndexItem[], "/methods/ffuf", "FFUF", ""),
   ...extractEntries(nucleiCategories as IndexItem[], "/tools/nuclei", "Nuclei", ""),
   ...extractEntries(burpsuiteCategories as IndexItem[], "/tools/burpsuite", "Burp Suite", ""),
   ...extractEntries(nmapCategories as IndexItem[], "/tools/nmap", "Nmap", ""),
@@ -155,8 +155,8 @@ const allEntries: { text: string; title: string; href: string; section: string }
   ...extractEntries(paramSpiderCategories as IndexItem[], "/tools/paramspider", "ParamSpider", ""),
   ...extractEntries(x8Categories as IndexItem[], "/tools/x8", "X8", ""),
   ...extractEntries(gfCategories as IndexItem[], "/tools/gf", "GF", ""),
-  ...extractEntries(gospiderCategories as IndexItem[], "/tools/gospider", "Gospider", ""),
-  ...extractEntries(cewlCategories as IndexItem[], "/tools/cewl", "CeWL", ""),
+  ...extractEntries(gospiderCategories as IndexItem[], "/methods/gospider", "Gospider", ""),
+  ...extractEntries(cewlCategories as IndexItem[], "/methods/cewl", "CeWL", ""),
   ...extractEntries(gobusterCategories as IndexItem[], "/tools/gobuster", "Gobuster", ""),
   ...extractEntries(hydraCategories as IndexItem[], "/tools/hydra", "Hydra", ""),
   ...extractEntries(whatwebCategories as IndexItem[], "/tools/whatweb", "WhatWeb", ""),
@@ -164,7 +164,7 @@ const allEntries: { text: string; title: string; href: string; section: string }
   ...extractEntries(dirsearchCategories as IndexItem[], "/tools/dirsearch", "Dirsearch", ""),
   ...extractEntries(johnCategories as IndexItem[], "/tools/john", "John", ""),
   ...extractEntries(searchsploitCategories as IndexItem[], "/tools/searchsploit", "Searchsploit", ""),
-  ...extractEntries(nucleiTemplateCategories as IndexItem[], "/tools/nuclei-templates", "Nuclei Templates", ""),
+  ...extractEntries(nucleiTemplateCategories as IndexItem[], "/methods/nuclei-templates", "Nuclei Templates", ""),
   ...extractEntries(fastXSSCategories as IndexItem[], "/tools/fast-xss", "Fast XSS", ""),
 ]
 

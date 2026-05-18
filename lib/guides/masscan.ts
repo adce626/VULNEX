@@ -4,7 +4,7 @@ export const masscanGuide: ToolGuide = {
   id: "masscan",
   name: "Masscan",
   icon: "network",
-  category: "Tools & Methods",
+  category: "Methods",
   description: "Mass IP port scanner — the fastest Internet-scale scanner, scanning the entire Internet in minutes",
   installation: {
     title: "Installation",

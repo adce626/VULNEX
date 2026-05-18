@@ -4,7 +4,7 @@ export const cewlGuide: ToolGuide = {
   id: "cewl",
   name: "CeWL",
   icon: "search",
-  category: "Tools & Methods",
+  category: "Methods",
   description: "Custom wordlist generator that crawls websites for targeted brute-forcing",
   installation: {
     title: "Installation",

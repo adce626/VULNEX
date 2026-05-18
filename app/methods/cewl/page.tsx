@@ -6,9 +6,9 @@ import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { CommandCard } from "@/components/command-card"
 import { CommandList } from "@/components/command-list"
-import { nucleiTemplateCategories, nucleiTemplateTools } from "@/lib/nuclei-templates-data"
+import { cewlCategories, cewlTools } from "@/lib/cewl-data"
 import {
-  FileJson,
+  Database,
   Terminal,
   ChevronRight,
   Home,
@@ -16,8 +16,8 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-export default function NucleiTemplatesPage() {
-  const [activeCategory, setActiveCategory] = useState("introduction")
+export default function CewlPage() {
+  const [activeCategory, setActiveCategory] = useState("installation")
 
   const scrollToSection = (id: string) => {
     setActiveCategory(id)
@@ -27,11 +27,11 @@ export default function NucleiTemplatesPage() {
     }
   }
 
-  const totalCommands = nucleiTemplateCategories.reduce((acc, cat) => acc + cat.commands.length, 0)
+  const totalCommands = cewlCategories.reduce((acc, cat) => acc + cat.commands.length, 0)
 
   return (
     <div className="min-h-screen bg-background">
-      <PageTitle title="Nuclei Templates" />
+      <PageTitle title="CeWL Wordlists" />
       <MainSidebar />
       <main className="lg:pl-64">
         <div className="border-b border-border bg-card/50">
@@ -39,24 +39,24 @@ export default function NucleiTemplatesPage() {
             <nav className="flex items-center gap-2 text-sm text-muted-foreground">
               <Link href="/" className="flex items-center gap-1 hover:text-foreground"><Home className="h-4 w-4" /></Link>
               <ChevronRight className="h-4 w-4" />
-              <Link href="/tools" className="hover:text-foreground">Tools & Methods</Link>
+              <Link href="/methods" className="hover:text-foreground">Methods</Link>
               <ChevronRight className="h-4 w-4" />
-              <span className="text-foreground">Nuclei Templates</span>
+              <span className="text-foreground">CeWL Wordlists</span>
             </nav>
           </div>
         </div>
 
-        <div className="relative overflow-hidden border-b border-border bg-gradient-to-br from-violet-500/10 via-background to-purple-500/5">
+        <div className="relative overflow-hidden border-b border-border bg-gradient-to-br from-amber-500/10 via-background to-yellow-500/5">
           <div className="relative px-6 py-12 text-center lg:py-16">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-violet-500/10 text-violet-500">
-              <FileJson className="h-8 w-8" />
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-500">
+              <Database className="h-8 w-8" />
             </div>
-            <h1 className="text-3xl font-bold text-foreground lg:text-4xl text-balance">Nuclei Templates</h1>
+            <h1 className="text-3xl font-bold text-foreground lg:text-4xl text-balance">CeWL Wordlists</h1>
             <p className="mx-auto mt-3 max-w-2xl text-muted-foreground text-pretty">
-              Custom Nuclei YAML templates for automated vulnerability detection — Open Redirect, WP-Setup, IIS, Git Exposure, CORS, Credential Disclosure, Blind SSRF, SQLi, CRLF, and more.
+              Custom wordlist generator that crawls websites and extracts meaningful words for targeted brute-force attacks.
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <span className="rounded-full bg-violet-500/10 px-4 py-2 text-sm font-medium text-violet-500">{nucleiTemplateCategories.length} Categories</span>
+              <span className="rounded-full bg-amber-500/10 px-4 py-2 text-sm font-medium text-amber-500">{cewlCategories.length} Categories</span>
               <span className="rounded-full bg-accent/10 px-4 py-2 text-sm font-medium text-accent">{totalCommands} Commands</span>
               <span className="rounded-full bg-secondary px-4 py-2 text-sm font-medium text-foreground">Copy Ready</span>
             </div>
@@ -66,13 +66,16 @@ export default function NucleiTemplatesPage() {
         <div className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur-sm">
           <div className="mx-auto max-w-5xl px-6">
             <div className="flex gap-1 overflow-x-auto py-3 scrollbar-hide">
-              {nucleiTemplateCategories.map((cat) => {
+              <span className="flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground">
+                <Database className="h-4 w-4" /> Phases
+              </span>
+              {cewlCategories.map((cat) => {
                 const sectionId = cat.category.toLowerCase().replace(/[^a-z0-9]+/g, "-")
                 return (
                   <button key={cat.category} onClick={() => scrollToSection(sectionId)}
                     className={cn("flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors whitespace-nowrap",
-                      activeCategory === sectionId ? "bg-violet-500 text-white" : "text-muted-foreground hover:bg-muted hover:text-foreground")}>
-                    {cat.category.split(" —")[0]}
+                      activeCategory === sectionId ? "bg-amber-500 text-white" : "text-muted-foreground hover:bg-muted hover:text-foreground")}>
+                    {cat.category}
                   </button>
                 )
               })}
@@ -81,37 +84,37 @@ export default function NucleiTemplatesPage() {
         </div>
 
         <div className="mx-auto max-w-5xl space-y-12 p-6">
-          {nucleiTemplateCategories.map((category, idx) => {
+          {cewlCategories.map((category, idx) => {
             const sectionId = category.category.toLowerCase().replace(/[^a-z0-9]+/g, "-")
             return (
               <section key={idx} id={sectionId} className="scroll-mt-20">
                 <div className="mb-6 flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-violet-500/10 text-violet-500"><Terminal className="h-5 w-5" /></div>
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10 text-amber-500"><Terminal className="h-5 w-5" /></div>
                   <div>
-                    <span className="text-xs font-medium text-violet-500">{idx === 0 ? "Intro" : `Template ${idx}`}</span>
+                    <span className="text-xs font-medium text-amber-500">Phase {idx + 1}</span>
                     <h2 className="text-2xl font-bold text-foreground">{category.category}</h2>
                   </div>
                 </div>
-                <CommandList commands={category.commands} pageTitle="Nuclei Templates" pageSize={15} />
+                <CommandList commands={category.commands} pageTitle="CeWL Wordlists" pageSize={15} />
               </section>
             )
           })}
 
           <section className="scroll-mt-20">
             <div className="mb-6 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-violet-500/10 text-violet-500"><ExternalLink className="h-5 w-5" /></div>
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10 text-amber-500"><ExternalLink className="h-5 w-5" /></div>
               <div>
-                <span className="text-xs font-medium text-violet-500">Tools</span>
+                <span className="text-xs font-medium text-amber-500">Tools</span>
                 <h2 className="text-2xl font-bold text-foreground">Tools & Resources</h2>
               </div>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
-              {nucleiTemplateTools.map((tool) => (
+              {cewlTools.map((tool) => (
                 <a key={tool.name} href={tool.url} target="_blank" rel="noopener noreferrer"
-                  className="group flex items-start gap-3 rounded-lg border border-border bg-card p-4 transition-all hover:border-violet-500/50 hover:shadow-lg hover:shadow-violet-500/5">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-violet-500/10 text-violet-500"><ExternalLink className="h-4 w-4" /></div>
+                  className="group flex items-start gap-3 rounded-lg border border-border bg-card p-4 transition-all hover:border-amber-500/50 hover:shadow-lg hover:shadow-amber-500/5">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-amber-500/10 text-amber-500"><ExternalLink className="h-4 w-4" /></div>
                   <div className="min-w-0 flex-1">
-                    <div className="font-medium text-foreground group-hover:text-violet-500">{tool.name}</div>
+                    <div className="font-medium text-foreground group-hover:text-amber-500">{tool.name}</div>
                     <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{tool.description}</p>
                   </div>
                 </a>
