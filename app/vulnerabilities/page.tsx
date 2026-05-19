@@ -36,6 +36,13 @@ const vulnItems = [
     commandCount: "20+",
   },
   {
+    title: "SSRF",
+    description: "Server-Side Request Forgery testing with cloud metadata endpoints, URL schemes, and exploitation techniques",
+    href: "/vulnerabilities/ssrf",
+    available: true,
+    commandCount: "60+",
+  },
+  {
     title: "Dependency Confusion",
     description: "Exploiting package manager vulnerabilities",
     href: "/vulnerabilities/dependency-confusion",
@@ -131,6 +138,8 @@ export default function VulnerabilitiesPage() {
                         <Globe className="h-6 w-6" />
                       ) : item.title === "Open Redirect" ? (
                         <Link2 className="h-6 w-6" />
+                      ) : item.title === "SSRF" ? (
+                        <Globe className="h-6 w-6" />
                       ) : item.title === "Host Header Injection" ? (
                         <AlertTriangle className="h-6 w-6" />
                       ) : item.title === "403 Bypass" ? (
