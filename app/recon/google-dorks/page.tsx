@@ -33,10 +33,19 @@ export default function GoogleDorksPage() {
   const getProcessedQuery = (query: string) => {
     const targetDomain = domain.trim();
     if (!targetDomain) return query;
-    if (query.includes("{domain}")) {
-      return query.replace(/\{domain\}/g, targetDomain);
+    let processed = query;
+    if (processed.includes("{domain}")) {
+      processed = processed.replace(/\{domain\}/g, targetDomain);
     }
-    return `site:${targetDomain} ${query}`;
+    processed = processed.replace(/site:evil\.com/g, `site:${targetDomain}`);
+    processed = processed.replace(/site:"evil\.com"/g, `site:"${targetDomain}"`);
+    processed = processed.replace(/site:example\.com/g, `site:${targetDomain}`);
+    processed = processed.replace(/site:"example\.com"/g, `site:"${targetDomain}"`);
+    processed = processed.replace(/evil\.com\b/g, targetDomain);
+    if (processed === query) {
+      processed = `site:${targetDomain} ${query}`;
+    }
+    return processed;
   };
 
   const openInGoogle = (query: string) => {
