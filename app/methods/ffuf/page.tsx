@@ -13,11 +13,13 @@ import {
   ChevronRight,
   Home,
   ExternalLink,
+  Globe,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export default function FfufPage() {
   const [activeCategory, setActiveCategory] = useState("installation")
+  const [domain, setDomain] = useState("")
 
   const scrollToSection = (id: string) => {
     setActiveCategory(id)
@@ -60,6 +62,19 @@ export default function FfufPage() {
               <span className="rounded-full bg-accent/10 px-4 py-2 text-sm font-medium text-accent">{totalCommands} Commands</span>
               <span className="rounded-full bg-secondary px-4 py-2 text-sm font-medium text-foreground">Copy Ready</span>
             </div>
+            <div className="mt-6 mx-auto max-w-md">
+              <div className="relative">
+                <Globe className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <input
+                  type="text"
+                  placeholder="Enter target domain (e.g., example.com)"
+                  value={domain}
+                  onChange={(e) => setDomain(e.target.value)}
+                  className="w-full rounded-lg border border-border bg-background py-2.5 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                />
+              </div>
+              <p className="mt-2 text-xs text-muted-foreground">Commands will automatically replace <code className="rounded bg-muted px-1 font-mono">example.com</code> with your target domain</p>
+            </div>
           </div>
         </div>
 
@@ -95,7 +110,7 @@ export default function FfufPage() {
                     <h2 className="text-2xl font-bold text-foreground">{category.category}</h2>
                   </div>
                 </div>
-                <CommandList commands={category.commands} pageTitle="FFUF Techniques" pageSize={15} />
+                <CommandList commands={category.commands} pageTitle="FFUF Techniques" pageSize={15} domain={domain} />
               </section>
             )
           })}
