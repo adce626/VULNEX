@@ -7,7 +7,7 @@ import { nucleiGuide } from "./guides/nuclei"
 import { sqlmapGuide } from "./guides/sqlmap"
 import { xsstrikeGuide } from "./guides/xsstrike"
 import { burpsuiteGuide } from "./guides/burpsuite"
-// import { ffufGuide } from "./guides/ffuf"
+import { ffufGuide } from "./guides/ffuf"
 import { nmapGuide } from "./guides/nmap"
 import { cloudfoxGuide } from "./guides/cloudfox"
 import { jwtToolGuide } from "./guides/jwt_tool"
@@ -15,8 +15,8 @@ import { arjunGuide } from "./guides/arjun"
 import { paramSpiderGuide } from "./guides/paramspider"
 import { x8Guide } from "./guides/x8"
 import { gfGuide } from "./guides/gf"
-// import { gospiderGuide } from "./guides/gospider"
-// import { cewlGuide } from "./guides/cewl"
+import { gospiderGuide } from "./guides/gospider"
+import { cewlGuide } from "./guides/cewl"
 import { gobusterGuide } from "./guides/gobuster"
 import { hydraGuide } from "./guides/hydra"
 import { whatwebGuide } from "./guides/whatweb"
@@ -31,6 +31,12 @@ import { naabuGuide } from "./guides/naabu"
 import { masscanGuide } from "./guides/masscan"
 import { hashcatGuide } from "./guides/hashcat"
 import { trufflehogGuide } from "./guides/trufflehog"
+import { kiterunnerGuide } from "./guides/kiterunner"
+import { niktoGuide } from "./guides/nikto"
+import { theHarvesterGuide } from "./guides/theharvester"
+import { metasploitGuide } from "./guides/metasploit"
+import { dnsreconGuide } from "./guides/dnsrecon"
+import { sherlockGuide } from "./guides/sherlock"
 
 export const toolsData = [
   subfinderGuide,
@@ -47,6 +53,9 @@ export const toolsData = [
   paramSpiderGuide,
   x8Guide,
   gfGuide,
+  ffufGuide,
+  gospiderGuide,
+  cewlGuide,
   gobusterGuide,
   hydraGuide,
   whatwebGuide,
@@ -61,6 +70,12 @@ export const toolsData = [
   masscanGuide,
   hashcatGuide,
   trufflehogGuide,
+  kiterunnerGuide,
+  niktoGuide,
+  theHarvesterGuide,
+  metasploitGuide,
+  dnsreconGuide,
+  sherlockGuide,
 ]
 
 export const getToolsByCategory = (category: string) =>

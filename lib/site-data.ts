@@ -103,6 +103,14 @@ export const navigation: NavSection[] = [
       { title: "All Tools", href: "/tools", tag: "New" },
     ],
   },
+  {
+    title: "Payloads",
+    icon: "siren",
+    href: "/payloads",
+    items: [
+      { title: "Payload Library", href: "/payloads", tag: "New" },
+    ],
+  },
 ]
 
 export const sectionCards = [
@@ -175,7 +183,15 @@ export const sectionCards = [
     description: "Complete security tool collection — from installation to advanced usage, with practical examples and expert tips",
     icon: "terminal",
     href: "/tools",
-    itemCount: 33,
+    itemCount: 28,
     color: "primary",
+  },
+  {
+    title: "Payloads",
+    description: "Curated payload collection for web security testing — XSS, SQLi, SSTI, LFI, and more",
+    icon: "siren",
+    href: "/payloads",
+    itemCount: 1,
+    color: "accent",
   },
 ]

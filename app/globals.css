@@ -481,9 +481,15 @@ main {
   }
 }
 
-/* Responsive breadcrumbs — hide on mobile */
+/* Mobile breadcrumbs — show compact version */
 @media (max-width: 640px) {
   main > div:first-child > div > nav {
+    font-size: 0.75rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+  main > div:first-child > div > nav::-webkit-scrollbar {
     display: none;
   }
 }

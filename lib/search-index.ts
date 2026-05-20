@@ -1,3 +1,5 @@
+import { payloadCategories } from "./payloads-data"
+
 export interface SearchEntry {
   text: string
   title: string
@@ -66,6 +68,13 @@ import { googleAPIKeysCategories } from "./google-api-keys-data"
 // Special files
 import { reconCommands, subdomainCommands, scanningCommands, fuzzingCommands, shortnameCommands } from "./iis-commands"
 import { blindXSSSteps } from "./blind-xss-commands"
+// New tool guides for search indexing
+import { kiterunnerGuide } from "./guides/kiterunner"
+import { niktoGuide } from "./guides/nikto"
+import { theHarvesterGuide } from "./guides/theharvester"
+import { metasploitGuide } from "./guides/metasploit"
+import { dnsreconGuide } from "./guides/dnsrecon"
+import { sherlockGuide } from "./guides/sherlock"
 
 interface IndexItem {
   category?: string
@@ -166,6 +175,22 @@ const allEntries: { text: string; title: string; href: string; section: string }
   ...extractEntries(searchsploitCategories as IndexItem[], "/tools/searchsploit", "Searchsploit", ""),
   ...extractEntries(nucleiTemplateCategories as IndexItem[], "/methods/nuclei-templates", "Nuclei Templates", ""),
   ...extractEntries(fastXSSCategories as IndexItem[], "/tools/fast-xss", "Fast XSS", ""),
+  // New tools (guide-only, no data file)
+  ...extractEntries(kiterunnerGuide.commands.map(c => ({ command: c.command, description: c.description })) as unknown as IndexItem[], "/tools/kiterunner", "KiteRunner", ""),
+  ...extractEntries(niktoGuide.commands.map(c => ({ command: c.command, description: c.description })) as unknown as IndexItem[], "/tools/nikto", "Nikto", ""),
+  ...extractEntries(theHarvesterGuide.commands.map(c => ({ command: c.command, description: c.description })) as unknown as IndexItem[], "/tools/theharvester", "theHarvester", ""),
+  ...extractEntries(metasploitGuide.commands.map(c => ({ command: c.command, description: c.description })) as unknown as IndexItem[], "/tools/metasploit", "Metasploit", ""),
+  ...extractEntries(dnsreconGuide.commands.map(c => ({ command: c.command, description: c.description })) as unknown as IndexItem[], "/tools/dnsrecon", "DNSRecon", ""),
+  ...extractEntries(sherlockGuide.commands.map(c => ({ command: c.command, description: c.description })) as unknown as IndexItem[], "/tools/sherlock", "Sherlock", ""),
+  // Payloads — name + description only for discoverability
+  ...payloadCategories.flatMap(cat =>
+    cat.items.slice(0, 30).map(item => ({
+      text: `${item.name} — ${item.description}`,
+      title: `${cat.name} Payloads`,
+      href: `/payloads/${cat.id}`,
+      section: "Payloads",
+    }))
+  ),
 ]
 
 export function searchCommands(query: string): SearchEntry[] {

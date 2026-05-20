@@ -94,6 +94,15 @@ const toolTypeMap: Record<string, { label: string; color: string }> = {
   masscan: { label: "Scanner", color: "bg-rose-500/15 text-rose-400 border-rose-500/30" },
   hashcat: { label: "Cracking", color: "bg-red-500/15 text-red-400 border-red-500/30" },
   trufflehog: { label: "Scanner", color: "bg-rose-500/15 text-rose-400 border-rose-500/30" },
+  ffuf: { label: "Fuzzing", color: "bg-yellow-500/15 text-yellow-400 border-yellow-500/30" },
+  gospider: { label: "Crawler", color: "bg-green-500/15 text-green-400 border-green-500/30" },
+  cewl: { label: "Wordlist", color: "bg-teal-500/15 text-teal-400 border-teal-500/30" },
+  kiterunner: { label: "Discovery", color: "bg-indigo-500/15 text-indigo-400 border-indigo-500/30" },
+  nikto: { label: "Scanner", color: "bg-rose-500/15 text-rose-400 border-rose-500/30" },
+  theharvester: { label: "OSINT", color: "bg-blue-500/15 text-blue-400 border-blue-500/30" },
+  metasploit: { label: "Framework", color: "bg-orange-500/15 text-orange-400 border-orange-500/30" },
+  dnsrecon: { label: "Enumeration", color: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30" },
+  sherlock: { label: "OSINT", color: "bg-blue-500/15 text-blue-400 border-blue-500/30" },
 }
 
 const difficultyMap: Record<string, { level: string; bars: number; color: string }> = {
@@ -125,6 +134,15 @@ const difficultyMap: Record<string, { level: string; bars: number; color: string
   masscan: { level: "Advanced", bars: 3, color: "bg-red-500" },
   hashcat: { level: "Advanced", bars: 3, color: "bg-red-500" },
   trufflehog: { level: "Beginner", bars: 1, color: "bg-emerald-500" },
+  ffuf: { level: "Intermediate", bars: 2, color: "bg-yellow-500" },
+  gospider: { level: "Beginner", bars: 1, color: "bg-emerald-500" },
+  cewl: { level: "Beginner", bars: 1, color: "bg-emerald-500" },
+  kiterunner: { level: "Intermediate", bars: 2, color: "bg-yellow-500" },
+  nikto: { level: "Beginner", bars: 1, color: "bg-emerald-500" },
+  theharvester: { level: "Beginner", bars: 1, color: "bg-emerald-500" },
+  metasploit: { level: "Advanced", bars: 3, color: "bg-red-500" },
+  dnsrecon: { level: "Beginner", bars: 1, color: "bg-emerald-500" },
+  sherlock: { level: "Beginner", bars: 1, color: "bg-emerald-500" },
 }
 
 const tagColorMap: Record<string, string> = {

@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/browser-extensions',
     '/bookmarks',
     '/tools',
+    '/payloads',
   ]
 
   const extraPages = [

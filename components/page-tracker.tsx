@@ -8,7 +8,9 @@ export function PageTracker() {
   const pathname = usePathname()
 
   useEffect(() => {
-    const title = document.title.replace(" | VULNEX", "") || "Home"
+    let title = document.title
+    if (title === "VULNEX" || !title) title = "Home"
+    else title = title.replace(" | VULNEX", "")
     addRecentPage({ title, href: pathname })
   }, [pathname])
 
