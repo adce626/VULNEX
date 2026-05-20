@@ -5,8 +5,9 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
-import { sectionCards } from "@/lib/site-data"
+import { sectionCards, navigation } from "@/lib/site-data"
 import { toolsData } from "@/lib/tools-data"
+import { SITE_STATS } from "@/lib/stats"
 import {
   Search,
   Bug,
@@ -157,9 +158,9 @@ export default function HomePage() {
             {/* Stats */}
             <div className="mt-8 flex flex-wrap items-center justify-center gap-5 sm:gap-8">
 {[
-                { value: "6", label: "Sections (featured)" },
-                { value: "34", label: "Topics" },
-                { value: "2600+", label: "Commands" },
+                { value: String(sectionCards.length), label: "Sections" },
+                { value: String(navigation.reduce((acc, s) => acc + (s.items?.length || 0), 0)), label: "Topics" },
+                { value: SITE_STATS.commandCount + "+", label: "Commands" },
               ].map((stat, i) => (
                 <div key={stat.label} className="flex items-center gap-2">
                   {i > 0 && <div className="h-4 w-px bg-border hidden sm:block" />}
