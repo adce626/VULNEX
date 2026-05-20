@@ -114,6 +114,7 @@ const allPages = [
   { title: "XSS Payloads", href: "/payloads/xss", keywords: "xss,cross site,script,payload,injection" },
   { title: "Bookmarks", href: "/bookmarks", keywords: "bookmark,saved,favorite,star" },
   { title: "ffuf", href: "/tools/ffuf", keywords: "ffuf,fuzz,fuzzer,directory,discovery" },
+  { title: "x8", href: "/tools/x8", keywords: "x8,fuzz,parameter,discovery,fast,brute" },
   { title: "Gospider", href: "/tools/gospider", keywords: "gospider,crawl,spider,endpoint" },
   { title: "CeWL", href: "/tools/cewl", keywords: "cewl,wordlist,crawl,password" },
   { title: "KiteRunner", href: "/tools/kiterunner", keywords: "kiterunner,api,discovery,endpoint,jwt" },

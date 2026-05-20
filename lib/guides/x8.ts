@@ -13,7 +13,7 @@ export const x8Guide: ToolGuide = {
       "Verify installation"
     ],
     code: `# Using Go
-go install github.com/tomnomnom/x8@latest
+go install github.com/Sh1Yo/x8@latest
 
 # Verify
 x8 -h`
