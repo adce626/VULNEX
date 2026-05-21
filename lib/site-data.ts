@@ -183,7 +183,7 @@ export const sectionCards = [
     description: "Complete security tool collection — from installation to advanced usage, with practical examples and expert tips",
     icon: "terminal",
     href: "/tools",
-    itemCount: 37,
+    itemCount: 104,
     color: "primary",
   },
   {
