@@ -12,8 +12,9 @@ export const x8Guide: ToolGuide = {
       "Install via Docker, package manager, or build from source (Rust)",
       "Verify installation"
     ],
-    note: "Starting with v4.0.0, installing via cargo install uses the crate branch instead of main. This branch includes the original reqwest library that performs HTTP normalizations and prevents sending invalid requests. If you want to use the modified reqwest version without these limitations, install via the Releases page or build the sources.",
-    code: `# Docker
+    code: `# Note: Starting with v4.0.0, cargo install uses the crate branch (original reqwest).
+# For the modified reqwest version, use Releases page or build from source.
+# Docker
 git clone https://github.com/Sh1Yo/x8
 cd x8
 docker build -t x8 .
