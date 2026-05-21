@@ -49,13 +49,16 @@ export default function X8Page() {
 
         <div className="relative overflow-hidden border-b border-border bg-gradient-to-br from-primary/10 via-background to-accent/5">
           <div className="relative px-6 py-12 text-center lg:py-16">
-            <h1 className="text-3xl font-bold text-foreground lg:text-4xl">x8</h1>
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5">
+              <span className="text-xs font-medium text-primary uppercase tracking-wider">Phase 4</span>
+            </div>
+            <h1 className="text-3xl font-bold text-foreground lg:text-4xl">x8 — Very Fast Alternative to ffuf</h1>
             <p className="mx-auto mt-3 max-w-2xl text-muted-foreground text-pretty">
-              A fast alternative to ffuf for parameter fuzzing — written in Go
+              A fast alternative to ffuf for parameter fuzzing — written in Rust
             </p>
             <div className="mt-4 flex flex-wrap gap-2 justify-center">
               <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">Parameter Fuzzing</span>
-              <span className="rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent">Go</span>
+              <span className="rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent">Rust</span>
             </div>
           </div>
         </div>
@@ -69,18 +72,15 @@ export default function X8Page() {
               <h2 className="text-2xl font-bold text-foreground">Installation</h2>
             </div>
             <div className="space-y-4">
-              <div className="space-y-2">
-                {[
-                  { text: "go install github.com/tomnomnom/x8@latest", desc: "Install via Go" },
-                  { text: "x8 -h", desc: "Verify installation" },
-                ].map((step, idx) => (
-                  <div key={idx} className="flex items-center gap-3 text-muted-foreground">
-                    <span className="flex-shrink-0 size-6 rounded-full bg-primary/10 text-primary text-xs font-medium flex items-center justify-center">{idx + 1}</span>
-                    <code className="font-mono text-sm bg-muted/50 px-2 py-0.5 rounded">{step.text}</code>
-                    <span className="text-sm">{step.desc}</span>
-                  </div>
-                ))}
-              </div>
+              {[
+                { code: "cargo install x8", desc: "Install x8 via Cargo (Rust)" },
+                { code: "x8 -h", desc: "Verify installation" },
+              ].map((step, idx) => (
+                <div key={idx} className="bg-muted/50 border border-border/50 rounded-lg p-4">
+                  <div className="text-sm text-muted-foreground mb-2">#{idx + 1} {step.desc}</div>
+                  <pre className="bg-background rounded p-3 overflow-x-auto"><code className="text-sm font-mono">{step.code}</code></pre>
+                </div>
+              ))}
             </div>
           </section>
 
@@ -93,13 +93,12 @@ export default function X8Page() {
             </div>
             <div className="space-y-4">
               {[
-                { code: 'x8 -u "https://site.com/endpoint?FUZZ=test" -w paramnames.txt', desc: "Basic parameter fuzzing" },
-                { code: 'x8 -u "https://site.com/api?param=FUZZ" -w values.txt --filter-status 200,403', desc: "Filter by response status" },
+                { code: 'x8 -u "https://site.com/endpoint?FUZZ=test" -w paramnames.txt', desc: "Basic parameter fuzzing with x8" },
+                { code: 'x8 -u "https://site.com/api?param=FUZZ" -w values.txt --filter-status 200,403', desc: "Filter specific status codes" },
                 { code: 'x8 -u "https://site.com/endpoint" -w params.txt -t 200 --threads 50', desc: "High-speed fuzzing with 50 threads" },
-                { code: 'cat urls.txt | x8 -w params.txt -json', desc: "Fuzzing with JSON output for multiple URLs" },
               ].map((item, idx) => (
                 <div key={idx} className="bg-muted/50 border border-border/50 rounded-lg p-4">
-                  <div className="text-sm text-muted-foreground mb-2">{item.desc}</div>
+                  <div className="text-sm text-muted-foreground mb-2">#{idx + 1 + 2} {item.desc}</div>
                   <pre className="bg-background rounded p-3 overflow-x-auto"><code className="text-sm font-mono">{item.code}</code></pre>
                 </div>
               ))}

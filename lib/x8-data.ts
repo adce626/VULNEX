@@ -8,8 +8,8 @@ export const x8Categories: X8Category[] = [
     category: "Installation & Setup",
     commands: [
       {
-        command: "go install github.com/tomnomnom/x8@latest",
-        description: "Install via Go (recommended)",
+        command: "cargo install x8",
+        description: "Install via Cargo (Rust)",
       },
       {
         command: "echo $GOPATH && ls ~/go/bin/x8",
@@ -131,7 +131,7 @@ export const x8Categories: X8Category[] = [
 export const x8Tools = [
   {
     name: "x8 GitHub",
-    url: "https://github.com/tomnomnom/x8",
+    url: "https://github.com/Sh1Yo/x8",
     description: "Official repository with documentation",
   },
   {

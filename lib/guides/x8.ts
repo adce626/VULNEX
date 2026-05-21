@@ -5,29 +5,44 @@ export const x8Guide: ToolGuide = {
   name: "x8",
   icon: "zap",
   category: "Recon & OSINT",
-  description: "Extremely fast alternative to ffuf for parameter fuzzing",
+  description: "Very fast alternative to ffuf for parameter fuzzing",
   installation: {
     title: "Installation",
     steps: [
-      "Install using Go",
+      "Install via Docker, package manager, or build from source (Rust)",
       "Verify installation"
     ],
-    code: `# Using Go
-go install github.com/Sh1Yo/x8@latest
+    note: "Starting with v4.0.0, installing via cargo install uses the crate branch instead of main. This branch includes the original reqwest library that performs HTTP normalizations and prevents sending invalid requests. If you want to use the modified reqwest version without these limitations, install via the Releases page or build the sources.",
+    code: `# Docker
+git clone https://github.com/Sh1Yo/x8
+cd x8
+docker build -t x8 .
 
-# Verify
-x8 -h`
+# Linux — BlackArch
+pacman -Sy x8
+
+# Linux / Mac — from source
+git clone https://github.com/Sh1Yo/x8
+cd x8
+cargo build --release
+cp ./target/release/x8 /usr/local/bin
+
+# Linux / Mac — via cargo
+cargo install x8
+
+# Windows — download from Releases
+# https://github.com/Sh1Yo/x8/releases`
   },
   usage: {
     title: "Basic Usage",
-    description: "High-speed parameter and directory fuzzing written in Go",
+    description: "High-speed parameter fuzzing tool written in Rust",
     code: `# Basic parameter fuzzing
 x8 -u "https://site.com/endpoint?FUZZ=test" -w paramnames.txt
 
-# Filter by status codes
+# Filter specific status codes
 x8 -u "https://site.com/api?param=FUZZ" -w values.txt --filter-status 200,403
 
-# High-speed fuzzing with threads
+# High-speed fuzzing with 50 threads
 x8 -u "https://site.com/endpoint" -w params.txt -t 200 --threads 50
 
 # Multiple URLs from file
@@ -54,7 +69,7 @@ cat urls.txt | x8 -w params.txt -json`
   ],
   notes: [
     "10-100x faster than ffuf in some scenarios",
-    "Written in Go for high performance",
+    "Written in Rust for high performance",
     "Compatible with standard wordlists used with ffuf",
     "Supports stdin piping for URL lists",
     "Auto-update with --self-update flag",
@@ -80,5 +95,5 @@ cat urls.txt | x8 -w params.txt -json`
       solution: "Use full path to wordlist file"
     }
   ],
-  tags: ["fuzzing", "fast", "parameter", "go", "brute-force"]
+  tags: ["fuzzing", "fast", "parameter", "rust", "brute-force"]
 }

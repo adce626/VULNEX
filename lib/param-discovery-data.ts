@@ -86,8 +86,8 @@ export const paramDiscoveryCategories: ParamDiscoveryCategory[] = [
     category: "x8 - Very Fast Alternative to ffuf",
     commands: [
       {
-        command: "go install github.com/tomnomnom/x8@latest",
-        description: "#1 Install x8 via Go",
+        command: "cargo install x8",
+        description: "#1 Install x8 via Cargo (Rust)",
       },
       {
         command: "x8 -u \"https://site.com/endpoint?FUZZ=test\" -w paramnames.txt",
@@ -171,8 +171,8 @@ export const paramDiscoveryCategories: ParamDiscoveryCategory[] = [
         description: "ParamSpider - Passive parameter extraction from Wayback Machine",
       },
       {
-        command: "https://github.com/tomnomnom/x8",
-        description: "x8 - Extremely fast parameter fuzzer (Go)",
+        command: "https://github.com/Sh1Yo/x8",
+        description: "x8 - Extremely fast parameter fuzzer (Rust)",
       },
       {
         command: "https://github.com/tomnomnom/gf",
@@ -199,7 +199,7 @@ export const paramDiscoveryTools = [
   },
   {
     name: "x8 - Fast Fuzzer",
-    url: "https://github.com/tomnomnom/x8",
+    url: "https://github.com/Sh1Yo/x8",
     description: "Very fast alternative to ffuf for parameter fuzzing",
   },
   {
