@@ -32,7 +32,7 @@ export default function BookmarksPage() {
       <PageTitle title="Bookmarked Commands" />
       <MainSidebar />
 
-      <main className="lg:pl-64">
+      <main id="main-content" className="lg:pl-64">
         <div className="border-b border-border bg-card/50 p-6">
           <div className="mx-auto max-w-4xl">
             <div className="flex items-center justify-between">
@@ -104,3 +104,6 @@ export default function BookmarksPage() {
     </div>
   )
 }
+
+
+

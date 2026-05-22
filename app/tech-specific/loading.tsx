@@ -4,7 +4,7 @@ export default function TechLoading() {
   return (
     <div className="min-h-screen bg-background">
       <MainSidebar />
-      <main className="lg:pl-64">
+      <main id="main-content" className="lg:pl-64">
         <div className="border-b border-border p-8">
           <div className="mx-auto max-w-4xl">
             <div className="mb-4 h-10 w-64 animate-pulse rounded-lg bg-muted" />
@@ -22,3 +22,6 @@ export default function TechLoading() {
     </div>
   )
 }
+
+
+

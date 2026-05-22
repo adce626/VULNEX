@@ -1,0 +1,22 @@
+"use client"
+
+export default function GlobalError({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
+  return (
+    <html>
+      <body>
+        <div className="flex min-h-screen flex-col items-center justify-center bg-background px-6">
+          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-destructive/10 text-destructive">
+            <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+            </svg>
+          </div>
+          <h1 className="text-2xl font-bold text-foreground">Something went wrong</h1>
+          <p className="mt-2 text-center text-muted-foreground max-w-md">{error.message || "An unexpected error occurred"}</p>
+          <button onClick={reset} className="mt-8 inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90">
+            Try again
+          </button>
+        </div>
+      </body>
+    </html>
+  )
+}

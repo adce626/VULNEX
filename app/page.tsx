@@ -103,7 +103,7 @@ export default function HomePage() {
       <PageTitle title="VULNEX — Web Hacking Playbook" />
       <MainSidebar />
 
-      <main className="lg:pl-64">
+      <main id="main-content" className="lg:pl-64">
         {/* Hero */}
         <div className="relative overflow-hidden border-b border-border">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
@@ -134,6 +134,7 @@ export default function HomePage() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyDown={handleSearch}
                   className="w-full bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none"
+                  aria-label="Search payloads, techniques, tools"
                 />
                 <kbd className="hidden rounded-lg bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground sm:block">
                   K
@@ -373,3 +374,6 @@ export default function HomePage() {
     </div>
   )
 }
+
+
+

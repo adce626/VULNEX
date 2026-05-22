@@ -7,3 +7,6 @@ export default function ToolPage() {
   if (!tool) return null
   return <ToolDetailLayout tool={tool} pageTitle="Gitleaks — Git Secret Detection" breadcrumbCategory="Tools" />
 }
+
+
+

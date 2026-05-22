@@ -79,7 +79,10 @@ export function ToolDetailLayout({ tool, pageTitle, breadcrumbCategory }: ToolDe
                 <Home className="h-4 w-4" />
               </Link>
               <ChevronRight className="h-4 w-4" />
-              <Link href="/methods" className="hover:text-foreground">
+              <Link
+                href={tool.category === "Recon & OSINT" ? "/recon" : tool.category === "Web Vulnerabilities" ? "/vulnerabilities" : tool.category === "Cloud & Assets" ? "/cloud" : tool.category === "Advanced Topics" ? "/advanced" : "/methods"}
+                className="hover:text-foreground"
+              >
                 {breadcrumbCategory}
               </Link>
               <ChevronRight className="h-4 w-4" />

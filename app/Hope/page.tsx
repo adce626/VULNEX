@@ -103,7 +103,7 @@ export default function HopePage() {
     <div className="min-h-screen bg-background">
       <PageTitle title="HOPE — Every Expert Was Once Lost" />
       <MainSidebar />
-      <main className="lg:pl-64">
+      <main id="main-content" className="lg:pl-64">
         {/* Hero */}
         <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden border-b border-border/50">
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]" />
@@ -259,3 +259,6 @@ export default function HopePage() {
     </div>
   )
 }
+
+
+

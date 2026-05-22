@@ -50,7 +50,7 @@ export default function MethodsPage() {
       <PageTitle title="Methods" />
       <MainSidebar />
 
-      <main className="flex-1 ml-64 p-8">
+      <main id="main-content" className="lg:pl-64 p-8">
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
             <div className="size-12 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center border border-primary/20">
@@ -117,3 +117,6 @@ export default function MethodsPage() {
     </div>
   )
 }
+
+
+

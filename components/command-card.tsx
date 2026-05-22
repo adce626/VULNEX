@@ -79,7 +79,7 @@ export function CommandCard({ command, description, index, pageTitle, domain }: 
                 ? "text-amber-400 hover:text-amber-500"
                 : "text-muted-foreground/40 hover:text-amber-400 opacity-60 hover:opacity-100"
             )}
-            title={bookmarked ? "Remove bookmark" : "Add bookmark"}
+            aria-label={bookmarked ? "Remove bookmark" : "Add bookmark"}
           >
             <Star className={cn("h-4 w-4", bookmarked && "fill-amber-400")} />
           </button>
@@ -91,6 +91,7 @@ export function CommandCard({ command, description, index, pageTitle, domain }: 
                 ? "bg-primary/20 text-primary"
                 : "bg-secondary text-muted-foreground hover:bg-primary/10 hover:text-primary"
             )}
+            aria-label={copied ? "Copied" : "Copy command"}
           >
             {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
           </button>

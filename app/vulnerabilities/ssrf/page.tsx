@@ -35,7 +35,7 @@ export default function SSRFPage() {
     <div className="min-h-screen bg-background">
       <PageTitle title="SSRF Testing & Exploitation" />
       <MainSidebar />
-      <main className="lg:pl-64">
+      <main id="main-content" className="lg:pl-64">
         <div className="border-b border-border bg-card/50">
           <div className="mx-auto max-w-5xl px-6 py-3">
             <nav className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -171,3 +171,6 @@ export default function SSRFPage() {
     </div>
   )
 }
+
+
+

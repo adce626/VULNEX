@@ -56,7 +56,7 @@ export default function GoogleDorksPage() {
       <PageTitle title="Google Dorks" />
       <MainSidebar />
 
-      <main className="flex-1 lg:pl-64">
+      <main id="main-content" className="flex-1 lg:pl-64">
         {/* Header */}
         <div className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="px-4 py-4 sm:px-6 lg:px-8">
@@ -293,3 +293,6 @@ export default function GoogleDorksPage() {
     </div>
   );
 }
+
+
+

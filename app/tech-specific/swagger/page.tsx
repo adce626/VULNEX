@@ -37,7 +37,7 @@ export default function SwaggerXSSPage() {
       <PageTitle title="Swagger XSS" />
       <MainSidebar />
 
-      <main className="lg:pl-64">
+      <main id="main-content" className="lg:pl-64">
         {/* Breadcrumb */}
         <div className="border-b border-border bg-card/50">
           <div className="mx-auto max-w-5xl px-6 py-3">
@@ -269,3 +269,6 @@ export default function SwaggerXSSPage() {
     </div>
   )
 }
+
+
+

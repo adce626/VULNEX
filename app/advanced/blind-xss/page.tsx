@@ -46,7 +46,7 @@ export default function BlindXSSPage() {
       <PageTitle title="Blind XSS Advanced" />
       <MainSidebar />
 
-      <main className="lg:pl-64">
+      <main id="main-content" className="lg:pl-64">
         {/* Header */}
         <header className="sticky top-0 z-20 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="flex h-16 items-center gap-4 px-6">
@@ -272,3 +272,6 @@ export default function BlindXSSPage() {
     </div>
   )
 }
+
+
+

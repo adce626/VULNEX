@@ -144,7 +144,7 @@ export default function PayloadCategoryPage() {
     return (
       <div className="min-h-screen bg-background">
         <MainSidebar />
-        <main className="lg:pl-64">
+        <main id="main-content" className="lg:pl-64">
           <div className="flex flex-col items-center justify-center py-24">
             <Siren className="h-16 w-16 text-muted-foreground/50" />
             <h1 className="mt-4 text-2xl font-bold text-foreground">Category not found</h1>
@@ -160,7 +160,7 @@ export default function PayloadCategoryPage() {
     <div className="min-h-screen bg-background">
       <PageTitle title={category.name.endsWith("Payloads") ? category.name : `${category.name} Payloads`} />
       <MainSidebar />
-      <main className="lg:pl-64">
+      <main id="main-content" className="lg:pl-64">
         <div className="border-b border-border bg-card/50">
           <div className="mx-auto max-w-6xl px-6 py-3">
             <nav className="flex items-center gap-2 text-sm text-muted-foreground max-sm:hidden">

@@ -4,7 +4,6 @@ import { useState } from "react"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
-import { CommandCard } from "@/components/command-card"
 import { CommandList } from "@/components/command-list"
 import { authSessionCategories, authSessionTools } from "@/lib/auth-session-data"
 import {
@@ -33,7 +32,7 @@ export default function AuthSessionPage() {
     <div className="min-h-screen bg-background">
       <PageTitle title="Auth &amp; Session Vulnerabilities" />
       <MainSidebar />
-      <main className="lg:pl-64">
+      <main id="main-content" className="lg:pl-64">
         <div className="border-b border-border bg-card/50">
           <div className="mx-auto max-w-5xl px-6 py-3">
             <nav className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -126,3 +125,6 @@ export default function AuthSessionPage() {
     </div>
   )
 }
+
+
+

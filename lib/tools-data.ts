@@ -213,9 +213,6 @@ export const toolsData = [
   maltegoGuide,
 ]
 
-export const getToolsByCategory = (category: string) =>
-  toolsData.filter(tool => tool.category === category)
-
 export const getToolById = (id: string) =>
   toolsData.find(tool => tool.id === id)
 

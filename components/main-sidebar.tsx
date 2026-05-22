@@ -152,6 +152,7 @@ const allPages = [
   { title: "DNSRecon", href: "/tools/dnsrecon", keywords: "dnsrecon,dns,enumeration,recon,subdomain" },
   { title: "Sherlock", href: "/tools/sherlock", keywords: "sherlock,osint,username,social,recon" },
   { title: "Payloads Library", href: "/payloads", keywords: "payload,xss,sqli,ssti,lfi,injection,exploit" },
+  { title: "HOPE — Mindset & Roadmap", href: "/Hope", keywords: "hope,mindset,roadmap,hunter,beginner,growth" },
   { title: "All Sections", href: "/all", keywords: "all,index,overview,sections,browse" },
 ]
 
@@ -262,6 +263,7 @@ export function MainSidebar() {
             autoCapitalize="off"
             spellCheck={false}
             className="w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
+            aria-label="Search pages and tools"
           />
           <kbd className="hidden rounded bg-background px-1.5 py-0.5 text-xs text-muted-foreground sm:block">
             /
@@ -276,6 +278,7 @@ export function MainSidebar() {
                 key={result.href}
                 onClick={() => handleResultClick(result.href)}
                 className="flex w-full items-center justify-between px-3 py-2 text-sm text-foreground hover:bg-muted"
+                aria-label={`Go to ${result.title}`}
               >
                 <span>{result.title}</span>
                 <ArrowRight className="h-4 w-4 text-muted-foreground" />
@@ -364,34 +367,34 @@ export function MainSidebar() {
             For ethical use only
           </p>
           <div className="flex items-center gap-1">
-            <button
-              onClick={() => {
-                const order = ["dark", "light", "neon"]
-                const idx = order.indexOf(theme || "dark")
-                setTheme(order[(idx + 1) % order.length])
-              }}
-              className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:text-amber-400 hover:bg-muted transition-colors"
-              title="Toggle theme"
-            >
-              {mounted && theme === "neon" ? (
-                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2z" />
-                  <path d="M12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6 6 6 0 0 1-6-6 6 6 0 0 1 6-6z" />
-                  <path d="M12 10a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2z" />
-                </svg>
-              ) : mounted && theme === "dark" ? (
-                <Sun className="h-4 w-4" />
-              ) : (
-                <Moon className="h-4 w-4" />
-              )}
-            </button>
-            <Link
-              href="/bookmarks"
-              className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:text-primary hover:bg-muted transition-colors"
-              title="Bookmarks"
-            >
-              <Bookmark className="h-4 w-4" />
-            </Link>
+              <button
+                onClick={() => {
+                  const order = ["dark", "light", "neon"]
+                  const idx = order.indexOf(theme || "dark")
+                  setTheme(order[(idx + 1) % order.length])
+                }}
+                className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:text-amber-400 hover:bg-muted transition-colors"
+                aria-label="Toggle theme"
+              >
+                {mounted && theme === "neon" ? (
+                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2z" />
+                    <path d="M12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6 6 6 0 0 1-6-6 6 6 0 0 1 6-6z" />
+                    <path d="M12 10a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2z" />
+                  </svg>
+                ) : mounted && theme === "light" ? (
+                  <Sun className="h-4 w-4" />
+                ) : (
+                  <Moon className="h-4 w-4" />
+                )}
+              </button>
+              <Link
+                href="/bookmarks"
+                className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:text-primary hover:bg-muted transition-colors"
+                aria-label="Bookmarks"
+              >
+                <Bookmark className="h-4 w-4" />
+              </Link>
           </div>
         </div>
       </div>
@@ -404,6 +407,7 @@ export function MainSidebar() {
       <button
         onClick={() => setMobileOpen(!mobileOpen)}
         className="fixed left-4 top-4 z-50 flex h-10 w-10 items-center justify-center rounded-lg bg-card text-foreground shadow-lg lg:hidden"
+        aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
       >
         {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
       </button>
