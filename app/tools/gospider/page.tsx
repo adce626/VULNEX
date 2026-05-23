@@ -1,12 +1,132 @@
 "use client"
-import { ToolDetailLayout } from "@/components/tool-detail-layout"
-import { getToolById } from "@/lib/tools-data"
+import { PageTitle } from "@/components/page-title"
 
-export default function ToolPage() {
-  const tool = getToolById("gospider")
-  if (!tool) return null
-  return <ToolDetailLayout tool={tool} pageTitle="Gospider — Web Crawler" breadcrumbCategory="Tools" />
+import { useState } from "react"
+import Link from "next/link"
+import { MainSidebar } from "@/components/main-sidebar"
+import { CommandCard } from "@/components/command-card"
+import { CommandList } from "@/components/command-list"
+import { gospiderCategories, gospiderTools } from "@/lib/gospider-data"
+import {
+  Globe,
+  Terminal,
+  ChevronRight,
+  Home,
+  ExternalLink,
+} from "lucide-react"
+import { cn } from "@/lib/utils"
+
+export default function GospiderPage() {
+  const [activeCategory, setActiveCategory] = useState("installation")
+
+  const scrollToSection = (id: string) => {
+    setActiveCategory(id)
+    const element = document.getElementById(id)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
+  }
+
+  const totalCommands = gospiderCategories.reduce((acc, cat) => acc + cat.commands.length, 0)
+
+  return (
+    <div className="min-h-screen bg-background">
+      <PageTitle title="Gospider Methods" />
+      <MainSidebar />
+      <main id="main-content" className="lg:pl-64">
+        <div className="border-b border-border bg-card/50">
+          <div className="mx-auto max-w-5xl px-6 py-3">
+            <nav className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Link href="/" className="flex items-center gap-1 hover:text-foreground"><Home className="h-4 w-4" /></Link>
+              <ChevronRight className="h-4 w-4" />
+              <Link href="/tools" className="hover:text-foreground">Tools</Link>
+              <ChevronRight className="h-4 w-4" />
+              <span className="text-foreground">Gospider Methods</span>
+            </nav>
+          </div>
+        </div>
+
+        <div className="relative overflow-hidden border-b border-border bg-gradient-to-br from-cyan-500/10 via-background to-teal-500/5">
+          <div className="relative px-6 py-12 text-center lg:py-16">
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-cyan-500/10 text-cyan-500">
+              <Globe className="h-8 w-8" />
+            </div>
+            <h1 className="text-3xl font-bold text-foreground lg:text-4xl text-balance">Gospider Methods</h1>
+            <p className="mx-auto mt-3 max-w-2xl text-muted-foreground text-pretty">
+              Fast web crawling and content discovery tool written in Go. Complete guide with installation, crawling techniques, and automation methods.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <span className="rounded-full bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-500">{gospiderCategories.length} Categories</span>
+              <span className="rounded-full bg-accent/10 px-4 py-2 text-sm font-medium text-accent">{totalCommands} Commands</span>
+              <span className="rounded-full bg-secondary px-4 py-2 text-sm font-medium text-foreground">Copy Ready</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur-sm">
+          <div className="mx-auto max-w-5xl px-6">
+            <div className="flex gap-1 overflow-x-auto py-3 scrollbar-hide">
+              <span className="flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground">
+                <Globe className="h-4 w-4" /> Phases
+              </span>
+              {gospiderCategories.map((cat) => {
+                const sectionId = cat.category.toLowerCase().replace(/[^a-z0-9]+/g, "-")
+                return (
+                  <button key={cat.category} onClick={() => scrollToSection(sectionId)}
+                    className={cn("flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors whitespace-nowrap",
+                      activeCategory === sectionId ? "bg-cyan-500 text-white" : "text-muted-foreground hover:bg-muted hover:text-foreground")}>
+                    {cat.category}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+
+        <div className="mx-auto max-w-5xl space-y-12 p-6">
+          {gospiderCategories.map((category, idx) => {
+            const sectionId = category.category.toLowerCase().replace(/[^a-z0-9]+/g, "-")
+            return (
+              <section key={idx} id={sectionId} className="scroll-mt-20">
+                <div className="mb-6 flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-500"><Terminal className="h-5 w-5" /></div>
+                  <div>
+                    <span className="text-xs font-medium text-cyan-500">Phase {idx + 1}</span>
+                    <h2 className="text-2xl font-bold text-foreground">{category.category}</h2>
+                  </div>
+                </div>
+                <CommandList commands={category.commands} pageTitle="Gospider Methods" pageSize={15} />
+              </section>
+            )
+          })}
+
+          <section className="scroll-mt-20">
+            <div className="mb-6 flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-500"><ExternalLink className="h-5 w-5" /></div>
+              <div>
+                <span className="text-xs font-medium text-cyan-500">Tools</span>
+                <h2 className="text-2xl font-bold text-foreground">Tools & Resources</h2>
+              </div>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {gospiderTools.map((tool) => (
+                <a key={tool.name} href={tool.url} target="_blank" rel="noopener noreferrer"
+                  className="group flex items-start gap-3 rounded-lg border border-border bg-card p-4 transition-all hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/5">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-cyan-500/10 text-cyan-500"><ExternalLink className="h-4 w-4" /></div>
+                  <div className="min-w-0 flex-1">
+                    <div className="font-medium text-foreground group-hover:text-cyan-500">{tool.name}</div>
+                    <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{tool.description}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+
+          <footer className="border-t border-border pt-8 text-center">
+            <p className="text-sm text-muted-foreground">For authorized security testing only. Use responsibly.</p>
+          </footer>
+        </div>
+      </main>
+    </div>
+  )
 }
-
-
-

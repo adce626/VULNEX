@@ -60,9 +60,8 @@ export const navigation: NavSection[] = [
     href: "/methods",
     items: [
       { title: "FFUF Techniques", href: "/methods/ffuf", tag: "New" },
-      { title: "Gospider Methods", href: "/methods/gospider", tag: "New" },
-      { title: "CeWL Wordlists", href: "/methods/cewl", tag: "New" },
       { title: "Nuclei Templates", href: "/methods/nuclei-templates", tag: "New" },
+      { title: "Rapid Bug Discovery", href: "/methods/rapid-bug-discovery", tag: "New" },
     ],
   },
   {
@@ -102,6 +101,8 @@ export const navigation: NavSection[] = [
     href: "/tools",
     items: [
       { title: "All Tools", href: "/tools", tag: "New" },
+      { title: "Gospider Methods", href: "/tools/gospider", tag: "New" },
+      { title: "CeWL Wordlists", href: "/tools/cewl", tag: "New" },
     ],
   },
   {

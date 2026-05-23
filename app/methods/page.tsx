@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
-import { Wrench, BookOpen, ArrowRight, Globe, Target, Database, Shield } from "lucide-react"
+import { Wrench, BookOpen, ArrowRight, Target, Shield, Zap } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 
@@ -16,30 +16,21 @@ const methods = [
     commands: 30,
   },
   {
-    id: "gospider",
-    name: "Gospider",
-    description: "Fast web crawling and content discovery tool written in Go. Complete guide with installation, crawling techniques, and automation methods.",
-    icon: <Globe className="size-5" />,
-    color: "from-cyan-500/20 to-cyan-500/5 border-cyan-500/30 text-cyan-400",
-    tags: ["crawling", "spider", "discovery"],
-    commands: 20,
-  },
-  {
-    id: "cewl",
-    name: "CeWL",
-    description: "Custom wordlist generator that crawls websites and extracts meaningful words for targeted brute-force attacks.",
-    icon: <Database className="size-5" />,
-    color: "from-amber-500/20 to-amber-500/5 border-amber-500/30 text-amber-400",
-    tags: ["wordlist", "password", "bruteforce"],
-    commands: 25,
-  },
-  {
     id: "nuclei-templates",
     name: "Nuclei Templates",
     description: "Custom Nuclei YAML templates for automated vulnerability detection — Open Redirect, WP-Setup, IIS, Git Exposure, CORS, Credential Disclosure, Blind SSRF, SQLi, CRLF, and more.",
     icon: <Shield className="size-5" />,
     color: "from-blue-500/20 to-blue-500/5 border-blue-500/30 text-blue-400",
     tags: ["nuclei", "templates", "automation"],
+    commands: 23,
+  },
+  {
+    id: "rapid-bug-discovery",
+    name: "Rapid Bug Discovery",
+    description: "Find bugs on any website in under 5 minutes using Shodan, hidden element bypasses, and automated recon tools like AlienVault, URLScan, VirusTotal, and Gospider.",
+    icon: <Zap className="size-5" />,
+    color: "from-violet-500/20 to-violet-500/5 border-violet-500/30 text-violet-400",
+    tags: ["shodan", "automation", "recon"],
     commands: 23,
   },
 ]
