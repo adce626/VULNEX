@@ -70,6 +70,13 @@ const vulnItems = [
     available: true,
     commandCount: "55+",
   },
+  {
+    title: "JSON Privilege Escalation",
+    description: "Mass-assignment, hidden JSON fields, and privilege escalation in registration flows",
+    href: "/vulnerabilities/json-privilege-escalation",
+    available: true,
+    commandCount: "40+",
+  },
 ]
 
 export default function VulnerabilitiesPage() {

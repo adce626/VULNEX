@@ -30,6 +30,7 @@ export const navigation: NavSection[] = [
       { title: "Host Header Injection", href: "/vulnerabilities/host-header-injection", tag: "New" },
       { title: "SSRF Testing & Exploitation", href: "/vulnerabilities/ssrf", tag: "New" },
       { title: "Email Input Testing", href: "/vulnerabilities/email-input-testing", tag: "New" },
+      { title: "JSON Privilege Escalation", href: "/vulnerabilities/json-privilege-escalation", tag: "New" },
     ],
   },
   {
