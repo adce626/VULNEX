@@ -198,6 +198,7 @@ export default function QuickReconPage() {
     await navigator.clipboard.writeText(text)
     setCopiedId(id)
     setNotif("Command copied to clipboard!")
+    setTimeout(() => setCopiedId(null), 2500)
   }, [replaceDomain])
 
   return (
