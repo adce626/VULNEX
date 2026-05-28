@@ -2,16 +2,13 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import Link from "next/link"
-import { MainSidebar } from "@/components/main-sidebar"
-import { PageTitle } from "@/components/page-title"
+import { ContentLayout } from "@/components/content-layout"
 import { CommandCard } from "@/components/command-card"
 import {
-  Terminal, ChevronRight, Home, ExternalLink,
-  Search, Zap, Globe, Github, BookOpen,
+  Terminal, ChevronRight, ExternalLink,
+  Search, Zap, Github, BookOpen,
   CheckCircle, Shield,
 } from "lucide-react"
-import { cn } from "@/lib/utils"
 
 const phases = [
   { id: "introduction", label: "Introduction" },
@@ -34,70 +31,33 @@ export default function RapidBugDiscoveryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <PageTitle title="Rapid Bug Discovery" />
-      <MainSidebar />
-
-      <main id="main-content" className="lg:pl-64">
-        {/* Breadcrumb */}
-        <div className="border-b border-border bg-card/50">
-          <div className="mx-auto max-w-5xl px-6 py-3">
-            <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Link href="/" className="flex items-center gap-1 hover:text-foreground">
-                <Home className="h-4 w-4" />
-              </Link>
-              <ChevronRight className="h-4 w-4" />
-              <Link href="/methods" className="hover:text-foreground">Methods</Link>
-              <ChevronRight className="h-4 w-4" />
-              <span className="text-foreground">Rapid Bug Discovery</span>
-            </nav>
-          </div>
-        </div>
-
-        {/* Hero */}
-        <div className="relative overflow-hidden border-b border-border bg-gradient-to-br from-violet-500/10 via-background to-cyan-500/5">
-          <div className="relative px-6 py-12 text-center lg:py-16">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-violet-500/10 text-violet-500">
-              <Zap className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-foreground lg:text-4xl text-balance">
-              Rapid Bug Discovery — Find Bugs in Under 5 Minutes
-            </h1>
-            <p className="mx-auto mt-3 max-w-2xl text-muted-foreground text-pretty">
-              A fast shortcut that combines Shodan dorking, client-side bypasses, and automated recon tools to find the most important vulnerabilities without wasting time
-            </p>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <span className="rounded-full bg-violet-500/10 px-4 py-2 text-sm font-medium text-violet-500">3 Methods</span>
-              <span className="rounded-full bg-accent/10 px-4 py-2 text-sm font-medium text-accent">10+ Tools</span>
-              <span className="rounded-full bg-secondary px-4 py-2 text-sm font-medium text-foreground">Copy Ready</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Sticky Navigation */}
-        <div className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur-sm">
-          <div className="mx-auto max-w-5xl px-6">
-            <div className="flex gap-1 overflow-x-auto py-3 scrollbar-hide">
-              {phases.map((phase) => (
-                <button
-                  key={phase.id}
-                  onClick={() => scrollToSection(phase.id)}
-                  className={cn(
-                    "flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                    activeCategory === phase.id
-                      ? "bg-violet-500 text-white"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                  )}
-                >
-                  {phase.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Content */}
-        <div className="mx-auto max-w-5xl space-y-16 p-6">
+    <ContentLayout
+      pageTitle="Rapid Bug Discovery"
+      breadcrumbItems={[
+        { label: "Home", href: "/" },
+        { label: "Methods", href: "/methods" },
+        { label: "Rapid Bug Discovery" },
+      ]}
+      hero={{
+        icon: Zap,
+        title: "Rapid Bug Discovery — Find Bugs in Under 5 Minutes",
+        description: "A fast shortcut that combines Shodan dorking, client-side bypasses, and automated recon tools to find the most important vulnerabilities without wasting time",
+        stats: [
+          { label: "3 Methods", className: "bg-violet-500/10 text-violet-500" },
+          { label: "10+ Tools", className: "bg-accent/10 text-accent" },
+          { label: "Copy Ready", className: "bg-secondary text-foreground" },
+        ],
+        gradient: "from-violet-500/10 via-background to-cyan-500/5",
+        iconBg: "bg-violet-500/10 text-violet-500",
+      }}
+      phases={phases}
+      activeCategory={activeCategory}
+      onPhaseChange={scrollToSection}
+      navActiveClass="bg-violet-500 text-white"
+      expandedImg={expandedImg}
+      onLightboxClose={() => setExpandedImg(null)}
+      onLightboxOpen={(src) => setExpandedImg(src)}
+    >
 
           {/* Introduction */}
           <section id="introduction" className="scroll-mt-24">
@@ -305,7 +265,7 @@ export default function RapidBugDiscoveryPage() {
             <ul className="mb-6 space-y-2 text-muted-foreground">
               {[
                 "Opens a floating, resizable panel at the bottom of the page.",
-                "Collects URLs from the page &mdash; a, script, img, link, form tags, inline HTML, CSS url() paths, and browser resource performance entries.",
+                "Collects URLs from the page \u2014 a, script, img, link, form tags, inline HTML, CSS url() paths, and browser resource performance entries.",
                 "Scans external JavaScript files to find more endpoints using regex.",
                 "Lets you search/filter URLs, copy all URLs to clipboard, or export them as a .txt file.",
                 "Can unhide hidden or disabled elements on the page for testing purposes.",
@@ -315,7 +275,7 @@ export default function RapidBugDiscoveryPage() {
               ].map((item) => (
                 <li key={item} className="flex items-start gap-2">
                   <CheckCircle className="mt-1 h-3 w-3 shrink-0 text-violet-500" />
-                  <span dangerouslySetInnerHTML={{ __html: item }} />
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
@@ -636,38 +596,6 @@ export default function RapidBugDiscoveryPage() {
             </div>
           </section>
 
-          {/* Footer */}
-          <footer className="border-t border-border pt-8 text-center">
-            <p className="text-sm text-muted-foreground">
-              This guide is for ethical use and authorized penetration testing only
-            </p>
-          </footer>
-        </div>
-      </main>
-
-      {/* Lightbox Overlay */}
-      {expandedImg && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
-          onClick={() => setExpandedImg(null)}
-        >
-          <button
-            onClick={() => setExpandedImg(null)}
-            className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white text-xl hover:bg-black/70"
-          >
-            ✕
-          </button>
-          <Image
-            src={expandedImg}
-            alt="Expanded view"
-            width={1200}
-            height={675}
-            className="max-h-[90vh] max-w-[95vw] rounded-lg object-contain"
-            unoptimized
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      )}
-    </div>
+    </ContentLayout>
   )
 }

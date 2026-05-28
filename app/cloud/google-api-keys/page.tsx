@@ -2,18 +2,15 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import Link from "next/link"
-import { MainSidebar } from "@/components/main-sidebar"
-import { PageTitle } from "@/components/page-title"
+import { ContentLayout } from "@/components/content-layout"
 import { CommandCard } from "@/components/command-card"
 import { Badge } from "@/components/ui/badge"
 import {
-  Key, Terminal, ChevronRight, Home, ExternalLink,
+  Key, Terminal, ChevronRight, ExternalLink,
   Search, Shield, Upload, AlertTriangle, FileText,
   Globe, Zap, DollarSign, Github, BookOpen, Video,
   CheckCircle, XCircle, ArrowRight, Bug,
 } from "lucide-react"
-import { cn } from "@/lib/utils"
 
 const phases = [
   { id: "introduction", label: "Introduction" },
@@ -41,99 +38,36 @@ export default function GoogleAPIKeysPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <PageTitle title="Google API Keys" />
-      <MainSidebar />
-
-      <main id="main-content" className="lg:pl-64">
-        {/* Breadcrumb */}
-        <div className="border-b border-border bg-card/50">
-          <div className="mx-auto max-w-5xl px-6 py-3">
-            <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Link href="/" className="flex items-center gap-1 hover:text-foreground">
-                <Home className="h-4 w-4" />
-              </Link>
-              <ChevronRight className="h-4 w-4" />
-              <Link href="/cloud" className="hover:text-foreground">Cloud & Assets</Link>
-              <ChevronRight className="h-4 w-4" />
-              <span className="text-foreground">Google API Keys</span>
-            </nav>
-          </div>
-        </div>
-
-        {/* Hero */}
-        <div className="relative overflow-hidden border-b border-border bg-gradient-to-br from-primary/10 via-background to-accent/5">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZGF0PSJNIDYwIDAgTCBMMCAwIDAgNjAiIGZpbGw9Im5vbmUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGV4dD0idyIvPjwvc3ZnPg==')] opacity-50" />
-          <div className="relative px-6 py-12 text-center lg:py-16">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-              <Key className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-foreground lg:text-4xl text-balance">
-              Google API Keys — Finding & Exploiting Exposed Keys
-            </h1>
-            <p className="mx-auto mt-3 max-w-2xl text-muted-foreground text-pretty">
-              Turn exposed Google API keys into real-world impact by accessing Gemini and other Google services for higher bounty rewards
-            </p>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <span className="rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">8 Phases</span>
-              <span className="rounded-full bg-accent/10 px-4 py-2 text-sm font-medium text-accent">30+ Commands</span>
-              <span className="rounded-full bg-secondary px-4 py-2 text-sm font-medium text-foreground">Copy Ready</span>
-            </div>
-
-            {/* Hero Image */}
-            <div className="mx-auto mt-8 max-w-3xl overflow-hidden rounded-xl border border-border cursor-pointer" onClick={() => setExpandedImg("/images/cloud/google-api-keys/1_uz5jRhnpFIHKJTDjBFn8-g.webp")}>
-              <Image
-                src="/images/cloud/google-api-keys/1_uz5jRhnpFIHKJTDjBFn8-g.webp"
-                alt="Google API Keys hero illustration"
-                width={1200}
-                height={675}
-                className="w-full"
-                style={{ height: "auto" }}
-                loading="eager"
-                unoptimized
-              />
-            </div>
-            <div className="mt-4 text-center text-sm">
-              <span className="text-muted-foreground">Source: </span>
-              <a
-                href="https://x.com/lostsec_"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 font-medium text-primary hover:text-primary/80 transition-colors"
-              >
-                @lostsec_
-                <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Sticky Navigation */}
-        <div className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur-sm">
-          <div className="mx-auto max-w-5xl px-6">
-            <div className="flex gap-1 overflow-x-auto py-3 scrollbar-hide">
-              {phases.map((phase) => (
-                <button
-                  key={phase.id}
-                  onClick={() => scrollToSection(phase.id)}
-                  className={cn(
-                    "flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                    activeCategory === phase.id
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                  )}
-                >
-                  {phase.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Content */}
-        <div className="mx-auto max-w-5xl space-y-16 p-6">
+    <ContentLayout
+      pageTitle="Google API Keys"
+      breadcrumbItems={[
+        { label: "Home", href: "/" },
+        { label: "Cloud & Assets", href: "/cloud" },
+        { label: "Google API Keys" },
+      ]}
+      hero={{
+        icon: Key,
+        title: "Google API Keys — Finding & Exploiting Exposed Keys",
+        description: "Turn exposed Google API keys into real-world impact by accessing Gemini and other Google services for higher bounty rewards",
+        stats: [
+          { label: "8 Phases", className: "bg-primary/10 text-primary" },
+          { label: "30+ Commands", className: "bg-accent/10 text-accent" },
+          { label: "Copy Ready", className: "bg-secondary text-foreground" },
+        ],
+        gradient: "from-primary/10 via-background to-accent/5",
+        iconBg: "bg-primary/10 text-primary",
+        image: { src: "/images/cloud/google-api-keys/1_uz5jRhnpFIHKJTDjBFn8-g.webp", alt: "Google API Keys hero illustration" },
+        source: { label: "Source", url: "https://x.com/lostsec_", username: "@lostsec_" },
+        decor: <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZGF0PSJNIDYwIDAgTCBMMCAwIDAgNjAiIGZpbGw9Im5vbmUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGV4dD0idyIvPjwvc3ZnPg==')] opacity-50" />,
+      }}
+      phases={phases}
+      activeCategory={activeCategory}
+      onPhaseChange={scrollToSection}
+      navActiveClass="bg-primary text-primary-foreground"
+      expandedImg={expandedImg}
+      onLightboxClose={() => setExpandedImg(null)}
+      onLightboxOpen={(src) => setExpandedImg(src)}
+    >
 
           {/* Introduction */}
           <section id="introduction" className="scroll-mt-24">
@@ -830,42 +764,6 @@ ffmpeg -y -i out_multi.wav out_multi.mp3`}</code></pre>
             </div>
           </section>
 
-          {/* Footer */}
-          <footer className="border-t border-border pt-8 text-center">
-            <p className="text-sm text-muted-foreground">
-              This guide is for ethical use and authorized penetration testing only
-            </p>
-          </footer>
-        </div>
-      </main>
-
-      {/* Lightbox Overlay */}
-      {expandedImg && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
-          onClick={() => setExpandedImg(null)}
-        >
-          <button
-            onClick={() => setExpandedImg(null)}
-            className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white text-xl hover:bg-black/70"
-          >
-            ✕
-          </button>
-          <Image
-            src={expandedImg}
-            alt="Expanded view"
-            width={1200}
-            height={675}
-            className="max-h-[90vh] max-w-[95vw] rounded-lg object-contain"
-            unoptimized
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      )}
-    </div>
+    </ContentLayout>
   )
 }
-
-
-
-

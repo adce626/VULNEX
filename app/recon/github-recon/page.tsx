@@ -2,15 +2,12 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import Link from "next/link"
-import { MainSidebar } from "@/components/main-sidebar"
-import { PageTitle } from "@/components/page-title"
+import { ContentLayout } from "@/components/content-layout"
 import { CommandCard } from "@/components/command-card"
 import {
-  Github, Terminal, ChevronRight, Home, ExternalLink,
+  Github, Terminal, ChevronRight, ExternalLink,
   Search, Shield, FileText, Key, BookOpen, Zap, Video,
 } from "lucide-react"
-import { cn } from "@/lib/utils"
 
 const phases = [
   { id: "introduction", label: "Introduction" },
@@ -36,70 +33,34 @@ export default function GitHubReconPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <PageTitle title="GitHub Recon" />
-      <MainSidebar />
-
-      <main id="main-content" className="lg:pl-64">
-        {/* Breadcrumb */}
-        <div className="border-b border-border bg-card/50">
-          <div className="mx-auto max-w-5xl px-6 py-3">
-            <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Link href="/" className="flex items-center gap-1 hover:text-foreground">
-                <Home className="h-4 w-4" />
-              </Link>
-              <ChevronRight className="h-4 w-4" />
-              <Link href="/recon" className="hover:text-foreground">Recon</Link>
-              <ChevronRight className="h-4 w-4" />
-              <span className="text-foreground">GitHub Recon</span>
-            </nav>
-          </div>
-        </div>
-
-        {/* Hero */}
-        <div className="relative overflow-hidden border-b border-border bg-gradient-to-br from-gray-700/10 via-background to-gray-500/5">
-          <div className="relative px-6 py-12 text-center lg:py-16">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-700/10 text-gray-400">
-              <Github className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-foreground lg:text-4xl text-balance">
-              GitHub Recon — The Underrated Technique to Discover High-Impact Leaks
-            </h1>
-            <p className="mx-auto mt-3 max-w-2xl text-muted-foreground text-pretty">
-              Master the Art of Finding API Keys, Credentials and Sensitive Data in Public Repositories
-            </p>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <span className="rounded-full bg-gray-700/10 px-4 py-2 text-sm font-medium text-gray-400">7 Phases</span>
-              <span className="rounded-full bg-accent/10 px-4 py-2 text-sm font-medium text-accent">30+ Commands</span>
-              <span className="rounded-full bg-secondary px-4 py-2 text-sm font-medium text-foreground">Copy Ready</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Sticky Navigation */}
-        <div className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur-sm">
-          <div className="mx-auto max-w-5xl px-6">
-            <div className="flex gap-1 overflow-x-auto py-3 scrollbar-hide">
-              {phases.map((phase) => (
-                <button
-                  key={phase.id}
-                  onClick={() => scrollToSection(phase.id)}
-                  className={cn(
-                    "flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                    activeCategory === phase.id
-                      ? "bg-gray-700 text-white"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                  )}
-                >
-                  {phase.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Content */}
-        <div className="mx-auto max-w-5xl space-y-16 p-6">
+    <ContentLayout
+      pageTitle="GitHub Recon"
+      breadcrumbItems={[
+        { label: "Home", href: "/" },
+        { label: "Recon", href: "/recon" },
+        { label: "GitHub Recon" },
+      ]}
+      hero={{
+        icon: Github,
+        title: "GitHub Recon — The Underrated Technique to Discover High-Impact Leaks",
+        description: "Master the Art of Finding API Keys, Credentials and Sensitive Data in Public Repositories",
+        stats: [
+          { label: "7 Phases", className: "bg-gray-700/10 text-gray-400" },
+          { label: "30+ Commands", className: "bg-accent/10 text-accent" },
+          { label: "Copy Ready", className: "bg-secondary text-foreground" },
+        ],
+        gradient: "from-gray-700/10 via-background to-gray-500/5",
+        iconBg: "bg-gray-700/10 text-gray-400",
+      }}
+      phases={phases}
+      activeCategory={activeCategory}
+      onPhaseChange={scrollToSection}
+      navActiveClass="bg-gray-700 text-white"
+      expandedImg={expandedImg}
+      onLightboxClose={() => setExpandedImg(null)}
+      onLightboxOpen={(src) => setExpandedImg(src)}
+      footerText="For authorized security testing only. Use responsibly."
+    >
 
           {/* Introduction */}
           <section id="introduction" className="scroll-mt-24">
@@ -630,38 +591,6 @@ git checkout .`}</code></pre>
             </div>
           </section>
 
-          {/* Footer */}
-          <footer className="border-t border-border pt-8 text-center">
-            <p className="text-sm text-muted-foreground">
-              For authorized security testing only. Use responsibly.
-            </p>
-          </footer>
-        </div>
-      </main>
-
-      {/* Lightbox Overlay */}
-      {expandedImg && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
-          onClick={() => setExpandedImg(null)}
-        >
-          <button
-            onClick={() => setExpandedImg(null)}
-            className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white text-xl hover:bg-black/70"
-          >
-            ✕
-          </button>
-          <Image
-            src={expandedImg}
-            alt="Expanded view"
-            width={1200}
-            height={675}
-            className="max-h-[90vh] max-w-[95vw] rounded-lg object-contain"
-            unoptimized
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      )}
-    </div>
+    </ContentLayout>
   )
 }

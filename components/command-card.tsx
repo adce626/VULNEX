@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, memo } from "react"
 import { toast } from "sonner"
 import { Check, Copy, Terminal, Star } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -15,7 +15,7 @@ interface CommandCardProps {
   domain?: string
 }
 
-export function CommandCard({ command, description, index, pageTitle, domain }: CommandCardProps) {
+export const CommandCard = memo(function CommandCard({ command, description, index, pageTitle, domain }: CommandCardProps) {
   const displayCommand = domain ? command.replace(/example\.com/g, domain) : command
   const [copied, setCopied] = useState(false)
   const [bookmarked, setBookmarked] = useState(false)
@@ -105,4 +105,4 @@ export function CommandCard({ command, description, index, pageTitle, domain }: 
       </div>
     </div>
   )
-}
+})

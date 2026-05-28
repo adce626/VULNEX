@@ -11,10 +11,18 @@ export const navigation: NavSection[] = [
     icon: "search",
     href: "/recon",
     items: [
-      { title: "Google Dorks", href: "/recon/google-dorks", tag: "New" },
-      { title: "Shodan Dorks", href: "/recon/shodan-dorks", tag: "New" },
+      { title: "Google Dorks", href: "/recon/google-dorks" },
+      { title: "Shodan Dorks", href: "/recon/shodan-dorks" },
       { title: "Param Discovery", href: "/recon/param-discovery" },
-      { title: "GitHub Recon", href: "/recon/github-recon", tag: "New" },
+      { title: "GitHub Recon", href: "/recon/github-recon" },
+    ],
+  },
+  {
+    title: "Toolkit",
+    icon: "wrench",
+    href: "/toolkit",
+    items: [
+      { title: "Recon Toolkit", href: "/toolkit", tag: "New" },
     ],
   },
   {
@@ -22,15 +30,15 @@ export const navigation: NavSection[] = [
     icon: "bug",
     href: "/vulnerabilities",
     items: [
-      { title: "SQL Injection", href: "/vulnerabilities/sql-injection", tag: "New" },
-      { title: "WordPress", href: "/vulnerabilities/wordpress", tag: "New" },
-      { title: "Open Redirect", href: "/vulnerabilities/open-redirect", tag: "New" },
+      { title: "SQL Injection", href: "/vulnerabilities/sql-injection" },
+      { title: "WordPress", href: "/vulnerabilities/wordpress" },
+      { title: "Open Redirect", href: "/vulnerabilities/open-redirect" },
       { title: "CRLF Injection", href: "/vulnerabilities/crlf-injection" },
       { title: "Dependency Confusion", href: "/vulnerabilities/dependency-confusion" },
-      { title: "Host Header Injection", href: "/vulnerabilities/host-header-injection", tag: "New" },
-      { title: "SSRF Testing & Exploitation", href: "/vulnerabilities/ssrf", tag: "New" },
-      { title: "Email Input Testing", href: "/vulnerabilities/email-input-testing", tag: "New" },
-      { title: "JSON Privilege Escalation", href: "/vulnerabilities/json-privilege-escalation", tag: "New" },
+      { title: "Host Header Injection", href: "/vulnerabilities/host-header-injection" },
+      { title: "SSRF Testing & Exploitation", href: "/vulnerabilities/ssrf" },
+      { title: "Email Input Testing", href: "/vulnerabilities/email-input-testing" },
+      { title: "JSON Privilege Escalation", href: "/vulnerabilities/json-privilege-escalation" },
     ],
   },
   {
@@ -38,11 +46,11 @@ export const navigation: NavSection[] = [
     icon: "server",
     href: "/tech-specific",
     items: [
-      { title: "Microsoft IIS", href: "/tech-specific/iis", tag: "New" },
-      { title: "Next.js", href: "/tech-specific/nextjs", tag: "New" },
-      { title: "Swagger XSS", href: "/tech-specific/swagger", tag: "New" },
-      { title: "API Fuzzing", href: "/tech-specific/api-fuzzing", tag: "New" },
-      { title: "Spring Boot", href: "/tech-specific/spring-boot", tag: "New" },
+      { title: "Microsoft IIS", href: "/tech-specific/iis" },
+      { title: "Next.js", href: "/tech-specific/nextjs" },
+      { title: "Swagger XSS", href: "/tech-specific/swagger" },
+      { title: "API Fuzzing", href: "/tech-specific/api-fuzzing" },
+      { title: "Spring Boot", href: "/tech-specific/spring-boot" },
     ],
   },
   {
@@ -50,8 +58,8 @@ export const navigation: NavSection[] = [
     icon: "cloud",
     href: "/cloud",
     items: [
-      { title: "Google API Keys", href: "/cloud/google-api-keys", tag: "New" },
-      { title: "S3 Buckets", href: "/cloud/s3-buckets", tag: "New" },
+      { title: "Google API Keys", href: "/cloud/google-api-keys" },
+      { title: "S3 Buckets", href: "/cloud/s3-buckets" },
     ],
   },
   {
@@ -59,9 +67,9 @@ export const navigation: NavSection[] = [
     icon: "wrench",
     href: "/methods",
     items: [
-      { title: "FFUF Techniques", href: "/methods/ffuf", tag: "New" },
-      { title: "Nuclei Templates", href: "/methods/nuclei-templates", tag: "New" },
-      { title: "Rapid Bug Discovery", href: "/methods/rapid-bug-discovery", tag: "New" },
+      { title: "FFUF Techniques", href: "/methods/ffuf" },
+      { title: "Nuclei Templates", href: "/methods/nuclei-templates" },
+      { title: "Rapid Bug Discovery", href: "/methods/rapid-bug-discovery" },
     ],
   },
   {
@@ -69,9 +77,9 @@ export const navigation: NavSection[] = [
     icon: "shield",
     href: "/waf-bypass",
     items: [
-      { title: "IDOR & 403 Bypass", href: "/waf-bypass/idor", tag: "New" },
-      { title: "WAF Bypass with SQLMap", href: "/waf-bypass/sqlmap", tag: "New" },
-      { title: "403 Bypass", href: "/vulnerabilities/403-bypass", tag: "New" },
+      { title: "IDOR & 403 Bypass", href: "/waf-bypass/idor" },
+      { title: "WAF Bypass with SQLMap", href: "/waf-bypass/sqlmap" },
+      { title: "403 Bypass", href: "/vulnerabilities/403-bypass" },
     ],
   },
   {
@@ -79,12 +87,12 @@ export const navigation: NavSection[] = [
     icon: "brain",
     href: "/advanced",
     items: [
-      { title: "LLM Injection", href: "/advanced/llm-injection", tag: "New" },
-      { title: "Blind XSS Advanced", href: "/advanced/blind-xss", tag: "New" },
-      { title: "Auth & Session Vulns", href: "/auth-session", tag: "New" },
-      { title: "Registration Vulns", href: "/advanced/registration-vulns", tag: "New" },
-      { title: "Blind XSS via PasteJacking", href: "/advanced/blind-xss-pastejacking", tag: "New" },
-      { title: "Rate Limit Bypass", href: "/advanced/rate-limit-bypass", tag: "New" },
+      { title: "LLM Injection", href: "/advanced/llm-injection" },
+      { title: "Blind XSS Advanced", href: "/advanced/blind-xss" },
+      { title: "Auth & Session Vulns", href: "/auth-session" },
+      { title: "Registration Vulns", href: "/advanced/registration-vulns" },
+      { title: "Blind XSS via PasteJacking", href: "/advanced/blind-xss-pastejacking" },
+      { title: "Rate Limit Bypass", href: "/advanced/rate-limit-bypass" },
     ],
   },
   {
@@ -92,7 +100,7 @@ export const navigation: NavSection[] = [
     icon: "puzzle",
     href: "/browser-extensions",
     items: [
-      { title: "Full Collection", href: "/browser-extensions", tag: "New" },
+      { title: "Full Collection", href: "/browser-extensions" },
     ],
   },
   {
@@ -100,9 +108,7 @@ export const navigation: NavSection[] = [
     icon: "terminal",
     href: "/tools",
     items: [
-      { title: "All Tools", href: "/tools", tag: "New" },
-      { title: "Gospider Methods", href: "/tools/gospider", tag: "New" },
-      { title: "CeWL Wordlists", href: "/tools/cewl", tag: "New" },
+      { title: "All Tools", href: "/tools" },
     ],
   },
   {
@@ -110,7 +116,7 @@ export const navigation: NavSection[] = [
     icon: "siren",
     href: "/payloads",
     items: [
-      { title: "Payload Library", href: "/payloads", tag: "New" },
+      { title: "Payload Library", href: "/payloads" },
     ],
   },
 ]
@@ -122,6 +128,14 @@ export const sectionCards = [
     icon: "search",
     href: "/recon",
     itemCount: 4,
+    color: "primary",
+  },
+  {
+    title: "Toolkit",
+    description: "Interactive all-in-one recon command generator with domain auto-replacement",
+    icon: "wrench",
+    href: "/toolkit",
+    itemCount: 1,
     color: "primary",
   },
   {
@@ -153,7 +167,7 @@ export const sectionCards = [
     description: "Step-by-step technique guides for security testing tools and methodologies",
     icon: "wrench",
     href: "/methods",
-    itemCount: 4,
+    itemCount: 3,
     color: "accent",
   },
   {

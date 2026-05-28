@@ -123,6 +123,10 @@ Host: attacker.com`,
     ],
   },
   {
+    category: "Quick Recon",
+    commands: [],
+  },
+  {
     category: "Common 10: Using Server IP",
     commands: [
       {

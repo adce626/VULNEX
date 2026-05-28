@@ -39,6 +39,7 @@ const iconMap: Record<string, React.ReactNode> = {
 }
 
 const allPages = [
+  { title: "Recon Toolkit", href: "/toolkit", keywords: "toolkit,recon,command,generator,all-in-one,quick" },
   { title: "Google Dorks", href: "/recon/google-dorks", keywords: "google,search,dork,recon,osint" },
   { title: "Shodan Dorks", href: "/recon/shodan-dorks", keywords: "shodan,iot,recon,server,osint" },
   { title: "Param Discovery", href: "/recon/param-discovery", keywords: "param,parameter,discovery,fuzz,hidden" },
@@ -60,8 +61,6 @@ const allPages = [
   { title: "S3 Buckets", href: "/cloud/s3-buckets", keywords: "s3,bucket,aws,cloud,storage,leak" },
   { title: "Google API Keys", href: "/cloud/google-api-keys", keywords: "google,api key,cloud,gcp" },
   { title: "FFUF Techniques", href: "/methods/ffuf", keywords: "ffuf,fuzz,web fuzz,directory,file" },
-  { title: "Gospider Methods", href: "/tools/gospider", keywords: "gospider,crawl,spider,recon" },
-  { title: "CeWL Wordlists", href: "/tools/cewl", keywords: "cewl,wordlist,password,custom" },
   { title: "Nuclei Templates", href: "/methods/nuclei-templates", keywords: "nuclei,template,yaml,scan,automation,custom" },
   { title: "Rapid Bug Discovery", href: "/methods/rapid-bug-discovery", keywords: "rapid,bug,discovery,shodan,automation,recon,uncover" },
   { title: "Fast XSS", href: "/tools/fast-xss", keywords: "xss,fast,gau,gf,gxss,kxss,dalfox,loxs,pipeline" },
@@ -302,6 +301,7 @@ export function MainSidebar() {
           <div key={section.title}>
             <button
               onClick={() => toggleSection(section.title)}
+              aria-expanded={expandedSections.includes(section.title)}
               className={cn(
                 "flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                 isActive(section.href)

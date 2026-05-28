@@ -12,7 +12,7 @@ export default function NotFound() {
         <div className="text-[8rem] font-black leading-none tracking-tighter text-primary/10 select-none sm:text-[12rem]">
           404
         </div>
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
           <div className="h-24 w-24 rounded-full border-2 border-dashed border-primary/30 animate-spin" />
         </div>
       </div>
@@ -26,9 +26,6 @@ export default function NotFound() {
         </Link>
         <Link href="/all" className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-muted">
           Browse All Sections
-        </Link>
-        <Link href="/" className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-muted">
-          Go Home
         </Link>
       </div>
     </div>

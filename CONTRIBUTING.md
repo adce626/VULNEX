@@ -50,20 +50,84 @@ Payloads live in `lib/*-data.ts` files. Each file exports `categories` (array of
 
 Then create `app/tools/my-tool/page.tsx` following the existing tool page pattern.
 
-### 3. Style Guide
+**Adding to the Quick Recon Toolkit:**
+
+Edit `lib/toolkit-data.ts` and add a new section to the `sections` array:
+
+```typescript
+{
+  id: "my-section",
+  icon: Zap, // lucide-react icon
+  title: "My Section",
+  color: "from-blue-500 to-indigo-500",
+  subs: [
+    {
+      title: "Subcategory",
+      items: [
+        { name: "Tool Name", command: "command --flag", description: "What it does" },
+      ],
+    },
+  ],
+}
+```
+
+### 3. Development Setup
+
+```bash
+git clone https://github.com/adce626/VULNEX.git
+cd VULNEX
+pnpm install
+pnpm run dev
+```
+
+### 4. Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `pnpm run dev` | Start dev server (Turbopack) |
+| `pnpm run build` | Production build |
+| `pnpm run lint` | Run ESLint |
+| `pnpm run test` | Run unit tests (Vitest) |
+| `pnpm run test:e2e` | Run E2E tests (Playwright) |
+
+### 5. Style Guide
 
 - All UI text in **English**
 - Use tailwind classes; prefer `cn()` from `@/lib/utils` for conditional styles
 - New components go in `components/`
 - New data files go in `lib/`
-- Run `npm run lint` before submitting
+- Use shared components: `Breadcrumb`, `CommandCard`, `PageTitle`
+- Use shared icon mappings from `lib/icon-map.ts`
+- Run `pnpm run lint` before submitting
 
-### 4. Pull Requests
+### 6. Pull Requests
 
 1. Fork the repo and create a feature branch: `git checkout -b feat/my-feature`
 2. Commit with clear messages
 3. Push and open a PR against `main`
 4. Describe what the PR changes and why
+
+### 7. Project Structure
+
+```
+app/                    — Pages and layouts
+├── api/search/         — Search endpoint
+├── toolkit/            — Quick Recon Toolkit
+├── tools/              — Tool guide pages
+└── ...
+
+components/             — React components
+├── ui/                 — shadcn/ui components
+├── breadcrumb.tsx      — Shared breadcrumb
+├── command-card.tsx     — Command display card
+└── main-sidebar.tsx    — Navigation sidebar
+
+lib/                    — Data and utilities
+├── guides/             — Tool guide data
+├── toolkit-data.ts     — Toolkit sections
+├── icon-map.ts         — Shared icon mappings
+└── *-data.ts           — Topic data files
+```
 
 ## Code of Conduct
 
