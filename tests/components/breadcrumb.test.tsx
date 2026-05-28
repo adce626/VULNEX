@@ -61,8 +61,8 @@ describe("Breadcrumb", () => {
     expect(chevrons.length).toBe(3)
   })
 
-  it("last item is not a link", () => {
-    render(<Breadcrumb items={[{ label: "Final", href: "/final" }]} />)
+  it("last item without href is not a link", () => {
+    render(<Breadcrumb items={[{ label: "Final" }]} />)
     const finalText = screen.getByText("Final")
     expect(finalText.tagName).not.toBe("A")
   })

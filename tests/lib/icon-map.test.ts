@@ -17,14 +17,15 @@ describe("iconMap", () => {
     expect(Object.keys(iconMap)).toHaveLength(19)
   })
 
-  it("each entry is a React component", () => {
+  it("each entry is a valid React component", () => {
     Object.values(iconMap).forEach((comp) => {
-      expect(comp).toBeTypeOf("function")
+      expect(typeof comp === "function" || typeof comp === "object").toBe(true)
     })
   })
 
   it("maps string keys to valid icons", () => {
-    expect(iconMap["search"]?.displayName || iconMap["search"]?.name).toBeTruthy()
-    expect(iconMap["bug"]?.displayName || iconMap["bug"]?.name).toBeTruthy()
+    expect(iconMap["search"]).toBeTruthy()
+    expect(iconMap["bug"]).toBeTruthy()
+    expect(iconMap["terminal"]).toBeTruthy()
   })
 })

@@ -33,9 +33,9 @@ describe("toolkit-data", () => {
     it("each section has title, icon, color, and subs", () => {
       sections.forEach((sec) => {
         expect(sec.title).toBeTruthy()
-        expect(sec.icon).toBeTypeOf("function")
+        expect(typeof sec.icon === "function" || typeof sec.icon === "object").toBe(true)
         expect(sec.color).toContain("from-")
-        expect(sec.subs).toBeTypeOf("array")
+        expect(Array.isArray(sec.subs)).toBe(true)
         expect(sec.subs.length).toBeGreaterThan(0)
       })
     })
@@ -44,7 +44,7 @@ describe("toolkit-data", () => {
       sections.forEach((sec) => {
         sec.subs.forEach((sub) => {
           expect(sub.title).toBeTruthy()
-          expect(sub.items).toBeTypeOf("array")
+          expect(Array.isArray(sub.items)).toBe(true)
           expect(sub.items.length).toBeGreaterThan(0)
         })
       })
@@ -89,7 +89,7 @@ describe("toolkit-data", () => {
 
     it("each stat card has icon, label, and value", () => {
       statCards.forEach((stat) => {
-        expect(stat.icon).toBeTypeOf("function")
+        expect(typeof stat.icon === "function" || typeof stat.icon === "object").toBe(true)
         expect(stat.label).toBeTruthy()
         expect(stat.value).toBeTruthy()
       })
