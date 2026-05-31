@@ -106,7 +106,7 @@ function SearchContent() {
           {results.length === 0 && query && (
             <div className="flex flex-col items-center gap-4 py-16 text-center">
               <Search className="h-12 w-12 text-muted-foreground/40" />
-              <p className="text-muted-foreground">No results found for "{query}"</p>
+              <p className="text-muted-foreground">No results found for &quot;{query}&quot;</p>
               <Link
                 href="/all"
                 className="text-sm text-primary hover:underline"

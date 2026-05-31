@@ -313,7 +313,7 @@ export function MainSidebar() {
         {/* No Results */}
         {showResults && searchResults.length === 0 && searchQuery && (
           <div className="absolute left-0 right-0 top-full z-50 mx-4 mt-1 rounded-lg border border-border bg-card px-3 py-2 text-sm text-muted-foreground">
-            No results for "{searchQuery}"
+            No results for &quot;{searchQuery}&quot;
           </div>
         )}
       </div>

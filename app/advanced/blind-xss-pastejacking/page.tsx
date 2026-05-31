@@ -53,7 +53,7 @@ export default function BlindXSSPasteJackingPage() {
             </div>
             <h1 className="text-3xl font-bold text-foreground lg:text-4xl text-balance">Blind XSS via PasteJacking</h1>
             <p className="mx-auto mt-3 max-w-2xl text-muted-foreground text-pretty">
-              Clipboard Paste XSS (PasteJacking) abuses how web apps handle content pasted from the clipboard. When HTML is read from paste events and inserted directly into the DOM via innerHTML without sanitization, attackers can execute JavaScript in the victim's browser — and if stored, trigger Blind XSS against admins.
+              Clipboard Paste XSS (PasteJacking) abuses how web apps handle content pasted from the clipboard. When HTML is read from paste events and inserted directly into the DOM via innerHTML without sanitization, attackers can execute JavaScript in the victim&apos;s browser — and if stored, trigger Blind XSS against admins.
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <span className="rounded-full bg-red-500/10 px-4 py-2 text-sm font-medium text-red-500">{pasteJackingCategories.length} Categories</span>
