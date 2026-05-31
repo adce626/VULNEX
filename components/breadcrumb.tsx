@@ -16,7 +16,7 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
       <div className="mx-auto max-w-5xl px-6 py-3">
         <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-muted-foreground">
           <span className="flex items-center gap-2">
-            <Link href="/" className="flex items-center gap-1 hover:text-foreground">
+            <Link href="/" aria-label="Home" className="flex items-center gap-1 hover:text-foreground">
               <Home className="h-4 w-4" />
             </Link>
           </span>
