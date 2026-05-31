@@ -20,7 +20,7 @@ test.describe("Search functionality", () => {
     // Should show some results
     const results = page.locator("[data-testid]")
     // Results might appear or the page might show "no results"
-    await expect(page.locator("body")).toContainText(/nmap|Nmap|result|No/i)
+    await expect(page.locator("body")).toContainText(/nmap|Nmap/i)
   })
 })
 

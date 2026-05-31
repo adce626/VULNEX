@@ -5,6 +5,8 @@ export interface NavSection {
   items?: { title: string; href: string; tag?: string }[]
 }
 
+import { toolsData } from "./tools-data"
+
 export const navigation: NavSection[] = [
   {
     title: "Recon",
@@ -199,7 +201,7 @@ export const sectionCards = [
     description: "Complete security tool collection — from installation to advanced usage, with practical examples and expert tips",
     icon: "terminal",
     href: "/tools",
-    itemCount: 104,
+    itemCount: toolsData.length,
     color: "primary",
   },
   {

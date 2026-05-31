@@ -138,7 +138,7 @@ function SearchContent() {
                   className="group flex items-center justify-between rounded-xl border border-border bg-card p-4 transition-all hover:border-primary/50 hover:shadow-lg"
                 >
                   <div className="flex items-center gap-4 min-w-0">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary text-xs font-bold">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary text-xs font-bold" aria-label={result.type === "tool" ? "Tool" : result.type === "command" ? "Command" : "Payload"}>
                       {result.type === "tool" ? "T" : result.type === "command" ? <Terminal className="h-4 w-4" /> : "P"}
                     </div>
                     <div className="min-w-0">

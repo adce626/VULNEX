@@ -15,6 +15,7 @@ import {
   Brain,
   ChevronDown,
   ChevronRight,
+  ChevronLeft,
   Shield,
   Menu,
   X,
@@ -24,7 +25,9 @@ import {
   Sun,
   Moon,
   Siren,
+  Keyboard,
 } from "lucide-react"
+import { KeyboardShortcuts } from "@/components/keyboard-shortcuts"
 
 const iconMap: Record<string, React.ReactNode> = {
   search: <Search className="h-4 w-4" />,
@@ -114,7 +117,6 @@ const allPages = [
   { title: "XSS Payloads", href: "/payloads/xss", keywords: "xss,cross site,script,payload,injection" },
   { title: "Bookmarks", href: "/bookmarks", keywords: "bookmark,saved,favorite,star" },
   { title: "ffuf", href: "/tools/ffuf", keywords: "ffuf,fuzz,fuzzer,directory,discovery" },
-  { title: "x8", href: "/tools/x8", keywords: "x8,fuzz,parameter,discovery,fast,brute" },
   { title: "Assetfinder", href: "/tools/assetfinder", keywords: "assetfinder,subdomain,passive,recon,tomnomnom" },
   { title: "Findomain", href: "/tools/findomain", keywords: "findomain,subdomain,fast,recon,rust" },
   { title: "Sublist3r", href: "/tools/sublist3r", keywords: "sublist3r,subdomain,recon,enumeration,python" },
@@ -166,9 +168,15 @@ export function MainSidebar() {
   const [expandedSections, setExpandedSections] = useState<string[]>([
   ])
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [shortcutsOpen, setShortcutsOpen] = useState(false)
+  const [collapsed, setCollapsed] = useState(false)
   const searchRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => { setMounted(true) }, [])
+
+  useEffect(() => {
+    document.body.setAttribute("data-sidebar-collapsed", collapsed ? "true" : "false")
+  }, [collapsed])
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -178,6 +186,10 @@ export function MainSidebar() {
       }
       if (e.key === "Escape") {
         setMobileOpen(false)
+      }
+      if (e.key === "?" && !["INPUT", "TEXTAREA"].includes((e.target as HTMLElement).tagName)) {
+        e.preventDefault()
+        setShortcutsOpen((prev) => !prev)
       }
     }
     document.addEventListener("keydown", handleKey)
@@ -235,19 +247,30 @@ export function MainSidebar() {
     <>
       {/* Logo */}
       <div className="flex h-16 items-center gap-3 border-b border-border px-4">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary shrink-0">
           <Shield className="h-5 w-5" />
         </div>
-        <div>
-          <Link href="/" className="text-sm font-bold text-foreground">
-            VULNEX
-          </Link>
-          <p className="text-xs text-muted-foreground">Web Hacking Playbook</p>
-        </div>
+        {!collapsed && (
+          <div className="flex-1 min-w-0">
+            <Link href="/" className="text-sm font-bold text-foreground block truncate">
+              VULNEX
+            </Link>
+            <p className="text-xs text-muted-foreground truncate">Web Hacking Playbook</p>
+          </div>
+        )}
+        <button
+          onClick={() => setCollapsed(!collapsed)}
+          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+        >
+          {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
+        </button>
       </div>
 
       {/* Search */}
-      <div className="p-4 relative">
+      {!collapsed && (
+        <div className="p-4 relative">
         <div className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2">
           <Search className="h-4 w-4 text-muted-foreground" />
           <input
@@ -294,16 +317,19 @@ export function MainSidebar() {
           </div>
         )}
       </div>
+      )}
 
       {/* Navigation */}
-      <nav className="flex-1 space-y-1 overflow-y-auto px-3 pb-4">
+      <nav className={cn("flex-1 space-y-1 overflow-y-auto pb-4", collapsed ? "px-2" : "px-3")}>
         {navigation.map((section) => (
           <div key={section.title}>
             <button
               onClick={() => toggleSection(section.title)}
               aria-expanded={expandedSections.includes(section.title)}
+              title={collapsed ? section.title : undefined}
               className={cn(
-                "flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                "flex w-full items-center rounded-lg py-2 text-sm font-medium transition-colors",
+                collapsed ? "justify-center px-2" : "justify-between px-3",
                 isActive(section.href)
                   ? "bg-primary/10 text-primary"
                   : "text-muted-foreground hover:bg-muted hover:text-foreground"
@@ -311,9 +337,9 @@ export function MainSidebar() {
             >
               <span className="flex items-center gap-2">
                 {iconMap[section.icon]}
-                {section.title}
+                {!collapsed && section.title}
               </span>
-              {section.items && (
+              {!collapsed && section.items && (
                 <span className="text-muted-foreground">
                   {expandedSections.includes(section.title) ? (
                     <ChevronDown className="h-4 w-4" />
@@ -323,12 +349,13 @@ export function MainSidebar() {
                 </span>
               )}
             </button>
-            {section.items && expandedSections.includes(section.title) && (
+            {section.items && expandedSections.includes(section.title) && !collapsed && (
               <div className="mt-1 space-y-1 pl-4">
                 {section.items.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
+                    aria-current={pathname === item.href ? "page" : undefined}
                     onClick={() => setMobileOpen(false)}
                     className={cn(
                       "flex items-center justify-between rounded-lg px-3 py-1.5 text-sm transition-colors",
@@ -362,12 +389,14 @@ export function MainSidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="border-t border-border p-4">
-        <div className="flex items-center justify-between">
-          <p className="text-center text-xs text-muted-foreground">
-            For ethical use only
-          </p>
-          <div className="flex items-center gap-1">
+      <div className={cn("border-t border-border", collapsed ? "p-2" : "p-4")}>
+        <div className={cn("flex items-center", collapsed ? "justify-center" : "justify-between")}>
+          {!collapsed && (
+            <p className="text-center text-xs text-muted-foreground">
+              For ethical use only
+            </p>
+          )}
+          <div className={cn("flex items-center", collapsed ? "flex-col gap-1" : "gap-1")}>
               <button
                 onClick={() => {
                   const order = ["dark", "light", "neon"]
@@ -389,6 +418,14 @@ export function MainSidebar() {
                   <Moon className="h-4 w-4" />
                 )}
               </button>
+              <button
+                onClick={() => setShortcutsOpen(true)}
+                className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:text-primary hover:bg-muted transition-colors"
+                aria-label="Keyboard shortcuts"
+                title="Keyboard shortcuts"
+              >
+                <Keyboard className="h-4 w-4" />
+              </button>
               <Link
                 href="/bookmarks"
                 className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:text-primary hover:bg-muted transition-colors"
@@ -399,6 +436,7 @@ export function MainSidebar() {
           </div>
         </div>
       </div>
+      <KeyboardShortcuts open={shortcutsOpen} onOpenChange={setShortcutsOpen} />
     </>
   )
 
@@ -430,7 +468,7 @@ export function MainSidebar() {
       </aside>
 
       {/* Desktop Sidebar */}
-      <aside className="fixed left-0 top-0 z-30 hidden h-full w-64 flex-col border-r border-border bg-card lg:flex">
+      <aside className={cn("fixed left-0 top-0 z-30 hidden h-full flex-col border-r border-border bg-card lg:flex transition-all duration-300", collapsed ? "w-16" : "w-64")}>
         <SidebarContent />
       </aside>
     </>

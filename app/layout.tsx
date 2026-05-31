@@ -5,6 +5,7 @@ import { Toaster } from 'sonner'
 import { ThemeProvider } from "@/components/theme-provider"
 import { PageTracker } from "@/components/page-tracker"
 import { ScrollToTop } from "@/components/scroll-to-top"
+import { SWRegister } from "@/components/sw-register"
 import './globals.css'
 
 const interSans = Inter({
@@ -31,9 +32,7 @@ export const metadata: Metadata = {
   },
   description:
     'A comprehensive platform for security researchers and bug hunters. Ready-to-use payloads, exploitation techniques, practical tools, and quick checklists.',
-  generator: 'v0.app',
   icons: '/favicon.svg',
-  manifest: '/manifest.json',
   openGraph: {
     title: 'VULNEX — Web Hacking Playbook',
     description: 'Ready-to-use payloads, exploitation techniques, and security tools for researchers and bug hunters.',
@@ -75,13 +74,14 @@ export default function RootLayout({
           {children}
           <PageTracker />
           <ScrollToTop />
+          <SWRegister />
           <Toaster
             position="bottom-right"
             toastOptions={{
               style: {
-                background: 'oklch(0.15 0.005 260)',
-                border: '1px solid oklch(0.25 0.01 260)',
-                color: 'oklch(0.9 0.005 260)',
+                background: 'var(--card)',
+                border: '1px solid var(--border)',
+                color: 'var(--foreground)',
               },
             }}
           />

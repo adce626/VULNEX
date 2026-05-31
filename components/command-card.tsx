@@ -26,7 +26,18 @@ export const CommandCard = memo(function CommandCard({ command, description, ind
   }, [command])
 
   const copyToClipboard = async () => {
-    await navigator.clipboard.writeText(displayCommand)
+    try {
+      await navigator.clipboard.writeText(displayCommand)
+    } catch {
+      const textarea = document.createElement("textarea")
+      textarea.value = displayCommand
+      textarea.style.position = "fixed"
+      textarea.style.opacity = "0"
+      document.body.appendChild(textarea)
+      textarea.select()
+      document.execCommand("copy")
+      document.body.removeChild(textarea)
+    }
     setCopied(true)
     toast.success('Copied!', {
       duration: 1500,

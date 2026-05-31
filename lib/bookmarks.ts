@@ -40,3 +40,37 @@ export function isBookmarked(command: string): boolean {
 export function clearBookmarks() {
   localStorage.removeItem(STORAGE_KEY)
 }
+
+export function exportBookmarks(): string {
+  const bookmarks = getBookmarks()
+  return JSON.stringify(bookmarks, null, 2)
+}
+
+export function importBookmarks(json: string): boolean {
+  try {
+    const imported: Bookmark[] = JSON.parse(json)
+    if (!Array.isArray(imported)) return false
+    const existing = getBookmarks()
+    const existingCommands = new Set(existing.map((b) => b.command))
+    let added = 0
+    for (const bookmark of imported) {
+      if (
+        bookmark.command &&
+        bookmark.description &&
+        bookmark.pageTitle &&
+        bookmark.pageUrl &&
+        !existingCommands.has(bookmark.command)
+      ) {
+        existing.unshift(bookmark)
+        existingCommands.add(bookmark.command)
+        added++
+      }
+    }
+    if (added > 0) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(existing.slice(0, 200)))
+    }
+    return true
+  } catch {
+    return false
+  }
+}

@@ -73,7 +73,7 @@ export function ContentLayout({
         {/* Breadcrumb */}
         <div className="border-b border-border bg-card/50">
           <div className="mx-auto max-w-5xl px-6 py-3">
-            <nav className="flex items-center gap-2 text-sm text-muted-foreground">
+            <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-muted-foreground">
               {breadcrumbItems.map((item, idx) => (
                 <span key={idx} className="flex items-center gap-2">
                   {idx > 0 && <ChevronRight className="h-4 w-4" />}
@@ -189,6 +189,7 @@ export function ContentLayout({
         >
           <button
             onClick={onLightboxClose}
+            aria-label="Close lightbox"
             className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white text-xl hover:bg-black/70"
           >
             ✕

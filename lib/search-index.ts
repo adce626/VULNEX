@@ -193,10 +193,25 @@ const allEntries: { text: string; title: string; href: string; section: string }
   ),
 ]
 
+interface RankedEntry extends SearchEntry {
+  priority: number
+}
+
+function getPriority(entry: SearchEntry, q: string): number {
+  const titleLower = entry.title.toLowerCase()
+  if (titleLower === q) return 0
+  if (titleLower.includes(q)) return 1
+  const textLower = entry.text.toLowerCase()
+  if (textLower.includes(q)) return 2
+  const sectionLower = entry.section.toLowerCase()
+  if (sectionLower.includes(q)) return 3
+  return 4
+}
+
 export function searchCommands(query: string): SearchEntry[] {
   if (!query.trim()) return []
   const q = query.toLowerCase()
-  const results: SearchEntry[] = []
+  const ranked: RankedEntry[] = []
 
   for (const entry of allEntries) {
     if (
@@ -204,10 +219,10 @@ export function searchCommands(query: string): SearchEntry[] {
       entry.title.toLowerCase().includes(q) ||
       entry.section.toLowerCase().includes(q)
     ) {
-      results.push(entry)
-      if (results.length >= 100) return results
+      ranked.push({ ...entry, priority: getPriority(entry, q) })
     }
   }
 
-  return results
+  ranked.sort((a, b) => a.priority - b.priority)
+  return ranked.slice(0, 100)
 }

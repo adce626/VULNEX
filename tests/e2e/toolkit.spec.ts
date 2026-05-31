@@ -25,7 +25,7 @@ test.describe("Toolkit page", () => {
 
   test("has a theme toggle button", async ({ page }) => {
     await page.goto("/toolkit")
-    const toggle = page.locator("text=Dark")
+    const toggle = page.locator("button[aria-label='Toggle theme']")
     await expect(toggle).toBeVisible()
   })
 

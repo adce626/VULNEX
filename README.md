@@ -10,8 +10,9 @@ A comprehensive platform for security researchers and bug hunters. Ready-to-use 
 
 | Section | Description |
 |---------|-------------|
+| **HOPE — Bug Bounty Guide** | Complete bug bounty methodology — mindset, recon, exploitation, WAF bypass, chaining, reporting. Includes "How I Deal with Bug Hunting" personal workflow |
 | **Recon & OSINT** | Google Dorks, Shodan Dorks, GitHub Recon, Param Discovery |
-| **Quick Recon Toolkit** | 17 categories, 90+ commands with domain auto-replace, copy-to-clipboard, and theme toggle |
+| **Recon Toolkit** | 17 categories, 2700+ commands with domain auto-replace, copy-to-clipboard, theme toggle, and animations |
 | **Web Vulnerabilities** | SQLi, XSS, SSRF, IDOR, CRLF, Open Redirect, Host Header Injection, 403 Bypass, Email Input Testing, JSON Privilege Escalation |
 | **Tech-Specific** | IIS, Next.js, Swagger, API Fuzzing, Spring Boot |
 | **Cloud & Assets** | AWS S3, Google API Keys |
