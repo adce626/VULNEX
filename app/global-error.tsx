@@ -11,7 +11,7 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
             </svg>
           </div>
           <h1 className="text-2xl font-bold text-foreground">Something went wrong</h1>
-          <p className="mt-2 text-center text-muted-foreground max-w-md">{error.message || "An unexpected error occurred"}</p>
+          <p className="mt-2 text-center text-muted-foreground max-w-md">An unexpected error occurred. Please try again.</p>
           <button onClick={reset} className="mt-8 inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90">
             Try again
           </button>

@@ -45,6 +45,7 @@ export function CommandList({ commands, startIndex = 0, pageSize = 20, pageTitle
       <div className="mb-3 flex items-center gap-2">
         <button
           onClick={copyAll}
+          aria-label="Copy all commands"
           className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary"
         >
           <Copy className="h-3.5 w-3.5" />
@@ -68,6 +69,8 @@ export function CommandList({ commands, startIndex = 0, pageSize = 20, pageTitle
           <button
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page === 1}
+            aria-label="Previous page"
+            aria-disabled={page === 1}
             className={cn(
               "flex items-center gap-1 rounded-lg border border-border px-4 py-2 text-sm transition-colors",
               page === 1
@@ -83,6 +86,8 @@ export function CommandList({ commands, startIndex = 0, pageSize = 20, pageTitle
           <button
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             disabled={page === totalPages}
+            aria-label="Next page"
+            aria-disabled={page === totalPages}
             className={cn(
               "flex items-center gap-1 rounded-lg border border-border px-4 py-2 text-sm transition-colors",
               page === totalPages

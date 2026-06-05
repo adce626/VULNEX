@@ -20,7 +20,7 @@ export default function Error({
       </div>
       <h1 className="text-2xl font-bold text-foreground">Something went wrong</h1>
       <p className="mt-2 text-center text-muted-foreground max-w-md">
-        {error.message || "An unexpected error occurred."}
+        An unexpected error occurred. Please try again.
       </p>
       <div className="mt-8 flex gap-3">
         <button

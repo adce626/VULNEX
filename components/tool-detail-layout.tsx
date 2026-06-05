@@ -4,12 +4,12 @@ import { useState } from "react"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
+import { Breadcrumb } from "@/components/breadcrumb"
 import { CommandList } from "@/components/command-list"
 import { Badge } from "@/components/ui/badge"
+import { Footer } from "@/components/footer"
 import type { ToolGuide } from "@/lib/tools-data"
 import {
-  Home,
-  ChevronRight,
   Download,
   Terminal,
   Command,
@@ -71,25 +71,11 @@ export function ToolDetailLayout({ tool, pageTitle, breadcrumbCategory }: ToolDe
       <MainSidebar />
 
       <main className="lg:pl-64">
-        {/* Breadcrumb */}
-        <div className="border-b border-border bg-card/50">
-          <div className="mx-auto max-w-5xl px-6 py-3">
-            <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Link href="/" className="flex items-center gap-1 hover:text-foreground">
-                <Home className="h-4 w-4" />
-              </Link>
-              <ChevronRight className="h-4 w-4" />
-              <Link
-                href={tool.category === "Recon & OSINT" ? "/recon" : tool.category === "Web Vulnerabilities" ? "/vulnerabilities" : tool.category === "Cloud & Assets" ? "/cloud" : tool.category === "Advanced Topics" ? "/advanced" : "/methods"}
-                className="hover:text-foreground"
-              >
-                {breadcrumbCategory}
-              </Link>
-              <ChevronRight className="h-4 w-4" />
-              <span className="text-foreground">{tool.name}</span>
-            </nav>
-          </div>
-        </div>
+        <Breadcrumb items={[
+          { label: "Home", href: "/" },
+          { label: breadcrumbCategory, href: tool.category === "Recon & OSINT" ? "/recon" : tool.category === "Web Vulnerabilities" ? "/vulnerabilities" : tool.category === "Cloud & Assets" ? "/cloud" : tool.category === "Advanced Topics" ? "/advanced" : "/methods" },
+          { label: tool.name },
+        ]} />
 
         {/* Hero */}
         <div className="relative overflow-hidden border-b border-border bg-gradient-to-br from-primary/10 via-background to-accent/5">
@@ -257,11 +243,7 @@ export function ToolDetailLayout({ tool, pageTitle, breadcrumbCategory }: ToolDe
           </section>
 
           {/* Footer */}
-          <footer className="border-t border-border pt-8 text-center mt-20">
-            <p className="text-sm text-muted-foreground">
-              For authorized security testing only. Use responsibly.
-            </p>
-          </footer>
+          <Footer />
         </div>
       </main>
     </div>

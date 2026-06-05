@@ -3,7 +3,9 @@
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
-import { Search, ArrowRight, Home, ChevronRight, Globe, Database, Variable, Github } from "lucide-react"
+import { Breadcrumb } from "@/components/breadcrumb"
+import { HeroSection } from "@/components/hero-section"
+import { Search, ArrowRight, Globe, Database, Variable, Github } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const reconItems = [
@@ -44,31 +46,8 @@ export default function ReconPage() {
       <MainSidebar />
 
       <main id="main-content" className="lg:pl-64">
-        {/* Breadcrumb */}
-        <div className="border-b border-border bg-card/50">
-          <div className="mx-auto max-w-5xl px-6 py-3">
-            <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Link href="/" className="flex items-center gap-1 hover:text-foreground">
-                <Home className="h-4 w-4" />
-              </Link>
-              <ChevronRight className="h-4 w-4" />
-              <span className="text-foreground">Recon</span>
-            </nav>
-          </div>
-        </div>
-
-        {/* Header */}
-        <div className="border-b border-border bg-gradient-to-br from-primary/5 via-background to-accent/5">
-          <div className="mx-auto max-w-5xl px-6 py-12 text-center">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-              <Search className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-foreground">Reconnaissance</h1>
-            <p className="mt-2 text-muted-foreground">
-              Information gathering and reconnaissance techniques
-            </p>
-          </div>
-        </div>
+        <Breadcrumb items={[{ label: "Recon" }]} />
+        <HeroSection icon={<Search className="h-8 w-8" />} title="Reconnaissance" description="Information gathering and reconnaissance techniques" />
 
         {/* Content */}
         <div className="mx-auto max-w-5xl px-6 py-12">

@@ -3,7 +3,9 @@
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
-import { Brain, ArrowRight, Home, ChevronRight, Bot, Eye, UserPlus, ClipboardPaste, Gauge } from "lucide-react"
+import { Breadcrumb } from "@/components/breadcrumb"
+import { HeroSection } from "@/components/hero-section"
+import { Brain, ArrowRight, Bot, Eye, UserPlus, ClipboardPaste, Gauge } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const advancedItems = [
@@ -51,17 +53,8 @@ export default function AdvancedPage() {
       <MainSidebar />
 
       <main id="main-content" className="lg:pl-64">
-        {/* Breadcrumb */}
-        <div className="border-b border-border bg-card/50">
-          <div className="mx-auto max-w-5xl px-6 py-3">
-            <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Link href="/" className="flex items-center gap-1 hover:text-foreground">
-                <Home className="h-4 w-4" />
-              </Link>
-              <ChevronRight className="h-4 w-4" />
-              <span className="text-foreground">Advanced Topics</span>
-            </nav>
-          </div>
+        <Breadcrumb items={[{ label: "Advanced Topics" }]} />
+        <HeroSection icon={<Brain className="h-8 w-8" />} title="Advanced Topics" description="Advanced security testing techniques and methodologies" />
         </div>
 
         {/* Header */}

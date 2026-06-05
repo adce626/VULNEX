@@ -5,6 +5,7 @@ import Link from "next/link"
 import { getToolById, type ToolGuide } from "@/lib/tools-data"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
+import { iconMap } from "@/lib/icon-map"
 import {
   BookOpen,
   ChevronRight,
@@ -31,20 +32,8 @@ export function RecommendedTools({ toolIds, title = "Recommended Tools" }: Recom
   if (tools.length === 0) return null
 
   const getIcon = (iconName: string) => {
-    const icons: Record<string, React.JSX.Element> = {
-      search: <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>,
-      globe: <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
-      zap: <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>,
-      target: <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>,
-      database: <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg>,
-      code: <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>,
-      shield: <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>,
-      "folder-search": <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 20a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v2"/><path d="M14 14a2 2 0 0 0-2-2h4a2 2 0 0 0-.88-.34l-.44-.22h-.06l-.26-.13a2 2 0 0 1-.22-.13L9.4 9.48c-.43-.32-.45-.42-.77-.68"/><path d="M2 7.5V7a2 2 0 0 1 2-2h3.24l1.46-1.46A2 2 0 0 1 10.76 2h5.48a2 2 0 0 1 1.4.59l1.46 1.46A2 2 0 0 1 21 5.24V8"/></svg>,
-      network: <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="16" y="16" width="6" height="6" rx="1"/><path d="M8.5 16.5l4-4"/><rect x="2" y="16" width="6" height="6" rx="1"/><path d="M12 12V8"/><rect x="8.5" y="2" width="6" height="6" rx="1"/><path d="M11.5 8.5l-4-4"/><rect x="16" y="2" width="6" height="6" rx="1"/></svg>,
-      cloud: <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>,
-      key: <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m15.5 7.5 7-7m0 0-7-7"/><circle cx="9" cy="18" r="5"/><path d="M15.5 7.5 13 10"/><circle cx="13.5" cy="12.5" r="0.5"/></svg>,
-    }
-    return icons[iconName] || icons.search
+    const Icon = iconMap[iconName]
+    return Icon ? <Icon className="size-4" /> : null
   }
 
   return (

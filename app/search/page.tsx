@@ -104,7 +104,7 @@ function SearchContent() {
           </div>
 
           {results.length === 0 && query && (
-            <div className="flex flex-col items-center gap-4 py-16 text-center">
+            <div role="status" aria-live="polite" className="flex flex-col items-center gap-4 py-16 text-center">
               <Search className="h-12 w-12 text-muted-foreground/40" />
               <p className="text-muted-foreground">No results found for &quot;{query}&quot;</p>
               <Link
@@ -130,7 +130,7 @@ function SearchContent() {
           )}
 
           {results.length > 0 && (
-            <div className="space-y-3">
+            <div role="status" aria-live="polite" className="space-y-3">
               {results.map((result, idx) => (
                 <Link
                   key={`${result.href}-${idx}`}

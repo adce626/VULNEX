@@ -6,11 +6,10 @@ import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
 import { CommandList } from "@/components/command-list"
 import { authSessionCategories, authSessionTools } from "@/lib/auth-session-data"
+import { Breadcrumb } from "@/components/breadcrumb"
 import {
   Lock,
   Terminal,
-  ChevronRight,
-  Home,
   ExternalLink,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -33,15 +32,7 @@ export default function AuthSessionPage() {
       <PageTitle title="Auth &amp; Session Vulnerabilities" />
       <MainSidebar />
       <main id="main-content" className="lg:pl-64">
-        <div className="border-b border-border bg-card/50">
-          <div className="mx-auto max-w-5xl px-6 py-3">
-            <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Link href="/" className="flex items-center gap-1 hover:text-foreground"><Home className="h-4 w-4" /></Link>
-              <ChevronRight className="h-4 w-4" />
-              <span className="text-foreground">Auth & Session Vulns</span>
-            </nav>
-          </div>
-        </div>
+        <Breadcrumb items={[{ label: "Auth & Session Vulns" }]} />
 
         <div className="relative overflow-hidden border-b border-border bg-gradient-to-br from-red-500/10 via-background to-rose-500/5">
           <div className="relative px-6 py-12 text-center lg:py-16">

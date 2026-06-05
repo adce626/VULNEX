@@ -4,10 +4,12 @@ import { useState, useMemo } from "react"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
+import { Breadcrumb } from "@/components/breadcrumb"
 import { toolsData, getAllCategories } from "@/lib/tools-data"
 import type { ToolGuide } from "@/lib/tools-data"
 import { cn } from "@/lib/utils"
-import { Home, ChevronRight, Search, Terminal, ArrowRight, Box, Layers, Wrench, Globe, Shield, Zap, Database, Code, Network, Key, Filter, Cloud, FolderSearch, Target } from "lucide-react"
+import { iconMap } from "@/lib/icon-map"
+import { Search, Terminal, ArrowRight, Box, Layers, Wrench, Globe, Shield, Zap, Database, Code, Network, Key, Filter, Cloud, FolderSearch, Target } from "lucide-react"
 
 const categoryConfig: Record<string, { icon: typeof Box; gradient: string; border: string; label: string }> = {
   "Recon & OSINT": {
@@ -42,20 +44,7 @@ const categoryConfig: Record<string, { icon: typeof Box; gradient: string; borde
   },
 }
 
-const toolIconMap: Record<string, typeof Box> = {
-  search: Search,
-  globe: Globe,
-  zap: Zap,
-  target: Target,
-  database: Database,
-  code: Code,
-  shield: Shield,
-  "folder-search": FolderSearch,
-  network: Network,
-  key: Key,
-  filter: Filter,
-  cloud: Cloud,
-}
+
 
 const categoryColor: Record<string, string> = {
   "Recon & OSINT": "bg-blue-500/15 text-blue-400 border-blue-500/30",
@@ -395,18 +384,7 @@ export default function ToolsCatalogPage() {
       <MainSidebar />
 
       <main id="main-content" className="lg:pl-64">
-        {/* Breadcrumb */}
-        <div className="border-b border-border bg-card/50">
-          <div className="mx-auto max-w-6xl px-6 py-3">
-            <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Link href="/" className="flex items-center gap-1 hover:text-foreground">
-                <Home className="h-4 w-4" />
-              </Link>
-              <ChevronRight className="h-4 w-4" />
-              <span className="text-foreground font-medium">Tools</span>
-            </nav>
-          </div>
-        </div>
+        <Breadcrumb items={[{ label: "Tools" }]} />
 
         {/* Hero Section */}
         <div className="relative overflow-hidden border-b border-border">
@@ -546,7 +524,7 @@ export default function ToolsCatalogPage() {
                     {tools.map((tool) => {
                       const typeInfo = toolTypeMap[tool.id]
                       const diffInfo = difficultyMap[tool.id]
-                      const Icon = toolIconMap[tool.icon] || Wrench
+                      const Icon = iconMap[tool.icon] || Wrench
                       const firstCommand = tool.commands[0]?.command || tool.usage.code?.split("\n")[0] || ""
                       return (
                         <Link
@@ -711,6 +689,7 @@ export default function ToolsCatalogPage() {
     </div>
   )
 }
+
 
 
 

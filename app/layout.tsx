@@ -47,6 +47,9 @@ export const metadata: Metadata = {
     description: 'Ready-to-use payloads, exploitation techniques, and security tools.',
     creator: '@adce626',
   },
+  alternates: {
+    canonical: 'https://vulnex.vercel.app',
+  },
 }
 
 export default function RootLayout({
@@ -61,6 +64,21 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="font-sans antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              name: "VULNEX",
+              description: "A comprehensive platform for security researchers and bug hunters. Ready-to-use payloads, exploitation techniques, practical tools, and quick checklists.",
+              url: "https://vulnex.vercel.app",
+              author: { "@type": "Person", name: "adce626" },
+              applicationCategory: "DeveloperApplication",
+              operatingSystem: "All",
+            }),
+          }}
+        />
         <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary-foreground">
           Skip to main content
         </a>

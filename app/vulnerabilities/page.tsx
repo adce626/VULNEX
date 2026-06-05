@@ -3,7 +3,9 @@
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
-import { Bug, ArrowRight, Home, ChevronRight, Database, Globe, Link2, FileText, Shield, AlertTriangle, Mail } from "lucide-react"
+import { Breadcrumb } from "@/components/breadcrumb"
+import { HeroSection } from "@/components/hero-section"
+import { Bug, ArrowRight, Database, Globe, Link2, FileText, Shield, AlertTriangle, Mail } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const vulnItems = [
@@ -86,17 +88,8 @@ export default function VulnerabilitiesPage() {
       <MainSidebar />
 
       <main id="main-content" className="lg:pl-64">
-        {/* Breadcrumb */}
-        <div className="border-b border-border bg-card/50">
-          <div className="mx-auto max-w-5xl px-6 py-3">
-            <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Link href="/" className="flex items-center gap-1 hover:text-foreground">
-                <Home className="h-4 w-4" />
-              </Link>
-              <ChevronRight className="h-4 w-4" />
-              <span className="text-foreground">Web Vulnerabilities</span>
-            </nav>
-          </div>
+        <Breadcrumb items={[{ label: "Web Vulnerabilities" }]} />
+        <HeroSection icon={<Bug className="h-8 w-8" />} title="Web Vulnerabilities" description="Web security vulnerabilities and exploit techniques" gradient="from-destructive/5 via-background to-accent/5" iconBg="bg-destructive/10" iconColor="text-destructive" />
         </div>
 
         {/* Header */}

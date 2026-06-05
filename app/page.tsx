@@ -8,61 +8,21 @@ import { PageTitle } from "@/components/page-title"
 import { sectionCards, navigation } from "@/lib/site-data"
 import { toolsData } from "@/lib/tools-data"
 import { SITE_STATS } from "@/lib/stats"
+import { iconMap } from "@/lib/icon-map"
 import {
   Search,
-  Bug,
-  Server,
-  Cloud,
   Wrench,
-  Brain,
-  Shield,
-  Puzzle,
   ArrowRight,
-  Globe,
   Zap,
-  Target,
-  Database,
-  Code,
-  FolderSearch,
-  Network,
-  Key,
+  Shield,
   ChevronRight,
   Sparkles,
   Copy,
   Tag,
   Moon,
-  Terminal,
-  Siren,
 } from "lucide-react"
 import { RecentlyViewed } from "@/components/recently-viewed"
 import { cn } from "@/lib/utils"
-
-const iconMap: Record<string, React.ReactNode> = {
-  search: <Search className="h-6 w-6" />,
-  bug: <Bug className="h-6 w-6" />,
-  server: <Server className="h-6 w-6" />,
-  cloud: <Cloud className="h-6 w-6" />,
-  wrench: <Wrench className="h-6 w-6" />,
-  shield: <Shield className="h-6 w-6" />,
-  brain: <Brain className="h-6 w-6" />,
-  puzzle: <Puzzle className="h-6 w-6" />,
-  terminal: <Terminal className="h-6 w-6" />,
-  siren: <Siren className="h-6 w-6" />,
-}
-
-const toolIconMap: Record<string, React.ReactNode> = {
-  search: <Search className="h-5 w-5" />,
-  globe: <Globe className="h-5 w-5" />,
-  zap: <Zap className="h-5 w-5" />,
-  target: <Target className="h-5 w-5" />,
-  database: <Database className="h-5 w-5" />,
-  code: <Code className="h-5 w-5" />,
-  shield: <Shield className="h-5 w-5" />,
-  "folder-search": <FolderSearch className="h-5 w-5" />,
-  network: <Network className="h-5 w-5" />,
-  cloud: <Cloud className="h-5 w-5" />,
-  key: <Key className="h-5 w-5" />,
-}
 
 const quickTags = [
   { label: "Google Dorks", href: "/recon/google-dorks" },
@@ -118,9 +78,9 @@ export default function HomePage() {
               VULNEX
             </h1>
 
-            <p className="mx-auto mt-4 max-w-2xl text-sm text-muted-foreground sm:text-base">
-              The ultimate hacking playbook for security researchers and bug hunters. Payloads, techniques, and tools at your fingertips.
-            </p>
+              <p className="mx-auto mt-4 max-w-2xl text-sm text-muted-foreground sm:text-base">
+                The ultimate hacking playbook for security researchers and bug hunters. Payloads, techniques, and tools at your fingertips.
+              </p>
 
             {/* Search */}
             <div className="mx-auto mt-8 max-w-xl">
@@ -208,7 +168,7 @@ export default function HomePage() {
                     card.color === "accent" && "bg-accent/10 text-accent"
                   )}
                 >
-                  {iconMap[card.icon]}
+                  {(() => { const Icon = iconMap[card.icon]; return Icon ? <Icon className="h-6 w-6" /> : null })()}
                 </div>
 
                 <h3 className="text-lg font-semibold text-foreground">{card.title}</h3>
@@ -258,7 +218,7 @@ export default function HomePage() {
                 
                 <div className="relative p-5">
                   <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    {toolIconMap[tool.icon] || <Sparkles className="size-5" />}
+                    {(() => { const Icon = iconMap[tool.icon]; return Icon ? <Icon className="size-5" /> : <Sparkles className="size-5" /> })()}
                   </div>
                   
                   <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">

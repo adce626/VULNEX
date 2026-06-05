@@ -219,7 +219,7 @@ export function MainSidebar() {
   }
 
   const handleBlur = () => {
-    setTimeout(() => setShowResults(false), 300)
+    setTimeout(() => setShowResults(false), 150)
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

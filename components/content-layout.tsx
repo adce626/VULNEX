@@ -1,11 +1,12 @@
 "use client"
 
-import { type ReactNode } from "react"
+import { type ReactNode, useRef, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
-import { ChevronRight, Home } from "lucide-react"
+import { Breadcrumb } from "@/components/breadcrumb"
+import { Footer } from "@/components/footer"
 import { cn } from "@/lib/utils"
 
 interface BreadcrumbItem {
@@ -64,31 +65,38 @@ export function ContentLayout({
   onLightboxClose,
   footerText = "This guide is for ethical use and authorized penetration testing only",
 }: ContentLayoutProps) {
+  const lightboxRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!expandedImg) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") { onLightboxClose(); return }
+      if (e.key === "Tab") {
+        const overlay = lightboxRef.current
+        if (!overlay) return
+        const focusable = overlay.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )
+        if (focusable.length === 0) return
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault(); last.focus()
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault(); first.focus()
+        }
+      }
+    }
+    document.addEventListener("keydown", handleKeyDown)
+    return () => document.removeEventListener("keydown", handleKeyDown)
+  }, [expandedImg, onLightboxClose])
   return (
     <div className="min-h-screen bg-background">
       <PageTitle title={pageTitle} />
       <MainSidebar />
 
       <main id="main-content" className="lg:pl-64">
-        {/* Breadcrumb */}
-        <div className="border-b border-border bg-card/50">
-          <div className="mx-auto max-w-5xl px-6 py-3">
-            <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-muted-foreground">
-              {breadcrumbItems.map((item, idx) => (
-                <span key={idx} className="flex items-center gap-2">
-                  {idx > 0 && <ChevronRight className="h-4 w-4" />}
-                  {item.href ? (
-                    <Link href={item.href} className="flex items-center gap-1 hover:text-foreground">
-                      {item.label === "Home" ? <Home className="h-4 w-4" /> : item.label}
-                    </Link>
-                  ) : (
-                    <span className="text-foreground">{item.label}</span>
-                  )}
-                </span>
-              ))}
-            </nav>
-          </div>
-        </div>
+        <Breadcrumb items={breadcrumbItems} />
 
         {/* Hero */}
         <div className={`relative overflow-hidden border-b border-border bg-gradient-to-br ${heroGradient}`}>
@@ -121,6 +129,7 @@ export function ContentLayout({
                     alt={heroImage.alt}
                     width={1200}
                     height={675}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
                     className="w-full"
                     style={{ height: "auto" }}
                   />
@@ -174,16 +183,14 @@ export function ContentLayout({
         <div className="mx-auto max-w-5xl space-y-16 p-6">
           {children}
 
-          {/* Footer */}
-          <footer className="border-t border-border pt-8 text-center">
-            <p className="text-sm text-muted-foreground">{footerText}</p>
-          </footer>
+          <Footer text={footerText} />
         </div>
       </main>
 
       {/* Lightbox Overlay */}
       {expandedImg && (
         <div
+          ref={lightboxRef}
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
           onClick={onLightboxClose}
         >
@@ -199,6 +206,7 @@ export function ContentLayout({
             alt="Expanded view"
             width={1200}
             height={675}
+            sizes="(max-width: 768px) 100vw, 95vw"
             className="max-h-[90vh] max-w-[95vw] rounded-lg object-contain"
             onClick={(e) => e.stopPropagation()}
           />

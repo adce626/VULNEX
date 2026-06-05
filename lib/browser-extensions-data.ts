@@ -231,4 +231,11 @@ export const browserExtensions: BrowserExtension[] = [
     url: "https://chromewebstore.google.com/detail/code-formatter-json-css-j/bhimnoepicmcjfkbmhckamllnibadfal",
     icon: "code",
   },
+  {
+    name: "rep+",
+    description: "Capture, modify, and replay HTTP requests in Chrome DevTools with AI-powered security analysis",
+    why: "Burp Suite Repeater functionality directly in browser — no proxy setup, with AI analysis",
+    url: "https://chromewebstore.google.com/detail/rep+/dhildnnjbegaggknfkagdpnballiepfm",
+    icon: "edit",
+  },
 ]

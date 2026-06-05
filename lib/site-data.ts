@@ -40,6 +40,7 @@ export const navigation: NavSection[] = [
       { title: "Host Header Injection", href: "/vulnerabilities/host-header-injection" },
       { title: "SSRF Testing & Exploitation", href: "/vulnerabilities/ssrf" },
       { title: "Email Input Testing", href: "/vulnerabilities/email-input-testing" },
+      { title: "Cache Deception", href: "/vulnerabilities/cache-deception", tag: "New" },
       { title: "JSON Privilege Escalation", href: "/vulnerabilities/json-privilege-escalation" },
     ],
   },
@@ -145,7 +146,7 @@ export const sectionCards = [
     description: "XSS, SQLi, SSRF, IDOR, and other common web security flaws",
     icon: "bug",
     href: "/vulnerabilities",
-    itemCount: 8,
+    itemCount: 9,
     color: "destructive",
   },
   {

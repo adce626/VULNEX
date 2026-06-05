@@ -8,3 +8,7 @@ export const PageTitle = memo(function PageTitle({ title }: { title: string }) {
   }, [title])
   return null
 })
+
+export function generateMetadata(title: string) {
+  return { title: `${title} | VULNEX` }
+}

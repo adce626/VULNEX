@@ -5,10 +5,10 @@ import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
 import { browserExtensions } from "@/lib/browser-extensions-data"
+import { Breadcrumb } from "@/components/breadcrumb"
+import { HeroSection } from "@/components/hero-section"
 import {
   Puzzle,
-  Home,
-  ChevronRight,
   ExternalLink,
   Search,
   Globe,
@@ -61,30 +61,8 @@ export default function BrowserExtensionsPage() {
       <PageTitle title="Browser Extensions" />
       <MainSidebar />
       <main id="main-content" className="lg:pl-64">
-        <div className="border-b border-border bg-card/50">
-          <div className="mx-auto max-w-6xl px-6 py-3">
-            <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Link href="/" className="flex items-center gap-1 hover:text-foreground"><Home className="h-4 w-4" /></Link>
-              <ChevronRight className="h-4 w-4" />
-              <span className="text-foreground">Browser Extensions</span>
-            </nav>
-          </div>
-        </div>
-
-        <div className="relative overflow-hidden border-b border-border bg-gradient-to-br from-primary/5 via-background to-accent/5">
-          <div className="relative px-6 py-12 text-center lg:py-16">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-              <Puzzle className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-foreground lg:text-4xl">Browser Extensions</h1>
-            <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
-              Essential browser extensions for bug hunting, security testing, OSINT investigations, and privacy protection — curated with direct Chrome Web Store links.
-            </p>
-            <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
-              {browserExtensions.length} Extensions
-            </div>
-          </div>
-        </div>
+        <Breadcrumb items={[{ label: "Browser Extensions" }]} />
+        <HeroSection icon={<Puzzle className="h-8 w-8" />} title="Browser Extensions" description="Essential browser extensions for bug hunting, security testing, OSINT investigations, and privacy protection — curated with direct Chrome Web Store links." />
 
         <div className="mx-auto max-w-6xl px-6 py-12">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

@@ -4,7 +4,9 @@ import React from "react"
 import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
-import { Cloud, ArrowRight, Home, ChevronRight, Key, HardDrive, Database, Shield } from "lucide-react"
+import { Breadcrumb } from "@/components/breadcrumb"
+import { HeroSection } from "@/components/hero-section"
+import { Cloud, ArrowRight, Key, HardDrive, Database, Shield } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const cloudItems = [
@@ -38,31 +40,8 @@ export default function CloudPage() {
       <MainSidebar />
 
       <main id="main-content" className="lg:pl-64">
-        {/* Breadcrumb */}
-        <div className="border-b border-border bg-card/50">
-          <div className="mx-auto max-w-5xl px-6 py-3">
-            <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Link href="/" className="flex items-center gap-1 hover:text-foreground">
-                <Home className="h-4 w-4" />
-              </Link>
-              <ChevronRight className="h-4 w-4" />
-              <span className="text-foreground">Cloud & Assets</span>
-            </nav>
-          </div>
-        </div>
-
-        {/* Header */}
-        <div className="border-b border-border bg-gradient-to-br from-primary/5 via-background to-accent/5">
-          <div className="mx-auto max-w-5xl px-6 py-12 text-center">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-              <Cloud className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-foreground">Cloud & Assets</h1>
-            <p className="mt-2 text-muted-foreground">
-              Cloud infrastructure and asset takeover techniques
-            </p>
-          </div>
-        </div>
+        <Breadcrumb items={[{ label: "Cloud & Assets" }]} />
+        <HeroSection icon={<Cloud className="h-8 w-8" />} title="Cloud & Assets" description="Cloud infrastructure and asset takeover techniques" />
 
         {/* Content */}
         <div className="mx-auto max-w-5xl px-6 py-12">
