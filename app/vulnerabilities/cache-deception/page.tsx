@@ -111,10 +111,10 @@ export default function CacheDeceptionPage() {
           <CommandCard command="https://target.com/account/style.css" description="Append .css to private endpoint" index={1} />
         </div>
 
-        <ul className="space-y-1 text-muted-foreground list-decimal list-inside mt-2" start={4}>
+        <ol className="space-y-1 text-muted-foreground list-decimal list-inside mt-2" start={4}>
           <li>The cache sees .css → treats it as a static resource → stores the HTML content of the private page</li>
           <li>Any unauthenticated user visiting that URL later gets the cached private content</li>
-        </ul>
+        </ol>
 
         <h4 className="mt-6 mb-2 font-medium text-foreground">Impact</h4>
         <ul className="space-y-2 text-muted-foreground">
