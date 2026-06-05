@@ -55,7 +55,6 @@ export default function AdvancedPage() {
       <main id="main-content" className="lg:pl-64">
         <Breadcrumb items={[{ label: "Advanced Topics" }]} />
         <HeroSection icon={<Brain className="h-8 w-8" />} title="Advanced Topics" description="Advanced security testing techniques and methodologies" />
-        </div>
 
         {/* Header */}
         <div className="border-b border-border bg-gradient-to-br from-primary/5 via-background to-accent/5">

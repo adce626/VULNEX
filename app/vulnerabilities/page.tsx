@@ -90,7 +90,6 @@ export default function VulnerabilitiesPage() {
       <main id="main-content" className="lg:pl-64">
         <Breadcrumb items={[{ label: "Web Vulnerabilities" }]} />
         <HeroSection icon={<Bug className="h-8 w-8" />} title="Web Vulnerabilities" description="Web security vulnerabilities and exploit techniques" gradient="from-destructive/5 via-background to-accent/5" iconBg="bg-destructive/10" iconColor="text-destructive" />
-        </div>
 
         {/* Header */}
         <div className="border-b border-border bg-gradient-to-br from-destructive/5 via-background to-accent/5">
