@@ -1,4 +1,5 @@
 import { xssItems } from "./xss-data"
+import { bypassPayloads } from "./open-redirect-data"
 
 export interface PayloadItem {
   name: string
@@ -996,5 +997,16 @@ export const payloadCategories: PayloadCategory[] = [
         tags: ["Vue.js", "XSS", "Template Injection", "VulnJS"],
       }
     }),
+  },
+  {
+    id: "open-redirect",
+    name: "Open Redirect",
+    icon: "target",
+    items: bypassPayloads.map((p) => ({
+      name: p.length > 55 ? p.slice(0, 50) + "..." : p,
+      payload: p,
+      description: p.includes("javascript:") ? "JavaScript URI scheme open redirect" : p.includes("169.254") || p.includes("0xd8") || p.includes("0330") || p.includes("00330") || p.includes("0x3a") ? "IP obfuscation bypass for open redirect" : p.includes("%09") ? "Tab character prefix bypass for open redirect" : p.includes("%5c") ? "Backslash prefix bypass for open redirect" : p.includes("\\/") || p.includes("\\@") ? "Backslash delimiter bypass for open redirect" : p.includes("%2f%2e%2e") || p.includes("%2e%2e") || p.includes("%2f..") ? "URL-encoded path traversal open redirect" : p.includes("//") ? "Protocol-relative URL open redirect" : p.includes("<>") ? "HTML tag-wrapped open redirect bypass" : p.includes(" ") ? "Space/whitespace open redirect bypass" : p.includes("@") ? "Credentials @-sign bypass open redirect" : p.includes("#") || p.includes("?") ? "Fragment/query delimiter bypass open redirect" : p.includes("\\x") || p.includes("\\u") || p.includes("\\152") || p.includes("\\j") || p.includes("\\n") ? "Escape sequence obfuscation open redirect" : "Open redirect bypass payload",
+      tags: ["Open Redirect", "Bypass"],
+    })),
   },
 ]

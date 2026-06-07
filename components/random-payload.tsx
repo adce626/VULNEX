@@ -5,7 +5,6 @@ import { Sparkles, RefreshCw } from "lucide-react"
 
 const randomPayloads = [
   { payload: "' OR '1'='1' -- -", label: "SQL Injection" },
-  { payload: "<script>alert(1)</script>", label: "XSS" },
   { payload: "http://169.254.169.254/latest/meta-data/", label: "SSRF" },
   { payload: "https://target.com/account.css", label: "Cache Deception" },
   { payload: "/admin", label: "403 Bypass" },

@@ -274,12 +274,12 @@ export default function HomePage() {
         {/* Footer */}
         <footer className="border-t border-border bg-card/50">
           <div className="mx-auto max-w-6xl px-6 py-8">
-            <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+            <div className="flex flex-col items-center gap-4 sm:flex-col">
               <div className="flex items-center gap-2">
                 <Shield className="h-5 w-5 text-primary" />
                 <span className="font-semibold text-foreground">VULNEX</span>
               </div>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center justify-center gap-4">
                 <a
                   href="https://x.com/adce626"
                   target="_blank"
@@ -305,9 +305,10 @@ export default function HomePage() {
                   <span className="text-xs text-muted-foreground group-hover:text-primary">/adce626</span>
                 </a>
               </div>
-              <p className="text-sm text-muted-foreground">
-                For authorized security testing only. Use responsibly.
-              </p>
+            </div>
+            <div className="mt-6 border-t border-border/50 pt-4 text-center">
+              <p className="text-sm font-medium text-foreground">For ethical use only — educational purposes</p>
+              <p className="text-xs text-muted-foreground mt-1">All content provided for authorized security testing and learning. Use responsibly. The authors assume no liability for misuse.</p>
             </div>
           </div>
         </footer>

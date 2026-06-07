@@ -1,5 +1,18 @@
 const entries = [
   {
+    version: 'v1.5.0',
+    date: 'June 2026',
+    title: 'Search + Collections + Payloads Page',
+    changes: [
+      'Enhanced search with fuzzy matching, autocomplete dropdown, and section filters',
+      'New SearchBar component with keyboard shortcut (Cmd+K) and type icons',
+      'Added Collections system: create, manage, export collections of commands',
+      'Redesigned /payloads page with real-time filtering and Random Payload card',
+      'Added Collections link to sidebar navigation',
+    ],
+  },
+  {
+  {
     version: 'v1.4.0',
     date: 'June 2026',
     title: 'Homepage Enhancements',

@@ -22,6 +22,7 @@ import {
   ArrowRight,
   Puzzle,
   Bookmark,
+  FolderOpen,
   Sun,
   Moon,
   Siren,
@@ -116,6 +117,7 @@ const allPages = [
   { title: "XSS WAF Bypass Payloads", href: "/payloads/xss-waf-bypass", keywords: "xss,waf,bypass,cross site,payload" },
   { title: "XSS Payloads", href: "/payloads/xss", keywords: "xss,cross site,script,payload,injection" },
   { title: "Bookmarks", href: "/bookmarks", keywords: "bookmark,saved,favorite,star" },
+  { title: "Collections", href: "/collections", keywords: "collection,group,organized" },
   { title: "ffuf", href: "/tools/ffuf", keywords: "ffuf,fuzz,fuzzer,directory,discovery" },
   { title: "Assetfinder", href: "/tools/assetfinder", keywords: "assetfinder,subdomain,passive,recon,tomnomnom" },
   { title: "Findomain", href: "/tools/findomain", keywords: "findomain,subdomain,fast,recon,rust" },
@@ -391,11 +393,6 @@ export function MainSidebar() {
       {/* Footer */}
       <div className={cn("border-t border-border", collapsed ? "p-2" : "p-4")}>
         <div className={cn("flex items-center", collapsed ? "justify-center" : "justify-between")}>
-          {!collapsed && (
-            <p className="text-center text-xs text-muted-foreground">
-              For ethical use only
-            </p>
-          )}
           <div className={cn("flex items-center", collapsed ? "flex-col gap-1" : "gap-1")}>
               <button
                 onClick={() => {
@@ -418,21 +415,32 @@ export function MainSidebar() {
                   <Moon className="h-4 w-4" />
                 )}
               </button>
-              <button
-                onClick={() => setShortcutsOpen(true)}
-                className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:text-primary hover:bg-muted transition-colors"
-                aria-label="Keyboard shortcuts"
-                title="Keyboard shortcuts"
-              >
-                <Keyboard className="h-4 w-4" />
-              </button>
-              <Link
-                href="/bookmarks"
-                className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:text-primary hover:bg-muted transition-colors"
-                aria-label="Bookmarks"
-              >
-                <Bookmark className="h-4 w-4" />
-              </Link>
+              <div className="flex items-center gap-2 rounded-xl border border-border/60 bg-muted/30 px-3 py-1.5">
+                <button
+                  onClick={() => setShortcutsOpen(true)}
+                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-primary hover:bg-muted transition-colors"
+                  aria-label="Keyboard shortcuts"
+                  title="Keyboard shortcuts"
+                >
+                  <Keyboard className="h-4 w-4" />
+                </button>
+                <div className="h-5 w-px bg-border/50" />
+                <Link
+                  href="/bookmarks"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-primary hover:bg-muted transition-colors"
+                  aria-label="Bookmarks"
+                >
+                  <Bookmark className="h-4 w-4" />
+                </Link>
+                <div className="h-5 w-px bg-border/50" />
+                <Link
+                  href="/collections"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-primary hover:bg-muted transition-colors"
+                  aria-label="Collections"
+                >
+                  <FolderOpen className="h-4 w-4" />
+                </Link>
+              </div>
           </div>
         </div>
       </div>

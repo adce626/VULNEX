@@ -36,7 +36,7 @@ export const CommandCard = memo(function CommandCard({ command, description, ind
       document.body.appendChild(textarea)
       textarea.select()
       document.execCommand("copy")
-      document.body.removeChild(textarea)
+      if (textarea.parentNode) document.body.removeChild(textarea)
     }
     setCopied(true)
     toast.success('Copied!', {
