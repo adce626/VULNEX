@@ -12,7 +12,6 @@ const entries = [
     ],
   },
   {
-  {
     version: 'v1.4.0',
     date: 'June 2026',
     title: 'Homepage Enhancements',
