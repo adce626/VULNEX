@@ -22,6 +22,13 @@ import {
   Moon,
 } from "lucide-react"
 import { RecentlyViewed } from "@/components/recently-viewed"
+
+import { RandomPayload } from "@/components/random-payload"
+import { AnimatedCounter } from "@/components/animated-counter"
+import { FeaturedCarousel } from "@/components/featured-carousel"
+
+
+import { SplashScreen } from "@/components/splash-screen"
 import { cn } from "@/lib/utils"
 
 const quickTags = [
@@ -36,11 +43,22 @@ const featuredTools = featuredToolIds.map(id => toolsData.find(t => t.id === id)
 
 export default function HomePage() {
   const [mounted, setMounted] = useState(false)
+  const [showSplash, setShowSplash] = useState(true)
   const [searchQuery, setSearchQuery] = useState("")
   const searchRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
 
   useEffect(() => { setMounted(true) }, [])
+
+  useEffect(() => {
+    const seen = sessionStorage.getItem("vulnex-splash-seen")
+    if (seen) setShowSplash(false)
+  }, [])
+
+  const handleSplashEnter = () => {
+    sessionStorage.setItem("vulnex-splash-seen", "true")
+    setShowSplash(false)
+  }
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -60,6 +78,8 @@ export default function HomePage() {
   }
   return (
     <div className="min-h-screen bg-background">
+      {showSplash && <SplashScreen onEnter={handleSplashEnter} />}
+
       <PageTitle title="VULNEX — Web Hacking Playbook" />
       <MainSidebar />
 
@@ -116,72 +136,33 @@ export default function HomePage() {
               ))}
             </div>
 
-            {/* Stats */}
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-5 sm:gap-8">
-{[
-                { value: String(sectionCards.length), label: "Sections" },
-                { value: String(navigation.reduce((acc, s) => acc + (s.items?.length || 0), 0)), label: "Topics" },
-                { value: SITE_STATS.commandCount + "+", label: "Commands" },
-              ].map((stat, i) => (
-                <div key={stat.label} className="flex items-center gap-2">
-                  {i > 0 && <div className="h-4 w-px bg-border hidden sm:block" />}
-                  <span className="text-xl font-bold text-primary sm:text-2xl">{stat.value}</span>
-                  <span className="text-xs text-muted-foreground sm:text-sm">{stat.label}</span>
-                </div>
-              ))}
+            {/* Stats + Random Payload */}
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-6 sm:gap-10">
+              <AnimatedCounter value={sectionCards.length} label="Sections" />
+              <AnimatedCounter value={navigation.reduce((acc, s) => acc + (s.items?.length || 0), 0)} label="Topics" />
+              <AnimatedCounter value={SITE_STATS.commandCount} label="Commands" suffix="+" />
             </div>
           </div>
         </div>
 
-        {/* Explore Sections */}
+        {/* Random Payload */}
+        <div className="mx-auto max-w-6xl px-6 -mt-6 relative z-10">
+          <div className="max-w-sm mx-auto">
+            <RandomPayload />
+          </div>
+        </div>
+
+        {/* Explore Sections — Carousel */}
         <div className="mx-auto max-w-6xl px-6 py-16">
-          <div className="mb-8 flex items-center justify-between">
-            <div>
-              <h2 className="text-2xl font-bold text-foreground">Explore Sections</h2>
-              <p className="mt-1 text-muted-foreground">
-                Choose a category to dive in
-              </p>
-            </div>
+          <FeaturedCarousel />
+          <div className="mt-4 text-center">
             <Link
               href="/all"
-              className="hidden sm:inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary/80"
+              className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
             >
-              View all
+              View all sections
               <ArrowRight className="h-4 w-4" />
             </Link>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {sectionCards.slice(0, 6).map((card) => (
-              <Link
-                key={card.href}
-                href={card.href}
-                className="group relative overflow-hidden rounded-2xl border border-border bg-card p-6 transition-all hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5"
-              >
-                <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-primary/5 transition-transform group-hover:scale-150" />
-
-                <div
-                  className={cn(
-                    "mb-4 flex h-12 w-12 items-center justify-center rounded-xl",
-                    card.color === "primary" && "bg-primary/10 text-primary",
-                    card.color === "destructive" && "bg-destructive/10 text-destructive",
-                    card.color === "accent" && "bg-accent/10 text-accent"
-                  )}
-                >
-                  {(() => { const Icon = iconMap[card.icon]; return Icon ? <Icon className="h-6 w-6" /> : null })()}
-                </div>
-
-                <h3 className="text-lg font-semibold text-foreground">{card.title}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{card.description}</p>
-
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="text-xs text-muted-foreground">
-                    {card.itemCount} topics
-                  </span>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
-                </div>
-              </Link>
-            ))}
           </div>
         </div>
 
