@@ -157,7 +157,7 @@ export default function CollectionDetailPage() {
                   command={item.command}
                   description={item.description}
                   pageTitle={item.pageTitle}
-                  pageUrl={item.pageUrl}
+                  index={0}
                 />
               ))}
             </div>
