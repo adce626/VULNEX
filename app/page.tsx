@@ -28,7 +28,7 @@ import { AnimatedCounter } from "@/components/animated-counter"
 import { FeaturedCarousel } from "@/components/featured-carousel"
 
 
-import { SplashScreen } from "@/components/splash-screen"
+
 import { cn } from "@/lib/utils"
 
 const quickTags = [
@@ -43,22 +43,11 @@ const featuredTools = featuredToolIds.map(id => toolsData.find(t => t.id === id)
 
 export default function HomePage() {
   const [mounted, setMounted] = useState(false)
-  const [showSplash, setShowSplash] = useState(true)
   const [searchQuery, setSearchQuery] = useState("")
   const searchRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
 
   useEffect(() => { setMounted(true) }, [])
-
-  useEffect(() => {
-    const seen = sessionStorage.getItem("vulnex-splash-seen")
-    if (seen) setShowSplash(false)
-  }, [])
-
-  const handleSplashEnter = () => {
-    sessionStorage.setItem("vulnex-splash-seen", "true")
-    setShowSplash(false)
-  }
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -78,8 +67,6 @@ export default function HomePage() {
   }
   return (
     <div className="min-h-screen bg-background">
-      {showSplash && <SplashScreen onEnter={handleSplashEnter} />}
-
       <PageTitle title="VULNEX — Web Hacking Playbook" />
       <MainSidebar />
 
