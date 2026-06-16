@@ -202,7 +202,7 @@ export default function QuickReconPage() {
   }, [replaceDomain])
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "var(--bg-body, #0a0a0a)", ...themeVars }}>
+    <div className="min-h-screen transition-colors duration-500" style={{ backgroundColor: "var(--bg-body, #0a0a0a)", ...themeVars }}>
 
       {/* Cyber Grid Background */}
       <div className="fixed inset-0 pointer-events-none z-0"
@@ -247,8 +247,12 @@ export default function QuickReconPage() {
           0% { opacity: 0; transform: translateY(30px); }
           100% { opacity: 1; transform: translateY(0); }
         }
+        .tilt-card {
+          transition: border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.15s ease-out, box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+          will-change: transform;
+        }
         .tool-card-enter {
-          animation: cardEntry 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+          animation: cardEntry 0.5s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
         }
         .section-visible .section-header-icon {
           animation: borderPulse 3s ease-in-out 1;
@@ -269,7 +273,7 @@ export default function QuickReconPage() {
 
       <main id="main-content" className="lg:pl-64">
         {/* Breadcrumb */}
-        <div className="border-b bg-black/50" style={{ borderColor: "var(--border)" }}>
+        <div className="border-b bg-black/50 transition-[border-color] duration-500" style={{ borderColor: "var(--border)" }}>
           <div className="mx-auto max-w-6xl px-6 py-3">
             <nav className="flex items-center gap-2 text-sm text-gray-400">
               <Link href="/" className="flex items-center gap-1" style={{ color: "var(--accent)" }}>
@@ -284,7 +288,7 @@ export default function QuickReconPage() {
         </div>
 
         {/* Hero */}
-        <div className="relative overflow-hidden border-b bg-gradient-to-br from-black via-zinc-900 to-black" style={{ borderColor: "var(--border)" }}>
+        <div className="relative overflow-hidden border-b bg-gradient-to-br from-black via-zinc-900 to-black transition-[border-color] duration-500" style={{ borderColor: "var(--border)" }}>
           <div className="absolute inset-0 opacity-[0.03]" style={{
             backgroundImage: "repeating-linear-gradient(90deg, transparent, transparent 2px, var(--scan-color) 2px, var(--scan-color) 4px)",
           }} />
@@ -366,7 +370,7 @@ export default function QuickReconPage() {
                 key={sec.id}
                 id={sec.id}
                 ref={isVisible ? undefined : sectionRefCallback}
-                className={`${isVisible ? "section-visible" : ""} group overflow-hidden rounded-2xl border bg-gradient-to-br from-zinc-900/90 to-black/90 p-[1px] shadow-lg transition-all duration-700 hover:shadow-2xl`}
+                className={`${isVisible ? "section-visible" : ""} group overflow-hidden rounded-2xl border bg-gradient-to-br from-zinc-900/90 to-black/90 p-[1px] shadow-lg transition-all duration-700 ease-out hover:shadow-2xl`}
                 style={{
                   borderColor: isVisible ? `oklch(0.7 0.2 ${hueMap[sec.id] ?? 40})` : "transparent",
                   opacity: isVisible ? 1 : 0,
@@ -400,7 +404,7 @@ export default function QuickReconPage() {
                             return (
                               <div
                                 key={id}
-                                className="tilt-card group relative rounded-xl border border-zinc-800 bg-zinc-900/50 transition-all hover:border-[var(--hover-border)] hover:bg-zinc-900 hover:shadow-lg"
+                                className="tilt-card group relative rounded-xl border border-zinc-800 bg-zinc-900/50 hover:border-[var(--hover-border)] hover:bg-zinc-900 hover:shadow-lg"
                               >
                                 <div className="flex items-start gap-3 p-4 pb-2">
                                   <span className="mt-0.5 shrink-0 font-mono text-sm" style={{ color: "var(--accent)" }}>$</span>
@@ -446,7 +450,7 @@ export default function QuickReconPage() {
 
       {/* Notification */}
       <div
-        className={`fixed right-6 top-24 z-50 rounded-xl border px-6 py-3 text-sm font-medium text-white shadow-lg backdrop-blur transition-all duration-300 ${
+        className={`fixed right-6 top-24 z-50 rounded-xl border px-6 py-3 text-sm font-medium text-white shadow-lg backdrop-blur transition-all duration-500 cubic-bezier ${
           notif ? "translate-x-0 opacity-100" : "translate-x-96 opacity-0 pointer-events-none"
         }`}
         style={{ borderColor: "var(--border)", background: `linear-gradient(to right, ${isNeon ? "#ff0080" : "#00ff41"}33, ${isNeon ? "#00d4ff" : "#06b6d4"}33)`, boxShadow: `0 10px 40px var(--glow)` }}

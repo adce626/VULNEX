@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import Link from "next/link"
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 import { iconMap } from "@/lib/icon-map"
 import { sectionCards } from "@/lib/site-data"
 import { cn } from "@/lib/utils"
