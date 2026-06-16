@@ -12,7 +12,7 @@ const items = sectionCards.slice(0, 8)
 export function FeaturedCarousel() {
   const [current, setCurrent] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
-  const timerRef = useRef<ReturnType<typeof setInterval>>()
+  const timerRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined)
 
   const total = Math.ceil(items.length / 2)
 
