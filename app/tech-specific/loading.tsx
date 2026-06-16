@@ -1,4 +1,5 @@
 import { MainSidebar } from "@/components/main-sidebar"
+import { Skeleton } from "@/components/skeleton"
 
 export default function TechLoading() {
   return (
@@ -7,14 +8,14 @@ export default function TechLoading() {
       <main id="main-content" className="lg:pl-64">
         <div className="border-b border-border p-8">
           <div className="mx-auto max-w-4xl">
-            <div className="mb-4 h-10 w-64 animate-pulse rounded-lg bg-muted" />
-            <div className="h-5 w-96 animate-pulse rounded bg-muted" />
+            <div className="mb-4"><Skeleton width="w-64" height="h-10" /></div>
+            <Skeleton width="w-96" height="h-5" />
           </div>
         </div>
         <div className="mx-auto max-w-6xl p-8">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {[1, 2, 3, 4, 5].map((i) => (
-              <div key={i} className="h-36 animate-pulse rounded-2xl bg-card border border-border" />
+              <Skeleton key={i} shape="card" />
             ))}
           </div>
         </div>
@@ -22,6 +23,3 @@ export default function TechLoading() {
     </div>
   )
 }
-
-
-

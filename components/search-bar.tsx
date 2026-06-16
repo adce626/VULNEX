@@ -138,7 +138,11 @@ export function SearchBar({ allResults, placeholder = "Search...", autoFocus = f
       {focused && query.trim() && (
         <div ref={dropdownRef} className="absolute z-50 mt-2 w-full rounded-xl border border-border bg-card shadow-xl max-h-80 overflow-y-auto">
           {displayResults.length === 0 ? (
-            <div className="p-4 text-center text-sm text-muted-foreground">No results found</div>
+            <div className="flex flex-col items-center gap-2 p-5 text-center">
+              <Search className="h-6 w-6 text-muted-foreground/30" />
+              <p className="text-sm text-muted-foreground">No results for &quot;{query}&quot;</p>
+              <p className="text-xs text-muted-foreground/50">Try: XSS, SQLi, nuclei, dork, payload</p>
+            </div>
           ) : (
             displayResults.slice(0, 10).map((result) => (
               <button

@@ -7,7 +7,6 @@ import { navigation } from "@/lib/site-data"
 import { cn } from "@/lib/utils"
 import { useTheme } from "next-themes"
 import {
-  Search,
   Bug,
   Server,
   Cloud,
@@ -27,6 +26,7 @@ import {
   Moon,
   Siren,
   Keyboard,
+  Search,
 } from "lucide-react"
 import { KeyboardShortcuts } from "@/components/keyboard-shortcuts"
 
@@ -297,7 +297,7 @@ export function MainSidebar() {
         
         {/* Search Results Dropdown */}
         {showResults && searchResults.length > 0 && (
-          <div className="absolute left-0 right-0 top-full z-50 mx-4 mt-1 rounded-lg border border-border bg-card shadow-lg">
+          <div className="absolute left-0 right-0 top-full z-50 mx-4 mt-1 rounded-lg border border-border bg-card shadow-lg animate-fade-up">
             {searchResults.map((result) => (
               <button
                 key={result.href}
@@ -314,7 +314,8 @@ export function MainSidebar() {
         
         {/* No Results */}
         {showResults && searchResults.length === 0 && searchQuery && (
-          <div className="absolute left-0 right-0 top-full z-50 mx-4 mt-1 rounded-lg border border-border bg-card px-3 py-2 text-sm text-muted-foreground">
+          <div className="absolute left-0 right-0 top-full z-50 mx-4 mt-1 rounded-lg border border-border bg-card px-4 py-3 text-center text-sm text-muted-foreground animate-fade-up">
+            <Search className="mx-auto mb-1 h-5 w-5 text-muted-foreground/30" />
             No results for &quot;{searchQuery}&quot;
           </div>
         )}

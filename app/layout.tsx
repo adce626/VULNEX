@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { PageTracker } from "@/components/page-tracker"
 import { ScrollToTop } from "@/components/scroll-to-top"
 import { SWRegister } from "@/components/sw-register"
+import { PageTransition } from "@/components/page-transition"
 import './globals.css'
 
 const interSans = Inter({
@@ -32,7 +33,12 @@ export const metadata: Metadata = {
   },
   description:
     'A comprehensive platform for security researchers and bug hunters. Ready-to-use payloads, exploitation techniques, practical tools, and quick checklists.',
-  icons: '/favicon.svg',
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/icons/icon-192.svg',
+  },
+  manifest: '/manifest.json',
+  appleWebApp: { capable: true, title: 'VULNEX', statusBarStyle: 'black-translucent' },
   openGraph: {
     title: 'VULNEX — Web Hacking Playbook',
     description: 'Ready-to-use payloads, exploitation techniques, and security tools for researchers and bug hunters.',
@@ -89,7 +95,7 @@ export default function RootLayout({
           disableTransitionOnChange
           themes={["dark", "light", "neon"]}
         >
-          {children}
+          <PageTransition>{children}</PageTransition>
           <PageTracker />
           <ScrollToTop />
           <SWRegister />

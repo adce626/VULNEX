@@ -1,11 +1,9 @@
-const CACHE_NAME = 'vulnex-v1'
+const CACHE_NAME = 'vulnex-v2'
 const STATIC_ASSETS = [
-  '/',
-  '/search',
-  '/bookmarks',
-  '/all',
-  '/tools',
-  '/vulnerabilities',
+  '/', '/search', '/bookmarks', '/collections', '/all', '/tools', '/payloads',
+  '/vulnerabilities', '/methods', '/recon', '/tech-specific', '/cloud',
+  '/waf-bypass', '/advanced', '/auth-session', '/browser-extensions',
+  '/changelog', '/toolkit',
 ]
 
 self.addEventListener('install', (e) => {
@@ -27,9 +25,24 @@ self.addEventListener('fetch', (e) => {
   const url = new URL(e.request.url)
   if (url.origin !== self.location.origin) return
 
-  if (url.pathname.startsWith('/icons/') || url.pathname === '/favicon.svg') {
+  const path = url.pathname
+
+  if (path.startsWith('/icons/') || path === '/favicon.svg' || path === '/manifest.json') {
+    e.respondWith(caches.match(e.request).then((r) => r || fetch(e.request)))
+    return
+  }
+
+  if (path.startsWith('/_next/static/')) {
     e.respondWith(
-      caches.match(e.request).then((cached) => cached || fetch(e.request))
+      caches.open(CACHE_NAME).then((cache) =>
+        cache.match(e.request).then((cached) => {
+          const fetched = fetch(e.request).then((res) => {
+            cache.put(e.request, res.clone())
+            return res
+          })
+          return cached || fetched
+        })
+      )
     )
     return
   }
@@ -41,6 +54,10 @@ self.addEventListener('fetch', (e) => {
         caches.open(CACHE_NAME).then((cache) => cache.put(e.request, clone))
         return res
       })
-      .catch(() => caches.match(e.request).then((cached) => cached || new Response('Offline', { status: 503 })))
+      .catch(() =>
+        caches.match(e.request).then((cached) =>
+          cached || new Response('Offline', { status: 503 })
+        )
+      )
   )
 })

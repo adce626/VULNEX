@@ -9,7 +9,7 @@ import { SearchBar } from "@/components/search-bar"
 import { navigation } from "@/lib/site-data"
 import { toolsData } from "@/lib/tools-data"
 import { searchCommands } from "@/lib/search-index"
-import { Home, ChevronRight, ArrowRight, Terminal, BookOpen, Wrench } from "lucide-react"
+import { Home, ChevronRight, ArrowRight, Terminal, BookOpen, Wrench, Search } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const typeColors: Record<string, string> = {
@@ -112,8 +112,14 @@ function SearchContent() {
 
               {results.length === 0 ? (
                 <div className="flex flex-col items-center gap-4 py-16 text-center">
-                  <p className="text-muted-foreground">No {activeFilter === "all" ? "" : activeFilter} results found</p>
-                  <Link href="/all" className="text-sm text-primary hover:underline">Browse all sections →</Link>
+                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-muted/50">
+                    <Search className="h-7 w-7 text-muted-foreground/40" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">No {activeFilter === "all" ? "" : activeFilter} results for &quot;{query}&quot;</p>
+                    <p className="mt-1 text-xs text-muted-foreground/50">Try: XSS, SQLi, nuclei, subfinder, dork</p>
+                  </div>
+                  <Link href="/all" className="text-sm text-primary hover:underline transition-colors">Browse all sections →</Link>
                 </div>
               ) : (
                 <div className="space-y-2">
