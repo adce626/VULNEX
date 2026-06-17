@@ -290,7 +290,7 @@ export default function EncoderPage() {
   const copyOutput = useCallback(async () => {
     await navigator.clipboard.writeText(output)
     setCopied(true)
-    setTimeout(() => setCopied(null), 2000)
+    setTimeout(() => setCopied(false), 2000)
   }, [output])
 
   const shareUrl = useCallback(async () => {
