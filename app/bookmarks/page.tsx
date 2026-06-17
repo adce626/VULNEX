@@ -6,7 +6,7 @@ import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
 import { CommandCard } from "@/components/command-card"
 import { getBookmarks, clearBookmarks, type Bookmark as SavedBookmark } from "@/lib/bookmarks"
-import { Bookmark, Trash2, ArrowRight, ExternalLink } from "lucide-react"
+import { Bookmark, Trash, ArrowRight, ExternalLink } from "lucide-react"
 
 export default function BookmarksPage() {
   const [bookmarks, setBookmarks] = useState<SavedBookmark[]>([])
@@ -47,7 +47,7 @@ export default function BookmarksPage() {
                   onClick={handleClear}
                   className="flex items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm text-muted-foreground hover:text-destructive hover:border-destructive/50 transition-colors"
                 >
-                  <Trash2 className="h-4 w-4" />
+                  <Trash className="h-4 w-4" />
                   Clear All
                 </button>
               )}

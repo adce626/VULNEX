@@ -326,32 +326,71 @@ export function MainSidebar() {
       <nav className={cn("flex-1 space-y-1 overflow-y-auto pb-4", collapsed ? "px-2" : "px-3")}>
         {navigation.map((section) => (
           <div key={section.title}>
-            <button
-              onClick={() => toggleSection(section.title)}
-              aria-expanded={expandedSections.includes(section.title)}
-              title={collapsed ? section.title : undefined}
-              className={cn(
-                "flex w-full items-center rounded-lg py-2 text-sm font-medium transition-colors",
-                collapsed ? "justify-center px-2" : "justify-between px-3",
-                isActive(section.href)
-                  ? "bg-primary/10 text-primary"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
-              )}
-            >
-              <span className="flex items-center gap-2">
-                {iconMap[section.icon]}
-                {!collapsed && section.title}
-              </span>
-              {!collapsed && section.items && (
-                <span className="text-muted-foreground">
-                  {expandedSections.includes(section.title) ? (
-                    <ChevronDown className="h-4 w-4" />
-                  ) : (
-                    <ChevronRight className="h-4 w-4" />
-                  )}
+            {section.items && ["Browser Extensions", "Tools", "Interactive Tools", "Payloads"].includes(section.title) ? (
+              <Link
+                href={section.href}
+                onClick={() => setMobileOpen(false)}
+                title={collapsed ? section.title : undefined}
+                className={cn(
+                  "flex w-full items-center rounded-lg py-2 text-sm font-medium transition-colors",
+                  collapsed ? "justify-center px-2" : "justify-between px-3",
+                  isActive(section.href)
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                )}
+              >
+                <span className="flex items-center gap-2">
+                  {iconMap[section.icon]}
+                  {!collapsed && section.title}
                 </span>
-              )}
-            </button>
+              </Link>
+            ) : section.items ? (
+                <button
+                  onClick={() => toggleSection(section.title)}
+                  aria-expanded={expandedSections.includes(section.title)}
+                  title={collapsed ? section.title : undefined}
+                  className={cn(
+                    "flex w-full items-center rounded-lg py-2 text-sm font-medium transition-colors",
+                    collapsed ? "justify-center px-2" : "justify-between px-3",
+                    isActive(section.href)
+                      ? "bg-primary/10 text-primary"
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  )}
+                >
+                  <span className="flex items-center gap-2">
+                    {iconMap[section.icon]}
+                    {!collapsed && section.title}
+                  </span>
+                  {!collapsed && (
+                    <span className="text-muted-foreground">
+                      {expandedSections.includes(section.title) ? (
+                        <ChevronDown className="h-4 w-4" />
+                      ) : (
+                        <ChevronRight className="h-4 w-4" />
+                      )}
+                    </span>
+                  )}
+                </button>
+              )
+            : (
+              <Link
+                href={section.href}
+                onClick={() => setMobileOpen(false)}
+                title={collapsed ? section.title : undefined}
+                className={cn(
+                  "flex w-full items-center rounded-lg py-2 text-sm font-medium transition-colors",
+                  collapsed ? "justify-center px-2" : "justify-between px-3",
+                  isActive(section.href)
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                )}
+              >
+                <span className="flex items-center gap-2">
+                  {iconMap[section.icon]}
+                  {!collapsed && section.title}
+                </span>
+              </Link>
+            )}
             {section.items && expandedSections.includes(section.title) && !collapsed && (
               <div className="mt-1 space-y-1 pl-4">
                 {section.items.map((item) => (

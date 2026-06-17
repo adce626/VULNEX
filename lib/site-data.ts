@@ -115,6 +115,19 @@ export const navigation: NavSection[] = [
     ],
   },
   {
+    title: "Interactive Tools",
+    icon: "wand",
+    href: "/interactive",
+    items: [
+      { title: "All Interactive Tools", href: "/interactive" },
+      { title: "Universal Encoder", href: "/interactive/encoder" },
+      { title: "JWT Debugger", href: "/interactive/jwt-debugger" },
+      { title: "Hash Detector", href: "/interactive/hash-detector" },
+      { title: "CSP Evaluator", href: "/interactive/csp-evaluator" },
+      { title: "Port Visualizer", href: "/interactive/port-visualizer" },
+    ],
+  },
+  {
     title: "Payloads",
     icon: "siren",
     href: "/payloads",
@@ -203,6 +216,14 @@ export const sectionCards = [
     icon: "terminal",
     href: "/tools",
     itemCount: toolsData.length,
+    color: "primary",
+  },
+  {
+    title: "Interactive Tools",
+    description: "Client-side security testing utilities — Universal Encoder, JWT Debugger, Hash Detector, CSP Evaluator, and Port Visualizer",
+    icon: "wand",
+    href: "/interactive",
+    itemCount: 5,
     color: "primary",
   },
   {

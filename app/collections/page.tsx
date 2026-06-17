@@ -5,7 +5,7 @@ import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
 import { getCollections, createCollection, deleteCollection, type Collection } from "@/lib/collections"
-import { FolderOpen, Plus, Trash2, ArrowRight, ExternalLink } from "lucide-react"
+import { FolderOpen, Plus, Trash, ArrowRight, ExternalLink } from "lucide-react"
 
 export default function CollectionsPage() {
   const [collections, setCollections] = useState<Collection[]>([])
@@ -101,7 +101,7 @@ export default function CollectionsPage() {
                     onClick={() => handleDelete(col.id)}
                     className="opacity-0 group-hover:opacity-100 flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:text-destructive hover:bg-muted transition-all"
                   >
-                    <Trash2 className="h-4 w-4" />
+                    <Trash className="h-4 w-4" />
                   </button>
                 </div>
                 <p className="text-xs text-muted-foreground mb-3">{col.items.length} items</p>

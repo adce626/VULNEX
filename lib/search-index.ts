@@ -1,4 +1,5 @@
 import { payloadCategories } from "./payloads-data"
+import { encodingFormats } from "./encoding-formats-data"
 
 export interface SearchEntry {
   text: string
@@ -197,6 +198,13 @@ function getIndex(): SearchEntry[] {
         section: "Payloads",
       }))
     ),
+    // Encoding Formats
+    ...encodingFormats.map(f => ({
+      text: `${f.name}: ${f.description}. Security uses: ${f.securityUseCases.slice(0, 3).join(", ")}`,
+      title: f.name,
+      href: `/interactive/encoding-formats/${f.slug}`,
+      section: "Encoding Formats",
+    })),
   ]
   return allEntries
 }

@@ -7,7 +7,7 @@ import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
 import { CommandCard } from "@/components/command-card"
 import { getCollection, deleteCollection, exportCollection, addToCollection, type Collection } from "@/lib/collections"
-import { FolderOpen, Trash2, ArrowLeft, Download, Copy, ExternalLink, Plus, X } from "lucide-react"
+import { FolderOpen, Trash, ArrowLeft, Download, Copy, ExternalLink, Plus, X } from "lucide-react"
 
 export default function CollectionDetailPage() {
   const params = useParams()
@@ -107,7 +107,7 @@ export default function CollectionDetailPage() {
                   <Copy className="h-3.5 w-3.5" /> Copy JSON
                 </button>
                 <button onClick={handleDelete} className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs text-muted-foreground hover:text-destructive hover:border-destructive/50 transition-colors">
-                  <Trash2 className="h-3.5 w-3.5" /> Delete
+                  <Trash className="h-3.5 w-3.5" /> Delete
                 </button>
               </div>
             </div>

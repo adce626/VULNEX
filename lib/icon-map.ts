@@ -18,6 +18,8 @@ import {
   FolderSearch,
   Network,
   Key,
+  Wand2,
+  FileCode,
 } from "lucide-react"
 
 export const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -40,4 +42,6 @@ export const iconMap: Record<string, React.ComponentType<{ className?: string }>
   "folder-search": FolderSearch,
   network: Network,
   key: Key,
+  wand: Wand2,
+  "file-code": FileCode,
 }
