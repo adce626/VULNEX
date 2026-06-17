@@ -102,17 +102,13 @@ export function UsageGuide({ guide, tool, children }: UsageGuideProps) {
                         {idx + 1}
                       </span>
                       <div className="flex-1">
-                        {typeof step === "string" ? (
-                          <p>{step}</p>
-                        ) : (
-                          <div className="space-y-1">
-                            {step.split("\n").map((line, i) => (
-                              <span key={i} className="block">
-                                {line}
-                              </span>
-                            ))}
-                          </div>
-                        )}
+                        <div className="space-y-1">
+                          {step.split("\n").map((line, i) => (
+                            <span key={i} className="block">
+                              {line}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   ))}
