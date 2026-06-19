@@ -821,7 +821,7 @@ function ascii85Decode(s: string): string {
 }
 
 // === Async utilities (compression, hashing, charset) ===
-async function compressData(text: string, format: "gzip" | "zlib"): Promise<string> {
+async function compressData(text: string, format: "gzip" | "deflate"): Promise<string> {
   const enc = new TextEncoder()
   const data = enc.encode(text)
   const cs = new CompressionStream(format)
@@ -835,7 +835,7 @@ async function compressData(text: string, format: "gzip" | "zlib"): Promise<stri
   return btoa(String.fromCharCode(...total))
 }
 
-async function decompressData(text: string, format: "gzip" | "zlib"): Promise<string> {
+async function decompressData(text: string, format: "gzip" | "deflate"): Promise<string> {
   const binary = atob(text)
   const bytes = new Uint8Array(binary.length); for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i)
   const ds = new DecompressionStream(format)
