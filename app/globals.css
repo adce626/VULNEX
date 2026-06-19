@@ -159,12 +159,19 @@
   }
 }
 
+/* Mobile: clear fixed sidebar toggle button */
+@media (max-width: 1023px) {
+  #main-content {
+    padding-top: 3.75rem;
+  }
+}
+
 /* Sidebar collapsed state */
 body[data-sidebar-collapsed="true"] #main-content {
-  padding-left: 4rem !important;
+  padding-left: 4rem;
 }
 body[data-sidebar-collapsed="false"] #main-content {
-  padding-left: 16rem !important;
+  padding-left: 16rem;
 }
 
 @keyframes blink {
