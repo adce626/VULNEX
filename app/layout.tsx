@@ -92,10 +92,10 @@ export default function RootLayout({
         </a>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="neon"
           enableSystem
           disableTransitionOnChange
-          themes={["dark", "light", "neon"]}
+          themes={["neon", "light", "dark"]}
         >
           <PageTransition>{children}</PageTransition>
           <PageTracker />

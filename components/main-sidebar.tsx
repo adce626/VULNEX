@@ -437,7 +437,7 @@ export function MainSidebar() {
     <div className={cn("sticky bottom-0 border-t border-border shrink-0 bg-card", isCollapsed ? "p-2" : "p-4")}>
       {isCollapsed ? (
         <div className="flex flex-col items-center gap-3">
-          <button onClick={() => { const order = ["dark", "light", "neon"]; const idx = order.indexOf(theme || "dark"); setTheme(order[(idx + 1) % order.length]) }} className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:text-amber-400 hover:bg-muted transition-colors" aria-label="Toggle theme">
+          <button onClick={() => { const order = ["neon", "light", "dark"]; const idx = order.indexOf(theme || "neon"); setTheme(order[(idx + 1) % order.length]) }} className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:text-amber-400 hover:bg-muted transition-colors" aria-label="Toggle theme">
             {mounted && theme === "neon" ? (
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2z" /><path d="M12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6 6 6 0 0 1-6-6 6 6 0 0 1 6-6z" /><path d="M12 10a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2z" /></svg>
             ) : mounted && theme === "light" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
@@ -453,11 +453,12 @@ export function MainSidebar() {
       ) : (
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1">
-            <button onClick={() => { const order = ["dark", "light", "neon"]; const idx = order.indexOf(theme || "dark"); setTheme(order[(idx + 1) % order.length]) }} className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:text-amber-400 hover:bg-muted transition-colors" aria-label="Toggle theme">
+            <button onClick={() => { const order = ["neon", "light", "dark"]; const idx = order.indexOf(theme || "neon"); setTheme(order[(idx + 1) % order.length]) }} className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:text-amber-400 hover:bg-muted transition-colors" aria-label="Toggle theme">
               {mounted && theme === "neon" ? (
                 <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2z" /><path d="M12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6 6 6 0 0 1-6-6 6 6 0 0 1 6-6z" /><path d="M12 10a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2z" /></svg>
               ) : mounted && theme === "light" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </button>
+
             <div className="flex items-center gap-2 rounded-xl border border-border/60 bg-muted/30 px-3 py-1.5">
               <button onClick={() => setShortcutsOpen(true)} className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:text-primary hover:bg-muted transition-colors" aria-label="Keyboard shortcuts" title="Keyboard shortcuts"><Keyboard className="h-4 w-4" /></button>
               <div className="h-5 w-px bg-border/50" />
