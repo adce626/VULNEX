@@ -91,19 +91,6 @@ export default function VulnerabilitiesPage() {
         <Breadcrumb items={[{ label: "Web Vulnerabilities" }]} />
         <HeroSection icon={<Bug className="h-8 w-8" />} title="Web Vulnerabilities" description="Web security vulnerabilities and exploit techniques" gradient="from-destructive/5 via-background to-accent/5" iconBg="bg-destructive/10" iconColor="text-destructive" />
 
-        {/* Header */}
-        <div className="border-b border-border bg-gradient-to-br from-destructive/5 via-background to-accent/5">
-          <div className="mx-auto max-w-5xl px-6 py-12 text-center">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-destructive/10 text-destructive">
-              <Bug className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-foreground">Web Vulnerabilities</h1>
-            <p className="mt-2 text-muted-foreground">
-              Common web security vulnerabilities and exploitation techniques
-            </p>
-          </div>
-        </div>
-
         {/* Content */}
         <div className="mx-auto max-w-5xl px-6 py-12">
           <div className="grid gap-4">

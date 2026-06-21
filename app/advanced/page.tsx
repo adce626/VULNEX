@@ -56,19 +56,6 @@ export default function AdvancedPage() {
         <Breadcrumb items={[{ label: "Advanced Topics" }]} />
         <HeroSection icon={<Brain className="h-8 w-8" />} title="Advanced Topics" description="Advanced security testing techniques and methodologies" />
 
-        {/* Header */}
-        <div className="border-b border-border bg-gradient-to-br from-primary/5 via-background to-accent/5">
-          <div className="mx-auto max-w-5xl px-6 py-12 text-center">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-              <Brain className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-foreground">Advanced Topics</h1>
-            <p className="mt-2 text-muted-foreground">
-              Cutting-edge techniques and security research
-            </p>
-          </div>
-        </div>
-
         {/* Content */}
         <div className="mx-auto max-w-5xl px-6 py-12">
           <div className="grid gap-4">
