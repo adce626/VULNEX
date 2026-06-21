@@ -201,9 +201,11 @@ VULNEX is intended for **educational and ethical use only**. Only test systems y
 
 ---
 
-<picture align="center">
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/adce626/VULNEX/output/github-contribution-grid-snake-dark.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/adce626/VULNEX/output/github-contribution-grid-snake.svg" />
-  <img alt="GitHub contribution grid snake animation" src="https://raw.githubusercontent.com/adce626/VULNEX/output/github-contribution-grid-snake.svg" width="100%" />
-</picture>
 
+<br>
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/9ec3fed0-45ff-4cb3-988c-f8cd66e85082">
+</p>
+
+<br>
