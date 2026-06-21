@@ -189,31 +189,24 @@ tests/                        # Unit and E2E tests
 
 ---
 
+## ⚠️ Disclaimer
+
+VULNEX is intended for **educational and ethical use only**. Only test systems you own or have explicit permission to test. Unauthorized use against third-party websites or systems without consent is **illegal and unethical**.
+
+---
+
 ## 📄 License
 
 [MIT](LICENSE)
 
 ---
 
-<p align="center">
-  <strong>For authorized security testing & CTF use only. Use responsibly.</strong>
-</p>
+<picture align="center">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/adce626/VULNEX/output/github-contribution-grid-snake-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/adce626/VULNEX/output/github-contribution-grid-snake.svg" />
+  <img alt="GitHub contribution grid snake animation" src="https://raw.githubusercontent.com/adce626/VULNEX/output/github-contribution-grid-snake.svg" width="100%" />
+</picture>
 
-<p align="center">
-  <br>
-  <code>______██████████████______<br>
-  ___████▒▒▒▒▒▒▒▒▒▒▒▒████___<br>
-  __██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██__<br>
-  _██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██_<br>
-  _██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██_<br>
-  __██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██__<br>
-  ___████▒▒▒▒▒▒▒▒▒▒▒▒████___<br>
-  ______██████████████______<br>
-  ___________██_____________<br>
-  ___________██_____________<br>
-  ___________██_____________<br>
-  _______████████___________<br>
-  _______████████___________</code>
-  <br><br>
-  <sub>Built with 🛡️ for the security community</sub>
+<p align="center" style="color: #eab308; font-weight: 600;">
+  تحذير: يُستخدم برنامج VULNEX لأغراض تعليمية وأخلاقية فقط. يجب استخدامه لاختبار الأنظمة التي تملكها أو لديك إذن صريح لاختبارها. يُعدّ الاستخدام غير المصرح به لمواقع أو أنظمة جهات خارجية دون موافقة غير قانوني وغير أخلاقي.
 </p>
