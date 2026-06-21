@@ -207,6 +207,3 @@ VULNEX is intended for **educational and ethical use only**. Only test systems y
   <img alt="GitHub contribution grid snake animation" src="https://raw.githubusercontent.com/adce626/VULNEX/output/github-contribution-grid-snake.svg" width="100%" />
 </picture>
 
-<p align="center" style="color: #eab308; font-weight: 600;">
-  تحذير: يُستخدم برنامج VULNEX لأغراض تعليمية وأخلاقية فقط. يجب استخدامه لاختبار الأنظمة التي تملكها أو لديك إذن صريح لاختبارها. يُعدّ الاستخدام غير المصرح به لمواقع أو أنظمة جهات خارجية دون موافقة غير قانوني وغير أخلاقي.
-</p>
