@@ -1,12 +1,61 @@
-# VULNEX — Web Hacking Playbook
+```
+██╗   ██╗██╗   ██╗██╗     ███╗   ██╗███████╗██╗  ██╗
+██║   ██║██║   ██║██║     ████╗  ██║██╔════╝╚██╗██╔╝
+██║   ██║██║   ██║██║     ██╔██╗ ██║█████╗   ╚███╔╝ 
+╚██╗ ██╔╝██║   ██║██║     ██║╚██╗██║██╔══╝   ██╔██╗ 
+ ╚████╔╝ ╚██████╔╝███████╗██║ ╚████║███████╗██╔╝ ██╗
+  ╚═══╝   ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝
+```
 
-A comprehensive platform for security researchers and bug hunters. Ready-to-use payloads, exploitation techniques, practical tools, and quick checklists — all in one place.
+<p align="center">
+  <strong>Web Hacking Playbook — Bug Bounty Methodology, Payloads, Recon & Interactive Security Tools</strong>
+</p>
 
-## Live Demo
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-16-black?logo=next.js" alt="Next.js 16">
+  <img src="https://img.shields.io/badge/TypeScript-5.7-blue?logo=typescript" alt="TypeScript 5.7">
+  <img src="https://img.shields.io/badge/Tailwind-v4-38bdf8?logo=tailwindcss" alt="Tailwind v4">
+  <img src="https://img.shields.io/badge/Radix_UI-shadcn/ui-white?logo=radixui" alt="shadcn/ui">
+  <img src="https://img.shields.io/badge/license-MIT-green" alt="MIT">
+  <img src="https://img.shields.io/badge/pnpm-10-F69220?logo=pnpm" alt="pnpm">
+  <br>
+  <a href="https://vulnex.vercel.app"><img src="https://img.shields.io/badge/LIVE_DEMO-vulnex.vercel.app-ff6b6b?logo=vercel&style=for-the-badge" alt="Live Demo"></a>
+</p>
 
-[https://vulnex.vercel.app](https://vulnex.vercel.app)
+---
 
-## Sections
+## 📋 Table of Contents
+
+- [What is VULNEX?](#what-is-vulnex)
+- [Interactive Tools](#-interactive-tools)
+- [Sections](#sections)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Performance Features](#performance-features)
+- [Stats](#-stats)
+- [License](#license)
+
+---
+
+## 🎯 What is VULNEX?
+
+A comprehensive platform for **security researchers**, **bug bounty hunters**, and **penetration testers**. Ready-to-use payloads, exploitation techniques, practical tools, quick checklists, and **interactive client-side analyzers** — all in one place.
+
+No backend, no API calls — everything runs in your browser.
+
+---
+
+## 🛠 Interactive Tools
+
+| Tool | Description | Tech |
+|------|-------------|------|
+| **JS Source Inspector** | Extract API keys, tokens, secrets, routes, and sensitive data from JavaScript source code. 150+ detection patterns, entropy scanning, obfuscation detection (array-based, control-flow flattening), risk scoring, comment-aware filtering, ignore with localStorage persistence. | `100% client-side · React · Web Crypto · Regex` |
+| **JWT Debugger** | Decode, inspect, and verify JWT tokens. Supports HS256/384/512, RS256/384/512, PS256/384/512, ES256/384/512, EdDSA. PEM & JWK key import. Real-time verification. | `100% client-side · Web Crypto API · React` |
+
+---
+
+## 📚 Sections
 
 | Section | Description |
 |---------|-------------|
@@ -23,16 +72,26 @@ A comprehensive platform for security researchers and bug hunters. Ready-to-use 
 | **Payloads** | XSS, SQLi, SSTI, Deserialization, Command Injection, and more |
 | **Browser Extensions** | 20+ curated extensions for bug hunting |
 
-## Tech Stack
+---
 
-- **Framework:** Next.js 16 (App Router, Turbopack)
-- **Language:** TypeScript 5.7 (strict mode)
-- **Styling:** Tailwind CSS v4 + OKLCH colors
-- **UI:** Radix UI + shadcn/ui (New York style) + Lucide React
-- **Themes:** Dark, Light, Neon
-- **Fonts:** Inter (sans), JetBrains Mono (mono)
+## 🧱 Tech Stack
 
-## Getting Started
+```
+Framework   →  Next.js 16 (App Router · Turbopack)  
+Language    →  TypeScript 5.7 (strict mode)  
+Styling     →  Tailwind CSS v4 + OKLCH colors  
+UI Library  →  Radix UI + shadcn/ui (New York style)  
+Icons       →  Lucide React  
+Themes      →  Dark · Light · Neon  
+Fonts       →  Inter (sans) · JetBrains Mono (mono)  
+Testing     →  Vitest + Playwright  
+CI/CD       →  GitHub Actions  
+Deploy      →  Vercel  
+```
+
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
@@ -48,7 +107,7 @@ pnpm install
 pnpm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open **[http://localhost:3000](http://localhost:3000)** in your browser.
 
 ### Docker
 
@@ -56,7 +115,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 docker compose up --build
 ```
 
-## Scripts
+### Scripts
 
 | Command | Description |
 |---------|-------------|
@@ -67,45 +126,44 @@ docker compose up --build
 | `pnpm run test` | Run unit tests (Vitest) |
 | `pnpm run test:e2e` | Run E2E tests (Playwright) |
 
-## Project Structure
+---
+
+## 📁 Project Structure
 
 ```
-app/                    — Pages and layouts (App Router)
-├── api/search/         — Server-side search endpoint
-├── toolkit/            — Quick Recon Toolkit (interactive)
-├── tools/              — 104 individual tool guide pages
-├── vulnerabilities/    — Vulnerability methodology pages
-├── recon/              — Recon & OSINT pages
+app/                          # Pages and layouts (App Router)
+├── interactive/
+│   ├── js-inspector/         ← JS Source Inspector tool
+│   └── jwt-debugger/         ← JWT Debugger tool
+├── api/search/               # Server-side search endpoint
+├── toolkit/                  # Quick Recon Toolkit
+├── tools/                    # 104 tool guide pages
+├── vulnerabilities/          # Vulnerability methodology pages
+├── recon/                    # Recon & OSINT pages
 └── ...
 
-components/             — React components
-├── ui/                 — shadcn/ui components (55+)
-├── breadcrumb.tsx      — Shared breadcrumb component
-├── command-card.tsx     — Command display card (memoized)
-├── content-layout.tsx  — Content wrapper
-└── main-sidebar.tsx    — Navigation sidebar
+components/                   # React components
+├── ui/                       # shadcn/ui components (55+)
+├── breadcrumb.tsx
+├── command-card.tsx
+├── content-layout.tsx
+└── main-sidebar.tsx
 
-lib/                    — Data and utilities
-├── guides/             — 104 tool guide data files
-├── toolkit-data.ts     — Toolkit sections data
-├── icon-map.ts         — Shared icon mappings
-├── site-data.ts        — Navigation structure
-├── search-index.ts     — Client-side search index
-└── *-data.ts           — Topic-specific data files
+lib/                          # Data and utilities
+├── guides/                   # 104 tool guide data files
+├── toolkit-data.ts           # Toolkit sections data
+├── icon-map.ts               # Shared icon mappings
+├── js-inspector-patterns.ts  # 150+ secret detection patterns
+└── ...
 
-hooks/                  — Custom React hooks
-tests/                  — Unit and E2E tests
-.github/workflows/      — CI/CD pipeline
+hooks/                        # Custom React hooks
+tests/                        # Unit and E2E tests
+.github/workflows/            # CI/CD pipeline
 ```
 
-## CI/CD
+---
 
-GitHub Actions runs automatically on push/PR to `main`:
-- Lint check
-- TypeScript build
-- Unit tests (Vitest)
-
-## Performance Features
+## ⚡ Performance Features
 
 - **IntersectionObserver lazy loading** — Sections fade in on scroll
 - **React.memo** — Memoized components reduce re-renders
@@ -114,14 +172,48 @@ GitHub Actions runs automatically on push/PR to `main`:
 - **Cursor trail** — Animated cursor following (desktop only)
 - **Floating particles** — Background particle system
 
-## Contributing
+---
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+## 📊 Stats
 
-## License
+```
+★ 150+  secret detection patterns (JS Inspector)
+★ 104   tool guides
+★ 2700+ recon commands
+★ 55+   shadcn/ui components
+★ 17    recon toolkit categories
+★ 20+   browser extension recommendations
+★ 3     themes (Dark · Light · Neon)
+★ 100%  client-side interactive tools
+```
+
+---
+
+## 📄 License
 
 [MIT](LICENSE)
 
 ---
 
-**For authorized security testing & CTF use only. Use responsibly.**
+<p align="center">
+  <strong>For authorized security testing & CTF use only. Use responsibly.</strong>
+</p>
+
+<p align="center">
+  <br>
+  <code>______██████████████______<br>
+  ___████▒▒▒▒▒▒▒▒▒▒▒▒████___<br>
+  __██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██__<br>
+  _██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██_<br>
+  _██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██_<br>
+  __██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██__<br>
+  ___████▒▒▒▒▒▒▒▒▒▒▒▒████___<br>
+  ______██████████████______<br>
+  ___________██_____________<br>
+  ___________██_____________<br>
+  ___________██_____________<br>
+  _______████████___________<br>
+  _______████████___________</code>
+  <br><br>
+  <sub>Built with 🛡️ for the security community</sub>
+</p>
