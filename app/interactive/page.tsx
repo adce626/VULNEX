@@ -4,9 +4,10 @@ import { PageTitle } from "@/components/page-title"
 import { MainSidebar } from "@/components/main-sidebar"
 import Link from "next/link"
 import { interactiveTools } from "@/lib/interactive-data"
-import { Code, Key, Fingerprint, Shield, Network, ChevronRight, Home, Sparkles } from "lucide-react"
+import { Code, Key, Fingerprint, Shield, Network, Search, ChevronRight, Home, Sparkles } from "lucide-react"
 
 const toolIcons: Record<string, React.ReactNode> = {
+  Search: <Search className="h-6 w-6 text-white" />,
   Code: <Code className="h-6 w-6 text-white" />,
   Key: <Key className="h-6 w-6 text-white" />,
   Fingerprint: <Fingerprint className="h-6 w-6 text-white" />,

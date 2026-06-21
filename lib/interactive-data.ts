@@ -396,6 +396,14 @@ export interface InteractiveToolInfo {
 
 export const interactiveTools: InteractiveToolInfo[] = [
   {
+    id: "js-inspector",
+    title: "JS Source Inspector",
+    description: "Extract API keys, tokens, secrets, routes, and sensitive data from JavaScript source code",
+    icon: "Search",
+    href: "/interactive/js-inspector",
+    color: "from-rose-600 to-pink-400",
+  },
+  {
     id: "encoder",
     title: "Universal Encoder",
     description: "Encode and decode between Base64, URL, HTML, Hex, Unicode, JWT, Base62, Base85, Base36, Binary, Octal, and ROT13",
