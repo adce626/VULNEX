@@ -428,19 +428,19 @@ export const interactiveTools: InteractiveToolInfo[] = [
     color: "from-violet-600 to-purple-400",
   },
   {
-    id: "csp-evaluator",
-    title: "CSP Evaluator",
-    description: "Parse and analyze Content Security Policy headers for security weaknesses",
-    icon: "Shield",
-    href: "/interactive/csp-evaluator",
-    color: "from-emerald-600 to-green-400",
-  },
-  {
     id: "port-visualizer",
     title: "Port Visualizer",
     description: "Browse and search common network ports with service details and categories",
     icon: "Network",
     href: "/interactive/port-visualizer",
     color: "from-sky-600 to-blue-400",
+  },
+  {
+    id: "payload-forge",
+    title: "Payload Forge",
+    description: "Advanced payload generator & multi-encoder — craft, encode, bypass",
+    icon: "Sword",
+    href: "/interactive/payload-forge",
+    color: "from-fuchsia-600 to-cyan-400",
   },
 ]

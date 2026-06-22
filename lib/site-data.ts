@@ -123,7 +123,6 @@ export const navigation: NavSection[] = [
       { title: "Universal Encoder", href: "/interactive/encoder" },
       { title: "JWT Debugger", href: "/interactive/jwt-debugger" },
       { title: "Hash Detector", href: "/interactive/hash-detector" },
-      { title: "CSP Evaluator", href: "/interactive/csp-evaluator" },
       { title: "Port Visualizer", href: "/interactive/port-visualizer" },
     ],
   },

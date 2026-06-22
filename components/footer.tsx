@@ -51,7 +51,7 @@ export function Footer({ text }: FooterProps) {
               </svg>
             </a>
             <a
-              href="https://github.com/adcy626"
+              href="https://github.com/adce626"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground transition-colors hover:text-foreground"
