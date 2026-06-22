@@ -89,13 +89,8 @@ export default function PayloadForgePage() {
     const check = () => setIsMobile(window.innerWidth < 1024)
     check()
     window.addEventListener("resize", check)
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") { setShowTemplates(false); setShowHistory(false) }
-      if ((e.ctrlKey || e.metaKey) && e.key === "Enter") { handleEncode() }
-    }
-    window.addEventListener("keydown", onKey)
-    return () => { window.removeEventListener("resize", check); window.removeEventListener("keydown", onKey) }
-  }, [handleEncode])
+    return () => window.removeEventListener("resize", check)
+  }, [])
   const category = payloadCategories.find(c => c.id === selectedCategory)
   const subcategory = category?.subcategories.find(s => s.id === selectedSub)
   const levelOrder = ["Low", "Medium", "Hard", "Extreme"]
@@ -142,6 +137,15 @@ export default function PayloadForgePage() {
     setToast("Encoding applied")
     setTimeout(() => setToast(""), 2000)
   }, [currentPayload, encodingChain, obfuscationOpts, selectedPayload])
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") { setShowTemplates(false); setShowHistory(false) }
+      if ((e.ctrlKey || e.metaKey) && e.key === "Enter") { handleEncode() }
+    }
+    window.addEventListener("keydown", onKey)
+    return () => window.removeEventListener("keydown", onKey)
+  }, [handleEncode])
 
   const handleCopy = useCallback(async () => {
     if (!currentPayload) return
