@@ -13,11 +13,16 @@ import {
   ArrowLeftRight, ExternalLink, Sword, Copy, Check, Trash2,
   Shuffle, ChevronRight, Star,
   History, X, Settings2, Zap, Bookmark,
-  Home, Wand2, AlertTriangle, Search, RotateCcw,
+  Home, Wand2, AlertTriangle, Search, RotateCcw, ArrowRight,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 
+const iconColors: Record<string, string> = {
+  Code2: "text-cyan-400", Database: "text-blue-400", Braces: "text-fuchsia-400",
+  FolderOpen: "text-emerald-400", Terminal: "text-orange-400", FileCode: "text-yellow-400",
+  ArrowLeftRight: "text-violet-400", ExternalLink: "text-rose-400",
+}
 const categoryIcons: Record<string, React.ReactNode> = {
   Code2: <Code2 className="h-5 w-5" />,
   Database: <Database className="h-5 w-5" />,
@@ -247,17 +252,19 @@ export default function PayloadForgePage() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 overflow-x-auto border-b border-white/5 bg-black/20 px-6 py-3">
+        <div className="flex items-center gap-2 overflow-x-auto border-b border-white/5 bg-black/40 px-6 py-3">
           {payloadCategories.map(cat => (
             <button key={cat.id} onClick={() => { setSelectedCategory(cat.id); setSelectedSub(cat.subcategories[0]?.id ?? "") }}
               className={cn(
-                "flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-all whitespace-nowrap border",
+                "group relative flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all whitespace-nowrap border overflow-hidden",
                 selectedCategory === cat.id
-                  ? "border-cyan-500/50 bg-cyan-500/10 text-cyan-300 shadow-[0_0_20px_rgba(0,245,255,0.1)]"
-                  : "border-white/5 text-white/40 hover:border-white/10 hover:text-white/70"
+                  ? "border-cyan-500/60 bg-gradient-to-br from-cyan-500/15 to-fuchsia-500/10 text-cyan-300 shadow-[0_0_30px_rgba(0,245,255,0.15)]"
+                  : "border-white/5 text-white/30 hover:border-white/20 hover:text-white/70 hover:bg-white/[0.03]"
               )}
             >
-              {categoryIcons[cat.icon]}
+              <span className={cn("transition-all", selectedCategory === cat.id ? "drop-shadow-[0_0_8px_rgba(0,245,255,0.5)]" : "opacity-60", iconColors[cat.icon])}>
+                {categoryIcons[cat.icon]}
+              </span>
               {cat.name}
             </button>
           ))}
@@ -310,7 +317,9 @@ export default function PayloadForgePage() {
                               : "text-white/40 hover:bg-white/5 hover:text-white/70"
                           )}
                         >
-                          <ChevronRight className={cn("h-3 w-3 transition-transform", selectedSub === sub.id && "rotate-90")} />
+                          <span className={cn("transition-all", selectedSub === sub.id ? iconColors[category.icon] : "opacity-50")}>
+                            {categoryIcons[category.icon]}
+                          </span>
                           {sub.name}
                         </button>
                         {selectedSub === sub.id && (
@@ -343,7 +352,7 @@ export default function PayloadForgePage() {
                   <div className="flex items-center justify-between border-b border-white/5 px-5 py-3">
                     <div className="flex items-center gap-3">
                       <Zap className="h-4 w-4 text-cyan-400" />
-                      <h2 className="text-sm font-semibold text-white/80">Payload Studio</h2>
+                      <h2 className="bg-gradient-to-r from-cyan-400 to-fuchsia-400 bg-clip-text text-sm font-bold text-transparent">Payload Studio</h2>
                       {selectedPayload && (
                         <button onClick={() => toggleFavorite(selectedPayload.id)}
                           className={cn("transition-colors", favorites.includes(selectedPayload.id) ? "text-yellow-400" : "text-white/20 hover:text-yellow-400")}
@@ -369,11 +378,24 @@ export default function PayloadForgePage() {
                     </div>
                   </div>
                   <div className="p-5">
-                    <textarea value={currentPayload} onChange={e => setCurrentPayload(e.target.value)}
-                      placeholder="Select a payload or type your own..."
-                      className="min-h-[200px] w-full resize-y rounded-xl border border-white/5 bg-black/40 p-4 font-mono text-sm text-white/80 placeholder:text-white/10 outline-none transition-all focus:border-cyan-500/30 focus:shadow-[0_0_30px_rgba(0,245,255,0.05)]"
-                      spellCheck={false}
-                    />
+                    <div className="rounded-xl border border-white/5 bg-black/40 transition-all focus-within:border-cyan-500/30 focus-within:shadow-[0_0_30px_rgba(0,245,255,0.05)]">
+                      <div className="flex">
+                        <div className="select-none border-r border-white/5 px-3 py-4 text-right font-mono text-sm leading-6 text-white/[0.07]" aria-hidden="true">
+                          {currentPayload.split('\n').map((_, i) => (
+                            <div key={i}>{i + 1}</div>
+                          ))}
+                        </div>
+                        <textarea value={currentPayload} onChange={e => setCurrentPayload(e.target.value)}
+                          placeholder="Select a payload or type your own..."
+                          className="min-h-[200px] w-full resize-y bg-transparent p-4 font-mono text-sm leading-6 text-white/80 placeholder:text-white/10 outline-none"
+                          spellCheck={false}
+                        />
+                      </div>
+                      <div className="flex items-center justify-between border-t border-white/5 px-4 py-2 text-[11px] text-white/20">
+                        <span>{currentPayload.length} B · {currentPayload.split('\n').length} lines</span>
+                        <span>{encodingChain.length > 0 ? `Active: ${encodingChain.map(id => encoders.find(e => e.id === id)?.name).join(' → ')}` : 'No encoding active'}</span>
+                      </div>
+                    </div>
                     {selectedPayload && (
                       <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-white/30">
                         <span className="rounded-lg bg-white/5 px-2 py-1">{selectedPayload.name}</span>
@@ -405,13 +427,13 @@ export default function PayloadForgePage() {
                   <div className="flex items-center justify-between border-b border-white/5 px-5 py-3">
                     <div className="flex items-center gap-3">
                       <Wand2 className="h-4 w-4 text-fuchsia-400" />
-                      <h2 className="text-sm font-semibold text-white/80">Encoding Engine</h2>
+                      <h2 className="bg-gradient-to-r from-fuchsia-400 to-cyan-400 bg-clip-text text-sm font-bold text-transparent">Encoding Engine</h2>
                     </div>
                     <button onClick={handleEncode}
-                      className="flex items-center gap-1.5 rounded-xl border border-fuchsia-500/30 bg-fuchsia-500/10 px-4 py-1.5 text-xs font-medium text-fuchsia-300 hover:bg-fuchsia-500/20 transition-all"
+                      className="flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-fuchsia-600 to-cyan-600 px-4 py-1.5 text-xs font-bold text-white shadow-[0_0_20px_rgba(192,38,211,0.2)] hover:shadow-[0_0_30px_rgba(192,38,211,0.3)] transition-all hover:scale-105 active:scale-95"
                     >
                       <Zap className="h-3.5 w-3.5" />
-                      Apply Encoding Chain
+                      Apply
                     </button>
                   </div>
                   <div className="p-5">
@@ -430,22 +452,25 @@ export default function PayloadForgePage() {
                       ))}
                     </div>
                     {encodingChain.length > 0 && (
-                      <div className="mt-4 flex flex-wrap items-center gap-2 rounded-xl border border-white/5 bg-black/30 p-3">
-                        <span className="text-xs text-white/30">Chain:</span>
-                        {encodingChain.map(id => {
-                          const enc = encoders.find(e => e.id === id)
-                          return (
-                            <span key={id} className="flex items-center gap-1 rounded-lg bg-fuchsia-500/10 px-3 py-1.5 text-xs font-medium text-fuchsia-300">
-                              {enc?.name ?? id}
-                              <button onClick={() => toggleEncoder(id)} className="text-fuchsia-300/40 hover:text-red-400 transition-colors ml-0.5">
-                                <X className="h-3 w-3" />
-                              </button>
-                            </span>
-                          )
-                        })}
-                        <button onClick={() => setEncodingChain([])} className="text-xs text-white/20 hover:text-red-400 transition-colors ml-1">
-                          Clear all
-                        </button>
+                      <div className="mt-4 rounded-xl border border-white/5 bg-black/30 p-3">
+                        <div className="flex items-center gap-1 overflow-x-auto">
+                          <span className="shrink-0 text-[10px] font-bold text-white/[0.08] uppercase tracking-widest mr-1 select-none">PIPELINE</span>
+                          {encodingChain.map((id, idx) => {
+                            const enc = encoders.find(e => e.id === id)
+                            return [
+                              idx > 0 && <ArrowRight key={`arr-${id}`} className="h-3 w-3 shrink-0 text-fuchsia-500/40" />,
+                              <span key={id} className="group flex shrink-0 items-center gap-1 rounded-lg border border-fuchsia-500/20 bg-gradient-to-r from-fuchsia-500/10 to-cyan-500/5 px-2.5 py-1.5 text-xs font-medium text-fuchsia-300 shadow-[0_0_10px_rgba(192,38,211,0.05)]">
+                                {enc?.name ?? id}
+                                <button onClick={() => toggleEncoder(id)} className="text-fuchsia-300/30 hover:text-red-400 transition-colors">
+                                  <X className="h-3 w-3" />
+                                </button>
+                              </span>
+                            ]
+                          })}
+                          <button onClick={() => setEncodingChain([])} className="shrink-0 ml-2 rounded-md border border-white/5 px-2 py-1 text-[10px] text-white/[0.15] hover:text-red-400 hover:border-red-500/30 transition-all">
+                            Clear
+                          </button>
+                        </div>
                       </div>
                     )}
                   </div>
@@ -508,26 +533,25 @@ export default function PayloadForgePage() {
                           ))}
                         </div>
                       </div>
-                    </div>
-                  </div>
-
-                  <div className="rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-xl">
-                    <div className="border-b border-white/5 px-4 py-3">
-                      <h3 className="text-sm font-semibold text-white/60">Favorites</h3>
-                    </div>
-                    <div className="p-2">
-                      {favPayloads.length === 0 ? (
-                        <p className="px-3 py-4 text-center text-xs text-white/20">No favorites yet</p>
-                      ) : (
-                        favPayloads.map(p => (
-                          <button key={p.id} onClick={() => handleSelectPayload(p)}
-                            className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-left text-xs text-white/40 hover:bg-white/5 hover:text-white/70 transition-all"
-                          >
-                            <Star className="h-3 w-3 shrink-0 text-yellow-400" fill="currentColor" />
-                            <span className="truncate">{p.name}</span>
-                          </button>
-                        ))
-                      )}
+                      <div className="border-t border-white/5 pt-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Star className="h-3 w-3 text-yellow-400" fill="currentColor" />
+                          <label className="text-xs font-semibold text-white/40">Favorites ({favPayloads.length})</label>
+                        </div>
+                        {favPayloads.length === 0 ? (
+                          <p className="py-3 text-center text-[11px] text-white/15">Star a payload to save it here</p>
+                        ) : (
+                          <div className="space-y-0.5">
+                            {favPayloads.map(p => (
+                              <button key={p.id} onClick={() => handleSelectPayload(p)}
+                                className="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-left text-[11px] text-white/35 hover:bg-white/5 hover:text-white/60 transition-all"
+                              >
+                                <span className="truncate">{p.name}</span>
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
