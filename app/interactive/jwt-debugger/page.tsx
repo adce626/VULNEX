@@ -4,7 +4,7 @@ import { useState, useMemo, useCallback, useEffect } from "react"
 import { PageTitle } from "@/components/page-title"
 import { MainSidebar } from "@/components/main-sidebar"
 import Link from "next/link"
-import { ChevronRight, Home, Copy, Check, Key, AlertTriangle, Shield, Clock, Terminal, Info, Skull, Trash2, Wand2, RefreshCw, Fingerprint } from "lucide-react"
+import { ChevronRight, ChevronDown, Home, Copy, Check, Key, AlertTriangle, Shield, Clock, Terminal, Info, Skull, Trash2, Wand2, RefreshCw, Fingerprint, ClipboardPaste } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const claimDescriptions: Record<string, string> = {
@@ -29,148 +29,14 @@ const claimDescriptions: Record<string, string> = {
   family_name: "Family Name — user's last name",
 }
 
-const RSA_PRIV = `-----BEGIN PRIVATE KEY-----
-MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC7VJTUt9Us8cKj
-MzEfYyjiWA4R4/M2bS1GB4t7NXp98C26C6dVMvDuictGeurT8jNbvJZHtCSuYEvu
-NMoSfm76oqFvAp8Gy0iz5sxjZmSnXyCdPEovGhLa0VzMaQ8s+CLOyS56YyCFGeJZ
-qgtzJ6GR3eqoYSW9b9UMvkBpZODSctWSNGj3P7jRFDO5VoTQCQAWbFnOjDfH5Ulg
-p2PKxQnSJP3AJLQNFNe7br1XbrhV//eO+t51mIpGSDCUv3E0DDFcWDTH9cXDTDlR
-ZVEiR2BwpZOOkE/Z0/BVnhZYL71oZV34bKfWjQIt6V/isSMahdsAASACp4ZTGtwi
-VuNd9tybAgMBAAECggEASb51o2WbL2C6QEmfNLiFdsVHfWB+RJeIdaCl5JwSidr0
-bDjeI/g3j9Lr7hHfM/7QHf/Mgj4F1j6NK5X+LKlyQpMS84EhECg3N+PU+Luj3Yia
-LPJPT4vxPBxPdT3BwSVZ0HXmN2c5QtBK/08Q+5Eynw9weRMUDSfIZp2bGjR26OIc
-dNP29PJxAJ5ZhTrMq9gjHOmSZwJqg/Rn3dQRakXIG8Pzfnb5goQH7rL+uFd5N3oS
-QjbNssHVFVUMECmOajCB6AdBwNG5gUbBxuG89Mg5x3LGMiAn4x1J+0I05uFg6xIv
-+WvAEsMnK1amJ7B4Bk3CIC0YR+o5UW5XfqGWx0iW+QKBgQDk72eP7S1cy+L7AuTj
-wTF/0FPUhxX+GJaHFwTChk5dxRQsJ+IDaavN/IFJFtPlMHVdZ2ppOgcBZx6XDEg8
-TLsO+4MJ/BtO/lXQpIYh1ROqQy85G61gvF2S80oWgRVi1f/jg9yNHl1cE30FsJHE
-+nm6UNwQvLgWodw/QhAeuFMxUwKBgQDRcO7+pXyA9GrXX4gXq6q6VhL/Q+TiSTt6
-6E8l7mni95tQ6taO/9nuR1Tfh4hCQ6kM09Gc6xOAUA+0WLCGft1Mh9TlV5L1/Bpm
-Lv70NC5pGLu+EJRDxQC75fCQxJNZ8ld4OqRq0bSC7qscqK9EXGCM8Vtnhl4h6GTx
-YqKxkqL42wKBgFSMq1lAiCdVgGHGk68/kYvWtA3tSKzKV/0Vs9ajB2Gm/5OBhGXS
-8bnVQ/+HXUveV8p4/0G9FBkmhRsBCgSH7vvI/Obuqk5BvN6/vbQ7idn1mnEqIDV2
-2kJnXjYlBmOxCLP0ReQv6v2s8nQj5pPn7zqQ1xRDmBPMPIqEKD7Aj3g5AoGARmI+
-2kKBBQhtVp/YBSlV7M+xPQFC5zl6fWrAnYmC/E86sRhODQZBhQ4wrdchMIKhqJ0i
-YXMGstMYLHLwQQYq4wJ/WZnyR9nqn76TlYhNWbFKp5NR6Rf1gs1pYjh3HgQ5H5nw
-FnCQOELIlW3lFN5z+xS9ZrkXFJlyh4Gjuq8IWt8CgYEAzHRXg7xhQ9TD/5yXmSoV
-zXshRP65KUt0g+GGbQqQ1KFLeCVqKQN3PqWnRCOGnCjiKpE0vxiVhjQ/qF7jKWyU
-R5DpSdFTSzx/P/h5wLsj0RqA43jDktgH/5JQzNqSVGWLHZ3nzVcGCENqQp8vxAIz
-/X2v7JcmBXLPrS0qxsFQ2uI=
------END PRIVATE KEY-----`
-
-const ES256_PRIV = `-----BEGIN PRIVATE KEY-----
-MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgIn5WzY1GJAFwpX2y
-ZyrWKSTADAFdhB0xEojxLOJLnOqhRANCAATYk4RBaFz6eunICasgOFxFo2FwATQt
-b5c/uJApI/3iYTfCptEhLT4Fv9H42Dwk56INOPt/7hS0U6ejpgNFsnFi
------END PRIVATE KEY-----`
-
-const ES384_PRIV = `-----BEGIN PRIVATE KEY-----
-MIG2AgEAMBAGByqGSM49AgEGBSuBBAAiBIGeMIGbAgEBBDB0lQlN5nK/hY+zHk4s
-9gCJK3l4H1aZ46mTz62lHj0rA0t7mDIMfF1ll1y0Yj6FFC+hZANiAATT4YVJxpIF
-jDBFPmlPLGMVLMHAogNVgHgzLDXX/WnnLx7s6/UGfZYqejOJK9b1HniENJq2oWrF
-iEzLx6OJY2dqLNMFRgQ5sz6Cyg8dPN6M/S1LRmKjPNX1vUcRz31l10B9eR4=
------END PRIVATE KEY-----`
-
-const ES512_PRIV = `-----BEGIN PRIVATE KEY-----
-MIHuAgEAMBAGByqGSM49AgEGBSuBBAAjBIHWMIHTAgEBBEIAxgQmHFYmT/IzJ5hO
-UQKLq8ByOA2vo9t+BbAGuLh/3nZ41BcPqErn2eGZQ7fz/CqkKsmFuEV0op+ZWJ4l
-Fm+0pS+hgYkDgYYABABtyMEAC7C6S5iZWFQ5z4/QPSQl3I7j3LxfMBeMTkuLNy7D
-G/o+dvVm/Y+z+QCNBXy9tCRUjdjI0t8p17CNmIRMhAF4AYHY2B8tKJPFQ0G/PYN+
-I0iXg1Yr72clJ1J0BPuFnzEfxvPq75gTmlAYzRKBYWY1sLpSZstPpvFn6lJFTtQj
-ow==
------END PRIVATE KEY-----`
-
-const ED_PRIV = `-----BEGIN PRIVATE KEY-----
-MC4CAQAwBQYDK2VwBCIEIAptCWxRo2Kc7CRx3lBz1+LRpNH2h/2c80kj2nqAt0/k
------END PRIVATE KEY-----`
-
 const EXAMPLE_KEYS: Record<string, string> = {
   HS256: "a-string-secret-at-least-256-bits-long",
   HS384: "a-valid-string-secret-that-is-at-least-384-bits-long",
   HS512: "a-valid-string-secret-that-is-at-least-512-bits-long-which-is-very-long",
-  RS256: RSA_PRIV, RS384: RSA_PRIV, RS512: RSA_PRIV,
-  PS256: RSA_PRIV, PS384: RSA_PRIV, PS512: RSA_PRIV,
-  ES256: ES256_PRIV, ES384: ES384_PRIV, ES512: ES512_PRIV,
-  EdDSA: ED_PRIV,
-  none: "",
-}
-
-const EXAMPLE_PUB_KEYS: Record<string, string> = {
-  HS256: "a-string-secret-at-least-256-bits-long",
-  HS384: "a-valid-string-secret-that-is-at-least-384-bits-long",
-  HS512: "a-valid-string-secret-that-is-at-least-512-bits-long-which-is-very-long",
-  RS256: `-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu1SU1LfVLPHCozMxH2Mo
-4lgOEePzNm0tRgeLezV6ffAt0gunVTLw7onLRnrq0/IzW7yWR7QkrmBL7jTKEn5u
-+qKhbwKfBstIs+bMY2Zkp18gnTxKLxoS2tFczGkPLPgizskuemMghRniWaoLcyeh
-kd3qqGElvW/VDL5AaWTg0nLVkjRo9z+40RQzuVaE8AkAFmxZzow3x+VJYKdjykkJ
-0iT9wCS0DRTXu269V264Vf/3jvredZiKRkgwlL9xNAwxXFg0x/XFw005UWVRIkdg
-cKWTjpBP2dPwVZ4WWC+9aGVd+Gyn1o0CLelf4rEjGoXbAAEgAqeGUxrcIlbjXfbc
-mwIDAQAB
------END PUBLIC KEY-----`,
-  RS384: `-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu1SU1LfVLPHCozMxH2Mo
-4lgOEePzNm0tRgeLezV6ffAt0gunVTLw7onLRnrq0/IzW7yWR7QkrmBL7jTKEn5u
-+qKhbwKfBstIs+bMY2Zkp18gnTxKLxoS2tFczGkPLPgizskuemMghRniWaoLcyeh
-kd3qqGElvW/VDL5AaWTg0nLVkjRo9z+40RQzuVaE8AkAFmxZzow3x+VJYKdjykkJ
-0iT9wCS0DRTXu269V264Vf/3jvredZiKRkgwlL9xNAwxXFg0x/XFw005UWVRIkdg
-cKWTjpBP2dPwVZ4WWC+9aGVd+Gyn1o0CLelf4rEjGoXbAAEgAqeGUxrcIlbjXfbc
-mwIDAQAB
------END PUBLIC KEY-----`,
-  RS512: `-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu1SU1LfVLPHCozMxH2Mo
-4lgOEePzNm0tRgeLezV6ffAt0gunVTLw7onLRnrq0/IzW7yWR7QkrmBL7jTKEn5u
-+qKhbwKfBstIs+bMY2Zkp18gnTxKLxoS2tFczGkPLPgizskuemMghRniWaoLcyeh
-kd3qqGElvW/VDL5AaWTg0nLVkjRo9z+40RQzuVaE8AkAFmxZzow3x+VJYKdjykkJ
-0iT9wCS0DRTXu269V264Vf/3jvredZiKRkgwlL9xNAwxXFg0x/XFw005UWVRIkdg
-cKWTjpBP2dPwVZ4WWC+9aGVd+Gyn1o0CLelf4rEjGoXbAAEgAqeGUxrcIlbjXfbc
-mwIDAQAB
------END PUBLIC KEY-----`,
-  PS256: `-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu1SU1LfVLPHCozMxH2Mo
-4lgOEePzNm0tRgeLezV6ffAt0gunVTLw7onLRnrq0/IzW7yWR7QkrmBL7jTKEn5u
-+qKhbwKfBstIs+bMY2Zkp18gnTxKLxoS2tFczGkPLPgizskuemMghRniWaoLcyeh
-kd3qqGElvW/VDL5AaWTg0nLVkjRo9z+40RQzuVaE8AkAFmxZzow3x+VJYKdjykkJ
-0iT9wCS0DRTXu269V264Vf/3jvredZiKRkgwlL9xNAwxXFg0x/XFw005UWVRIkdg
-cKWTjpBP2dPwVZ4WWC+9aGVd+Gyn1o0CLelf4rEjGoXbAAEgAqeGUxrcIlbjXfbc
-mwIDAQAB
------END PUBLIC KEY-----`,
-  PS384: `-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu1SU1LfVLPHCozMxH2Mo
-4lgOEePzNm0tRgeLezV6ffAt0gunVTLw7onLRnrq0/IzW7yWR7QkrmBL7jTKEn5u
-+qKhbwKfBstIs+bMY2Zkp18gnTxKLxoS2tFczGkPLPgizskuemMghRniWaoLcyeh
-kd3qqGElvW/VDL5AaWTg0nLVkjRo9z+40RQzuVaE8AkAFmxZzow3x+VJYKdjykkJ
-0iT9wCS0DRTXu269V264Vf/3jvredZiKRkgwlL9xNAwxXFg0x/XFw005UWVRIkdg
-cKWTjpBP2dPwVZ4WWC+9aGVd+Gyn1o0CLelf4rEjGoXbAAEgAqeGUxrcIlbjXfbc
-mwIDAQAB
------END PUBLIC KEY-----`,
-  PS512: `-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu1SU1LfVLPHCozMxH2Mo
-4lgOEePzNm0tRgeLezV6ffAt0gunVTLw7onLRnrq0/IzW7yWR7QkrmBL7jTKEn5u
-+qKhbwKfBstIs+bMY2Zkp18gnTxKLxoS2tFczGkPLPgizskuemMghRniWaoLcyeh
-kd3qqGElvW/VDL5AaWTg0nLVkjRo9z+40RQzuVaE8AkAFmxZzow3x+VJYKdjykkJ
-0iT9wCS0DRTXu269V264Vf/3jvredZiKRkgwlL9xNAwxXFg0x/XFw005UWVRIkdg
-cKWTjpBP2dPwVZ4WWC+9aGVd+Gyn1o0CLelf4rEjGoXbAAEgAqeGUxrcIlbjXfbc
-mwIDAQAB
------END PUBLIC KEY-----`,
-  ES256: `-----BEGIN PUBLIC KEY-----
-MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEEVs/o5+uQbTjL3chynL4wXgUg2R9
-q9UU8I5mEovUf86QZ7kOBIjJwqnzD1omageEHWwHdBO6B+dFabmdT9POxg==
------END PUBLIC KEY-----`,
-  ES384: `-----BEGIN PUBLIC KEY-----
-MHYwEAYHKoZIzj0CAQYFK4EEACIDYgAEC1uWSXj2czCDwMTLWV5BFmwxdM6PX9p+
-Pk9Yf9rIf374m5XP1U8q79dBhLSIuaojsvOT39UUcPJROSD1FqYLued0rXiooIii
-1D3jaW6pmGVJFhodzC31cy5sfOYotrzF
------END PUBLIC KEY-----`,
-  ES512: `-----BEGIN PUBLIC KEY-----
-MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQBgc4HZz+/fBbC7lmEww0AO3NK9wVZ
-PDZ0VEnsaUFLEYpTzb90nITtJUcPUbvOsdZIZ1Q8fnbquAYgxXL5UgHMoywAib47
-6MkyyYgPk0BXZq3mq4zImTRNuaU9slj9TVJ3ScT3L1bXwVuPJDzpr5GOFpaj+WwM
-Al8G7CqwoJOsW7Kddns=
------END PUBLIC KEY-----`,
-  EdDSA: `-----BEGIN PUBLIC KEY-----
-MCowBQYDK2VwAyEAwmK6SSAu2E9V7uynkCKEaj5nZJyTvNG4x0KohsRzLpg=
------END PUBLIC KEY-----`,
+  RS256: "", RS384: "", RS512: "",
+  PS256: "", PS384: "", PS512: "",
+  ES256: "", ES384: "", ES512: "",
+  EdDSA: "",
   none: "",
 }
 
@@ -203,7 +69,7 @@ function b64urlEncode(str: string): string {
 }
 
 function arrayBufferToPem(buf: ArrayBuffer, label: string): string {
-  const b64 = btoa(String.fromCharCode.apply(null, Array.from(new Uint8Array(buf))))
+  const b64 = btoa(Array.from(new Uint8Array(buf)).map(b => String.fromCharCode(b)).join(""))
   const lines = b64.match(/.{1,64}/g) || []
   return `-----BEGIN ${label}-----\n${lines.join("\n")}\n-----END ${label}-----\n`
 }
@@ -215,6 +81,12 @@ async function generateKeyPairPem(algo: string): Promise<{ privateKey: string; p
   let privateLabel = "PRIVATE KEY"
   let publicLabel = "PUBLIC KEY"
 
+  const hashForAlgo = (bits: string): string => {
+    if (bits === "512") return "SHA-512"
+    if (bits === "384") return "SHA-384"
+    return "SHA-256"
+  }
+
   if (algoUpper === "EDDSA") {
     keyPair = await crypto.subtle.generateKey({ name: "Ed25519" }, true, ["sign", "verify"]) as CryptoKeyPair
   } else if (algoUpper.startsWith("ES")) {
@@ -222,10 +94,14 @@ async function generateKeyPairPem(algo: string): Promise<{ privateKey: string; p
     algParams = { name: "ECDSA", namedCurve: curveMap[algoUpper.slice(2)] || "P-256" }
     keyPair = await crypto.subtle.generateKey(algParams, true, ["sign", "verify"]) as CryptoKeyPair
   } else if (algoUpper.startsWith("RS")) {
-    algParams = { name: "RSASSA-PKCS1-v1_5", modulusLength: 2048, publicExponent: new Uint8Array([1, 0, 1]), hash: "SHA-256" }
+    const bits = algoUpper.slice(2)
+    const modulusLen = bits === "512" ? 4096 : 2048
+    algParams = { name: "RSASSA-PKCS1-v1_5", modulusLength: modulusLen, publicExponent: new Uint8Array([1, 0, 1]), hash: { name: hashForAlgo(bits) } }
     keyPair = await crypto.subtle.generateKey(algParams, true, ["sign", "verify"]) as CryptoKeyPair
   } else if (algoUpper.startsWith("PS")) {
-    algParams = { name: "RSA-PSS", modulusLength: 2048, publicExponent: new Uint8Array([1, 0, 1]), hash: "SHA-256" }
+    const bits = algoUpper.slice(2)
+    const modulusLen = bits === "512" ? 4096 : 2048
+    algParams = { name: "RSA-PSS", modulusLength: modulusLen, publicExponent: new Uint8Array([1, 0, 1]), hash: { name: hashForAlgo(bits) } }
     keyPair = await crypto.subtle.generateKey(algParams, true, ["sign", "verify"]) as CryptoKeyPair
   } else {
     throw new Error(`Unsupported algorithm for key generation: ${algo}`)
@@ -352,16 +228,13 @@ async function verifyJwt(
       key = await crypto.subtle.importKey("raw", keyBytes, { name: "HMAC", hash: { name: hashName } }, false, ["verify"])
       return { valid: await crypto.subtle.verify("HMAC", key, sigBytes, data) }
     } else if (alg === "EDDSA") {
-      const importParams: any = isJwk
-        ? { name: "Ed25519", ...jwkObj }
-        : { name: "Ed25519" }
       if (!keyStrClean.includes("-----") && !isJwk) {
         return { valid: false, error: "EdDSA requires a public key in PEM or JWK format" }
       }
       if (isJwk) {
-        key = await crypto.subtle.importKey("jwk", jwkObj, importParams, false, ["verify"])
+        key = await crypto.subtle.importKey("jwk", jwkObj, { name: "Ed25519" }, false, ["verify"])
       } else {
-        key = await crypto.subtle.importKey("spki", pemToArrayBuffer(keyStrClean), importParams, false, ["verify"])
+        key = await crypto.subtle.importKey("spki", pemToArrayBuffer(keyStrClean), { name: "Ed25519" }, false, ["verify"])
       }
       return { valid: await crypto.subtle.verify("Ed25519", key, sigBytes, data) }
     } else if (alg.startsWith("RS")) {
@@ -504,6 +377,102 @@ interface SecurityIssue {
   description: string
 }
 
+interface DecodedToken {
+  error: string | null
+  header: string | null
+  payload: string | null
+  signature: string | null
+  alg: string
+  kid: string | null
+  jku: string | null
+  jwk: any
+  x5u: string | null
+  x5c: string[] | null
+  x5t: string | null
+  crit: string[] | null
+  typ: string | null
+  headerObj: any
+  payloadObj: any
+  verdict: { text: string; color: string } | null
+  issues: SecurityIssue[]
+  score: number
+  hashcatMode: string | null
+  timeline: any
+  claims: { name: string; description: string; value: any; severity?: "good" | "warn" | "info" }[]
+  tlIatPct: number
+  tlNbfPct: number
+  tlExpPct: number
+}
+
+const EMPTY_DECODED: DecodedToken = {
+  error: null, header: null, payload: null, signature: null, alg: "", kid: null,
+  headerObj: null, payloadObj: null, verdict: null, issues: [], score: 100,
+  hashcatMode: null, timeline: null, claims: [],
+  jku: null, jwk: null, x5u: null, x5c: null, x5t: null, crit: null, typ: null,
+  tlIatPct: 0, tlNbfPct: 50, tlExpPct: 100,
+}
+
+function buildSecurityIssues(headerObj: any, payloadObj: any, alg: string, kid: string | null, jku: string | null, jwk: any, x5u: string | null, x5c?: string | null, x5t?: string | null, crit?: string[] | null): SecurityIssue[] {
+  const issues: SecurityIssue[] = []
+  if (alg.toLowerCase() === "none") { issues.push({ severity: "critical", icon: Skull, title: "alg=none Attack", description: "The algorithm is set to 'none'. An attacker can forge any JWT by removing the signature and setting alg to none." }) }
+  if (jku) { issues.push({ severity: "high", icon: Skull, title: "JKU Header Present", description: `JKU (JWK Set URL): ${jku}. An attacker could host a malicious JWK set and point the JKU to it. Only use trusted HTTPS URLs.` }) }
+  if (x5u) { issues.push({ severity: "high", icon: Skull, title: "X5U Header Present", description: `X5U (X.509 URL): ${x5u}. Similar to JKU — an attacker could point this to a malicious certificate.` }) }
+  if (jwk) { issues.push({ severity: "high", icon: Skull, title: "JWK Header Present (Embedded Key)", description: "The token contains an embedded JWK. Unless you explicitly trust the embedded key, this is a high-risk vector — the issuer controls the key." }) }
+  if (x5c) { issues.push({ severity: "medium", icon: Shield, title: "X5C Certificate Chain Present", description: "The token includes an X.509 certificate chain. Verify the chain validity and trust anchor before using the key." }) }
+  if (kid && kidIsDangerous(kid)) { issues.push({ severity: "high", icon: Skull, title: "Dangerous kid Value", description: `The kid contains special characters: "${kid}". This could be SQL injection, NoSQL injection, or path traversal. Always sanitize kid lookups.` }) }
+  if (crit && crit.length > 0) { issues.push({ severity: "high", icon: AlertTriangle, title: "Critical Headers (crit)", description: `The token declares critical headers: ${crit.join(", ")}. Your library MUST support all of them or reject the token.` }) }
+  const isWeakHmac = alg.toLowerCase().startsWith("hs") && !["hs256", "hs384", "hs512"].includes(alg.toLowerCase())
+  if (isWeakHmac) { issues.push({ severity: "medium", icon: AlertTriangle, title: "Weak HMAC Algorithm", description: `${alg} is a weak HMAC variant. Use HS256 or higher.` }) }
+  return issues
+}
+
+function buildTokenTimeline(payloadObj: any, issues: SecurityIssue[]): any {
+  const timeline: any = {}
+  if (payloadObj.exp) {
+    const t = parseTime(payloadObj.exp)
+    const expired = new Date(payloadObj.exp * 1000).getTime() < Date.now()
+    timeline.exp = { ...t, expired }
+    if (expired) issues.push({ severity: "medium", icon: Clock, title: "Token Expired", description: `This token expired ${t.relative} (${t.date}). Expired tokens should be rejected.` })
+    else issues.push({ severity: "info", icon: Info, title: "Token Valid", description: `Token expires ${t.relative} (${t.date}).` })
+  } else { issues.push({ severity: "info", icon: Info, title: "No Expiration (exp)", description: "The token has no expiration claim. If it's stolen, it can be used indefinitely." }) }
+  if (payloadObj.iat) {
+    timeline.iat = parseTime(payloadObj.iat)
+  } else { issues.push({ severity: "info", icon: Info, title: "No Issued At (iat)", description: "Without an iat claim, there's no record of when the token was created." }) }
+  if (payloadObj.nbf) {
+    const t = parseTime(payloadObj.nbf)
+    const future = new Date(payloadObj.nbf * 1000).getTime() > Date.now()
+    timeline.nbf = { ...t, future }
+    if (future) issues.push({ severity: "info", icon: Clock, title: "Not Yet Valid (nbf)", description: `This token is not valid until ${t.date} (${t.relative}).` })
+  }
+  return timeline
+}
+
+function computeTimelinePcts(payloadObj: any): { tlIatPct: number; tlNbfPct: number; tlExpPct: number } {
+  let tlIatPct = 0; let tlNbfPct = 50; let tlExpPct = 100
+  if (payloadObj.iat && payloadObj.exp) {
+    const total = payloadObj.exp - payloadObj.iat
+    if (total > 0) {
+      tlIatPct = 0; tlExpPct = 100
+      tlNbfPct = payloadObj.nbf ? Math.round(((payloadObj.nbf - payloadObj.iat) / total) * 100) : 50
+    }
+  } else if (payloadObj.iat && payloadObj.nbf) {
+    tlIatPct = 0; tlNbfPct = 100; tlExpPct = 100
+  }
+  return { tlIatPct, tlNbfPct, tlExpPct }
+}
+
+function extractClaims(payloadObj: any): { name: string; description: string; value: any; severity?: "good" | "warn" | "info" }[] {
+  const claims: { name: string; description: string; value: any; severity?: "good" | "warn" | "info" }[] = []
+  for (const key of Object.keys(payloadObj)) {
+    const desc = claimDescriptions[key.toLowerCase()] || "Custom claim"
+    let sev: "good" | "warn" | "info" | undefined
+    if (["iss", "sub", "aud", "exp", "iat", "nbf", "jti"].includes(key.toLowerCase())) sev = "good"
+    else sev = "info"
+    claims.push({ name: key, description: desc, value: payloadObj[key], severity: sev })
+  }
+  return claims
+}
+
 export default function JwtDebuggerPage() {
   const [activeTab, setActiveTab] = useState<"decoder" | "encoder">("decoder")
   const [token, setToken] = useState("")
@@ -512,9 +481,9 @@ export default function JwtDebuggerPage() {
   // Encoder state
   const [encoderAlgo, setEncoderAlgo] = useState("HS256")
   const [headerJson, setHeaderJson] = useState(JSON.stringify({ alg: "HS256", typ: "JWT" }, null, 2))
-  const [payloadJson, setPayloadJson] = useState(JSON.stringify({ sub: "1234567890", name: "John Doe", admin: true, iat: 1516239022 }, null, 2))
+  const [payloadJson, setPayloadJson] = useState(JSON.stringify({ sub: "1234567890", name: "John Doe", admin: true, iat: Math.floor(Date.now() / 1000) }, null, 2))
   const [secretInput, setSecretInput] = useState(EXAMPLE_KEYS.HS256)
-  const [base64urlSecret, setBase64urlSecret] = useState(false)
+  const [isBase64urlSecret, setIsBase64urlSecret] = useState(false)
   const [encodedResult, setEncodedResult] = useState<{ token: string; signature: string; error?: string }>({ token: "", signature: "" })
   const [signing, setSigning] = useState(false)
 
@@ -527,97 +496,68 @@ export default function JwtDebuggerPage() {
   const [verifying, setVerifying] = useState(false)
   const [verifyResult, setVerifyResult] = useState<{ valid: boolean; error?: string } | null>(null)
   const [generatingKey, setGeneratingKey] = useState(false)
+  const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set(["secScore", "secIssues", "secHeader", "secPayload", "secTimeline", "secAlgo", "secFindings", "secJose", "secSig", "secVerify", "secHashcat", "secAttacks"]))
+
+  const toggleSection = useCallback((id: string) => {
+    setExpandedSections(prev => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id); else next.add(id)
+      return next
+    })
+  }, [])
 
   const headerValid = useMemo(() => { try { JSON.parse(headerJson); return true } catch { return false } }, [headerJson])
   const payloadValid = useMemo(() => { try { JSON.parse(payloadJson); return true } catch { return false } }, [payloadJson])
   const isAsymmetric = encoderAlgo.startsWith("RS") || encoderAlgo.startsWith("ES") || encoderAlgo.startsWith("PS") || encoderAlgo === "EdDSA"
   const isNoneAlgo = encoderAlgo === "none"
-  const secretValid = isNoneAlgo ? true : isAsymmetric ? secretInput.trim().length > 0 : secretInput.length >= 16
+  const minHmacLen = encoderAlgo === "HS512" ? 64 : encoderAlgo === "HS384" ? 48 : 32
+  const secretValid = isNoneAlgo ? true : isAsymmetric ? secretInput.trim().length > 0 : secretInput.length >= minHmacLen
 
-  const parsed = useMemo(() => {
+  const parsed = useMemo((): DecodedToken => {
     const parts = token.trim().split(".")
-    if (parts.length !== 3) return { error: "Invalid JWT format. Expected 3 dot-separated parts (header.payload.signature)", header: null, payload: null, signature: null, alg: "", kid: null, headerObj: null, payloadObj: null, verdict: null, issues: [], score: 100, hashcatMode: null, timeline: null, claims: [] }
+    if (parts.length !== 3) return { ...EMPTY_DECODED, error: "Invalid JWT format. Expected 3 dot-separated parts (header.payload.signature)" }
 
     const headerRaw = b64urlDecode(parts[0])
     const payloadRaw = b64urlDecode(parts[1])
     const sigRaw = parts[2]
-    if (!headerRaw || !payloadRaw) return { error: "Failed to decode JWT parts — invalid Base64 encoding", header: null, payload: null, signature: null, alg: "", kid: null, headerObj: null, payloadObj: null, verdict: null, issues: [], score: 100, hashcatMode: null, timeline: null, claims: [] }
+    if (!headerRaw || !payloadRaw) return { ...EMPTY_DECODED, error: "Failed to decode JWT parts — invalid Base64 encoding" }
 
     let headerObj: any, payloadObj: any
     try { headerObj = JSON.parse(headerRaw) } catch { headerObj = {} }
     try { payloadObj = JSON.parse(payloadRaw) } catch { payloadObj = {} }
 
-    const header = formatJSON(headerRaw)
-    const payload = formatJSON(payloadRaw)
     const alg = getAlgorithm(headerObj)
     const kid = getKid(headerObj)
     const jku = getJKU(headerObj)
     const jwk = getJWK(headerObj)
     const x5u = getX5u(headerObj)
+    const x5c = headerObj?.x5c || null
+    const x5t = headerObj?.["x5t#S256"] || headerObj?.x5t || null
+    const critInput: string[] | null = headerObj?.crit || null
     const typ = getTyp(headerObj)
-    const verdict = algVerdict(alg)
 
-    const issues: SecurityIssue[] = []
-
-    if (alg.toLowerCase() === "none") { issues.push({ severity: "critical", icon: Skull, title: "alg=none Attack", description: "The algorithm is set to 'none'. An attacker can forge any JWT by removing the signature and setting alg to none." }) }
-    if (jku) { issues.push({ severity: "high", icon: Skull, title: "JKU Header Present", description: `JKU (JWK Set URL): ${jku}. An attacker could host a malicious JWK set and point the JKU to it. Only use trusted HTTPS URLs.` }) }
-    if (x5u) { issues.push({ severity: "high", icon: Skull, title: "X5U Header Present", description: `X5U (X.509 URL): ${x5u}. Similar to JKU — an attacker could point this to a malicious certificate.` }) }
-    if (jwk) { issues.push({ severity: "high", icon: Skull, title: "JWK Header Present (Embedded Key)", description: "The token contains an embedded JWK. Unless you explicitly trust the embedded key, this is a high-risk vector — the issuer controls the key." }) }
-    if (kid && kidIsDangerous(kid)) { issues.push({ severity: "high", icon: Skull, title: "Dangerous kid Value", description: `The kid contains special characters: "${kid}". This could be SQL injection, NoSQL injection, or path traversal. Always sanitize kid lookups.` }) }
-
-    const isWeakHmac = alg.toLowerCase().startsWith("hs") && !["hs256", "hs384", "hs512"].includes(alg.toLowerCase())
-    if (isWeakHmac) { issues.push({ severity: "medium", icon: AlertTriangle, title: "Weak HMAC Algorithm", description: `${alg} is a weak HMAC variant. Use HS256 or higher.` }) }
-
-    const claims: { name: string; description: string; value: any; severity?: "good" | "warn" | "info" }[] = []
-    for (const key of Object.keys(payloadObj)) {
-      const desc = claimDescriptions[key.toLowerCase()] || "Custom claim"
-      const val = payloadObj[key]
-      let sev: "good" | "warn" | "info" | undefined
-      if (["iss", "sub", "aud", "exp", "iat", "nbf", "jti"].includes(key.toLowerCase())) sev = "good"
-      else sev = "info"
-      claims.push({ name: key, description: desc, value: val, severity: sev })
-    }
-
-    const timeline: { exp?: { date: string; relative: string; expired: boolean }; iat?: { date: string; relative: string }; nbf?: { date: string; relative: string; future: boolean } } = {}
-    if (payloadObj.exp) {
-      const t = parseTime(payloadObj.exp)
-      const expired = new Date(payloadObj.exp * 1000).getTime() < Date.now()
-      timeline.exp = { ...t, expired }
-      if (expired) issues.push({ severity: "medium", icon: Clock, title: "Token Expired", description: `This token expired ${t.relative} (${t.date}). Expired tokens should be rejected.` })
-      else issues.push({ severity: "info", icon: Info, title: "Token Valid", description: `Token expires ${t.relative} (${t.date}).` })
-    } else { issues.push({ severity: "info", icon: Info, title: "No Expiration (exp)", description: "The token has no expiration claim. If it's stolen, it can be used indefinitely." }) }
-
-    if (payloadObj.iat) {
-      const t = parseTime(payloadObj.iat)
-      timeline.iat = t
-    } else { issues.push({ severity: "info", icon: Info, title: "No Issued At (iat)", description: "Without an iat claim, there's no record of when the token was created." }) }
-
-    if (payloadObj.nbf) {
-      const t = parseTime(payloadObj.nbf)
-      const future = new Date(payloadObj.nbf * 1000).getTime() > Date.now()
-      timeline.nbf = { ...t, future }
-      if (future) issues.push({ severity: "info", icon: Clock, title: "Not Yet Valid (nbf)", description: `This token is not valid until ${t.date} (${t.relative}).` })
-    }
-
+    const issues = buildSecurityIssues(headerObj, payloadObj, alg, kid, jku, jwk, x5u, x5c, x5t, critInput)
+    const timeline = buildTokenTimeline(payloadObj, issues)
+    const claims = extractClaims(payloadObj)
+    const { tlIatPct, tlNbfPct, tlExpPct } = computeTimelinePcts(payloadObj)
     const score = computeScore(issues)
+
     let hashcatMode: string | null = null
     if (alg.toLowerCase() === "hs256") hashcatMode = "16500"
     else if (alg.toLowerCase() === "hs384") hashcatMode = "16600"
     else if (alg.toLowerCase() === "hs512") hashcatMode = "16700"
+    else if (alg.toLowerCase() === "rs256" || alg.toLowerCase() === "rs384" || alg.toLowerCase() === "rs512") hashcatMode = "16610"
+    else if (alg.toLowerCase() === "es256") hashcatMode = "16710"
+    else if (alg.toLowerCase() === "es384") hashcatMode = "16720"
+    else if (alg.toLowerCase() === "es512") hashcatMode = "16730"
 
-    let tlIatPct = 0; let tlNbfPct = 50; let tlExpPct = 100
-    if (payloadObj.iat && payloadObj.exp) {
-      const total = payloadObj.exp - payloadObj.iat
-      if (total > 0) {
-        tlIatPct = 0
-        tlExpPct = 100
-        tlNbfPct = payloadObj.nbf ? Math.round(((payloadObj.nbf - payloadObj.iat) / total) * 100) : 50
-      }
-    } else if (payloadObj.iat && payloadObj.nbf) {
-      tlIatPct = 0; tlNbfPct = 100; tlExpPct = 100
+    return {
+      error: null, header: formatJSON(headerRaw), payload: formatJSON(payloadRaw),
+      signature: sigRaw, alg, kid, jku, jwk, x5u, x5c, x5t, crit: critInput,
+      typ, headerObj, payloadObj,
+      verdict: algVerdict(alg), issues, score, hashcatMode, timeline, claims,
+      tlIatPct, tlNbfPct, tlExpPct,
     }
-
-    return { error: null, header, payload, signature: sigRaw, alg, kid, jku, jwk, x5u, typ, headerObj, payloadObj, verdict, issues, score, hashcatMode, timeline, claims, parts, tlIatPct, tlNbfPct, tlExpPct }
   }, [token])
 
   useEffect(() => {
@@ -650,10 +590,7 @@ export default function JwtDebuggerPage() {
           try {
             const kp = await generateKeyPairPem(targetAlgo)
             setSecretInput(kp.privateKey)
-          } catch {
-            const fb = EXAMPLE_KEYS[targetAlgo as keyof typeof EXAMPLE_KEYS]
-            if (fb) setSecretInput(fb)
-          }
+          } catch { setSecretInput("") }
         } else {
           setSecretInput(EXAMPLE_KEYS[targetAlgo as keyof typeof EXAMPLE_KEYS] || "")
         }
@@ -668,13 +605,13 @@ export default function JwtDebuggerPage() {
     setSigning(true)
     setEncodedResult({ token: "", signature: "" })
     try {
-      const result = await signJwt(headerJson, payloadJson, secretInput, encoderAlgo, base64urlSecret)
+      const result = await signJwt(headerJson, payloadJson, secretInput, encoderAlgo, isBase64urlSecret)
       setEncodedResult(result)
     } catch (e: any) {
       setEncodedResult({ token: "", signature: "", error: `Signing failed: ${e?.message || e?.name || "Cause unknown. The key may not be valid for this algorithm."}` })
     }
     setSigning(false)
-  }, [headerJson, payloadJson, secretInput, encoderAlgo, base64urlSecret])
+  }, [headerJson, payloadJson, secretInput, encoderAlgo, isBase64urlSecret])
 
   return (
     <div className="min-h-screen bg-background">
@@ -724,32 +661,73 @@ export default function JwtDebuggerPage() {
         {activeTab === "decoder" && (
         <div className="mx-auto max-w-6xl space-y-6 p-6">
           {/* Input */}
-          <div>
-            <label className="text-sm font-medium text-muted-foreground">JWT Token</label>
-            <div className="relative mt-1">
-              <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden rounded-xl border border-border bg-card p-4 font-mono text-sm whitespace-pre-wrap break-all" aria-hidden="true">
-                {(() => {
-                  const parts = token.trim().split(".")
-                  if (parts.length === 3) {
-                    return (
-                      <>
-                        <span className="text-green-400">{parts[0]}</span>
-                        <span className="text-muted-foreground">.</span>
-                        <span className="text-blue-400">{parts[1]}</span>
-                        <span className="text-muted-foreground">.</span>
-                        <span className="text-red-400">{parts[2]}</span>
-                      </>
-                    )
+    <div>
+            <div className="flex items-center justify-between">
+              <label className="text-sm font-medium text-muted-foreground">JWT Token</label>
+              <div className="flex items-center gap-2">
+                <select value="" onChange={e => {
+                  const v = e.target.value; if (v) {
+                    setToken(v)
+                    // pre‑fill verify key for HMAC examples
+                    const algoKey = (Object.entries(EXAMPLE_TOKENS) as [string, string][]).find(([, jwt]) => jwt === v)?.[0]
+                    if (algoKey && algoKey.startsWith("HS")) {
+                      const secret = EXAMPLE_KEYS[algoKey as keyof typeof EXAMPLE_KEYS]
+                      if (secret) setSecretInput(secret)
+                    }
                   }
-                  return <span className="text-muted-foreground/50">{token || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."}</span>
-                })()}
+                }}
+                  className="rounded-lg border border-border bg-card px-2.5 py-1.5 text-xs text-muted-foreground focus:outline-none focus:border-primary">
+                  <option value="" disabled>Load example token…</option>
+                  {Object.entries(EXAMPLE_TOKENS).map(([algo, jwt]) => (
+                    <option key={algo} value={jwt}>{algo === "none" ? "unsigned (none)" : algo}</option>
+                  ))}
+                </select>
               </div>
+            </div>
+            <div className="mt-1 overflow-hidden rounded-xl border border-border/50 bg-card">
               <textarea value={token} onChange={e => setToken(e.target.value)}
-                rows={3}
-                placeholder=" "
-                className="relative z-20 w-full resize-y bg-transparent p-4 font-mono text-sm text-transparent caret-foreground focus:outline-none"
-                style={{ WebkitTextFillColor: "transparent" }}
+                rows={4}
+                className="w-full resize-y bg-transparent p-4 font-mono text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none"
+                spellCheck={false}
+                placeholder="Paste your JWT here..."
               />
+              <div className="flex items-center justify-between border-t border-border/50 px-4 py-2">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-muted-foreground">{token.trim().length > 0 ? `${token.length} chars` : "Paste a JWT token to decode"}</span>
+                  {token.trim().split(".").length === 3 && (
+                    <span className="rounded bg-green-500/15 px-1.5 py-0.5 text-[9px] font-bold text-green-400">VALID JWT</span>
+                  )}
+                </div>
+                <div className="flex items-center gap-2">
+                  <button onClick={() => {
+                    if (navigator.clipboard) {
+                      navigator.clipboard.readText().then(text => {
+                        if (text) setToken(text)
+                      }).catch(() => {})
+                    }
+                  }}
+                    title="Paste from clipboard & decode"
+                    className="flex items-center gap-1 rounded-lg bg-primary/10 px-2.5 py-1 text-[10px] font-semibold text-primary hover:bg-primary/20 transition-colors">
+                    <ClipboardPaste className="h-3 w-3" />
+                    Paste &amp; Decode
+                  </button>
+                  {(() => {
+                    const parts = token.trim().split(".")
+                    if (parts.length === 3) {
+                      return (
+                        <div className="flex items-center gap-1 font-mono text-[11px]">
+                          <span className="text-green-400">{parts[0].length > 12 ? `${parts[0].slice(0, 12)}...` : parts[0]}</span>
+                          <span className="text-muted-foreground/50">.</span>
+                          <span className="text-blue-400">{parts[1].length > 12 ? `${parts[1].slice(0, 12)}...` : parts[1]}</span>
+                          <span className="text-muted-foreground/50">.</span>
+                          <span className="text-red-400">{parts[2].length > 12 ? `${parts[2].slice(0, 12)}...` : parts[2]}</span>
+                        </div>
+                      )
+                    }
+                    return null
+                  })()}
+                </div>
+              </div>
             </div>
           </div>
 
@@ -775,34 +753,38 @@ export default function JwtDebuggerPage() {
               <div className="lg:col-span-2 space-y-6">
                 {/* Security Score */}
                 <div className="rounded-xl border border-border/50 bg-card overflow-hidden">
-                  <div className={cn("px-5 py-3 border-b border-border/50", parsed.score >= 80 ? "bg-gradient-to-r from-green-500/10 to-transparent" : parsed.score >= 50 ? "bg-gradient-to-r from-amber-500/10 to-transparent" : "bg-gradient-to-r from-red-500/10 to-transparent")}>
-                    <div className="flex items-center justify-between">
+                  <button onClick={() => toggleSection("secScore")} className="w-full text-left">
+                    <div className={cn("flex items-center justify-between px-5 py-3 border-b border-border/50", parsed.score >= 80 ? "bg-gradient-to-r from-green-500/10 to-transparent" : parsed.score >= 50 ? "bg-gradient-to-r from-amber-500/10 to-transparent" : "bg-gradient-to-r from-red-500/10 to-transparent")}>
                       <div className="flex items-center gap-2">
                         <Shield className={cn("h-5 w-5", scoreColor(parsed.score))} />
                         <h3 className="text-sm font-bold text-foreground">Security Score</h3>
                       </div>
-                      <span className={cn("text-2xl font-bold", scoreColor(parsed.score))}>{parsed.score}/100</span>
+                      <div className="flex items-center gap-2">
+                        <span className={cn("text-2xl font-bold", scoreColor(parsed.score))}>{parsed.score}/100</span>
+                        <ChevronDown className={cn("h-4 w-4 text-muted-foreground transition-transform", expandedSections.has("secScore") ? "" : "-rotate-90")} />
+                      </div>
                     </div>
-                  </div>
-                  <div className="p-5 pt-4 space-y-3">
+                  </button>
+                  {expandedSections.has("secScore") && <div className="p-5 pt-4 space-y-3">
                     <div className="h-3 w-full overflow-hidden rounded-full bg-muted">
                       <div className={cn("h-full rounded-full transition-all duration-700 ease-out", scoreBgColor(parsed.score))} style={{ width: `${parsed.score}%` }} />
                     </div>
                     <p className="text-xs font-medium text-muted-foreground leading-relaxed">
                       {parsed.score >= 80 ? "✓ No critical issues detected" : parsed.score >= 50 ? "⚠ Several issues found — review the alerts below" : "✗ Critical security vulnerabilities detected"}
                     </p>
-                  </div>
+                  </div>}
                 </div>
 
                   {/* Security Issues */}
                 {parsed.issues.filter(i => i.severity === "critical" || i.severity === "high").length > 0 && (
                   <div className="space-y-3">
-                    <div className="flex items-center gap-2 border-b border-red-500/20 pb-2">
+                    <button onClick={() => toggleSection("secIssues")} className="w-full flex items-center gap-2 border-b border-red-500/20 pb-2">
                       <AlertTriangle className="h-4 w-4 text-red-400" />
                       <h3 className="text-sm font-bold uppercase tracking-wider text-red-400">Security Alerts</h3>
-                      <span className="ml-auto rounded-full bg-red-500/20 px-2 py-0.5 text-[10px] font-bold text-red-400">{parsed.issues.filter(i => i.severity === "critical" || i.severity === "high").length}</span>
-                    </div>
-                    {parsed.issues.filter(i => i.severity === "critical" || i.severity === "high").map((issue, idx) => {
+                      <span className="rounded-full bg-red-500/20 px-2 py-0.5 text-[10px] font-bold text-red-400">{parsed.issues.filter(i => i.severity === "critical" || i.severity === "high").length}</span>
+                      <ChevronDown className={cn("h-3.5 w-3.5 text-muted-foreground ml-auto transition-transform", expandedSections.has("secIssues") ? "" : "-rotate-90")} />
+                    </button>
+                    {expandedSections.has("secIssues") && parsed.issues.filter(i => i.severity === "critical" || i.severity === "high").map((issue, idx) => {
                       const Icon = issue.icon
                       return (
                         <div key={idx} className={cn("border-l-4 flex items-start gap-3 rounded-r-xl border p-4", issue.severity === "critical" ? "border-l-red-500 border-red-500/30 bg-red-500/10" : "border-l-orange-500 border-orange-500/30 bg-orange-500/10")}>
@@ -819,23 +801,26 @@ export default function JwtDebuggerPage() {
 
                 {/* Decoded Header */}
                 <div className="rounded-xl border border-border/50 bg-card overflow-hidden">
-                  <div className="flex items-center justify-between border-b border-border/50 bg-gradient-to-r from-green-500/5 to-transparent px-5 py-3">
+                  <button onClick={() => toggleSection("secHeader")} className="w-full flex items-center justify-between border-b border-border/50 bg-gradient-to-r from-green-500/5 to-transparent px-5 py-3">
                     <div className="flex items-center gap-2">
                       <div className="flex h-6 w-6 items-center justify-center rounded-md bg-green-500/15">
                         <Shield className="h-3.5 w-3.5 text-green-400" />
                       </div>
                       <h3 className="text-sm font-bold text-foreground">Decoded Header</h3>
+                    </div>
+                    <div className="flex items-center gap-2" onClick={e => e.stopPropagation()}>
                       <div className="flex gap-0.5 rounded-lg border border-border/30 bg-muted/30 p-0.5">
                         <button onClick={() => setHeaderView("json")} className={cn("rounded-md px-2.5 py-1 text-[11px] font-medium transition-all", headerView === "json" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground")}>JSON</button>
                         <button onClick={() => setHeaderView("claims")} className={cn("rounded-md px-2.5 py-1 text-[11px] font-medium transition-all", headerView === "claims" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground")}>Claims Breakdown</button>
                       </div>
+                      <button onClick={e => { e.stopPropagation(); copyPart(parsed.header, "header") }} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
+                        {copiedPart === "header" ? <Check className="h-3.5 w-3.5 text-primary" /> : <Copy className="h-3.5 w-3.5" />}
+                        {copiedPart === "header" ? "Copied" : "Copy"}
+                      </button>
+                      <ChevronDown className={cn("h-4 w-4 text-muted-foreground transition-transform", expandedSections.has("secHeader") ? "" : "-rotate-90")} />
                     </div>
-                    <button onClick={() => copyPart(parsed.header, "header")} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
-                      {copiedPart === "header" ? <Check className="h-3.5 w-3.5 text-primary" /> : <Copy className="h-3.5 w-3.5" />}
-                      {copiedPart === "header" ? "Copied" : "Copy"}
-                    </button>
-                  </div>
-                  {headerView === "json" ? (
+                  </button>
+                  {expandedSections.has("secHeader") && (headerView === "json" ? (
                     <div className="relative">
                       <div className="absolute right-3 top-3 rounded bg-muted/80 px-2 py-0.5 text-[10px] text-muted-foreground font-mono">{Object.keys(parsed.headerObj || {}).length} fields</div>
                       <pre className="overflow-x-auto p-5 font-mono text-sm leading-relaxed">{parsed.headerObj ? renderColoredJSON(parsed.headerObj) : parsed.header}</pre>
@@ -868,28 +853,31 @@ export default function JwtDebuggerPage() {
                         </div>
                       )})}
                     </div>
-                  )}
+                  ))}
                 </div>
 
                 {/* Decoded Payload */}
                 <div className="rounded-xl border border-border/50 bg-card overflow-hidden">
-                  <div className="flex items-center justify-between border-b border-border/50 bg-gradient-to-r from-blue-500/5 to-transparent px-5 py-3">
+                  <button onClick={() => toggleSection("secPayload")} className="w-full flex items-center justify-between border-b border-border/50 bg-gradient-to-r from-blue-500/5 to-transparent px-5 py-3">
                     <div className="flex items-center gap-2">
                       <div className="flex h-6 w-6 items-center justify-center rounded-md bg-blue-500/15">
                         <Info className="h-3.5 w-3.5 text-blue-400" />
                       </div>
                       <h3 className="text-sm font-bold text-foreground">Decoded Payload</h3>
+                    </div>
+                    <div className="flex items-center gap-2" onClick={e => e.stopPropagation()}>
                       <div className="flex gap-0.5 rounded-lg border border-border/30 bg-muted/30 p-0.5">
                         <button onClick={() => setPayloadView("json")} className={cn("rounded-md px-2.5 py-1 text-[11px] font-medium transition-all", payloadView === "json" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground")}>JSON</button>
                         <button onClick={() => setPayloadView("claims")} className={cn("rounded-md px-2.5 py-1 text-[11px] font-medium transition-all", payloadView === "claims" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground")}>Claims Breakdown</button>
                       </div>
+                      <button onClick={e => { e.stopPropagation(); copyPart(parsed.payload, "payload") }} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
+                        {copiedPart === "payload" ? <Check className="h-3.5 w-3.5 text-primary" /> : <Copy className="h-3.5 w-3.5" />}
+                        {copiedPart === "payload" ? "Copied" : "Copy"}
+                      </button>
+                      <ChevronDown className={cn("h-4 w-4 text-muted-foreground transition-transform", expandedSections.has("secPayload") ? "" : "-rotate-90")} />
                     </div>
-                    <button onClick={() => copyPart(parsed.payload, "payload")} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
-                      {copiedPart === "payload" ? <Check className="h-3.5 w-3.5 text-primary" /> : <Copy className="h-3.5 w-3.5" />}
-                      {copiedPart === "payload" ? "Copied" : "Copy"}
-                    </button>
-                  </div>
-                  {payloadView === "json" ? (
+                  </button>
+                  {expandedSections.has("secPayload") && (payloadView === "json" ? (
                     <div className="relative">
                       <div className="absolute right-3 top-3 rounded bg-muted/80 px-2 py-0.5 text-[10px] text-muted-foreground font-mono">{Object.keys(parsed.payloadObj || {}).length} fields</div>
                       <pre className="overflow-x-auto p-5 font-mono text-sm leading-relaxed">{parsed.payloadObj ? renderColoredJSON(parsed.payloadObj) : parsed.payload}</pre>
@@ -922,7 +910,7 @@ export default function JwtDebuggerPage() {
                         )
                       })}
                     </div>
-                  )}
+                  ))}
                 </div>
 
                 {/* Timeline */}
@@ -1021,7 +1009,7 @@ export default function JwtDebuggerPage() {
                 )}
 
                 {/* JOSE Headers Group */}
-                {(parsed.kid || parsed.jku || parsed.x5u || parsed.jwk) && (
+                {(parsed.kid || parsed.jku || parsed.x5u || parsed.jwk || parsed.x5c || parsed.x5t || parsed.crit) && (
                   <div className="rounded-xl border border-border/50 bg-card overflow-hidden">
                     <div className="flex items-center gap-2 bg-gradient-to-r from-amber-500/5 to-transparent px-5 py-2 border-b border-border/50">
                       <Key className="h-3.5 w-3.5 text-amber-400" />
@@ -1052,10 +1040,34 @@ export default function JwtDebuggerPage() {
                           <p className="mt-1.5 text-[10px] text-red-400 font-medium">Embedded key — verify trust before using</p>
                         </div>
                       )}
+                      {parsed.x5c && (
+                        <div className="px-5 py-3">
+                          <span className="block mb-1.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">X.509 Certificate (x5c)</span>
+                          <code className="block break-all rounded bg-muted px-2 py-1.5 font-mono text-[10px] text-foreground">{parsed.x5c.length} certificate{(parsed.x5c.length || 0) > 1 ? "s" : ""} in chain</code>
+                          <p className="mt-1.5 text-[10px] text-muted-foreground">First certificate: <code className="font-mono">{parsed.x5c[0]?.substring(0, 40)}...</code></p>
+                        </div>
+                      )}
+                      {parsed.x5t && (
+                        <div className="px-5 py-3">
+                          <span className="block mb-1.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">X.509 Thumbprint (x5t)</span>
+                          <code className="block break-all rounded bg-muted px-2 py-1.5 font-mono text-xs text-foreground">{parsed.x5t}</code>
+                        </div>
+                      )}
                       {parsed.x5u && (
                         <div className="px-5 py-3">
                           <span className="block mb-1.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">X.509 URL (x5u)</span>
                           <code className="block break-all rounded bg-muted px-2 py-1.5 font-mono text-xs text-orange-400">{parsed.x5u}</code>
+                        </div>
+                      )}
+                      {parsed.crit && parsed.crit.length > 0 && (
+                        <div className="px-5 py-3">
+                          <span className="block mb-1.5 text-[10px] font-bold uppercase tracking-wider text-red-400">Critical Headers (crit)</span>
+                          <div className="flex flex-wrap gap-1">
+                            {parsed.crit.map((h: string) => (
+                              <span key={h} className="rounded bg-red-500/15 px-1.5 py-0.5 text-[10px] font-bold text-red-400">{h}</span>
+                            ))}
+                          </div>
+                          <p className="mt-1.5 text-[10px] text-red-400">Token MUST be rejected if these headers are not understood</p>
                         </div>
                       )}
                     </div>
@@ -1090,6 +1102,9 @@ export default function JwtDebuggerPage() {
                     <div className="rounded-lg border border-border/30 bg-muted/20 px-3 py-2">
                       <p className="text-[11px] text-muted-foreground">{parsed.alg?.toLowerCase().startsWith("hs") ? "Enter the secret used to sign the JWT below:" : "Paste the public key to verify the signature:"}</p>
                     </div>
+                    {parsed.alg?.toLowerCase().startsWith("hs") && verifyKey.trim().length > 0 && (
+                      <SecretStrengthIndicator secret={verifyKey} />
+                    )}
                     <textarea value={verifyKey} onChange={e => { setVerifyKey(e.target.value); setVerifyResult(null) }}
                       rows={4}
                       placeholder={parsed.alg?.toLowerCase().startsWith("hs") ? "Paste the HMAC secret..." : "-----BEGIN PUBLIC KEY-----\n...\n-----END PUBLIC KEY-----"}
@@ -1169,11 +1184,20 @@ export default function JwtDebuggerPage() {
 
           {/* Generate example + Algorithm */}
           <div className="flex flex-wrap items-center justify-between gap-4">
-            <button onClick={() => {
-              setHeaderJson(JSON.stringify({ alg: "HS256", typ: "JWT" }, null, 2))
+            <button onClick={async () => {
+              const currentAlgo = encoderAlgo === "none" ? "HS256" : encoderAlgo
+              setHeaderJson(JSON.stringify({ alg: currentAlgo, typ: "JWT" }, null, 2))
               setPayloadJson(JSON.stringify({ sub: "1234567890", name: "John Doe", admin: true, iat: Math.floor(Date.now() / 1000) }, null, 2))
-              setEncoderAlgo("HS256")
-              setSecretInput(EXAMPLE_KEYS.HS256)
+              setEncoderAlgo(currentAlgo)
+              const isAsym = currentAlgo.startsWith("RS") || currentAlgo.startsWith("ES") || currentAlgo.startsWith("PS") || currentAlgo === "EdDSA"
+              if (isAsym) {
+                try {
+                  const kp = await generateKeyPairPem(currentAlgo)
+                  setSecretInput(kp.privateKey)
+                } catch { setSecretInput("") }
+              } else {
+                setSecretInput(EXAMPLE_KEYS[currentAlgo as keyof typeof EXAMPLE_KEYS] || "")
+              }
               setEncodedResult({ token: "", signature: "" })
               setVerifyResult(null)
             }} className="flex items-center gap-2 rounded-xl border border-border/50 bg-card px-4 py-2 text-sm font-medium text-foreground hover:bg-muted transition-colors">
@@ -1190,10 +1214,7 @@ export default function JwtDebuggerPage() {
                   try {
                     const kp = await generateKeyPairPem(newAlgo)
                     setSecretInput(kp.privateKey)
-                  } catch {
-                    const fallback = EXAMPLE_KEYS[newAlgo as keyof typeof EXAMPLE_KEYS]
-                    if (fallback) setSecretInput(fallback)
-                  }
+                  } catch { setSecretInput("") }
                   setGeneratingKey(false)
                 } else {
                   const exampleKey = EXAMPLE_KEYS[newAlgo as keyof typeof EXAMPLE_KEYS]
@@ -1233,29 +1254,20 @@ export default function JwtDebuggerPage() {
                 <p className="text-xs text-muted-foreground">json</p>
               </div>
               <div className="flex items-center gap-2">
+                <button onClick={() => { try { setHeaderJson(JSON.stringify(JSON.parse(headerJson), null, 2)) } catch { /* ignore */ } }} className="flex items-center gap-1 rounded-md border border-border/30 px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors">
+                  Format JSON
+                </button>
                 <button onClick={() => copyPart(headerJson, "header-json")} className="flex items-center gap-1 rounded-md border border-border/30 px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors">
                   {copiedPart === "header-json" ? <Check className="h-3.5 w-3.5 text-primary" /> : <Copy className="h-3.5 w-3.5" />}
                   {copiedPart === "header-json" ? "Copied" : "Copy"}
                 </button>
               </div>
             </div>
-            <div className="relative">
-              <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden p-5 font-mono text-sm whitespace-pre-wrap break-all leading-relaxed" aria-hidden="true">
-                {(() => {
-                  try {
-                    const parsed = JSON.parse(headerJson)
-                    return renderColoredJSON(parsed)
-                  } catch {
-                    return <span className="text-red-400">{headerJson}</span>
-                  }
-                })()}
-              </div>
-              <textarea value={headerJson} onChange={e => setHeaderJson(e.target.value)}
-                rows={3}
-                className="relative z-20 w-full resize-y bg-transparent p-5 font-mono text-sm text-transparent caret-foreground focus:outline-none"
-                style={{ WebkitTextFillColor: "transparent" }}
-              />
-            </div>
+            <textarea value={headerJson} onChange={e => setHeaderJson(e.target.value)}
+              rows={4}
+              className="w-full resize-y bg-transparent p-5 font-mono text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none"
+              spellCheck={false}
+            />
             <div className="border-t border-border/50 px-5 py-2">
               {headerValid && <span className="flex items-center gap-1 text-xs text-green-400"><Shield className="h-3 w-3" /> Valid header</span>}
               {!headerValid && <span className="text-xs text-red-400">Invalid JSON</span>}
@@ -1270,29 +1282,20 @@ export default function JwtDebuggerPage() {
                 <p className="text-xs text-muted-foreground">json</p>
               </div>
               <div className="flex items-center gap-2">
+                <button onClick={() => { try { setPayloadJson(JSON.stringify(JSON.parse(payloadJson), null, 2)) } catch { /* ignore */ } }} className="flex items-center gap-1 rounded-md border border-border/30 px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors">
+                  Format JSON
+                </button>
                 <button onClick={() => copyPart(payloadJson, "payload-json")} className="flex items-center gap-1 rounded-md border border-border/30 px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors">
                   {copiedPart === "payload-json" ? <Check className="h-3.5 w-3.5 text-primary" /> : <Copy className="h-3.5 w-3.5" />}
                   {copiedPart === "payload-json" ? "Copied" : "Copy"}
                 </button>
               </div>
             </div>
-            <div className="relative">
-              <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden p-5 font-mono text-sm whitespace-pre-wrap break-all leading-relaxed" aria-hidden="true">
-                {(() => {
-                  try {
-                    const parsed = JSON.parse(payloadJson)
-                    return renderColoredJSON(parsed)
-                  } catch {
-                    return <span className="text-red-400">{payloadJson}</span>
-                  }
-                })()}
-              </div>
-              <textarea value={payloadJson} onChange={e => setPayloadJson(e.target.value)}
-                rows={6}
-                className="relative z-20 w-full resize-y bg-transparent p-5 font-mono text-sm text-transparent caret-foreground focus:outline-none"
-                style={{ WebkitTextFillColor: "transparent" }}
-              />
-            </div>
+            <textarea value={payloadJson} onChange={e => setPayloadJson(e.target.value)}
+              rows={Math.max(4, (payloadJson.match(/\n/g) || []).length + 1)}
+              className="w-full resize-y bg-transparent p-5 font-mono text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none min-h-[120px]"
+              spellCheck={false}
+            />
             <div className="border-t border-border/50 px-5 py-2">
               {payloadValid && <span className="flex items-center gap-1 text-xs text-green-400"><Shield className="h-3 w-3" /> Valid payload</span>}
               {!payloadValid && <span className="text-xs text-red-400">Invalid JSON</span>}
@@ -1316,17 +1319,15 @@ export default function JwtDebuggerPage() {
               <h3 className="text-sm font-semibold text-foreground">
                 {isAsymmetric ? "Private Key" : "Secret Key"}
               </h3>
-              {!isAsymmetric && (
-                <div className="flex items-center gap-2">
-                  <button onClick={() => setSecretInput("")} className="flex items-center gap-1 rounded-md border border-border/30 px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors">
-                    <Trash2 className="h-3 w-3" /> Clear
-                  </button>
-                  <button onClick={() => copyPart(secretInput, "secret-key")} className="flex items-center gap-1 rounded-md border border-border/30 px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors">
-                    {copiedPart === "secret-key" ? <Check className="h-3.5 w-3.5 text-primary" /> : <Copy className="h-3.5 w-3.5" />}
-                    {copiedPart === "secret-key" ? "Copied" : "Copy"}
-                  </button>
-                </div>
-              )}
+              <div className="flex items-center gap-2">
+                <button onClick={() => setSecretInput("")} className="flex items-center gap-1 rounded-md border border-border/30 px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors">
+                  <Trash2 className="h-3 w-3" /> Clear
+                </button>
+                <button onClick={() => copyPart(secretInput, "secret-key")} className="flex items-center gap-1 rounded-md border border-border/30 px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors">
+                  {copiedPart === "secret-key" ? <Check className="h-3.5 w-3.5 text-primary" /> : <Copy className="h-3.5 w-3.5" />}
+                  {copiedPart === "secret-key" ? "Copied" : "Copy"}
+                </button>
+              </div>
             </div>
             {isAsymmetric ? (
               <div>
@@ -1368,12 +1369,10 @@ export default function JwtDebuggerPage() {
                   />
                 </div>
                 <div className="flex flex-wrap items-center gap-3">
-                  <label className={cn("flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-1.5 text-xs font-medium transition-all", base64urlSecret ? "border-cyan-500/50 bg-cyan-500/10 text-cyan-400" : "border-border/50 text-muted-foreground hover:border-border")}>
-                    <input type="checkbox" checked={base64urlSecret} onChange={e => setBase64urlSecret(e.target.checked)} className="sr-only" />
-                    <div className={cn("h-3.5 w-3.5 rounded border flex items-center justify-center transition-all", base64urlSecret ? "border-cyan-500 bg-cyan-500" : "border-border bg-transparent")}>
-                      {base64urlSecret && <Check className="h-2.5 w-2.5 text-white" />}
-                    </div>
-                    Base64URL Encoded
+                  <label className="flex items-center gap-1.5 cursor-pointer">
+                    <input type="checkbox" checked={isBase64urlSecret} onChange={e => { setIsBase64urlSecret(e.target.checked); setEncodedResult({ token: "", signature: "" }) }}
+                      className="h-3.5 w-3.5 rounded border-border accent-cyan-500 cursor-pointer" />
+                    <span className="text-[11px] font-medium text-muted-foreground">Base64URL Encoded</span>
                   </label>
 
                   {/* Secret strength */}
@@ -1392,7 +1391,7 @@ export default function JwtDebuggerPage() {
                       </span>
                     )
                   })()}
-                  {!secretValid && secretInput.length > 0 && <span className="text-xs text-orange-400">At least 16 characters recommended for HMAC</span>}
+                  {!secretValid && secretInput.length > 0 && <span className="text-xs text-orange-400">Minimum {minHmacLen} characters recommended for {encoderAlgo}</span>}
                 </div>
               </div>
             )}
@@ -1427,6 +1426,30 @@ export default function JwtDebuggerPage() {
         </div>
         )}
       </main>
+    </div>
+  )
+}
+
+function SecretStrengthIndicator({ secret }: { secret: string }) {
+  const len = secret.length
+  const charTypes = new Set(
+    [...secret].map(c => {
+      if (/[a-z]/.test(c)) return "lower"
+      if (/[A-Z]/.test(c)) return "upper"
+      if (/[0-9]/.test(c)) return "digit"
+      return "special"
+    })
+  )
+  const score = Math.min(100, Math.round(len * (1 + charTypes.size * 0.25) * 2.5))
+  const label = score < 30 ? "Weak" : score < 60 ? "Fair" : score < 85 ? "Good" : "Strong"
+  const color = score < 30 ? "bg-red-500" : score < 60 ? "bg-amber-500" : score < 85 ? "bg-blue-500" : "bg-green-500"
+  const textColor = score < 30 ? "text-red-400" : score < 60 ? "text-amber-400" : score < 85 ? "text-blue-400" : "text-green-400"
+  return (
+    <div className="flex items-center gap-2 px-1">
+      <div className="flex-1 h-1.5 rounded-full bg-muted overflow-hidden">
+        <div className={`h-full ${color} transition-all duration-300`} style={{ width: `${score}%` }} />
+      </div>
+      <span className={`text-[10px] font-bold ${textColor}`}>{label}</span>
     </div>
   )
 }

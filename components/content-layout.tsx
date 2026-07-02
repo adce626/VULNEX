@@ -2,7 +2,6 @@
 
 import { type ReactNode, useRef, useEffect } from "react"
 import Image from "next/image"
-import Link from "next/link"
 import { MainSidebar } from "@/components/main-sidebar"
 import { PageTitle } from "@/components/page-title"
 import { Breadcrumb } from "@/components/breadcrumb"
@@ -66,6 +65,36 @@ export function ContentLayout({
   footerText = "This guide is for ethical use and authorized penetration testing only",
 }: ContentLayoutProps) {
   const lightboxRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = contentRef.current
+    if (!el || !onLightboxOpen) return
+    const handleClick = (e: MouseEvent) => {
+      const path = e.composedPath()
+      for (const node of path) {
+        if ((node as HTMLElement).tagName === "IMG") {
+          const img = node as HTMLImageElement
+          const src = img.currentSrc || img.src
+          if (src && (src.startsWith("http") || src.startsWith("/"))) {
+            onLightboxOpen(src)
+          }
+          return
+        }
+      }
+    }
+    el.addEventListener("click", handleClick)
+    return () => el.removeEventListener("click", handleClick)
+  }, [onLightboxOpen])
+
+  useEffect(() => {
+    if (expandedImg) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+    return () => { document.body.style.overflow = "" }
+  }, [expandedImg])
 
   useEffect(() => {
     if (!expandedImg) return
@@ -90,6 +119,7 @@ export function ContentLayout({
     document.addEventListener("keydown", handleKeyDown)
     return () => document.removeEventListener("keydown", handleKeyDown)
   }, [expandedImg, onLightboxClose])
+
   return (
     <div className="min-h-screen bg-background">
       <PageTitle title={pageTitle} />
@@ -98,7 +128,6 @@ export function ContentLayout({
       <main id="main-content" className="lg:pl-64">
         <Breadcrumb items={breadcrumbItems} />
 
-        {/* Hero */}
         <div className={`relative overflow-hidden border-b border-border bg-gradient-to-br ${heroGradient}`}>
           {heroDecor}
           <div className="relative px-6 py-12 text-center lg:py-16">
@@ -132,6 +161,8 @@ export function ContentLayout({
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
                     className="w-full"
                     style={{ height: "auto" }}
+                    priority
+                    unoptimized
                   />
                 </div>
                 {heroSource && (
@@ -155,7 +186,6 @@ export function ContentLayout({
           </div>
         </div>
 
-        {/* Sticky Navigation */}
         <div className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur-sm">
           <div className="mx-auto max-w-5xl px-6">
             <div role="tablist" className="flex gap-1 overflow-x-auto py-3 scrollbar-hide">
@@ -179,35 +209,29 @@ export function ContentLayout({
           </div>
         </div>
 
-        {/* Content */}
-        <div className="mx-auto max-w-5xl space-y-16 p-6">
+        <div ref={contentRef} className="mx-auto max-w-5xl space-y-16 p-6">
           {children}
-
           <Footer text={footerText} />
         </div>
       </main>
 
-      {/* Lightbox Overlay */}
       {expandedImg && (
         <div
           ref={lightboxRef}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 select-none"
           onClick={onLightboxClose}
         >
           <button
             onClick={onLightboxClose}
             aria-label="Close lightbox"
-            className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white text-xl hover:bg-black/70"
+            className="absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white text-xl hover:bg-black/80 transition-colors"
           >
             ✕
           </button>
-          <Image
+          <img
             src={expandedImg}
             alt="Expanded view"
-            width={1200}
-            height={675}
-            sizes="(max-width: 768px) 100vw, 95vw"
-            className="max-h-[90vh] max-w-[95vw] rounded-lg object-contain"
+            className="max-h-[85vh] max-w-[95vw] w-auto h-auto rounded-lg shadow-2xl cursor-default"
             onClick={(e) => e.stopPropagation()}
           />
         </div>

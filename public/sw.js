@@ -32,6 +32,15 @@ self.addEventListener('fetch', (e) => {
     return
   }
 
+  if (path.startsWith('/images/') || path.endsWith('.webp') || path.endsWith('.svg') || path.endsWith('.png') || path.endsWith('.jpg') || path.endsWith('.jpeg')) {
+    e.respondWith(
+      caches.open(CACHE_NAME).then((cache) =>
+        cache.match(e.request).then((cached) => cached || fetch(e.request).then((res) => { cache.put(e.request, res.clone()); return res }))
+      )
+    )
+    return
+  }
+
   if (path.startsWith('/_next/static/')) {
     e.respondWith(
       caches.open(CACHE_NAME).then((cache) =>

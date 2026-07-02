@@ -94,7 +94,7 @@ export default function SpringBootPage() {
 
             {/* Hero Image */}
             <div className="mx-auto mt-8 max-w-3xl overflow-hidden rounded-xl border border-border cursor-pointer" onClick={() => setExpandedImg("/images/tech-specific/spring-boot/9df079c691b8fb1e97cb52193cacb6d8de4f89aa.webp")}>
-              <Image src="/images/tech-specific/spring-boot/9df079c691b8fb1e97cb52193cacb6d8de4f89aa.webp" alt="Spring Boot Actuator" width={1200} height={675} className="w-full" style={{ height: "auto" }} loading="eager" unoptimized />
+              <Image src="/images/tech-specific/spring-boot/9df079c691b8fb1e97cb52193cacb6d8de4f89aa.webp" alt="Spring Boot Actuator" width={1200} height={675} className="w-full" style={{ height: "auto" }} priority unoptimized />
             </div>
             <div className="mt-4 text-center text-sm">
               <span className="text-muted-foreground">Source: </span>
@@ -590,13 +590,13 @@ done < ip_list.txt`}</code></pre>
 
       {/* Lightbox Overlay */}
       {expandedImg && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm" onClick={() => setExpandedImg(null)}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 select-none" onClick={() => setExpandedImg(null)}>
           <button onClick={() => setExpandedImg(null)}
-            className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white text-xl hover:bg-black/70">
+            className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white text-xl hover:bg-black/80 transition-colors">
             ✕
           </button>
-          <Image src={expandedImg} alt="Expanded view" width={1200} height={675}
-            className="max-h-[90vh] max-w-[95vw] rounded-lg object-contain" unoptimized
+          <img src={expandedImg} alt="Expanded view"
+            className="max-h-[85vh] max-w-[95vw] w-auto h-auto rounded-lg shadow-2xl cursor-default"
             onClick={(e) => e.stopPropagation()} />
         </div>
       )}
