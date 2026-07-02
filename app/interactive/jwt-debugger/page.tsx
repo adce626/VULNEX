@@ -813,7 +813,7 @@ export default function JwtDebuggerPage() {
                         <button onClick={() => setHeaderView("json")} className={cn("rounded-md px-2.5 py-1 text-[11px] font-medium transition-all", headerView === "json" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground")}>JSON</button>
                         <button onClick={() => setHeaderView("claims")} className={cn("rounded-md px-2.5 py-1 text-[11px] font-medium transition-all", headerView === "claims" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground")}>Claims Breakdown</button>
                       </div>
-                      <button onClick={e => { e.stopPropagation(); copyPart(parsed.header, "header") }} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
+                      <button onClick={e => { e.stopPropagation(); copyPart(parsed.header || "", "header") }} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
                         {copiedPart === "header" ? <Check className="h-3.5 w-3.5 text-primary" /> : <Copy className="h-3.5 w-3.5" />}
                         {copiedPart === "header" ? "Copied" : "Copy"}
                       </button>
@@ -870,7 +870,7 @@ export default function JwtDebuggerPage() {
                         <button onClick={() => setPayloadView("json")} className={cn("rounded-md px-2.5 py-1 text-[11px] font-medium transition-all", payloadView === "json" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground")}>JSON</button>
                         <button onClick={() => setPayloadView("claims")} className={cn("rounded-md px-2.5 py-1 text-[11px] font-medium transition-all", payloadView === "claims" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground")}>Claims Breakdown</button>
                       </div>
-                      <button onClick={e => { e.stopPropagation(); copyPart(parsed.payload, "payload") }} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
+                      <button onClick={e => { e.stopPropagation(); copyPart(parsed.payload || "", "payload") }} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
                         {copiedPart === "payload" ? <Check className="h-3.5 w-3.5 text-primary" /> : <Copy className="h-3.5 w-3.5" />}
                         {copiedPart === "payload" ? "Copied" : "Copy"}
                       </button>
