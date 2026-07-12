@@ -24,7 +24,10 @@ interface ErrorPayload {
 
 type OutgoingMessage = ProgressPayload | ResultPayload | ErrorPayload
 
-const ctx = self as unknown as DedicatedWorkerGlobalScope
+const ctx = self as unknown as {
+  onmessage: ((e: MessageEvent<WorkerMessage>) => void) | null
+  postMessage(message: OutgoingMessage): void
+}
 
 ctx.onmessage = async (e: MessageEvent<WorkerMessage>) => {
   const { input, buf } = e.data
