@@ -7,15 +7,15 @@ describe("iconMap", () => {
       "search", "bug", "server", "cloud", "wrench", "brain",
       "shield", "puzzle", "terminal", "siren", "target", "zap",
       "globe", "lock", "database", "code", "folder-search", "network", "key",
-      "wand", "file-code",
+      "wand", "file-code", "sword",
     ]
     expectedKeys.forEach((key) => {
       expect(iconMap[key]).toBeDefined()
     })
   })
 
-  it("has 21 entries", () => {
-    expect(Object.keys(iconMap)).toHaveLength(21)
+  it("has 22 entries", () => {
+    expect(Object.keys(iconMap)).toHaveLength(22)
   })
 
   it("each entry is a valid React component", () => {

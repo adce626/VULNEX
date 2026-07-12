@@ -224,7 +224,7 @@ async function verifyJwt(
       }
       const hashName = `SHA-${alg.slice(2)}`
       const keyBytes = isJwk
-        ? Uint8Array.from(atob(jwkObj.k.replace(/-/g, "+").replace(/_/g, "/")), c => c.charCodeAt(0))
+        ? Uint8Array.from(atob(jwkObj!.k.replace(/-/g, "+").replace(/_/g, "/")), c => c.charCodeAt(0))
         : new TextEncoder().encode(keyStrClean)
       key = await crypto.subtle.importKey("raw", keyBytes, { name: "HMAC", hash: { name: hashName } }, false, ["verify"])
       return { valid: await crypto.subtle.verify("HMAC", key, sigBytes, data) }
