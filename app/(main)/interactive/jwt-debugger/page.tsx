@@ -202,7 +202,7 @@ async function verifyJwt(
   let headerObj: Record<string, unknown>
   try { headerObj = JSON.parse(headerRaw) as Record<string, unknown> } catch { return { valid: false, error: "Invalid header JSON" } }
 
-  const alg = (algo || headerObj.alg || "").toUpperCase()
+  const alg = (algo || String(headerObj.alg ?? "")).toUpperCase()
   const data = new TextEncoder().encode(`${b64urlEncode(headerRaw)}.${b64urlEncode(payloadRaw)}`)
   const sigBytes = Uint8Array.from(atob(sigRaw.replace(/-/g, "+").replace(/_/g, "/")), c => c.charCodeAt(0))
 
