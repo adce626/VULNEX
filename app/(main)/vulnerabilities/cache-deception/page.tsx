@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { Shield } from "lucide-react"
 import { ContentLayout } from "@/components/content-layout"
 import { IntroductionSection } from "@/components/sections/cache-deception/introduction-section"
 import { CacheFundamentalsSection } from "@/components/sections/cache-deception/cache-fundamentals-section"
