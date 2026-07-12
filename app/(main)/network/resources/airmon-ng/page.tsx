@@ -219,8 +219,8 @@ const sections = [
         <div>
           <h3 className="mb-2 text-xs font-bold tracking-wider" style={{ color: "var(--network-text-muted)" }}>athX Interface Number Rising (ath0, ath1, ath45...)</h3>
           <p className="mb-2 text-xs" style={{ color: "var(--network-text)" }}>Caused by udev persistent net rules creating new entries for each VAP. Fix by editing <code className="font-mono text-xs" style={{ color: "var(--network-primary)" }}>/etc/udev/rules.d/75-persistent-net-generator.rules</code>:</p>
-          <CodeBlock cmd="# Change from: KERNEL==\"eth*|ath*|wlan*|ra*|sta*\"" />
-          <CodeBlock cmd="# To:           KERNEL==\"eth*|Ath*|wlan*|ra*|sta*\"" />
+          <CodeBlock cmd={`# Change from: KERNEL=="eth*|ath*|wlan*|ra*|sta*"`} />
+          <CodeBlock cmd={`# To:           KERNEL=="eth*|Ath*|wlan*|ra*|sta*"`} />
           <p className="mb-2 text-xs" style={{ color: "var(--network-text)" }}>Capitalize <code className="font-mono text-xs" style={{ color: "var(--network-primary)" }}>a</code> in <code className="font-mono text-xs" style={{ color: "var(--network-primary)" }}>ath*</code> → <code className="font-mono text-xs" style={{ color: "var(--network-primary)" }}>Ath*</code>, then delete the persistent rules file:</p>
           <CodeBlock cmd="rm /etc/udev/rules.d/70-persistent-net.rules" />
           <CodeBlock cmd="modprobe -r ath9k_htc && modprobe ath9k_htc" />
