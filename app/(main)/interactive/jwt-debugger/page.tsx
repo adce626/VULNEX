@@ -232,7 +232,7 @@ async function verifyJwt(
       if (!keyStrClean.includes("-----") && !isJwk) {
         return { valid: false, error: "EdDSA requires a public key in PEM or JWK format" }
       }
-      if (isJwk) {
+      if (isJwk && jwkObj) {
         key = await crypto.subtle.importKey("jwk", jwkObj, { name: "Ed25519" }, false, ["verify"])
       } else {
         key = await crypto.subtle.importKey("spki", pemToArrayBuffer(keyStrClean), { name: "Ed25519" }, false, ["verify"])
