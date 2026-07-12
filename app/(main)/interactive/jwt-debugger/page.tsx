@@ -428,7 +428,7 @@ const EMPTY_DECODED: DecodedToken = {
   tlIatPct: 0, tlNbfPct: 50, tlExpPct: 100,
 }
 
-function buildSecurityIssues(headerObj: Record<string, unknown>, payloadObj: Record<string, unknown>, alg: string, kid: string | null, jku: string | null, jwk: JsonWebKey | null, x5u: string | null, x5c?: string | null, x5t?: string | null, crit?: string[] | null): SecurityIssue[] {
+function buildSecurityIssues(headerObj: Record<string, unknown>, payloadObj: Record<string, unknown>, alg: string, kid: string | null, jku: string | null, jwk: JsonWebKey | null, x5u: string | null, x5c?: string[] | null, x5t?: string | null, crit?: string[] | null): SecurityIssue[] {
   const issues: SecurityIssue[] = []
   if (alg.toLowerCase() === "none") { issues.push({ severity: "critical", icon: Skull, title: "alg=none Attack", description: "The algorithm is set to 'none'. An attacker can forge any JWT by removing the signature and setting alg to none." }) }
   if (jku) { issues.push({ severity: "high", icon: Skull, title: "JKU Header Present", description: `JKU (JWK Set URL): ${jku}. An attacker could host a malicious JWK set and point the JKU to it. Only use trusted HTTPS URLs.` }) }
