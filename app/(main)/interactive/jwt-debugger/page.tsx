@@ -444,19 +444,22 @@ function buildSecurityIssues(headerObj: Record<string, unknown>, payloadObj: Rec
 
 function buildTokenTimeline(payloadObj: Record<string, unknown>, issues: SecurityIssue[]): Record<string, TimelineEntry> {
   const timeline: Record<string, TimelineEntry> = {}
-  if (payloadObj.exp) {
-    const t = parseTime(payloadObj.exp)
-    const expired = new Date(payloadObj.exp * 1000).getTime() < Date.now()
+  const exp = payloadObj.exp as number | undefined
+  if (exp) {
+    const t = parseTime(exp)
+    const expired = new Date(exp * 1000).getTime() < Date.now()
     timeline.exp = { ...t, expired }
     if (expired) issues.push({ severity: "medium", icon: Clock, title: "Token Expired", description: `This token expired ${t.relative} (${t.date}). Expired tokens should be rejected.` })
     else issues.push({ severity: "info", icon: Info, title: "Token Valid", description: `Token expires ${t.relative} (${t.date}).` })
   } else { issues.push({ severity: "info", icon: Info, title: "No Expiration (exp)", description: "The token has no expiration claim. If it's stolen, it can be used indefinitely." }) }
-  if (payloadObj.iat) {
-    timeline.iat = parseTime(payloadObj.iat)
+  const iat = payloadObj.iat as number | undefined
+  if (iat) {
+    timeline.iat = parseTime(iat)
   } else { issues.push({ severity: "info", icon: Info, title: "No Issued At (iat)", description: "Without an iat claim, there's no record of when the token was created." }) }
-  if (payloadObj.nbf) {
-    const t = parseTime(payloadObj.nbf)
-    const future = new Date(payloadObj.nbf * 1000).getTime() > Date.now()
+  const nbf = payloadObj.nbf as number | undefined
+  if (nbf) {
+    const t = parseTime(nbf)
+    const future = new Date(nbf * 1000).getTime() > Date.now()
     timeline.nbf = { ...t, future }
     if (future) issues.push({ severity: "info", icon: Clock, title: "Not Yet Valid (nbf)", description: `This token is not valid until ${t.date} (${t.relative}).` })
   }
@@ -465,13 +468,16 @@ function buildTokenTimeline(payloadObj: Record<string, unknown>, issues: Securit
 
 function computeTimelinePcts(payloadObj: Record<string, unknown>): { tlIatPct: number; tlNbfPct: number; tlExpPct: number } {
   let tlIatPct = 0; let tlNbfPct = 50; let tlExpPct = 100
-  if (payloadObj.iat && payloadObj.exp) {
-    const total = payloadObj.exp - payloadObj.iat
+  const iat = payloadObj.iat as number | undefined
+  const exp = payloadObj.exp as number | undefined
+  const nbf = payloadObj.nbf as number | undefined
+  if (iat && exp) {
+    const total = exp - iat
     if (total > 0) {
       tlIatPct = 0; tlExpPct = 100
-      tlNbfPct = payloadObj.nbf ? Math.round(((payloadObj.nbf - payloadObj.iat) / total) * 100) : 50
+      tlNbfPct = nbf ? Math.round(((nbf - iat) / total) * 100) : 50
     }
-  } else if (payloadObj.iat && payloadObj.nbf) {
+  } else if (iat && nbf) {
     tlIatPct = 0; tlNbfPct = 100; tlExpPct = 100
   }
   return { tlIatPct, tlNbfPct, tlExpPct }
