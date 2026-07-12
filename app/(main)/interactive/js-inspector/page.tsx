@@ -98,6 +98,11 @@ const dbUrl = "mongodb://admin:pass123@cluster0.mongodb.net:27017/mydb"
 //# sourceMappingURL=app.min.js.map
 `
 
+function autoResize(el: HTMLTextAreaElement) {
+  el.style.height = "auto"
+  el.style.height = Math.min(el.scrollHeight, 600) + "px"
+}
+
 export default function JsInspectorPage() {
   const [input, setInput] = useState("")
   const [copied, setCopied] = useState(false)
@@ -319,7 +324,7 @@ export default function JsInspectorPage() {
             </div>
             <div className="relative">
               <textarea ref={textareaRef} value={input}
-                onChange={e => { setInput(e.target.value); autoResize() }}
+                onChange={e => { setInput(e.target.value); textareaRef.current && autoResize(textareaRef.current) }}
                 placeholder={`Paste JavaScript code here...\n\nOr click "Upload .js" to select a file.`}
                 className="w-full min-h-[300px] resize-y rounded-xl border border-border/50 bg-card p-5 font-mono text-sm text-foreground placeholder:text-muted-foreground/30 focus:outline-none focus:border-primary transition-colors"
               />
