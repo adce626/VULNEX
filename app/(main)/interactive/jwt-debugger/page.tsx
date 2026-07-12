@@ -413,7 +413,7 @@ interface DecodedToken {
   issues: SecurityIssue[]
   score: number
   hashcatMode: string | null
-  timeline: Record<string, TimelineEntry>
+  timeline: Record<string, TimelineEntry> | null
   claims: ClaimEntry[]
   tlIatPct: number
   tlNbfPct: number
