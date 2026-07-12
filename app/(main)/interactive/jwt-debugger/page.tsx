@@ -303,7 +303,7 @@ function renderColoredJSON(obj: unknown): React.ReactNode {
       if (keys.length === 0) return <span className="text-muted-foreground/50">{'{}'}</span>
       const entries = keys.map((k, i) => {
         const comma = i < keys.length - 1 ? <span className="text-muted-foreground/30">,</span> : ""
-        return <span key={k}>{pad}  <span className="text-amber-400">&quot;{k}&quot;</span><span className="text-muted-foreground/30">: </span>{format(val[k], indent + 1)}{comma}{"\n"}</span>
+        return <span key={k}>{pad}  <span className="text-amber-400">&quot;{k}&quot;</span><span className="text-muted-foreground/30">: </span>{format((val as Record<string, unknown>)[k], indent + 1)}{comma}{"\n"}</span>
       })
       return <span>{'{\n'}{entries}{pad}{'}'}</span>
     }
