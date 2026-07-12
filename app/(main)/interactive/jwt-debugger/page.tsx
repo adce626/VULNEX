@@ -243,7 +243,7 @@ async function verifyJwt(
       if (!keyStrClean.includes("-----") && !isJwk) {
         return { valid: false, error: "RSA requires a public key in PEM or JWK format" }
       }
-      if (isJwk) {
+      if (isJwk && jwkObj) {
         key = await crypto.subtle.importKey("jwk", jwkObj, { name: "RSASSA-PKCS1-v1_5", hash: { name: hashName } }, false, ["verify"])
       } else {
         key = await crypto.subtle.importKey("spki", pemToArrayBuffer(keyStrClean), { name: "RSASSA-PKCS1-v1_5", hash: { name: hashName } }, false, ["verify"])
@@ -254,7 +254,7 @@ async function verifyJwt(
       if (!keyStrClean.includes("-----") && !isJwk) {
         return { valid: false, error: "RSA-PSS requires a public key in PEM or JWK format" }
       }
-      if (isJwk) {
+      if (isJwk && jwkObj) {
         key = await crypto.subtle.importKey("jwk", jwkObj, { name: "RSA-PSS", hash: { name: hashName } }, false, ["verify"])
       } else {
         key = await crypto.subtle.importKey("spki", pemToArrayBuffer(keyStrClean), { name: "RSA-PSS", hash: { name: hashName } }, false, ["verify"])
@@ -266,7 +266,7 @@ async function verifyJwt(
       if (!keyStrClean.includes("-----") && !isJwk) {
         return { valid: false, error: "ECDSA requires a public key in PEM or JWK format" }
       }
-      if (isJwk) {
+      if (isJwk && jwkObj) {
         key = await crypto.subtle.importKey("jwk", jwkObj, { name: "ECDSA", namedCurve: curve }, false, ["verify"])
       } else {
         key = await crypto.subtle.importKey("spki", pemToArrayBuffer(keyStrClean), { name: "ECDSA", namedCurve: curve }, false, ["verify"])
