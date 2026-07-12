@@ -553,9 +553,9 @@ export default function JwtDebuggerPage() {
     const jku = getJKU(headerObj)
     const jwk = getJWK(headerObj)
     const x5u = getX5u(headerObj)
-    const x5c = headerObj?.x5c || null
-    const x5t = headerObj?.["x5t#S256"] || headerObj?.x5t || null
-    const critInput: string[] | null = headerObj?.crit || null
+    const x5c = (headerObj?.x5c as string[] | undefined) ?? null
+    const x5t = (headerObj?.["x5t#S256"] as string | undefined) ?? (headerObj?.x5t as string | undefined) ?? null
+    const critInput: string[] | null = (headerObj?.crit as string[] | undefined) ?? null
     const typ = getTyp(headerObj)
 
     const issues = buildSecurityIssues(headerObj, payloadObj, alg, kid, jku, jwk, x5u, x5c, x5t, critInput)
