@@ -59,13 +59,19 @@ No backend, no API calls — everything runs in your browser.
 
 | Section | Description |
 |---------|-------------|
-| **HOPE — Bug Bounty Guide** | Complete bug bounty methodology — mindset, recon, exploitation, WAF bypass, chaining, reporting. Includes "How I Deal with Bug Hunting" personal workflow |
+| **HOPE — Bug Bounty Guide** | Complete bug bounty methodology — mindset, recon, exploitation, WAF bypass, chaining, reporting. 11 chapters |
+| **Bug Bounty — Recon Flow** | Step-by-step subdomain enumeration, port scanning, fingerprinting, endpoint discovery — 3 chapters, 24 sections |
+| **Bug Bounty — Automation** | Personal recon pipeline with Nuclei, Dalfox, Katana, custom bash scripts — parallel scanning, GitOps, CI/CD, AI analysis |
+| **Bug Bounty — Vulnerability Chaining** | Combine low-severity into critical exploits — XSS→ATO, IDOR→PII, SSRF→Cloud, Upload→RCE. 4 chapters, 12 sections |
+| **Bug Bounty — Reporting Templates** | Ready-to-submit report templates with CVSS scoring — XSS, IDOR, SSRF, SQLi, RCE, SSTI, XXE, Race Condition, WebSocket. 5 chapters |
+| **Bug Bounty — Platform Guides** | Complete setup & strategy for HackerOne, Bugcrowd, Intigriti, Synack, OpenBugBounty — payout benchmarks, reputation systems, program selection |
 | **Recon & OSINT** | Google Dorks, Shodan Dorks, GitHub Recon, Param Discovery |
 | **Recon Toolkit** | 17 categories, 2700+ commands with domain auto-replace, copy-to-clipboard, theme toggle, and animations |
 | **Web Vulnerabilities** | SQLi, XSS, SSRF, IDOR, CRLF, Open Redirect, Host Header Injection, 403 Bypass, Email Input Testing, JSON Privilege Escalation |
 | **Tech-Specific** | IIS, Next.js, Swagger, API Fuzzing, Spring Boot |
 | **Cloud & Assets** | AWS S3, Google API Keys |
 | **Methods** | FFUF Techniques, Nuclei Templates, Rapid Bug Discovery |
+| **Network Pentesting** | Port guide, payload generator, wireless modules, resources |
 | **Tools** | 104 tool guides — Burp Suite, Nuclei, ffuf, Nmap, Subfinder, Amass, SQLMap, and more |
 | **WAF Bypass & PoCs** | SQLMap WAF evasion, IDOR & 403 bypass techniques |
 | **Advanced Topics** | LLM Injection, Blind XSS, Rate Limit Bypass, Registration Vulns |
@@ -132,6 +138,12 @@ docker compose up --build
 
 ```
 app/                          # Pages and layouts (App Router)
+├── (main)/bug-bounty/        # Bug Bounty section (6 guide pages)
+│   ├── recon-flow/           # Recon methodology (3 chapters)
+│   ├── automation/           # Pipeline setup (4 chapters)
+│   ├── chaining/             # Attack chains (4 chapters)
+│   ├── reporting/            # Report templates (5 chapters)
+│   └── platforms/            # Platform guides (5 chapters)
 ├── interactive/
 │   ├── js-inspector/         ← JS Source Inspector tool
 │   └── jwt-debugger/         ← JWT Debugger tool
@@ -180,9 +192,11 @@ tests/                        # Unit and E2E tests
 ★ 150+  secret detection patterns (JS Inspector)
 ★ 104   tool guides
 ★ 2700+ recon commands
+★ 23    bug bounty chapters (across 5 guide areas)
 ★ 55+   shadcn/ui components
 ★ 17    recon toolkit categories
 ★ 20+   browser extension recommendations
+★ 5     bug bounty platforms covered
 ★ 3     themes (Dark · Light · Neon)
 ★ 100%  client-side interactive tools
 ```

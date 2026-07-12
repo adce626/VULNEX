@@ -1,5 +1,5 @@
 {
-  "installCommand": "npx pnpm@9 install --frozen-lockfile",
+  "installCommand": "npx pnpm@9 install --no-frozen-lockfile",
   "headers": [
     {
       "source": "/(.*)",
