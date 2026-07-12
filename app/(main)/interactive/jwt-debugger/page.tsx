@@ -407,8 +407,8 @@ interface DecodedToken {
   x5t: string | null
   crit: string[] | null
   typ: string | null
-  headerObj: Record<string, unknown>
-  payloadObj: Record<string, unknown>
+  headerObj: Record<string, unknown> | null
+  payloadObj: Record<string, unknown> | null
   verdict: { text: string; color: string } | null
   issues: SecurityIssue[]
   score: number
