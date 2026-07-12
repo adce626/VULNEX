@@ -1,9 +1,12 @@
 {
   "extends": ["next/core-web-vitals", "prettier"],
+  "plugins": ["@typescript-eslint"],
   "rules": {
-    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
-    "prefer-const": "warn",
-    "react-hooks/exhaustive-deps": "warn",
-    "no-console": "warn"
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "@typescript-eslint/no-explicit-any": "warn",
+    "prefer-const": "error",
+    "react-hooks/exhaustive-deps": "error",
+    "no-console": "error"
   }
 }

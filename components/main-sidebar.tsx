@@ -27,6 +27,8 @@ import {
   Siren,
   Keyboard,
   Search,
+  Globe,
+  Target,
 } from "lucide-react"
 import { KeyboardShortcuts } from "@/components/keyboard-shortcuts"
 
@@ -40,6 +42,8 @@ const iconMap: Record<string, React.ReactNode> = {
   shield: <Shield className="h-4 w-4" />,
   puzzle: <Puzzle className="h-4 w-4" />,
   siren: <Siren className="h-4 w-4" />,
+  network: <Globe className="h-4 w-4" />,
+  target: <Target className="h-4 w-4" />,
 }
 
 const allPages = [
@@ -75,6 +79,7 @@ const allPages = [
   { title: "SQLMap", href: "/tools/sqlmap", keywords: "sqlmap,sqli,automation,database,injection" },
   { title: "XSStrike", href: "/tools/xsstrike", keywords: "xsstrike,xss,cross site,scanner" },
   { title: "Burp Suite", href: "/tools/burpsuite", keywords: "burp,proxy,intercept,repeater,scanner" },
+  { title: "Network Pentesting", href: "/network", keywords: "network,port,scan,nmap,ssh,smb,rdp,ftp,database,enumeration,exploit" },
   { title: "Nmap", href: "/tools/nmap", keywords: "nmap,port,scan,network,discovery" },
   { title: "Gobuster", href: "/tools/gobuster", keywords: "gobuster,directory,dns,bruteforce" },
   { title: "Hydra", href: "/tools/hydra", keywords: "hydra,bruteforce,password,login,authentication" },

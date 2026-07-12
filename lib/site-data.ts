@@ -98,6 +98,7 @@ export const navigation: NavSection[] = [
       { title: "Rate Limit Bypass", href: "/advanced/rate-limit-bypass" },
     ],
   },
+
   {
     title: "Browser Extensions",
     icon: "puzzle",

@@ -51,6 +51,9 @@ import { johnCategories } from "./john-data"
 import { searchsploitCategories } from "./searchsploit-data"
 import { nucleiTemplateCategories } from "./nuclei-templates-data"
 import { fastXSSCategories } from "./fast-xss-data"
+// Network pentesting ports
+import { networkPorts } from "./network-data"
+import { wirelessModules } from "./wireless-data"
 // Step pattern pages
 import { wafSteps } from "./waf-data"
 import { paymentSteps } from "./waf-payment-data"
@@ -205,6 +208,30 @@ function getIndex(): SearchEntry[] {
       href: `/interactive/encoding-formats/${f.slug}`,
       section: "Encoding Formats",
     })),
+    // Network payload generator
+    { text: `Interactive payload generator: reverse shells, bind shells, web shells, Meterpreter. Languages: bash, python, powershell, netcat, php, perl, ruby, socat, node.js, go`, title: "Payload Generator", href: "/network/payloads", section: "Network Pentesting" },
+    { text: `Listener setup: netcat, socat, Metasploit multi/handler, pwncat, python http server, updog`, title: "Listener Commands", href: "/network/payloads", section: "Network Pentesting" },
+    { text: `MSFVenom payload builder: generate Meterpreter payloads for linux, windows, mac, android, php, asp, jsp, war`, title: "MSFVenom Builder", href: "/network/payloads", section: "Network Pentesting" },
+    // Network ports
+    ...networkPorts.flatMap(p => [
+      { text: `${p.service} (port ${p.port}): ${p.protocolBasics.slice(0, 120)}`, title: `Port ${p.port} — ${p.service}`, href: `/network/port/${p.slug}`, section: "Network Pentesting" },
+      ...p.basicEnumeration.slice(0, 3).map(e => ({ text: e.command.length > 80 ? e.command.slice(0, 80) + "..." : e.command, title: `${p.service} Enumeration`, href: `/network/port/${p.slug}`, section: "Network Pentesting" })),
+      ...p.discovery.map(d => ({ text: d.command.length > 80 ? d.command.slice(0, 80) + "..." : d.command, title: `${p.service} Discovery`, href: `/network/port/${p.slug}`, section: "Network Pentesting" })),
+    ]),
+    // Network wireless
+    ...wirelessModules.flatMap(m => [
+      { text: `${m.title}: ${m.overview.slice(0, 120)}`, title: m.title, href: `/network/wireless/${m.slug}`, section: "Network Pentesting" },
+      ...m.recon.slice(0, 2).map(r => ({ text: r.command.length > 80 ? r.command.slice(0, 80) + "..." : r.command, title: `${m.title} Recon`, href: `/network/wireless/${m.slug}`, section: "Network Pentesting" })),
+    ]),
+    // Network tool references
+    { text: `airmon-ng: wireless monitor mode management — start, stop, check, check kill, usage examples, debugging, troubleshooting`, title: "airmon-ng Reference", href: "/network/resources/airmon-ng", section: "Network Pentesting" },
+    { text: `Nmap scan types: TCP SYN (-sS), Connect (-sT), UDP (-sU), FIN (-sF), Xmas (-sX), Null (-sN), Ping Sweep (-sn), Idle (-sI), FTP Bounce (-sB). Complete scan type reference.`, title: "Nmap Scan Types", href: "/network/resources/nmap#scan-types", section: "Network Pentesting" },
+    { text: `NSE scripts by service: SMB enumeration, HTTP discovery, SSL/TLS cipher check, DNS zone transfer, FTP anonymous, SMTP open relay, MySQL, MSSQL, SNMP, RDP, Redis, LDAP, Kerberos.`, title: "Nmap NSE by Service", href: "/network/resources/nmap#nse-by-service", section: "Network Pentesting" },
+    { text: `Nmap NSE categories: default (-sC), safe, vuln, exploit, auth, brute, discovery, intrusive, version, broadcast, malware, dos.`, title: "Nmap NSE Categories", href: "/network/resources/nmap#nse-categories", section: "Network Pentesting" },
+    { text: `Nmap output formats: normal (-oN), XML (-oX), grepable (-oG), all formats (-oA), append (--append-output).`, title: "Nmap Output Formats", href: "/network/resources/nmap#output-formats", section: "Network Pentesting" },
+    { text: `Nmap timing templates: T0 Paranoid, T1 Sneaky, T2 Polite, T3 Normal, T4 Aggressive, T5 Insane.`, title: "Nmap Timing Templates", href: "/network/resources/nmap#timing-templates", section: "Network Pentesting" },
+    { text: `Nmap firewall evasion: decoys (-D), source port, fragmention (-f), MTU, MAC spoofing, TTL, badsum, scan delay, proxies.`, title: "Nmap Firewall Evasion", href: "/network/resources/nmap#firewall-evasion", section: "Network Pentesting" },
+    { text: `nmap -p- --min-rate 5000 -T4 <target> — quick full port scan. nmap -A <target> — service+OS detection. nmap --script vuln <target> — vulnerability scan.`, title: "Nmap One-Liners", href: "/network/resources/nmap#quick-one-liners", section: "Network Pentesting" },
   ]
   return allEntries
 }

@@ -20,6 +20,7 @@ import {
   Key,
   Wand2,
   FileCode,
+  Sword,
 } from "lucide-react"
 
 export const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -44,4 +45,5 @@ export const iconMap: Record<string, React.ComponentType<{ className?: string }>
   key: Key,
   wand: Wand2,
   "file-code": FileCode,
+  sword: Sword,
 }

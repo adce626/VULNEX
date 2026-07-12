@@ -7,7 +7,7 @@ import { iconMap } from "@/lib/icon-map"
 import { sectionCards } from "@/lib/site-data"
 import { cn } from "@/lib/utils"
 
-const items = sectionCards.slice(0, 8)
+const items = sectionCards.slice(0, 14)
 
 export function FeaturedCarousel() {
   const [current, setCurrent] = useState(0)

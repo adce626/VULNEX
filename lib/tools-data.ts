@@ -67,8 +67,6 @@ import { arjunGuide } from "./guides/arjun"
 import { paramSpiderGuide } from "./guides/paramspider"
 import { x8Guide } from "./guides/x8"
 import { gfGuide } from "./guides/gf"
-import { gospiderGuide } from "./guides/gospider"
-import { cewlGuide } from "./guides/cewl"
 import { gobusterGuide } from "./guides/gobuster"
 import { hydraGuide } from "./guides/hydra"
 import { whatwebGuide } from "./guides/whatweb"
@@ -122,8 +120,6 @@ export const toolsData = [
   x8Guide,
   gfGuide,
   ffufGuide,
-  gospiderGuide,
-  cewlGuide,
   gobusterGuide,
   hydraGuide,
   whatwebGuide,

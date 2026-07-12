@@ -28,6 +28,8 @@ export const viewport: Viewport = {
   ],
 }
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://vulnex.vercel.app'
+
 export const metadata: Metadata = {
   title: {
     default: 'VULNEX',
@@ -44,7 +46,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'VULNEX — Web Hacking Playbook',
     description: 'Ready-to-use payloads, exploitation techniques, and security tools for researchers and bug hunters.',
-    url: 'https://vulnex.vercel.app',
+    url: siteUrl,
     siteName: 'VULNEX',
     locale: 'en_US',
     type: 'website',
@@ -56,7 +58,7 @@ export const metadata: Metadata = {
     creator: '@adce626',
   },
   alternates: {
-    canonical: 'https://vulnex.vercel.app',
+    canonical: siteUrl,
   },
 }
 
@@ -80,7 +82,7 @@ export default function RootLayout({
               "@type": "WebApplication",
               name: "VULNEX",
               description: "A comprehensive platform for security researchers and bug hunters. Ready-to-use payloads, exploitation techniques, practical tools, and quick checklists.",
-              url: "https://vulnex.vercel.app",
+              url: siteUrl,
               author: { "@type": "Person", name: "adce626" },
               applicationCategory: "DeveloperApplication",
               operatingSystem: "All",

@@ -37,7 +37,7 @@ const critical: PatternDefinition[] = [
   { type: "JWT Token", severity: "critical", category: "Tokens", pattern: /eyJ[a-zA-Z0-9_-]{10,}\.[a-zA-Z0-9_-]{10,}\.[a-zA-Z0-9_-]{10,}/g, description: "JWT token — may contain session data" },
   { type: "Bearer Token", severity: "critical", category: "Tokens", pattern: /Bearer\s+[a-zA-Z0-9_\-\.]{20,200}/g, description: "Bearer authorization token" },
   { type: "Heroku API Key", severity: "critical", category: "API Keys", pattern: /[hH][eE][rR][oO][kK][uU].{0,40}(?:key|token|secret|api)[^'\"]{0,20}['\"][a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}['\"]/g, description: "Heroku API key" },
-  { type: "RSA Private Key", severity: "critical", category: "Secrets", pattern: /-----BEGIN\s?(RSA|EC|DSA|PRIVATE)?\s?PRIVATE KEY-----[\s\S]*?-----END\s?(RSA|EC|DSA|PRIVATE)?\s?PRIVATE KEY-----/g, description: "Private key in PEM format" },
+  { type: "RSA Private Key", severity: "critical", category: "Secrets", pattern: /-----BEGIN\s?(RSA|EC|DSA|PRIVATE)?\s?PRIVATE KEY-----[\s\S]{0,10000}?-----END\s?(RSA|EC|DSA|PRIVATE)?\s?PRIVATE KEY-----/g, description: "Private key in PEM format" },
   { type: "Password Assignment", severity: "critical", category: "Credentials", pattern: /(password|passwd|pwd)\s*[:=]\s*['\"][^'\"]{3,}['\"]/gi, description: "Hardcoded password" },
   { type: "Secret Assignment", severity: "critical", category: "Secrets", pattern: /(secret|api_secret|api_key|apikey|app_secret)\s*[:=]\s*['\"][^'\"]{8,}['\"]/gi, description: "Hardcoded secret or API key" },
   { type: "client_secret", severity: "critical", category: "Secrets", pattern: /client_secret\s*[:=]\s*['\"][^'\"]{8,}['\"]/gi, description: "OAuth client secret" },
@@ -53,7 +53,7 @@ const critical: PatternDefinition[] = [
   { type: "Auth Token", severity: "critical", category: "Tokens", pattern: /(auth_token|access_token|refresh_token)\s*[:=]\s*['\"][^'\"]{8,}['\"]/gi, description: "Authentication token" },
   { type: "Sauce Token", severity: "critical", category: "Tokens", pattern: /sauce[a-zA-Z0-9_-]{20,}/g, description: "Sauce Labs access key" },
   { type: "npm Token", severity: "critical", category: "Tokens", pattern: /npm_[a-zA-Z0-9]{36}/g, description: "npm access token" },
-  { type: "SSH Private Key Inline", severity: "critical", category: "Secrets", pattern: /-----BEGIN OPENSSH PRIVATE KEY-----[\s\S]*?-----END OPENSSH PRIVATE KEY-----/g, description: "OpenSSH private key" },
+  { type: "SSH Private Key Inline", severity: "critical", category: "Secrets", pattern: /-----BEGIN OPENSSH PRIVATE KEY-----[\s\S]{0,10000}?-----END OPENSSH PRIVATE KEY-----/g, description: "OpenSSH private key" },
   { type: ".env Reference", severity: "critical", category: "Credentials", pattern: /process\.env\.[a-zA-Z_][a-zA-Z0-9_]*(?:_KEY|_SECRET|_PASSWORD|_TOKEN|_API|API_KEY)/g, description: "Sensitive environment variable referenced" },
   { type: "AWS Session Key", severity: "critical", category: "API Keys", pattern: /ASIA[0-9A-Z]{16}/g, description: "AWS temporary session key" },
   { type: "Stripe Restricted Key", severity: "critical", category: "API Keys", pattern: /rk_(live|test)_[a-zA-Z0-9]{20,60}/g, description: "Stripe restricted API key" },
@@ -183,7 +183,7 @@ export function analyzeJsSource(input: string): InspectorFinding[] {
   const multiLinePatterns = allUniquePatterns.filter(p => p.pattern.source.includes("[\\s\\S]"))
   const singleLinePatterns = allUniquePatterns.filter(p => !p.pattern.source.includes("[\\s\\S]"))
 
-  const strippedLines = input.replace(/\/\*[\s\S]*?\*\//g, "").split("\n").map(l => l.replace(/\/\/.*$/, "").trim())
+  const strippedLines = input.replace(/\/\*[\s\S]{0,50000}?\*\//g, "").split("\n").map(l => l.replace(/\/\/.*$/, "").trim())
 
   for (let lineIdx = 0; lineIdx < lines.length; lineIdx++) {
     const originalLine = lines[lineIdx]
@@ -422,6 +422,258 @@ export function calculateRiskScore(findings: InspectorFinding[]): { score: numbe
 
   const level = score >= 30 ? "critical" : score >= 15 ? "high" : score >= 5 ? "medium" : "low"
   return { score: Math.round(score), level }
+}
+
+export async function analyzeJsSourceChunked(
+  input: string,
+  onProgress: (percent: number, phase: string) => void,
+  signal?: AbortSignal
+): Promise<InspectorFinding[]> {
+  if (!input.trim()) return []
+
+  const CHUNK_SIZE = 200
+  const lines = input.split("\n")
+  const findings: InspectorFinding[] = []
+  const seen = new Set<string>()
+
+  const allUniquePatterns = [...critical, ...high, ...medium, ...info, ...allPatterns]
+  const multiLinePatterns = allUniquePatterns.filter(p => p.pattern.source.includes("[\\s\\S]"))
+  const singleLinePatterns = allUniquePatterns.filter(p => !p.pattern.source.includes("[\\s\\S]"))
+
+  onProgress(0, "Preparing...")
+  if (signal?.aborted) return []
+
+  const strippedLines = input.replace(/\/\*[\s\S]{0,50000}?\*\//g, "").split("\n").map(l => l.replace(/\/\/.*$/, "").trim())
+
+  onProgress(3, "Analyzing line patterns...")
+  if (signal?.aborted) return []
+
+  const totalChunks = Math.ceil(lines.length / CHUNK_SIZE)
+  for (let chunkIdx = 0; chunkIdx < totalChunks; chunkIdx++) {
+    if (signal?.aborted) return []
+
+    const start = chunkIdx * CHUNK_SIZE
+    const end = Math.min(start + CHUNK_SIZE, lines.length)
+
+    for (let lineIdx = start; lineIdx < end; lineIdx++) {
+      const originalLine = lines[lineIdx]
+      const strippedLine = strippedLines[lineIdx]
+      if (!strippedLine) continue
+
+      for (const def of singleLinePatterns) {
+        def.pattern.lastIndex = 0
+        let match: RegExpExecArray | null
+        while ((match = def.pattern.exec(strippedLine)) !== null) {
+          const value = match[0].length > 120 ? match[0].substring(0, 120) + "..." : match[0]
+          const dedupKey = `${def.type}|${value}|${lineIdx + 1}`
+          if (seen.has(dedupKey)) continue
+          seen.add(dedupKey)
+          findings.push({
+            type: def.type,
+            severity: def.severity,
+            category: def.category,
+            value,
+            context: originalLine.trim().length > 150 ? originalLine.trim().substring(0, 150) + "..." : originalLine.trim(),
+            line: lineIdx + 1,
+            pattern: def.pattern.source.substring(0, 60),
+          })
+        }
+      }
+    }
+
+    const pct = 3 + Math.round(((chunkIdx + 1) / totalChunks) * 65)
+    onProgress(Math.min(pct, 68), `Analyzing line patterns... (${end}/${lines.length} lines)`)
+    await new Promise(r => setTimeout(r, 0))
+  }
+
+  onProgress(70, "Checking multi-line patterns...")
+  if (signal?.aborted) return []
+
+  for (const def of multiLinePatterns) {
+    def.pattern.lastIndex = 0
+    let match: RegExpExecArray | null
+    while ((match = def.pattern.exec(input)) !== null) {
+      const value = match[0].length > 120 ? match[0].substring(0, 120) + "..." : match[0]
+      const lineNum = input.substring(0, match.index).split("\n").length
+      const contextLine = (lines[lineNum - 1] ?? "").trim()
+      const context = contextLine.length > 150 ? contextLine.substring(0, 150) + "..." : contextLine
+      const dedupKey = `${def.type}|${value}|${lineNum}`
+      if (seen.has(dedupKey)) continue
+      seen.add(dedupKey)
+      findings.push({
+        type: def.type,
+        severity: def.severity,
+        category: def.category,
+        value,
+        context,
+        line: lineNum,
+        pattern: def.pattern.source.substring(0, 60),
+      })
+    }
+  }
+
+  onProgress(80, "Analyzing entropy...")
+  if (signal?.aborted) return []
+
+  const entropyMinLen = 25
+  const entropyThreshold = 4.5
+  const entropyPat = /['\"`]([a-zA-Z0-9_\-\.\+\/=]{25,80})['\"`]/g
+  for (let lineIdx = 0; lineIdx < lines.length; lineIdx++) {
+    if (signal?.aborted) return []
+    const line = lines[lineIdx]
+    entropyPat.lastIndex = 0
+    let m: RegExpExecArray | null
+    while ((m = entropyPat.exec(line)) !== null) {
+      const s = m[1]
+      if (s.length < entropyMinLen) continue
+      if (/^https?:\/\//i.test(s) || /@/.test(s) || /\.(com|net|org|io|app|dev)$/i.test(s)) continue
+      if (findings.some(f => f.line === lineIdx + 1 && f.value.includes(s))) continue
+      const ent = shannonEntropy(s)
+      if (ent > entropyThreshold) {
+        const value = s.length > 120 ? s.substring(0, 120) + "..." : s
+        const dedupKey = `High Entropy String|${value}|${lineIdx + 1}`
+        if (seen.has(dedupKey)) continue
+        seen.add(dedupKey)
+        findings.push({
+          type: "High Entropy String",
+          severity: "medium",
+          category: "Suspicious",
+          value,
+          context: line.trim().length > 150 ? line.trim().substring(0, 150) + "..." : line.trim(),
+          line: lineIdx + 1,
+          pattern: "entropy",
+        })
+      }
+    }
+    if ((lineIdx + 1) % 500 === 0) {
+      const pct = 80 + Math.round(((lineIdx + 1) / lines.length) * 10)
+      onProgress(Math.min(pct, 90), `Analyzing entropy... (${lineIdx + 1}/${lines.length} lines)`)
+      await new Promise(r => setTimeout(r, 0))
+    }
+  }
+
+  onProgress(90, "Detecting obfuscation...")
+  if (signal?.aborted) return []
+
+  const largeArrPat = /\[(?:\s*['\"`][^'\"`]+['\"`]\s*,){5,}/g
+  const arrAccessPat = /\b([a-zA-Z_]\w*)\[['\"`]?[a-zA-Z0-9_]+['\"`]?\]/g
+  largeArrPat.lastIndex = 0
+  const largeArrLines = new Set<number>()
+  let arrMatch: RegExpExecArray | null
+  while ((arrMatch = largeArrPat.exec(input)) !== null) {
+    const lineNum = input.substring(0, arrMatch.index).split("\n").length
+    largeArrLines.add(lineNum)
+  }
+  if (largeArrLines.size > 0) {
+    arrAccessPat.lastIndex = 0
+    const accessLines = new Set<number>()
+    while ((arrMatch = arrAccessPat.exec(input)) !== null) {
+      const lineNum = input.substring(0, arrMatch.index).split("\n").length
+      accessLines.add(lineNum)
+    }
+    let found = false
+    for (const l of largeArrLines) {
+      if (accessLines.has(l)) {
+        const key = `Array-based Obfuscation||${l}`
+        if (!seen.has(key)) {
+          seen.add(key)
+          findings.push({
+            type: "Array-based Obfuscation",
+            severity: "high",
+            category: "Obfuscation",
+            value: `Large string array with computed access on line ${l}`,
+            context: (lines[l - 1] ?? "").trim().substring(0, 150),
+            line: l,
+            pattern: "obfuscation-array",
+          })
+        }
+        found = true
+      }
+    }
+    if (!found) {
+      const firstLine = Math.min(...largeArrLines)
+      const key = `Suspicious String Array||${firstLine}`
+      if (!seen.has(key)) {
+        seen.add(key)
+        findings.push({
+          type: "Suspicious String Array",
+          severity: "medium",
+          category: "Obfuscation",
+          value: `Array with 5+ string literals on line ${firstLine}`,
+          context: (lines[firstLine - 1] ?? "").trim().substring(0, 150),
+          line: firstLine,
+          pattern: "obfuscation-array",
+        })
+      }
+    }
+  }
+
+  onProgress(94, "Detecting control-flow flattening...")
+  if (signal?.aborted) return []
+
+  const flatCasePat = /switch\s*\([^)]*\)\s*\{([^}]*case\s+[^:]+:[^}]*){5,}/g
+  flatCasePat.lastIndex = 0
+  let flatMatch: RegExpExecArray | null
+  while ((flatMatch = flatCasePat.exec(input)) !== null) {
+    const lineNum = input.substring(0, flatMatch.index).split("\n").length
+    const key = `Control-Flow Flattening||${lineNum}`
+    if (!seen.has(key)) {
+      seen.add(key)
+      findings.push({
+        type: "Control-Flow Flattening",
+        severity: "high",
+        category: "Obfuscation",
+        value: `Large switch with 6+ numeric cases at line ${lineNum}`,
+        context: (lines[lineNum - 1] ?? "").trim().substring(0, 150),
+        line: lineNum,
+        pattern: "obfuscation-cff",
+      })
+    }
+  }
+
+  onProgress(97, "Finalizing results...")
+  if (signal?.aborted) return []
+
+  findings.sort((a, b) => {
+    const sevOrder: Record<string, number> = { critical: 0, high: 1, medium: 2, info: 3 }
+    const aOrder = sevOrder[a.severity] ?? 99
+    const bOrder = sevOrder[b.severity] ?? 99
+    if (aOrder !== bOrder) return aOrder - bOrder
+    return a.line - b.line
+  })
+
+  const sevOrder: Record<string, number> = { critical: 0, high: 1, medium: 2, info: 3 }
+  const deduped = new Map<string, InspectorFinding>()
+  for (const f of findings) {
+    const key = `${f.line}|${f.type}|${f.value}`
+    const existing = deduped.get(key)
+    if (!existing || sevOrder[f.severity] < sevOrder[existing.severity]) {
+      deduped.set(key, f)
+    }
+  }
+
+  const stripQ = (v: string) => v.replace(/^['\"`]|['\"`]$/g, "")
+  const genericTypes = new Set([
+    "URL", "Database Connection String", "localhost",
+    "Internal IP", "IP:Port",
+  ])
+  const valueDedup = new Map<string, InspectorFinding>()
+  for (const f of Array.from(deduped.values())) {
+    const vKey = `${f.line}|${stripQ(f.value)}`
+    const existing = valueDedup.get(vKey)
+    if (!existing) {
+      valueDedup.set(vKey, f)
+    } else if (genericTypes.has(existing.type) && !genericTypes.has(f.type)) {
+      valueDedup.set(vKey, f)
+    } else if (genericTypes.has(f.type) && !genericTypes.has(existing.type)) {
+    } else if (genericTypes.has(existing.type) && genericTypes.has(f.type) && f.type !== existing.type) {
+      const typeRank = (t: string) => t === "Database Connection String" ? 0 : t === "URL" ? 1 : t === "localhost" ? 2 : t === "Internal IP" ? 3 : t === "IP:Port" ? 4 : 5
+      if (typeRank(f.type) > typeRank(existing.type)) valueDedup.set(vKey, f)
+    }
+  }
+
+  onProgress(100, "Complete")
+  return Array.from(valueDedup.values())
 }
 
 export function getCategoryFindings(findings: InspectorFinding[]): Record<string, InspectorFinding[]> {
