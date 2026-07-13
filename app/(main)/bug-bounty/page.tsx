@@ -410,13 +410,13 @@ export default function BugBountyPage() {
       <MouseGlow />
 
       {/* Nav */}
-      <nav className="sticky top-0 z-50 flex h-14 items-center border-b px-6" style={{ background: "oklch(0.075 0.02 30 / 0.95)", backdropFilter: "blur(16px)", borderColor: "var(--bb-border)" }}>
-        <div className="flex items-center gap-6">
-          <Link href="/bug-bounty" className="flex items-center gap-2 text-sm font-bold tracking-wider" style={{ color: "var(--bb-primary)" }}>
-            <Target className="h-4 w-4" /> BUG BOUNTY
+      <nav className="sticky top-0 z-50 flex h-14 items-center border-b px-3 sm:px-6" style={{ background: "oklch(0.075 0.02 30 / 0.95)", backdropFilter: "blur(16px)", borderColor: "var(--bb-border)" }}>
+        <div className="flex items-center gap-2 sm:gap-6 overflow-x-auto">
+          <Link href="/bug-bounty" className="shrink-0 flex items-center gap-2 text-sm font-bold tracking-wider" style={{ color: "var(--bb-primary)" }}>
+            <Target className="h-4 w-4" /> <span className="hidden sm:inline">BUG BOUNTY</span><span className="sm:hidden">BB</span>
           </Link>
-          <div className="h-5 w-px" style={{ background: "var(--bb-border)" }} />
-          <div className="flex items-center gap-1.5">
+          <div className="h-5 w-px shrink-0" style={{ background: "var(--bb-border)" }} />
+          <div className="flex items-center gap-0.5 sm:gap-1.5">
             {[
               { href: "/", label: "Main Site", color: "var(--bb-primary)", dot: "var(--bb-primary)" },
               { href: "/Hope", label: "Full Guide", color: "var(--bb-gold)", dot: "var(--bb-gold)" },
@@ -452,22 +452,22 @@ export default function BugBountyPage() {
 
         <div className="relative z-10">
           {/* Target icon with enhanced pulse */}
-          <div className="mx-auto mb-8 flex h-24 w-24 items-center justify-center rounded-full" style={{
+          <div className="mx-auto mb-6 sm:mb-8 flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-full" style={{
             background: "var(--bb-primary-glow)",
             border: "2px solid var(--bb-primary)",
             animation: "target-pulse 2.5s ease-in-out infinite",
             boxShadow: "0 0 40px var(--bb-primary-glow), 0 0 80px oklch(0.55 0.22 25 / 0.15)",
           }}>
-            <Target className="h-12 w-12" style={{ color: "var(--bb-primary)" }} />
+            <Target className="h-8 w-8 sm:h-12 sm:w-12" style={{ color: "var(--bb-primary)" }} />
           </div>
 
-          <h1 className="mb-4 text-6xl font-bold tracking-tight sm:text-7xl lg:text-8xl" style={{
+          <h1 className="mb-3 sm:mb-4 text-4xl sm:text-6xl lg:text-8xl font-bold tracking-tight" style={{
             color: "var(--bb-text)",
             textShadow: "0 0 40px oklch(0.55 0.22 25 / 0.3), 0 0 80px oklch(0.55 0.22 25 / 0.1)",
           }}>
             BUG BOUNTY
           </h1>
-          <p className="mx-auto mb-12 max-w-2xl text-lg sm:text-xl" style={{
+          <p className="mx-auto mb-10 sm:mb-12 max-w-2xl text-base sm:text-lg" style={{
             color: "var(--bb-text-secondary)",
             textShadow: "0 0 20px oklch(0.5 0.02 30 / 0.3)",
           }}>
@@ -475,7 +475,7 @@ export default function BugBountyPage() {
           </p>
 
           {/* Stats with animated counters */}
-          <div className="flex flex-wrap justify-center gap-12 text-center">
+          <div className="flex flex-wrap justify-center gap-6 sm:gap-12 text-center">
             <AnimatedCounter target={11} suffix="" label="CHAPTERS" />
             <div className="w-px self-stretch" style={{ background: "var(--bb-border)" }} />
             <AnimatedCounter target={8} suffix="" label="CHAINS" />

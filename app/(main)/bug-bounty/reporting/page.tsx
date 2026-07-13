@@ -68,24 +68,24 @@ export default function ReportingPage() {
       <PageTitle title="Reporting Templates — Bug Bounty Submission Guide" />
 
       {/* Nav */}
-      <nav className="sticky top-0 z-50 flex h-14 items-center border-b px-6" style={{ background: "var(--bb-bg)", borderColor: "var(--bb-border)" }}>
-        <div className="flex items-center gap-6">
-          <Link href="/bug-bounty" className="flex items-center gap-2 text-sm font-bold tracking-wider" style={{ color: "var(--bb-primary)" }}>
-            <Target className="h-4 w-4" /> BUG BOUNTY
+      <nav className="sticky top-0 z-50 flex h-14 items-center border-b px-3 sm:px-6" style={{ background: "var(--bb-bg)", borderColor: "var(--bb-border)" }}>
+        <div className="flex items-center gap-2 sm:gap-6 overflow-x-auto">
+          <Link href="/bug-bounty" className="shrink-0 flex items-center gap-2 text-sm font-bold tracking-wider" style={{ color: "var(--bb-primary)" }}>
+            <Target className="h-4 w-4" /> <span className="hidden sm:inline">BUG BOUNTY</span><span className="sm:hidden">BB</span>
           </Link>
-          <div className="h-5 w-px" style={{ background: "var(--bb-border)" }} />
-          <div className="flex items-center gap-1.5">
+          <div className="h-5 w-px shrink-0" style={{ background: "var(--bb-border)" }} />
+          <div className="flex items-center gap-0.5 sm:gap-1.5">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="group relative flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-medium tracking-wider transition-all duration-200"
+                className="group relative shrink-0 flex items-center gap-1 sm:gap-2 rounded-lg px-2 sm:px-3 py-1.5 text-[10px] sm:text-xs font-medium tracking-wider transition-all duration-200"
                 style={{ color: "var(--bb-text-muted)" }}
                 onMouseEnter={(e) => { e.currentTarget.style.color = link.color; e.currentTarget.style.background = `${link.color}12` }}
                 onMouseLeave={(e) => { e.currentTarget.style.color = "var(--bb-text-muted)"; e.currentTarget.style.background = "transparent" }}
               >
                 <span className="h-1.5 w-1.5 rounded-full transition-all duration-200" style={{ background: link.dot }} />
-                {link.label}
+                <span className="hidden sm:inline">{link.label}</span>
               </Link>
             ))}
           </div>
