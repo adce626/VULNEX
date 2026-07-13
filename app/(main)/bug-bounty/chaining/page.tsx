@@ -26,6 +26,8 @@ export default function ChainingPage() {
     setActiveChapter(id)
     const el = document.getElementById(id)
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
+    const btn = document.querySelector(`[data-chapter="${id}"]`)
+    if (btn) btn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" })
   }
 
   return (
@@ -76,12 +78,12 @@ export default function ChainingPage() {
           <p className="mx-auto mb-6 max-w-2xl" style={{ color: "var(--bb-text-secondary)" }}>
             Chain multiple low-severity bugs into critical exploits — XSS to ATO, IDOR to data breach, SSRF to cloud compromise
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex overflow-x-auto gap-3 justify-center">
             {chainingChapters.map((ch) => (
               <button
                 key={ch.id}
                 onClick={() => scrollToChapter(ch.id)}
-                className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold tracking-wider transition-all duration-200"
+                className="shrink-0 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold tracking-wider whitespace-nowrap transition-all duration-200"
                 style={{
                   background: activeChapter === ch.id ? `${ch.color}18` : "var(--bb-card)",
                   color: ch.color,
@@ -104,6 +106,7 @@ export default function ChainingPage() {
           {chainingChapters.map((ch) => (
             <button
               key={ch.id}
+              data-chapter={ch.id}
               onClick={() => scrollToChapter(ch.id)}
               className="relative flex items-center gap-2 whitespace-nowrap rounded-lg px-3.5 py-2 text-xs font-semibold tracking-wider transition-all duration-200"
               style={{

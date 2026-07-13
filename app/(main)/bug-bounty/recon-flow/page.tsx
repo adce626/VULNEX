@@ -27,6 +27,8 @@ export default function ReconFlowPage() {
     setActiveChapter(id)
     const el = document.getElementById(id)
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
+    const btn = document.querySelector(`[data-chapter="${id}"]`)
+    if (btn) btn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" })
   }
 
   return (
@@ -77,12 +79,12 @@ export default function ReconFlowPage() {
           <p className="mx-auto mb-6 max-w-2xl" style={{ color: "var(--bb-text-secondary)" }}>
             Subdomain enumeration, port scanning, technology fingerprinting, and endpoint discovery — the foundation of every bounty
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex overflow-x-auto gap-3 justify-center">
             {reconFlowChapters.map((ch) => (
               <button
                 key={ch.id}
                 onClick={() => scrollToChapter(ch.id)}
-                className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold tracking-wider transition-all duration-200"
+                className="shrink-0 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold tracking-wider whitespace-nowrap transition-all duration-200"
                 style={{
                   background: activeChapter === ch.id ? `${ch.color}18` : "var(--bb-card)",
                   color: ch.color,
@@ -105,6 +107,7 @@ export default function ReconFlowPage() {
           {reconFlowChapters.map((ch) => (
             <button
               key={ch.id}
+              data-chapter={ch.id}
               onClick={() => scrollToChapter(ch.id)}
               className="relative flex items-center gap-2 whitespace-nowrap rounded-lg px-3.5 py-2 text-xs font-semibold tracking-wider transition-all duration-200"
               style={{
