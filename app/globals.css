@@ -427,6 +427,13 @@ body[data-sidebar-collapsed="false"] #main-content {
   min-height: 100vh;
 }
 
+/* Mobile: prevent stuck hover effects */
+@media (hover: none) and (pointer: coarse) {
+  .bug-bounty-realm [style*="transition"] {
+    transition: none !important;
+  }
+}
+
 @keyframes target-pulse {
   0%, 100% { box-shadow: 0 0 0 0 oklch(0.55 0.22 25 / 0.4); }
   50% { box-shadow: 0 0 0 20px oklch(0.55 0.22 25 / 0); }

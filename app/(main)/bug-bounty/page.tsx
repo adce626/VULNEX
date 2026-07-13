@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback, type ReactNode } from "react"
 import Link from "next/link"
 import { PageTitle } from "@/components/page-title"
+import { useDeviceType } from "@/lib/use-device-type"
 import {
   Target, ChevronRight, BookOpen, ArrowRight, Search,
   Globe, Terminal, FileText, Wrench, Sparkles,
@@ -219,6 +220,7 @@ function AnimatedCounter({ target, suffix, label }: { target: number; suffix: st
   const [count, setCount] = useState(0)
   const ref = useRef<HTMLDivElement>(null)
   const counted = useRef(false)
+  const intervalMs = typeof window !== "undefined" && window.innerWidth < 640 ? 100 : 35
 
   useEffect(() => {
     const el = ref.current
@@ -241,7 +243,7 @@ function AnimatedCounter({ target, suffix, label }: { target: number; suffix: st
             } else {
               setCount(Math.floor(current))
             }
-          }, 35)
+          }, intervalMs)
         }
       },
       { threshold: 0.5 },
@@ -252,7 +254,7 @@ function AnimatedCounter({ target, suffix, label }: { target: number; suffix: st
       observer.disconnect()
       if (intervalId) clearInterval(intervalId)
     }
-  }, [target])
+  }, [target, intervalMs])
 
   return (
     <div ref={ref} className="text-center">
@@ -274,6 +276,7 @@ function MethodCard({ area }: { area: typeof methodAreas[number] }) {
   const [hover, setHover] = useState(false)
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    if (!window.matchMedia("(hover: hover)").matches) return
     const card = cardRef.current
     if (!card) return
     const rect = card.getBoundingClientRect()
@@ -287,7 +290,7 @@ function MethodCard({ area }: { area: typeof methodAreas[number] }) {
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setHover(true)}
+      onMouseEnter={() => { if (!window.matchMedia("(hover: hover)").matches) return; setHover(true) }}
       onMouseLeave={() => { setHover(false); setTilt({ x: 0, y: 0 }) }}
       className="group relative overflow-hidden rounded-xl border p-6 h-full cursor-default transition-all duration-300"
       style={{
@@ -374,8 +377,8 @@ function ChainCard({ chain }: { chain: typeof attackChains[number] }) {
         transform: hover ? "translateY(-4px)" : "translateY(0)",
         boxShadow: hover ? `0 0 35px ${chain.color}22, 0 8px 24px rgba(0,0,0,0.2)` : "0 4px 12px rgba(0,0,0,0.1)",
       }}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
+      onMouseEnter={() => { if (!window.matchMedia("(hover: hover)").matches) return; setHover(true) }}
+      onMouseLeave={() => { if (!window.matchMedia("(hover: hover)").matches) return; setHover(false) }}
     >
       <div className="mb-3 flex items-center gap-1.5">
         {chain.steps.map((step, i) => (
@@ -402,12 +405,13 @@ function ChainCard({ chain }: { chain: typeof attackChains[number] }) {
 }
 
 export default function BugBountyPage() {
+  const device = useDeviceType()
   return (
     <div className="bug-bounty-realm">
       <PageTitle title="Bug Bounty — Hunter's Roadmap" />
 
-      <ParticleField />
-      <MouseGlow />
+      {device === "desktop" && <ParticleField />}
+      {device === "desktop" && <MouseGlow />}
 
       {/* Nav */}
       <nav className="sticky top-0 z-50 flex h-14 items-center border-b px-3 sm:px-6" style={{ background: "oklch(0.075 0.02 30 / 0.95)", backdropFilter: "blur(16px)", borderColor: "var(--bb-border)" }}>
@@ -428,8 +432,14 @@ export default function BugBountyPage() {
                 href={link.href}
                 className="group relative flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-medium tracking-wider transition-all duration-200"
                 style={{ color: "var(--bb-text-muted)" }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = link.color; e.currentTarget.style.background = `${link.color}12` }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = "var(--bb-text-muted)"; e.currentTarget.style.background = "transparent" }}
+                onMouseEnter={(e) => {
+                  if (!window.matchMedia("(hover: hover)").matches) return
+                  e.currentTarget.style.color = link.color; e.currentTarget.style.background = `${link.color}12`
+                }}
+                onMouseLeave={(e) => {
+                  if (!window.matchMedia("(hover: hover)").matches) return
+                  e.currentTarget.style.color = "var(--bb-text-muted)"; e.currentTarget.style.background = "transparent"
+                }}
               >
                 <span className="h-1.5 w-1.5 rounded-full transition-all duration-200" style={{ background: link.dot, boxShadow: `0 0 6px ${link.dot}` }} />
                 {link.label}
@@ -605,12 +615,14 @@ export default function BugBountyPage() {
                       color: "var(--bb-text-secondary)",
                     }}
                     onMouseEnter={(e) => {
+                      if (!window.matchMedia("(hover: hover)").matches) return
                       e.currentTarget.style.borderColor = "var(--bb-primary)"
                       e.currentTarget.style.color = "var(--bb-primary)"
                       e.currentTarget.style.background = "oklch(0.55 0.22 25 / 0.08)"
                       e.currentTarget.style.transform = "translateY(-2px)"
                     }}
                     onMouseLeave={(e) => {
+                      if (!window.matchMedia("(hover: hover)").matches) return
                       e.currentTarget.style.borderColor = "var(--bb-border)"
                       e.currentTarget.style.color = "var(--bb-text-secondary)"
                       e.currentTarget.style.background = "oklch(0.1 0.01 30 / 0.5)"

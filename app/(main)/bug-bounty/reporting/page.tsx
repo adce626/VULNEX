@@ -4,7 +4,8 @@ import { useState } from "react"
 import Link from "next/link"
 import { PageTitle } from "@/components/page-title"
 import { reportingChapters } from "@/lib/reporting-templates-data"
-import { Target, Copy, Check, FileText, ChevronRight, ExternalLink } from "lucide-react"
+import { BBCommandBlock } from "@/components/bb-command-block"
+import { Target, FileText, ChevronRight, ExternalLink } from "lucide-react"
 
 const navLinks = [
   { href: "/", label: "Main Site", color: "var(--bb-primary)", dot: "var(--bb-primary)" },
@@ -16,43 +17,7 @@ const navLinks = [
   { href: "/bug-bounty/platforms", label: "Platforms", color: "oklch(0.65 0.18 50)", dot: "oklch(0.65 0.18 50)" },
 ]
 
-function CopyButton({ text }: { text: string }) {
-  const [copied, setCopied] = useState(false)
-  return (
-    <button
-      onClick={() => { navigator.clipboard.writeText(text); setCopied(true); setTimeout(() => setCopied(false), 1500) }}
-      className="flex items-center gap-1 rounded-md px-2.5 py-1 text-[11px] font-medium transition-all duration-200"
-      style={{ background: "oklch(0.55 0.22 25 / 0.12)", color: "var(--bb-primary)" }}
-      onMouseEnter={(e) => { e.currentTarget.style.background = "oklch(0.55 0.22 25 / 0.22)" }}
-      onMouseLeave={(e) => { e.currentTarget.style.background = "oklch(0.55 0.22 25 / 0.12)" }}
-    >
-      {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
-      {copied ? "Copied" : "Copy"}
-    </button>
-  )
-}
 
-function CommandBlock({ cmd, desc }: { cmd: string; desc: string }) {
-  return (
-    <div
-      className="group rounded-lg border transition-all duration-200"
-      style={{ background: "oklch(0.07 0.015 30 / 0.6)", borderColor: "var(--bb-border)" }}
-      onMouseEnter={(e) => { e.currentTarget.style.borderColor = "var(--bb-primary)" }}
-      onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--bb-border)" }}
-    >
-      <div className="flex items-start gap-3 p-3">
-        <span className="mt-0.5 shrink-0 font-mono text-xs" style={{ color: "oklch(0.45 0.15 25)" }}>$</span>
-        <div className="min-w-0 flex-1">
-          <code className="block overflow-x-auto whitespace-pre-wrap break-all font-mono text-sm leading-relaxed" style={{ color: "var(--bb-text)" }}>
-            {cmd}
-          </code>
-          <p className="mt-1.5 text-xs leading-relaxed" style={{ color: "var(--bb-text-secondary)" }}>{desc}</p>
-        </div>
-        <CopyButton text={cmd} />
-      </div>
-    </div>
-  )
-}
 
 export default function ReportingPage() {
   const [activeChapter, setActiveChapter] = useState(reportingChapters[0].id)
@@ -81,8 +46,14 @@ export default function ReportingPage() {
                 href={link.href}
                 className="group relative shrink-0 flex items-center gap-1 sm:gap-2 rounded-lg px-2 sm:px-3 py-1.5 text-[10px] sm:text-xs font-medium tracking-wider transition-all duration-200"
                 style={{ color: "var(--bb-text-muted)" }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = link.color; e.currentTarget.style.background = `${link.color}12` }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = "var(--bb-text-muted)"; e.currentTarget.style.background = "transparent" }}
+                onMouseEnter={(e) => {
+                  if (!window.matchMedia("(hover: hover)").matches) return
+                  e.currentTarget.style.color = link.color; e.currentTarget.style.background = `${link.color}12`
+                }}
+                onMouseLeave={(e) => {
+                  if (!window.matchMedia("(hover: hover)").matches) return
+                  e.currentTarget.style.color = "var(--bb-text-muted)"; e.currentTarget.style.background = "transparent"
+                }}
               >
                 <span className="h-1.5 w-1.5 rounded-full transition-all duration-200" style={{ background: link.dot }} />
                 <span className="hidden sm:inline">{link.label}</span>
@@ -188,7 +159,7 @@ export default function ReportingPage() {
 
                   <div className="space-y-2.5">
                     {section.commands.map((cmd, ci) => (
-                      <CommandBlock key={ci} cmd={cmd.cmd} desc={cmd.desc} />
+                      <BBCommandBlock key={ci} cmd={cmd.cmd} desc={cmd.desc} />
                     ))}
                   </div>
 
@@ -224,8 +195,14 @@ export default function ReportingPage() {
                     rel="noopener noreferrer"
                     className="group rounded-lg border p-3 transition-all duration-200"
                     style={{ borderColor: "var(--bb-border)", background: "var(--bb-surface)" }}
-                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = chapter.color; e.currentTarget.style.background = `${chapter.color}08` }}
-                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--bb-border)"; e.currentTarget.style.background = "var(--bb-surface)" }}
+                    onMouseEnter={(e) => {
+                      if (!window.matchMedia("(hover: hover)").matches) return
+                      e.currentTarget.style.borderColor = chapter.color; e.currentTarget.style.background = `${chapter.color}08`
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!window.matchMedia("(hover: hover)").matches) return
+                      e.currentTarget.style.borderColor = "var(--bb-border)"; e.currentTarget.style.background = "var(--bb-surface)"
+                    }}
                   >
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-sm font-bold" style={{ color: "var(--bb-text)" }}>{tool.name}</span>
@@ -233,7 +210,7 @@ export default function ReportingPage() {
                     </div>
                     <p className="mb-2 text-xs leading-relaxed" style={{ color: "var(--bb-text-secondary)" }}>{tool.desc}</p>
                     {tool.install && (
-                      <code className="block overflow-x-auto whitespace-nowrap rounded px-2 py-1 text-[10px] font-mono" style={{ background: "oklch(0 0 0 / 0.3)", color: "var(--bb-text-muted)" }}>
+                      <code className="block overflow-x-auto whitespace-pre-wrap break-all rounded px-2 py-1 text-[10px] font-mono" style={{ background: "oklch(0 0 0 / 0.3)", color: "var(--bb-text-muted)" }}>
                         {tool.install}
                       </code>
                     )}
