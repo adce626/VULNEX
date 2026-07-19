@@ -35,7 +35,7 @@ export function FeaturedCarousel() {
   const visibleItems = [items[current * 2], items[current * 2 + 1]].filter(Boolean)
 
   return (
-    <div className="relative" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
+    <div className="relative" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)} onTouchStart={() => setIsPaused(true)} onTouchEnd={() => setIsPaused(false)}>
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-foreground">Featured Sections</h2>
         <div className="flex gap-1">
@@ -94,8 +94,8 @@ export function FeaturedCarousel() {
             key={i}
             onClick={() => setCurrent(i)}
             className={cn(
-              "h-1.5 rounded-full transition-all duration-300",
-              i === current ? "w-6 bg-primary" : "w-1.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
+              "h-3 rounded-full transition-all duration-300",
+              i === current ? "w-6 bg-primary" : "w-3 bg-muted-foreground/30 hover:bg-muted-foreground/50"
             )}
             aria-label={`Slide ${i + 1}`}
           />

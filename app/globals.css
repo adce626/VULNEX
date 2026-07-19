@@ -3,6 +3,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Eliminate 300ms tap delay on mobile */
+button, a, input, select, textarea, [role="button"] {
+  touch-action: manipulation;
+}
+
 :root {
   --background: oklch(0.98 0.002 260);
   --foreground: oklch(0.15 0.01 260);
@@ -164,14 +169,25 @@
   #main-content {
     padding-top: 3.75rem;
   }
+  /* 44px touch targets for sidebar nav items */
+  .sidebar-nav-item {
+    min-height: 44px;
+  }
 }
 
-/* Sidebar collapsed state */
-body[data-sidebar-collapsed="true"] #main-content {
-  padding-left: 4rem;
+/* Sidebar collapsed state — desktop only */
+@media (min-width: 1024px) {
+  body[data-sidebar-collapsed="true"] #main-content {
+    padding-left: 4rem;
+  }
+  body[data-sidebar-collapsed="false"] #main-content {
+    padding-left: 16rem;
+  }
 }
-body[data-sidebar-collapsed="false"] #main-content {
-  padding-left: 16rem;
+@media (max-width: 1023px) {
+  #main-content {
+    padding-left: 0;
+  }
 }
 
 @keyframes blink {
@@ -437,6 +453,11 @@ body[data-sidebar-collapsed="false"] #main-content {
 @media (max-width: 639px) {
   .bug-bounty-realm [style*="backdropFilter"],
   .bug-bounty-realm [style*="backdrop-filter"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  [style*="backdropFilter"],
+  [style*="backdrop-filter"] {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }

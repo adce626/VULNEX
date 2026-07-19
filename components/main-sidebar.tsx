@@ -186,6 +186,15 @@ export function MainSidebar() {
   }, [collapsed])
 
   useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+    return () => { document.body.style.overflow = "" }
+  }, [mobileOpen])
+
+  useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "/" && !["INPUT", "TEXTAREA"].includes((e.target as HTMLElement).tagName)) {
         e.preventDefault()
@@ -336,26 +345,26 @@ export function MainSidebar() {
                 href={section.href}
                 onClick={() => setMobileOpen(false)}
                 title={collapsed ? section.title : undefined}
-                className={cn(
-                  "flex w-full items-center rounded-lg py-2 text-sm font-medium transition-colors",
-                  collapsed ? "justify-center px-2" : "justify-between px-3",
-                  isActive(section.href)
-                    ? "bg-primary/10 text-primary"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                )}
-              >
-                <span className="flex items-center gap-2">
-                  {iconMap[section.icon]}
-                  {!collapsed && section.title}
-                </span>
-              </Link>
-            ) : section.items ? (
-                <button
+                  className={cn(
+                    "sidebar-nav-item flex w-full items-center rounded-lg py-2 text-sm font-medium transition-colors",
+                    collapsed ? "justify-center px-2" : "justify-between px-3",
+                    isActive(section.href)
+                      ? "bg-primary/10 text-primary"
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  )}
+                >
+                  <span className="flex items-center gap-2">
+                    {iconMap[section.icon]}
+                    {!collapsed && section.title}
+                  </span>
+                </Link>
+              ) : section.items ? (
+                  <button
                   onClick={() => toggleSection(section.title)}
                   aria-expanded={expandedSections.includes(section.title)}
                   title={collapsed ? section.title : undefined}
                   className={cn(
-                    "flex w-full items-center rounded-lg py-2 text-sm font-medium transition-colors",
+                    "sidebar-nav-item flex w-full items-center rounded-lg py-2 text-sm font-medium transition-colors",
                     collapsed ? "justify-center px-2" : "justify-between px-3",
                     isActive(section.href)
                       ? "bg-primary/10 text-primary"
@@ -383,7 +392,7 @@ export function MainSidebar() {
                 onClick={() => setMobileOpen(false)}
                 title={collapsed ? section.title : undefined}
                 className={cn(
-                  "flex w-full items-center rounded-lg py-2 text-sm font-medium transition-colors",
+                  "sidebar-nav-item flex w-full items-center rounded-lg py-2 text-sm font-medium transition-colors",
                   collapsed ? "justify-center px-2" : "justify-between px-3",
                   isActive(section.href)
                     ? "bg-primary/10 text-primary"
@@ -482,7 +491,7 @@ export function MainSidebar() {
       {/* Mobile Toggle */}
       <button
         onClick={() => setMobileOpen(!mobileOpen)}
-        className="fixed left-4 top-4 z-50 flex h-10 w-10 items-center justify-center rounded-lg bg-card text-foreground shadow-lg lg:hidden"
+        className="fixed left-4 top-4 z-50 flex h-11 w-11 items-center justify-center rounded-lg bg-card text-foreground shadow-lg lg:hidden"
         aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
       >
         {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -491,7 +500,7 @@ export function MainSidebar() {
       {/* Mobile Sidebar */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-40 bg-background/80 lg:hidden"
           onClick={() => setMobileOpen(false)}
         />
       )}

@@ -46,6 +46,7 @@ const featuredTools = featuredToolIds.map(id => toolsData.find(t => t.id === id)
 export default function HomePage() {
   const [mounted, setMounted] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
+  const [bbHover, setBbHover] = useState(false)
   const searchRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
 
@@ -161,21 +162,24 @@ export default function HomePage() {
           <div className="mx-auto max-w-6xl px-6 py-16">
             <Link
               href="/bug-bounty"
-              className="group relative block overflow-hidden rounded-2xl border p-8 transition-all duration-500 sm:p-12"
+              className="relative block overflow-hidden rounded-2xl border p-8 transition-all duration-500 sm:p-12"
               style={{
                 borderColor: "oklch(0.22 0.04 30)",
                 background: "linear-gradient(135deg, oklch(0.12 0.03 30 / 0.9), oklch(0.08 0.02 30 / 0.6))",
               }}
+              onMouseEnter={() => { if (window.matchMedia("(hover: hover)").matches) setBbHover(true) }}
+              onMouseLeave={() => setBbHover(false)}
             >
-              <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full opacity-20 blur-3xl transition-all duration-700 group-hover:opacity-30 group-hover:scale-110" style={{ background: "oklch(0.55 0.22 25)" }} />
-              <div className="pointer-events-none absolute -bottom-20 -left-20 h-80 w-80 rounded-full opacity-10 blur-3xl transition-all duration-700 group-hover:opacity-20 group-hover:scale-110" style={{ background: "oklch(0.72 0.16 75)" }} />
+              <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full blur-3xl transition-all duration-700" style={{ background: "oklch(0.55 0.22 25)", opacity: bbHover ? 0.3 : 0.2, transform: bbHover ? "scale(1.1)" : "scale(1)" }} />
+              <div className="pointer-events-none absolute -bottom-20 -left-20 h-80 w-80 rounded-full blur-3xl transition-all duration-700" style={{ background: "oklch(0.72 0.16 75)", opacity: bbHover ? 0.2 : 0.1, transform: bbHover ? "scale(1.1)" : "scale(1)" }} />
 
               <div className="relative flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-5">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl" style={{
+                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl transition-all duration-300" style={{
                     background: "oklch(0.55 0.22 25 / 0.15)",
                     border: "1px solid oklch(0.55 0.22 25 / 0.4)",
-                    boxShadow: "0 0 25px oklch(0.55 0.22 25 / 0.15)",
+                    boxShadow: bbHover ? "0 0 30px oklch(0.55 0.22 25 / 0.3)" : "0 0 25px oklch(0.55 0.22 25 / 0.15)",
+                    transform: bbHover ? "scale(1.1)" : "scale(1)",
                   }}>
                     <Target className="h-8 w-8" style={{ color: "oklch(0.55 0.22 25)" }} />
                   </div>
@@ -190,7 +194,7 @@ export default function HomePage() {
                         HUNTER'S DEN
                       </span>
                     </div>
-                    <h2 className="text-2xl font-bold sm:text-3xl transition-colors duration-300 group-hover:text-white" style={{ color: "oklch(0.92 0.01 30)" }}>
+                    <h2 className="text-2xl font-bold sm:text-3xl transition-colors duration-300" style={{ color: bbHover ? "white" : "oklch(0.92 0.01 30)" }}>
                       The Hunter's Roadmap
                     </h2>
                     <p className="mt-1 max-w-xl text-sm transition-colors duration-300" style={{ color: "oklch(0.75 0.02 30)" }}>
@@ -216,12 +220,13 @@ export default function HomePage() {
                       <div className="text-[10px] tracking-widest" style={{ color: "oklch(0.55 0.03 30)" }}>METHODS</div>
                     </div>
                   </div>
-                  <div className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition-all duration-300 group-hover:gap-3 group-hover:shadow-xl" style={{
+                  <div className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition-all duration-300" style={{
                     background: "oklch(0.55 0.22 25)",
                     color: "white",
-                    boxShadow: "0 0 25px oklch(0.55 0.22 25 / 0.25)",
+                    gap: bbHover ? "0.75rem" : "0.5rem",
+                    boxShadow: bbHover ? "0 0 35px oklch(0.55 0.22 25 / 0.4)" : "0 0 25px oklch(0.55 0.22 25 / 0.25)",
                   }}>
-                    Enter <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    Enter <ArrowRight className="h-4 w-4 transition-transform duration-300" style={{ transform: bbHover ? "translateX(4px)" : "translateX(0)" }} />
                   </div>
                 </div>
               </div>
